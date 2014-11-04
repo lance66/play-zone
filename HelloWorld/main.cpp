@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     QWidget win;
 
-    QLabel hello("Hello World");
+    QLabel hello("Hello World!");
 
     QGridLayout layout;
 
