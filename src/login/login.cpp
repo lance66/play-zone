@@ -14,7 +14,10 @@ login::login(QWidget *parent) :
     //Connect to database
     db = QSqlDatabase::addDatabase ("QODBC","Chessgames");
     db.setConnectOptions();
-    db.setDatabaseName("Driver={SQL Server Native Client 11.0};Server=192.168.0.103;Port=1433;Database=Chessgames;Uid=sa;Pwd=chessgames;");    if(db.open())
+	
+    db.setDatabaseName("Driver={SQL Server Native Client 11.0};Server=192.168.35.55;Port=1433;Database=Chessgames;Uid=sa;Pwd=chessgames;");    
+	
+	if(db.open())
     {
        qDebug() << "Opened!";
        ui->lbl_isOpen->setText("Connected");
@@ -46,7 +49,11 @@ void login::on_pbtn_login_clicked()
 
     QSqlQuery qry( db );
 
-    if(qry.exec("SELECT * FROM CG_userCopy WHERE Username = '"+username+"' AND Passwd= '"+password+"';" ))
+    qry.prepare("SELECT * FROM CG_userCopy WHERE Username= :Username AND Passwd= :Passwd;");
+    qry.bindValue(":Username", username);
+    qry.bindValue(":Passwd", password);
+
+    if(qry.exec())
     {
         int count = 0;
         while(qry.next())
