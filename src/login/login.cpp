@@ -66,13 +66,12 @@ void login::on_pbtn_login_clicked()
             ui->lbl_isOpen->setText("username and password is correct");
 
             //Hide the login screen
-            //this->hide();
+            this->hide();
 
             //Create splash screen
-           // SplashScreen splashScreen;
-            //splashScreen.setModal(true);
-           // splashScreen.exec();
-
+            SplashScreen splashScreen(username);
+            splashScreen.setModal(true);
+            splashScreen.exec();
         }
         if(count > 1)
             ui->lbl_isOpen->setText("Duplicate username and password.");
