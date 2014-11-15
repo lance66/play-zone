@@ -7,14 +7,14 @@ login::login(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //Set picture to logo
-    //QPixmap pix* ();
+    //Set label to logo
+    QPixmap pix ("./cg_logo_hires.png");
+    ui->lbl_logo->setPixmap(pix);
 
     //Connect to database
     db = QSqlDatabase::addDatabase ("QODBC","Chessgames");
     db.setConnectOptions();
-    db.setDatabaseName("Driver={SQL Server Native Client 11.0};Server=192.168.0.105;Port=1433;Database=Chessgames;Uid=sa;Pwd=chessgames;");
-    if(db.open())
+    db.setDatabaseName("Driver={SQL Server Native Client 11.0};Server=192.168.0.103;Port=1433;Database=Chessgames;Uid=sa;Pwd=chessgames;");    if(db.open())
     {
        qDebug() << "Opened!";
        ui->lbl_isOpen->setText("Connected");
@@ -55,7 +55,18 @@ void login::on_pbtn_login_clicked()
         }
 
         if(count == 1)
+        {
             ui->lbl_isOpen->setText("username and password is correct");
+
+            //Hide the login screen
+            //this->hide();
+
+            //Create splash screen
+           // SplashScreen splashScreen;
+            //splashScreen.setModal(true);
+           // splashScreen.exec();
+
+        }
         if(count > 1)
             ui->lbl_isOpen->setText("Duplicate username and password.");
         if(count < 1)

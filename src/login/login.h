@@ -10,6 +10,7 @@
 #include <QFileInfo>
 #include <QWidget>
 #include <QGridLayout>
+#include "splashscreen.h"
 
 namespace Ui {
 class login;
