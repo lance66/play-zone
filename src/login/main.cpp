@@ -6,8 +6,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     QWidget win;
 
-    Login login;
-
+    Login login(&win);
     QGridLayout win_layout;
     win_layout.addWidget(&login);
 

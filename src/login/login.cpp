@@ -2,18 +2,13 @@
 
 Login::Login(QWidget * parent) :
     QWidget(parent), gb_login("Login"), lbl_username("Username"), lbl_password("Password"),
-    lbl_email("Email"), btn_login("Login"), btn_register("Register")
-{
+    lbl_email("Email"), btn_login("Login"), btn_register("Register"), ss_splashScreen("", this)
+{   
     //Connect to database
     db_login = QSqlDatabase::addDatabase("QSQLITE");
 
-    //Need to change this line to find the chessgames.db in your own path
-    //Should be in the login folder, but can't use a relative path in the
-    //database name.
-    db_login.setDatabaseName("C:/Users/Jake/Desktop/JP/Play-Zone/play-zone/src/login/chessgames.db");
-
     //For deployment use the line below rather than the one above
-    //db_login.setDatabaseName(QDir::currentPath() + "/chessgames.db");
+    db_login.setDatabaseName(QDir::currentPath() + "/chessgames.db");
 
     //Hide the password entry
     le_password.setEchoMode(QLineEdit::Password);
@@ -38,6 +33,9 @@ Login::Login(QWidget * parent) :
     gl_login.addWidget(&btn_login, 3, 0, 1, 2);
     gl_login.addWidget(&btn_register, 4, 0, 1, 2);
     gl_login.addWidget(&lbl_isOpen, 5, 0, 1, 2, Qt::AlignCenter);
+
+    gl_login.addWidget(&ss_splashScreen, 6, 0);
+    ss_splashScreen.hide();
 
     //Set the group box to the login layout
     gb_login.setLayout(&gl_login);
@@ -82,13 +80,11 @@ void Login::on_btn_login_clicked()
         {
             lbl_isOpen.setText("username and password is correct");
 
-            //Hide the login screen
-            //this->hide();
+           //Hide the login screen
+           this->hide();
 
-            //Create splash screen
-           //SplashScreen splashScreen;
-           //splashScreen.setModal(true);
-           //splashScreen.exec();
+           //Create splash screen
+           ss_splashScreen.show();
         }
         if(count > 1)
             lbl_isOpen.setText("Duplicate username and password.");

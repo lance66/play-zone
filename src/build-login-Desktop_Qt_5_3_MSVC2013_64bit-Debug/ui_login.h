@@ -51,12 +51,12 @@ public:
     {
         if (login->objectName().isEmpty())
             login->setObjectName(QStringLiteral("login"));
-        login->resize(400, 300);
+        login->resize(919, 295);
         centralWidget = new QWidget(login);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         lbl_isOpen = new QLabel(centralWidget);
         lbl_isOpen->setObjectName(QStringLiteral("lbl_isOpen"));
-        lbl_isOpen->setGeometry(QRect(20, 190, 221, 16));
+        lbl_isOpen->setGeometry(QRect(20, 190, 871, 16));
         gb_login = new QGroupBox(centralWidget);
         gb_login->setObjectName(QStringLiteral("gb_login"));
         gb_login->setGeometry(QRect(120, 10, 261, 131));
@@ -65,7 +65,7 @@ public:
         pbtn_login->setGeometry(QRect(120, 90, 75, 23));
         layoutWidget = new QWidget(gb_login);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 60, 187, 22));
+        layoutWidget->setGeometry(QRect(10, 60, 187, 24));
         horizontalLayout = new QHBoxLayout(layoutWidget);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
@@ -84,7 +84,7 @@ public:
 
         layoutWidget1 = new QWidget(gb_login);
         layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(10, 30, 189, 22));
+        layoutWidget1->setGeometry(QRect(10, 30, 189, 24));
         horizontalLayout_2 = new QHBoxLayout(layoutWidget1);
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -106,7 +106,7 @@ public:
         login->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(login);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 400, 21));
+        menuBar->setGeometry(QRect(0, 0, 919, 26));
         login->setMenuBar(menuBar);
         mainToolBar = new QToolBar(login);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));

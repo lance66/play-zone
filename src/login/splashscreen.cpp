@@ -1,22 +1,15 @@
 #include "splashscreen.h"
-#include "ui_splashscreen.h"
 
 SplashScreen::SplashScreen(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::SplashScreen)
+    QWidget(parent)
 {
-    ui->setupUi(this);
+    gl_splashScreen.addWidget(&lbl_welcome);
+    setLayout(&gl_splashScreen);
 }
 
 SplashScreen::SplashScreen(QString username, QWidget *parent) :
-    QDialog(parent), ui(new Ui::SplashScreen)
+    QWidget(parent), lbl_welcome("Hello, " + username  + "!")
 {
-    ui->setupUi(this);
-    ui->lbl_welcome->setText("Hello, " + username + "!");
-    update();
-}
-
-SplashScreen::~SplashScreen()
-{
-    delete ui;
+    gl_splashScreen.addWidget(&lbl_welcome);
+    setLayout(&gl_splashScreen);
 }

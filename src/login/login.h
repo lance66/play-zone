@@ -33,6 +33,8 @@ class Login : public QWidget
         virtual void resizeEvent(QResizeEvent * event);
 
     private:
+        SplashScreen ss_splashScreen;
+
         QGroupBox gb_login;
 
         QLabel lbl_username;
