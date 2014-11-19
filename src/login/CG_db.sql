@@ -18,7 +18,7 @@ CREATE TABLE CG_user
 (
 	UserID				int				IDENTITY,
 	Username			nvarchar(32)	NOT NULL		UNIQUE, --User nvarchar
-	Passwd				nvarchar(32)	NOT NULL,				--for unicode standards.
+	Passwd				nvarchar(64)	NOT NULL,				--for unicode standards.
 	Email				nvarchar(64)	NOT NULL,
 	JoinDate			date,
 	CurrentELO			float			DEFAULT 0,
