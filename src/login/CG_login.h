@@ -11,15 +11,15 @@
 #include <QLabel>
 #include <QDir>
 
-#include "validator.h"
-#include "splashscreen.h"
+#include "CG_validator.h"
+#include "CG_splashScreen.h"
 
-class Login : public QWidget
+class CG_login : public QWidget
 {
     Q_OBJECT
 
     public:
-        Login(QWidget * parent = 0);
+        CG_login(QWidget * parent = 0);
 
     private slots:
         void on_btn_login_clicked();
@@ -33,7 +33,7 @@ class Login : public QWidget
         virtual void resizeEvent(QResizeEvent * event);
 
     private:
-        SplashScreen ss_splashScreen;
+        CG_splashScreen ss_splashScreen;
 
         QGroupBox gb_login;
 

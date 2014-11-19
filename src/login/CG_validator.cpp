@@ -1,10 +1,10 @@
-#include "validator.h"
+#include "CG_validator.h"
 
-Validator::Validator(QLabel & feedback) :
+CG_validator::CG_validator(QLabel & feedback) :
     lbl_feedback(&feedback)
 { }
 
-bool Validator::CheckLength(QString username)
+bool CG_validator::CheckLength(QString username)
 {
     bool valid_length = true;
 
@@ -22,7 +22,7 @@ bool Validator::CheckLength(QString username)
     return valid_length;
 }
 
-bool Validator::CheckNotNull(QString username)
+bool CG_validator::CheckNotNull(QString username)
 {
     bool not_null = true;
 
@@ -35,7 +35,7 @@ bool Validator::CheckNotNull(QString username)
     return not_null;
 }
 
-bool Validator::CheckValidCharacters(QString username)
+bool CG_validator::CheckValidCharacters(QString username)
 {
     bool valid_characters = true;
 
@@ -51,7 +51,7 @@ bool Validator::CheckValidCharacters(QString username)
     return valid_characters;
 }
 
-bool Validator::CheckInvalidPeriods(QString username)
+bool CG_validator::CheckInvalidPeriods(QString username)
 {
     bool valid_period_placement = true;
 
@@ -73,7 +73,7 @@ bool Validator::CheckInvalidPeriods(QString username)
     return valid_period_placement;
 }
 
-bool Validator::CheckForWebsite(QString username)
+bool CG_validator::CheckForWebsite(QString username)
 {
     bool notAWebsite = true;
     QRegExp WebsiteRegex("^.*\\.+\\b(com|co|uk|org|net)\\b$");
@@ -87,7 +87,7 @@ bool Validator::CheckForWebsite(QString username)
     return notAWebsite;
 }
 
-bool Validator::CheckForInvalidSpaces(QString username)
+bool CG_validator::CheckForInvalidSpaces(QString username)
 {
     bool validSpaces = true;
     QRegExp startWithSpace("^\\s.*$");
@@ -113,7 +113,7 @@ bool Validator::CheckForInvalidSpaces(QString username)
     return validSpaces;
 }
 
-bool Validator::validUsername(QString username)
+bool CG_validator::validUsername(QString username)
 {
     bool valid_username = true;
 

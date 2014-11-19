@@ -13,13 +13,14 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        login.cpp \
-    splashscreen.cpp \
-    validator.cpp
+    CG_login.cpp \
+    CG_validator.cpp \
+    CG_splashScreen.cpp
 
-HEADERS  += login.h \
-    splashscreen.h \
-    validator.h
+HEADERS  += \
+    CG_login.h \
+    CG_validator.h \
+    CG_splashScreen.h
 
 FORMS    += login.ui \
     splashscreen.ui

@@ -6,10 +6,10 @@
 #include <QLabel>
 #include <QDebug>
 
-class Validator
+class CG_validator
 {
     public:
-        Validator(QLabel & feedback);
+        CG_validator(QLabel & feedback);
 
         bool CheckLength(QString username);
         bool CheckNotNull(QString username);

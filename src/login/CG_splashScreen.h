@@ -5,13 +5,14 @@
 #include <QLabel>
 #include <QGridLayout>
 
-class SplashScreen : public QWidget
+class CG_splashScreen : public QWidget
 {
     Q_OBJECT
 
     public:
-        explicit SplashScreen(QWidget *parent = 0);
-        explicit SplashScreen(QString, QWidget *parent = 0);
+        CG_splashScreen(QWidget *parent = 0);
+        CG_splashScreen(QString, QWidget *parent = 0);
+        void setText(QString str);
 
     private:
         QLabel lbl_welcome;
@@ -19,4 +20,4 @@ class SplashScreen : public QWidget
 
 };
 
-#endif // SPLASHSCREEN_H
+#endif

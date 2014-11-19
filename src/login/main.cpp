@@ -1,4 +1,4 @@
-#include "login.h"
+#include "CG_login.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     QWidget win;
 
-    Login login(&win);
+    CG_login login(&win);
     QGridLayout win_layout;
     win_layout.addWidget(&login);
 

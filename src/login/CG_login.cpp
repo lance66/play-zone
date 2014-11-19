@@ -1,8 +1,8 @@
-#include "login.h"
+#include "CG_login.h"
 
-Login::Login(QWidget * parent) :
+CG_login::CG_login(QWidget * parent) :
     QWidget(parent), gb_login("Login"), lbl_username("Username"), lbl_password("Password"),
-    lbl_email("Email"), btn_login("Login"), btn_register("Register"), ss_splashScreen("", this)
+    lbl_email("Email"), btn_login("Login"), btn_register("Register")
 {   
     //Connect to database
     db_login = QSqlDatabase::addDatabase("QSQLITE");
@@ -56,7 +56,7 @@ Login::Login(QWidget * parent) :
     connect(&le_username, SIGNAL(textChanged(QString)), this, SLOT(setUsernameValidator()));
 }
 
-void Login::on_btn_login_clicked()
+void CG_login::on_btn_login_clicked()
 {
     QString username, password;
     username = le_username.text();
@@ -81,9 +81,10 @@ void Login::on_btn_login_clicked()
             lbl_isOpen.setText("username and password is correct");
 
            //Hide the login screen
-           this->hide();
+           //gb_login.hide();
 
            //Create splash screen
+           ss_splashScreen.setText(le_username.text());
            ss_splashScreen.show();
         }
         if(count > 1)
@@ -95,7 +96,7 @@ void Login::on_btn_login_clicked()
     db_login.close();
 }
 
-void Login::on_btn_register_clicked()
+void CG_login::on_btn_register_clicked()
 {
     if(!db_login.open())
         lbl_isOpen.setText("Failed to connect to the database");
@@ -126,7 +127,7 @@ void Login::on_btn_register_clicked()
     db_login.close();
 }
 
-void Login::addUser()
+void CG_login::addUser()
 {
     QString username, password, email;
     username = le_username.text();
@@ -148,7 +149,7 @@ void Login::addUser()
     db_login.close();
 }
 
-void Login::resizeEvent(QResizeEvent * event)
+void CG_login::resizeEvent(QResizeEvent * event)
 {
     //Resize depending on portrait orientation vs landscape orientation
     if (width() > height())
@@ -163,9 +164,9 @@ void Login::resizeEvent(QResizeEvent * event)
     }
 }
 
-void Login::setUsernameValidator()
+void CG_login::setUsernameValidator()
 {
-    Validator vld_username(lbl_isOpen);
+    CG_validator vld_username(lbl_isOpen);
 
     if (vld_username.validUsername(le_username.text()))
         le_username.setStyleSheet("background: #77FF77");
