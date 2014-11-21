@@ -22,5 +22,4 @@ HEADERS  += \
     CG_validator.h \
     CG_splashScreen.h
 
-FORMS    += \
-splashscreen.ui
+FORMS    +=
