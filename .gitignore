@@ -8,6 +8,13 @@
 *.so
 *.dll
 *.dylib
+*.obj
+*.exe
+*.pdb
+*.ilk
+*.manifest
+*.rc
+*.res
 # Qt-es
 /.qmake.cache
 /.qmake.stash
