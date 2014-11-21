@@ -1,4 +1,5 @@
 #include "CG_login.h"
+#include <QCryptographicHash>  // Needed for encrypting in SHA256
 
 CG_login::CG_login(QWidget * parent) :
     QWidget(parent), gb_login("Login"), lbl_username("Username"), lbl_password("Password"),
@@ -60,7 +61,26 @@ void CG_login::on_btn_login_clicked()
 {
     QString username, password;
     username = le_username.text();
-    password = le_password.text();
+
+    // Begin Add LewisSanchez
+
+            // Takes the text in the le_password and converts it to Utf8, so it can be placed in a type of 'const char *' next
+            QByteArray passwordInBytes = le_password.text().toUtf8();
+
+            // casting the data in passwordInBytes (currently in the form of 'Utf8' to a type of 'const char *'
+            const char * convertedPasswordToVerify = passwordInBytes.constData();
+
+            /* Instantiating an object that will create the hashing key for the password. Takes an argument specifying
+             * the encryption type you would like be executed on the string */
+            QCryptographicHash sha256PasswordEncryptionGenerator( QCryptographicHash::Sha256 );
+
+            // Adding the data to password encryption generator
+            sha256PasswordEncryptionGenerator.addData( convertedPasswordToVerify );
+
+            // Converting the password to the hash key using the result method and placing it in password.
+            password = (QString)sha256PasswordEncryptionGenerator.result();
+
+    // End Add LewisSanchez
 
     if(!db_login.open())
         lbl_isOpen.setText("Failed to connect to the database");
@@ -131,11 +151,30 @@ void CG_login::addUser()
 {
     QString username, password, email;
     username = le_username.text();
-    password = le_password.text();
     email = le_email.text();
 
     if(!db_login.open())
         lbl_isOpen.setText("Failed to connect to the database");
+
+// Begin Add LewisSanchez
+
+        // Takes the text in the le_password and converts it to Utf8, so it can be placed in a type of 'const char *' next
+        QByteArray passwordInBytes = le_password.text().toUtf8();
+
+        // casting the data in passwordInBytes (currently in the form of 'Utf8' to a type of 'const char *'
+        const char * convertedPasswordToVerify = passwordInBytes.constData();
+
+        /* Instantiating an object that will create the hashing key for the password. Takes an argument specifying
+         * the encryption type you would like be executed on the string */
+        QCryptographicHash sha256PasswordEncryptionGenerator( QCryptographicHash::Sha256 );
+
+        // Adding the data to password encryption generator
+        sha256PasswordEncryptionGenerator.addData( convertedPasswordToVerify );
+
+        // Converting the password to the hash key using the result method and placing it in password.
+        password = (QString)sha256PasswordEncryptionGenerator.result();
+
+// End Add LewisSanchez
 
     QSqlQuery qry( db_login );
     qry.prepare( "INSERT INTO CG_user (Username, Passwd, Email) VALUES(?, ?, ?)" );
