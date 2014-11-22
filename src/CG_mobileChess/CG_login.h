@@ -32,7 +32,7 @@ class CG_login : public QWidget
         virtual void resizeEvent(QResizeEvent * event);
 
     private:
-        CG_splashScreen ss_splashScreen;
+        //CG_splashScreen ss_splashScreen;
 
         QGroupBox gb_login;
 

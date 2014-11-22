@@ -35,8 +35,8 @@ CG_login::CG_login(QWidget * parent) :
     gl_login.addWidget(&btn_register, 4, 0, 1, 2);
     gl_login.addWidget(&lbl_isOpen, 5, 0, 1, 2, Qt::AlignCenter);
 
-    gl_login.addWidget(&ss_splashScreen, 6, 0);
-    ss_splashScreen.hide();
+    //gl_login.addWidget(&ss_splashScreen, 6, 0);
+    //ss_splashScreen.hide();
 
     //Set the group box to the login layout
     gb_login.setLayout(&gl_login);
@@ -104,8 +104,8 @@ void CG_login::on_btn_login_clicked()
            //gb_login.hide();
 
            //Create splash screen
-           ss_splashScreen.setText(le_username.text());
-           ss_splashScreen.show();
+           //ss_splashScreen.setText(le_username.text());
+           //ss_splashScreen.show();
         }
         if(count > 1)
             lbl_isOpen.setText("Duplicate username and password.");
