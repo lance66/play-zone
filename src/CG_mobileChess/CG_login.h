@@ -10,7 +10,6 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QDir>
-
 #include "CG_validator.h"
 #include "CG_splashScreen.h"
 

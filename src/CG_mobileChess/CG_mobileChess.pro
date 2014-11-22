@@ -8,7 +8,7 @@ QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = login
+TARGET = CG_mobileChess
 TEMPLATE = app
 
 
@@ -21,5 +21,3 @@ HEADERS  += \
     CG_login.h \
     CG_validator.h \
     CG_splashScreen.h
-
-FORMS    +=
