@@ -19,6 +19,7 @@ class CG_login : public QWidget
 
     public:
         CG_login(QWidget * parent = 0);
+        ~CG_login();
 
     private slots:
         void on_btn_login_clicked();
@@ -32,7 +33,7 @@ class CG_login : public QWidget
         virtual void resizeEvent(QResizeEvent * event);
 
     private:
-        //CG_splashScreen ss_splashScreen;
+        CG_splashScreen * ss_splashScreen;
 
         QGroupBox gb_login;
 
