@@ -5,6 +5,9 @@
 #include <QRegExp>
 #include <QLabel>
 #include <QDebug>
+#include <QDir>
+#include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlQuery>
 
 class CG_validator
 {
@@ -17,7 +20,8 @@ class CG_validator
         bool CheckInvalidPeriods(QString username);
         bool CheckForWebsite(QString username);
         bool CheckForInvalidSpaces(QString username);
-        bool validUsername(QString username);
+        bool CheckValidUsername(QString username);
+        bool CheckUniqueUsername(QString username);
 
     private:
         QLabel * lbl_feedback;

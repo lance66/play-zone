@@ -213,7 +213,7 @@ void CG_login::setUsernameValidator()
 {
     CG_validator vld_username(lbl_isOpen);
 
-    if (vld_username.validUsername(le_username.text()))
+    if (vld_username.CheckValidUsername(le_username.text()))
         le_username.setStyleSheet("background: #77FF77");
     else
         le_username.setStyleSheet("background: #FF7777");

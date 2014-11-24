@@ -113,7 +113,7 @@ bool CG_validator::CheckForInvalidSpaces(QString username)
     return validSpaces;
 }
 
-bool CG_validator::validUsername(QString username)
+bool CG_validator::CheckValidUsername(QString username)
 {
     bool valid_username = true;
 
@@ -125,4 +125,38 @@ bool CG_validator::validUsername(QString username)
         lbl_feedback->clear();
 
     return valid_username;
+}
+
+bool CG_validator::CheckUniqueUsername(QString username)
+{
+    bool unique_username = true;
+    int count = 0;
+
+    //Connect to database
+    QSqlDatabase db_logins = QSqlDatabase::addDatabase("QSQLITE");
+
+    //For deployment use the line below rather than the one above
+    db_logins.setDatabaseName(QDir::currentPath() + "/chessgames.db");
+
+    if(!db_logins.open())
+        lbl_feedback->setText("Failed to connect to the database");
+
+    QSqlQuery qry( db_logins );
+    qry.prepare( "SELECT UserID FROM CG_user WHERE Username = ?" );
+    qry.addBindValue(username);
+
+    if(qry.exec())
+    {
+        for(; qry.next(); count++);
+
+        if (count > 0)
+        {
+            unique_username = false;
+            lbl_feedback->setText("That username already exists.");
+        }
+    }
+
+    db_logins.close();
+
+    return unique_username;
 }
