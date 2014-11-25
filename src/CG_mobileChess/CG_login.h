@@ -28,7 +28,7 @@ class CG_login : public QWidget
 
         //This is for the text changed slot of the username
         void setUsernameValidator();
-
+        void EncryptPassword( QString & password );
     protected:
         virtual void resizeEvent(QResizeEvent * event);
 
