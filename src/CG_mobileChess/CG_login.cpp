@@ -14,11 +14,11 @@ CG_login::CG_login(QWidget * parent) :
     //Hide the password entry
     le_password.setEchoMode(QLineEdit::Password);
 
-    gb_login.setStyleSheet("background: #448ed3");
-    btn_login.setStyleSheet("background: #b6ee65");
-    btn_register.setStyleSheet("background: #b6ee65");
-    le_username.setStyleSheet("background: #FFFFFF");
-    le_password.setStyleSheet("background: #FFFFFF");
+    gb_login.setStyleSheet("background: #448ed3; border-style: outset; border-radius: 10px;border-color: #448ed3;min-width: 10em; padding: 6px;");
+    btn_login.setStyleSheet("background: #b6ee65;");
+    btn_register.setStyleSheet("background: #b6ee65;");
+    le_username.setStyleSheet("background: #FFFFFF;");
+    le_password.setStyleSheet("background: #FFFFFF;");
     le_email.setStyleSheet("background: #FFFFFF;");
 
     //Add all the controls to the login layout
