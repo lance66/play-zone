@@ -5,6 +5,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     QWidget win;
+    win.setStyleSheet("background-color: #448ed3");
 
     CG_login login(&win);
     QGridLayout win_layout;
