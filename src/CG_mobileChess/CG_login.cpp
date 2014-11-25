@@ -21,7 +21,7 @@ CG_login::CG_login(QWidget * parent) :
     le_password.setStyleSheet("background: #FFFFFF;");
     le_email.setStyleSheet("background: #FFFFFF;");
 
-    lbl_logo.setPixmap(pm_logo.scaled(300, 300));
+    lbl_logo.setPixmap(pm_logo);
 
     //Add all the controls to the login layout
     //gl_login.addWidget(&lbl_username, 0, 0);
@@ -53,7 +53,7 @@ CG_login::CG_login(QWidget * parent) :
     gb_login.setLayout(&gl_login);
 
     //Add the login group box to the layout of the widget
-    gl_widget.addWidget(&lbl_logo, 0, 0, 1, 1, Qt::AlignCenter);
+    gl_widget.addWidget(&lbl_logo, 0, 0, 1, 1, Qt::AlignHCenter | Qt::AlignBottom);
     gl_widget.addWidget(&gb_login, 1, 0);
 
     //Set the widget to the layout
