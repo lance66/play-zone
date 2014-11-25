@@ -2,8 +2,8 @@
 #include <QCryptographicHash>  // Needed for encrypting in SHA256
 
 CG_login::CG_login(QWidget * parent) :
-    QWidget(parent), gb_login("Login"), lbl_username("Username"), lbl_password("Password"),
-    lbl_email("Email"), btn_login("Login"), btn_register("Register")
+    QWidget(parent), gb_login(""), //lbl_username(), lbl_password(),
+    btn_login("Login"), btn_register("Register")
 {   
     //Connect to database
     db_login = QSqlDatabase::addDatabase("QSQLITE");
@@ -14,22 +14,28 @@ CG_login::CG_login(QWidget * parent) :
     //Hide the password entry
     le_password.setEchoMode(QLineEdit::Password);
 
-    gb_login.setStyleSheet("background: white");
-    btn_login.setStyleSheet("background: grey");
-    btn_register.setStyleSheet("background: grey");
+    gb_login.setStyleSheet("background: #448ed3");
+    btn_login.setStyleSheet("background: #b6ee65");
+    btn_register.setStyleSheet("background: #b6ee65");
+    le_username.setStyleSheet("background: #FFFFFF");
+    le_password.setStyleSheet("background: #FFFFFF");
+    le_email.setStyleSheet("background: #FFFFFF;");
 
     //Add all the controls to the login layout
-    gl_login.addWidget(&lbl_username, 0, 0);
-    gl_login.addWidget(&le_username, 0, 1);
+    //gl_login.addWidget(&lbl_username, 0, 0);
+    gl_login.addWidget(&le_username, 0, 0);
 
-    gl_login.addWidget(&lbl_password, 1, 0);
-    gl_login.addWidget(&le_password, 1, 1);
+    //gl_login.addWidget(&lbl_password, 1, 0);
+    gl_login.addWidget(&le_password, 1, 0);
 
-    gl_login.addWidget(&lbl_email, 2, 0);
-    gl_login.addWidget(&le_email, 2, 1);
+    //gl_login.addWidget(&lbl_email, 2, 0);
+    gl_login.addWidget(&le_email, 2, 0);
 
-    lbl_email.hide();
+    //lbl_email.hide();
     le_email.hide();
+
+    le_username.setPlaceholderText("Chessgames username");
+    le_password.setPlaceholderText("Chessgames password");
 
     gl_login.addWidget(&btn_login, 3, 0, 1, 2);
     gl_login.addWidget(&btn_register, 4, 0, 1, 2);
@@ -122,7 +128,8 @@ void CG_login::on_btn_register_clicked()
 
         if (count == 0)
         {
-            lbl_email.show();
+            //lbl_email.show();
+            le_email.setPlaceholderText("Enter email");
             le_email.show();
             connect(&btn_register, SIGNAL(released()), this, SLOT(addUser()));
         }

@@ -10,6 +10,7 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QDir>
+#include <QFrame>
 #include "CG_validator.h"
 #include "CG_splashScreen.h"
 
@@ -37,13 +38,13 @@ class CG_login : public QWidget
 
         QGroupBox gb_login;
 
-        QLabel lbl_username;
+        //QLabel lbl_username;
         QLineEdit le_username;
 
-        QLabel lbl_password;
+        //QLabel lbl_password;
         QLineEdit le_password;
 
-        QLabel lbl_email;
+        //QLabel lbl_email;
         QLineEdit le_email;
 
         QPushButton btn_login;
