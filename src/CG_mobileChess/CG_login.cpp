@@ -3,7 +3,7 @@
 
 CG_login::CG_login(QWidget * parent) :
     QWidget(parent), gb_login(""), //lbl_username(), lbl_password(),
-    btn_login("Login"), btn_register("Register")
+    btn_login("Login"), btn_register("Register"), pm_logo("cg_logo_hires_app.png")
 {   
     //Connect to database
     db_login = QSqlDatabase::addDatabase("QSQLITE");
@@ -21,15 +21,19 @@ CG_login::CG_login(QWidget * parent) :
     le_password.setStyleSheet("background: #FFFFFF;");
     le_email.setStyleSheet("background: #FFFFFF;");
 
+    lbl_logo.setPixmap(pm_logo.scaled(300, 300));
+
     //Add all the controls to the login layout
     //gl_login.addWidget(&lbl_username, 0, 0);
-    gl_login.addWidget(&le_username, 0, 0);
+
+    gl_login.addWidget(&lbl_logo, 0, 0);
+    gl_login.addWidget(&le_username, 1, 0);
 
     //gl_login.addWidget(&lbl_password, 1, 0);
-    gl_login.addWidget(&le_password, 1, 0);
+    gl_login.addWidget(&le_password, 2, 0);
 
     //gl_login.addWidget(&lbl_email, 2, 0);
-    gl_login.addWidget(&le_email, 2, 0);
+    gl_login.addWidget(&le_email, 3, 0);
 
     //lbl_email.hide();
     le_email.hide();
@@ -37,19 +41,20 @@ CG_login::CG_login(QWidget * parent) :
     le_username.setPlaceholderText("Chessgames username");
     le_password.setPlaceholderText("Chessgames password");
 
-    gl_login.addWidget(&btn_login, 3, 0, 1, 2);
-    gl_login.addWidget(&btn_register, 4, 0, 1, 2);
-    gl_login.addWidget(&lbl_isOpen, 5, 0, 1, 2, Qt::AlignCenter);
+    gl_login.addWidget(&btn_login, 4, 0, 1, 2);
+    gl_login.addWidget(&btn_register, 5, 0, 1, 2);
+    gl_login.addWidget(&lbl_isOpen, 6, 0, 1, 2, Qt::AlignCenter);
 
     ss_splashScreen = new CG_splashScreen;
-    gl_login.addWidget(ss_splashScreen, 6, 0);
+    gl_login.addWidget(ss_splashScreen, 7, 0);
     ss_splashScreen->hide();
 
     //Set the group box to the login layout
     gb_login.setLayout(&gl_login);
 
     //Add the login group box to the layout of the widget
-    gl_widget.addWidget(&gb_login, 0, 0, 1, -1);
+    gl_widget.addWidget(&lbl_logo, 0, 0);
+    gl_widget.addWidget(&gb_login, 1, 0);
 
     //Set the widget to the layout
     setLayout(&gl_widget);
@@ -172,14 +177,16 @@ void CG_login::resizeEvent(QResizeEvent * event)
     //Resize depending on portrait orientation vs landscape orientation
     if (width() > height())
     {
-        gb_login.setMaximumWidth(width() / 2);
-        gb_login.setMaximumHeight(height());
+        gb_login.setMaximumSize(width() / 2, height());
+        //lbl_logo.resize(width() / 2, height());
     }
     else
     {
-        gb_login.setMaximumWidth(width());
-        gb_login.setMaximumHeight(height() / 2);
+        gb_login.setMaximumSize(width(), height() / 2);
+        //lbl_logo.resize(width(), height() / 2);
     }
+
+    //lbl_logo.setPixmap(pm_logo.scaled(lbl_logo.width(), lbl_logo.height()));
 }
 
 void CG_login::setUsernameValidator()

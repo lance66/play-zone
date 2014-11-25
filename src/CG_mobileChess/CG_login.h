@@ -52,6 +52,7 @@ class CG_login : public QWidget
 
         QLabel lbl_isOpen;
 
+        QPixmap pm_logo;
         QLabel lbl_logo;
 
         QGridLayout gl_widget;

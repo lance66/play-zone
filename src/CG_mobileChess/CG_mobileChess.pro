@@ -10,7 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = CG_mobileChess
 TEMPLATE = app
-
+ICON = cg_logo_hires_app_2.svg
 
 SOURCES += main.cpp\
     CG_login.cpp \
