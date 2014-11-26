@@ -4,16 +4,30 @@ CG_validator::CG_validator(QLabel & feedback) :
     lbl_feedback(&feedback)
 { }
 
+/***************************************************************************
+ * Function Name:  CheckLength
+ *
+ * Purpose:  Check to see if the username passed in is of a length between
+ * 2 and 20 characters.  Returns a value describing whether the QString
+ * passed or failed this check.
+ *
+ * Entry:  Takes in a QString which represents a username of a user that is
+ * attempting to login or register.
+ *
+ * Exit:  Returns a boolean value describing if the username fits the
+ * length of a valid username.  A false value is returned if the username's
+ * length is less than 2 characters long or more than 20 characters long.
+ **************************************************************************/
 bool CG_validator::CheckLength(QString username)
 {
     bool valid_length = true;
 
-    if (username.length() < 2)
+    if (username.length() < 2) //If a username is less than 2 characters long.
     {
         valid_length = false;
         lbl_feedback->setText("Username is too short.");
     }
-    else if (username.length() > 20)
+    else if (username.length() > 20) //If a username is more than 20 characters long.
     {
         valid_length = false;
         lbl_feedback->setText("Username is too long.");
