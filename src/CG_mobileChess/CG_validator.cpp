@@ -36,11 +36,26 @@ bool CG_validator::CheckLength(QString username)
     return valid_length;
 }
 
+/***************************************************************************
+ * Function Name:  CheckNotNull
+ *
+ * Purpose:  Check to see if the username passed in is null.  If a username
+ * is null, the feedback label will be updated to let the user know they
+ * must have a username.
+ *
+ * Entry:  Takes in a QString which represents a username of a user that is
+ * attempting to login or register.
+ *
+ * Exit:  Returns a boolean value describing if the username is null.  If a
+ * username is null, a feedback label will let the user know the error and
+ * return a false value.  Otherwise, if the username is not null, this will
+ * return a true value.
+ **************************************************************************/
 bool CG_validator::CheckNotNull(QString username)
 {
     bool not_null = true;
 
-    if (username.isNull())
+    if (username.isNull()) //If the username is null.
     {
         not_null = false;
         lbl_feedback->setText("Please enter username.");
@@ -49,6 +64,23 @@ bool CG_validator::CheckNotNull(QString username)
     return not_null;
 }
 
+/***************************************************************************
+ * Function Name:  CheckValidCharacters
+ *
+ * Purpose:  Check to see if the username passed in only contains valid
+ * characters within it.  Valid characters for a username include all
+ * lowercase and uppercase letters, numbers, dashes (-), spaces, and
+ * periods (.).  If a username happens to contain a character that isn't
+ * valid, it will return a value describing that.
+ *
+ * Entry:  Takes in a QString which represents a username of a user that is
+ * attempting to login or register.
+ *
+ * Exit:  Returns a boolean value describing if the username only contains
+ * valid characters.  If an invalid character exists in the username, it
+ * will return a false value and update a label to inform the user of the
+ * issue.
+ **************************************************************************/
 bool CG_validator::CheckValidCharacters(QString username)
 {
     bool valid_characters = true;
@@ -56,7 +88,7 @@ bool CG_validator::CheckValidCharacters(QString username)
     QRegExp regex("^([a-z]*[A-Z]*[0-9]*\\-*\\.*\\s*)*$"); //Any string with only the characters
                                                           //a-z, A-Z, 0-9, -, (space), and .
 
-    if (!username.contains(regex))
+    if (!username.contains(regex)) //If the username does not contain only valid characters.
     {
         valid_characters = false;
         lbl_feedback->setText("Username contains invalid characters.");
@@ -65,6 +97,21 @@ bool CG_validator::CheckValidCharacters(QString username)
     return valid_characters;
 }
 
+/***************************************************************************
+ * Function Name:  CheckInvalidPeriods
+ *
+ * Purpose:  Check to see if the username passed in uses periods (.)
+ * correctly within the string of characters.  A username cannot start with
+ * a period, nor can it end with a period.  If a username matches either of
+ * these cases, it will inform the user of the error.
+ *
+ * Entry:  Takes in a QString which represents a username of a user that is
+ * attempting to login or register.
+ *
+ * Exit:  Returns a boolean value describing if the username has a period
+ * (.) at the start of end of the username.  This will return a false value
+ * and set a label to inform the username of the error.
+ **************************************************************************/
 bool CG_validator::CheckInvalidPeriods(QString username)
 {
     bool valid_period_placement = true;
@@ -72,13 +119,13 @@ bool CG_validator::CheckInvalidPeriods(QString username)
     QRegExp FrontPeriodRegex("^\\.+.*$"); //Any string that starts with a period.
     QRegExp BackPeriodRegex("^.*\\.+$");  //Any string that ends with a period.
 
-    if (FrontPeriodRegex.indexIn(username) != -1)
+    if (FrontPeriodRegex.indexIn(username) != -1) //If the username starts with a period.
     {
         valid_period_placement = false;
         lbl_feedback->setText("Username can't have a period at the front.");
     }
 
-    if (BackPeriodRegex.indexIn(username) != -1)
+    if (BackPeriodRegex.indexIn(username) != -1) //If the username ends with a period.
     {
         valid_period_placement = false;
         lbl_feedback->setText("Username can't have a period at the back.");
@@ -87,12 +134,26 @@ bool CG_validator::CheckInvalidPeriods(QString username)
     return valid_period_placement;
 }
 
+/***************************************************************************
+ * Function Name:  CheckForWebsite
+ *
+ * Purpose:  Check to see if the username passed in looks like a website
+ * or not.  If it does, it will inform the user that a username cannot look
+ * like a website and return a false value.
+ *
+ * Entry:  Takes in a QString which represents a username of a user that is
+ * attempting to login or register.
+ *
+ * Exit:  Returns a boolean value describing if the username looks like a
+ * website.  If it does, it will return false and set a label to inform the
+ * user of the error in their username.
+ **************************************************************************/
 bool CG_validator::CheckForWebsite(QString username)
 {
     bool notAWebsite = true;
-    QRegExp WebsiteRegex("^.*\\.+\\b(com|co|uk|org|net)\\b$");
+    QRegExp WebsiteRegex("^.*\\.+\\b(com|co|uk|org|net)\\b$"); //A language describing a variety of email endings.
 
-    if (WebsiteRegex.indexIn(username) != -1)
+    if (WebsiteRegex.indexIn(username) != -1) //If the username matches the website regular expression.
     {
         notAWebsite = false;
         lbl_feedback->setText("Username can't be a website.");
@@ -101,6 +162,22 @@ bool CG_validator::CheckForWebsite(QString username)
     return notAWebsite;
 }
 
+/***************************************************************************
+ * Function Name:  CheckForInvalidSpaces
+ *
+ * Purpose:  Check to see if the username passed in uses spaces correctly
+ * within the string.  A space is used incorrectly if the username starts or
+ * ends with a space, or if there are at least 2 spaces in a row.  If spaces
+ * are used incorrectly in the username, it will set a label to inform the
+ * user of the error and return false.
+ *
+ * Entry:  Takes in a QString which represents a username of a user that is
+ * attempting to login or register.
+ *
+ * Exit:  Returns a boolean value describing if the username uses spaces
+ * correctly within the string.  It will set a label to describe the error
+ * if it returns a false value.
+ **************************************************************************/
 bool CG_validator::CheckForInvalidSpaces(QString username)
 {
     bool validSpaces = true;
@@ -108,17 +185,17 @@ bool CG_validator::CheckForInvalidSpaces(QString username)
     QRegExp endWithSpace("^.*\\s$");
     QRegExp doubleSpaces("^.*\\s\\s.*$");
 
-    if (startWithSpace.indexIn(username) != -1)
+    if (startWithSpace.indexIn(username) != -1) //If the username starts with a space.
     {
         validSpaces = false;
         lbl_feedback->setText("Username can't start with a space.");
     }
-    if (endWithSpace.indexIn(username) != -1)
+    if (endWithSpace.indexIn(username) != -1) //If the username ends with a space.
     {
         validSpaces = false;
         lbl_feedback->setText("Username can't end with a space.");
     }
-    if (doubleSpaces.indexIn(username) != -1)
+    if (doubleSpaces.indexIn(username) != -1) //If the username has 2+ spaces in a row.
     {
         validSpaces = false;
         lbl_feedback->setText("Username can't contain 2 consecutive spaces.");
