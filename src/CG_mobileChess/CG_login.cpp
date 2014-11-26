@@ -10,6 +10,8 @@ CG_login::CG_login(QWidget * parent) :
 
     //For deployment use the line below rather than the one above
     db_login.setDatabaseName(QDir::currentPath() + "/chessgames.db");
+    //db_login.setDatabaseName("Resources/chessgames.db");
+
 
     //Hide the password entry
     le_password.setEchoMode(QLineEdit::Password);
@@ -114,6 +116,8 @@ void CG_login::on_btn_login_clicked()
     }
 
     db_login.close();
+
+    le_email.hide();
 }
 
 void CG_login::on_btn_register_clicked()
@@ -146,6 +150,8 @@ void CG_login::on_btn_register_clicked()
     }
 
     db_login.close();
+
+    setUsernameValidator();
 }
 
 void CG_login::addUser()
@@ -186,6 +192,11 @@ void CG_login::resizeEvent(QResizeEvent * event)
         //lbl_logo.resize(width(), height() / 2);
     }
 
+    //le_username.setMinimumHeight(height() / 10);
+    //le_password.setMinimumHeight(height() / 10);
+    //btn_login.setMinimumHeight(height() / 10);
+    //btn_register.setMinimumHeight(height() / 10);
+
     //lbl_logo.setPixmap(pm_logo.scaled(lbl_logo.width(), lbl_logo.height()));
 }
 
@@ -193,10 +204,13 @@ void CG_login::setUsernameValidator()
 {
     CG_validator vld_username(lbl_isOpen);
 
-    if (vld_username.CheckValidUsername(le_username.text()))
-        le_username.setStyleSheet("background: #77FF77");
-    else
-        le_username.setStyleSheet("background: #FF7777");
+    if (le_email.isVisible())
+    {
+        if (vld_username.CheckValidUsername(le_username.text()))
+            le_username.setStyleSheet("background: #77FF77");
+        else
+            le_username.setStyleSheet("background: #FF7777");
+    }
 
     update();
 }

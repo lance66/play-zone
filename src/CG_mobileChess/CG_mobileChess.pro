@@ -21,3 +21,13 @@ HEADERS  += \
     CG_login.h \
     CG_validator.h \
     CG_splashScreen.h
+
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+
+OTHER_FILES += \
+    android/AndroidManifest.xml \
+    ../../bin/chessgames.db \
+    ../../img/cg_logo_hires_app.png
+
+RESOURCES += \
+    resources.qrc
