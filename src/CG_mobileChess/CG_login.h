@@ -1,8 +1,6 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 
-#include <QtSql/QSqlDatabase>
-#include <QtSql/QSqlQuery>
 #include <QWidget>
 #include <QGridLayout>
 #include <QGroupBox>
@@ -13,6 +11,7 @@
 #include <QFrame>
 #include "CG_validator.h"
 #include "CG_splashScreen.h"
+#include "CG_dbManager.h"
 
 class CG_login : public QWidget
 {
@@ -29,7 +28,6 @@ class CG_login : public QWidget
 
         //This is for the text changed slot of the username
         void setUsernameValidator();
-        void EncryptPassword( QString & password );
     protected:
         virtual void resizeEvent(QResizeEvent * event);
 
@@ -58,7 +56,8 @@ class CG_login : public QWidget
         QGridLayout gl_widget;
         QGridLayout gl_login;
 
-        QSqlDatabase db_login;
+        CG_dbManager db_chessgames;
+
 };
 
 #endif

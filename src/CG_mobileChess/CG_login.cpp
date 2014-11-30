@@ -1,18 +1,10 @@
 #include "CG_login.h"
-#include <QCryptographicHash>  // Needed for encrypting in SHA256
 
 CG_login::CG_login(QWidget * parent) :
     QWidget(parent), gb_login(""), //lbl_username(), lbl_password(),
-    btn_login("Login"), btn_register("Register"), pm_logo("cg_logo_hires_app.png")
+    btn_login("Login"), btn_register("Register"), pm_logo("cg_logo_hires_app.png"),
+    db_chessgames(QDir::currentPath() + "/chessgames.db")
 {   
-    //Connect to database
-    db_login = QSqlDatabase::addDatabase("QSQLITE");
-
-    //For deployment use the line below rather than the one above
-    db_login.setDatabaseName(QDir::currentPath() + "/chessgames.db");
-    //db_login.setDatabaseName("Resources/chessgames.db");
-
-
     //Hide the password entry
     le_password.setEchoMode(QLineEdit::Password);
 
@@ -78,126 +70,45 @@ CG_login::~CG_login()
 
 void CG_login::on_btn_login_clicked()
 {
-    QString username, password;
-    username = le_username.text();
+    if (!db_chessgames.CorrectUserInfo(le_username.text(), le_password.text()))
+        lbl_isOpen.setText("Username or password is incorrect.");
+    else
+        lbl_isOpen.setText("Successfully logged in.");
 
-    // Calls the encryption method
-    EncryptPassword( password );
-
-    if(!db_login.open())
-        lbl_isOpen.setText("Failed to connect to the database");
-
-    QSqlQuery qry( db_login );
-    qry.prepare( "SELECT * FROM CG_user WHERE Username= ? AND Passwd= ? COLLATE NOCASE" );
-    qry.addBindValue(username);
-    qry.addBindValue(password);
-
-    if(qry.exec())
-    {
-        int count = 0;
-
-        for (; qry.next(); count++);
-
-        if(count == 1)
-        {
-            lbl_isOpen.setText("username and password is correct");
-
-           //Hide the login screen
-           //gb_login.hide();
-
-           //Create splash screen
-           //ss_splashScreen->setText(le_username.text());
-           //ss_splashScreen->show();
-        }
-        if(count > 1)
-            lbl_isOpen.setText("Duplicate username and password.");
-        if(count < 1)
-            lbl_isOpen.setText("username and password is not correct");
-    }
-
-    db_login.close();
-
+    //Ensure email is hidden while logging in
     le_email.hide();
 }
 
 void CG_login::on_btn_register_clicked()
 {
-    if(!db_login.open())
-        lbl_isOpen.setText("Failed to connect to the database");
-
-    QSqlQuery qry( db_login );
-    qry.prepare( "SELECT * FROM CG_user WHERE Username= ? COLLATE NOCASE" );
-    qry.addBindValue(le_username.text());
-
-    if(qry.exec())
+    if (!db_chessgames.UserExists(le_username.text()))
     {
-        int count = 0;
-
-        for (; qry.next(); count++);
-
-        if (count == 0)
-        {
-            //lbl_email.show();
-            le_email.setPlaceholderText("Enter email");
-            le_email.show();
-            connect(&btn_register, SIGNAL(released()), this, SLOT(addUser()));
-        }
-        else
-        {
-            le_username.setStyleSheet("background: #FF7777");
-            lbl_isOpen.setText("User already exists.");
-        }
+        le_email.setPlaceholderText("Enter email");
+        le_email.show();
+        connect(&btn_register, SIGNAL(released()), this, SLOT(addUser()));
     }
-
-    db_login.close();
+    else
+    {
+        le_username.setStyleSheet("background: #FF7777");
+        lbl_isOpen.setText("User already exists.");
+    }
 
     setUsernameValidator();
 }
 
 void CG_login::addUser()
 {
-    QString username, password, email;
-    username = le_username.text();
-    email = le_email.text();
-
-    if(!db_login.open())
-        lbl_isOpen.setText("Failed to connect to the database");
-
-    // Calls encryption password
-    EncryptPassword( password );
-
-    QSqlQuery qry( db_login );
-    qry.prepare( "INSERT INTO CG_user (Username, Passwd, Email) VALUES(?, ?, ?)" );
-    qry.addBindValue(username);
-    qry.addBindValue(password);
-    qry.addBindValue(email);
-
-    if(qry.exec())
+    if (db_chessgames.AddUser(le_username.text(), le_password.text(), le_email.text()))
         lbl_isOpen.setText("Successfully created user.");
-
-    db_login.close();
 }
 
 void CG_login::resizeEvent(QResizeEvent * event)
 {
     //Resize depending on portrait orientation vs landscape orientation
     if (width() > height())
-    {
         gb_login.setMaximumSize(width() / 2, height());
-        //lbl_logo.resize(width() / 2, height());
-    }
     else
-    {
         gb_login.setMaximumSize(width(), height() / 2);
-        //lbl_logo.resize(width(), height() / 2);
-    }
-
-    //le_username.setMinimumHeight(height() / 10);
-    //le_password.setMinimumHeight(height() / 10);
-    //btn_login.setMinimumHeight(height() / 10);
-    //btn_register.setMinimumHeight(height() / 10);
-
-    //lbl_logo.setPixmap(pm_logo.scaled(lbl_logo.width(), lbl_logo.height()));
 }
 
 void CG_login::setUsernameValidator()
@@ -213,23 +124,4 @@ void CG_login::setUsernameValidator()
     }
 
     update();
-}
-
-void CG_login::EncryptPassword( QString & password )
-{
-    // Takes the text in the le_password and converts it to Utf8, so it can be placed in a type of 'const char *' next
-    QByteArray passwordInBytes = le_password.text().toUtf8();
-
-    // casting the data in passwordInBytes (currently in the form of 'Utf8' to a type of 'const char *'
-    const char * convertedPasswordToVerify = passwordInBytes.constData();
-
-            /* Instantiating an object that will create the hashing key for the password. Takes an argument specifying
-             * the encryption type you would like be executed on the string */
-    QCryptographicHash sha256PasswordEncryptionGenerator( QCryptographicHash::Sha256 );
-
-    // Adding the data to password encryption generator
-    sha256PasswordEncryptionGenerator.addData( convertedPasswordToVerify );
-
-    // Converting the password to the hash key using the result method and placing it in password.
-    password = (QString)sha256PasswordEncryptionGenerator.result();
 }
