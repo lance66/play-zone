@@ -23,6 +23,12 @@ class CG_validator
         bool CheckValidUsername(QString username);
         bool CheckUniqueUsername(QString username);
 
+        bool CheckPasswordLength(QString password);
+        bool CheckRequiredPasswordCharacters(QString password);
+        bool CheckValidPassword(QString password);
+
+        bool CheckValidEmailAddress(QString email);
+
     private:
         QLabel * lbl_feedback;
 };

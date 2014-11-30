@@ -151,7 +151,7 @@ bool CG_validator::CheckInvalidPeriods(QString username)
 bool CG_validator::CheckForWebsite(QString username)
 {
     bool notAWebsite = true;
-    QRegExp WebsiteRegex("^.*\\.+\\b(com|co|uk|org|net)\\b$"); //A language describing a variety of email endings.
+    QRegExp WebsiteRegex("^.*\\.+\\b(com|co|uk|org|net|edu)\\b$"); //A language describing a variety of email endings.
 
     if (WebsiteRegex.indexIn(username) != -1) //If the username matches the website regular expression.
     {
@@ -218,6 +218,8 @@ bool CG_validator::CheckValidUsername(QString username)
     return valid_username;
 }
 
+//This function will need to be modified for its communication to the database.
+//It should have to acquire database info via communication with the database manager.
 bool CG_validator::CheckUniqueUsername(QString username)
 {
     bool unique_username = true;
@@ -250,4 +252,63 @@ bool CG_validator::CheckUniqueUsername(QString username)
     db_logins.close();
 
     return unique_username;
+}
+
+bool CG_validator::CheckPasswordLength(QString password)
+{
+    bool valid_length = true;
+
+    if (password.length() < 8) //If a username is less than 8 characters long.
+    {
+        valid_length = false;
+        lbl_feedback->setText("Password is too short.");
+    }
+    else if (password.length() > 256) //If a username is more than 256 characters long.
+    {
+        valid_length = false;
+        lbl_feedback->setText("Password is too long.");
+    }
+
+    return valid_length;
+}
+
+bool CG_validator::CheckRequiredPasswordCharacters(QString password)
+{
+    QRegExp requiredCharacters("^([a-z]*[A-Z]*[0-9]*)*$");
+
+    bool contains_requiredCharacters = true;
+
+    if (!password.contains(requiredCharacters)) //If the password does not contain required valid characters.
+    {
+        contains_requiredCharacters = false;
+        lbl_feedback->setText("Password must contain atleast 1 lowercase letter, 1 uppercase letter, and 1 number.");
+    }
+
+    return contains_requiredCharacters;
+}
+
+bool CG_validator::CheckValidEmailAddress(QString email)
+{
+    QRegExp valid_email("^.+@.+\\.\\b(com|co|uk|org|net|edu)\\b$");
+
+    bool is_email = true;
+
+    if (valid_email.indexIn(email) == -1) //If the email doesn't match the email regular expression.
+    {
+        is_email = false;
+        lbl_feedback->setText("You must have a valid email address.");
+    }
+
+    return is_email;
+}
+
+bool CG_validator::CheckValidPassword(QString password)
+{
+    bool valid_password = true;
+
+    valid_password = CheckPasswordLength(password) &&
+                     CheckRequiredPasswordCharacters(password);
+
+
+    return valid_password;
 }
