@@ -48,10 +48,6 @@ CG_login::CG_login(QWidget * parent) :
     gl_login.addWidget(&btn_register, 5, 0, 1, 2);
     gl_login.addWidget(&lbl_isOpen, 6, 0, 1, 2, Qt::AlignCenter);
 
-    ss_splashScreen = new CG_splashScreen;
-    gl_login.addWidget(ss_splashScreen, 7, 0);
-    ss_splashScreen->hide();
-
     //Set the group box to the login layout
     gb_login.setLayout(&gl_login);
 
@@ -82,7 +78,7 @@ CG_login::CG_login(QWidget * parent) :
 
 CG_login::~CG_login()
 {
-    delete ss_splashScreen;
+
 }
 
 /**************************************************************

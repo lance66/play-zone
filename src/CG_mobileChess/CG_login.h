@@ -10,7 +10,6 @@
 #include <QDir>
 #include <QFrame>
 #include "CG_validator.h"
-#include "CG_splashScreen.h"
 #include "CG_dbManager.h"
 
 /************************************************************************
@@ -58,8 +57,6 @@ class CG_login : public QWidget
         virtual void resizeEvent(QResizeEvent * event);
 
     private:
-        CG_splashScreen * ss_splashScreen;
-
         QGroupBox gb_login;
 
         //QLabel lbl_username;
