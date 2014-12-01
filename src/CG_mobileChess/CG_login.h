@@ -59,13 +59,8 @@ class CG_login : public QWidget
     private:
         QGroupBox gb_login;
 
-        //QLabel lbl_username;
         QLineEdit le_username;
-
-        //QLabel lbl_password;
         QLineEdit le_password;
-
-        //QLabel lbl_email;
         QLineEdit le_email;
 
         QPushButton btn_login;
