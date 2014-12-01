@@ -13,6 +13,32 @@
 #include "CG_splashScreen.h"
 #include "CG_dbManager.h"
 
+/************************************************************************
+* Class: CG_login
+*
+* Constructors:
+*	CG_login(QWidget * parent = 0)
+*
+* Slots:
+*   void on_btn_login_clicked()
+*       Checks to see whether user entered valid username and password.
+*       Displays appropriate message on whether user was able to login
+*       or not.
+*   void on_btn_register_clicked()
+*       Checks to see if user already exists in the database.  If user
+*       does not exist and they entered a valid username,
+*       password and email, then addUser() is called.
+*   void addUser()
+*       Adds user to the database
+*   void setUsernameValidator()
+*       Uses regular expressions to see if user is valid or not.
+*
+* Methods:
+*   virtual void resizeEvent(QResizeEvent * event)
+*       Resizes based on whether width is greater than height or vice
+*       versa.
+*************************************************************************/
+
 class CG_login : public QWidget
 {
     Q_OBJECT
