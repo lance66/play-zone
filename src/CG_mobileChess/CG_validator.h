@@ -14,12 +14,12 @@ class CG_validator
     public:
         CG_validator(QLabel & feedback);
 
-        bool CheckLength(QString username);
-        bool CheckNotNull(QString username);
-        bool CheckValidCharacters(QString username);
-        bool CheckInvalidPeriods(QString username);
-        bool CheckForWebsite(QString username);
-        bool CheckForInvalidSpaces(QString username);
+        bool CheckUsernameLength(QString username);
+        bool CheckUsernameNotNull(QString username);
+        bool CheckUsernameValidCharacters(QString username);
+        bool CheckUsernameInvalidPeriods(QString username);
+        bool CheckUsernameForWebsite(QString username);
+        bool CheckUsernameForInvalidSpaces(QString username);
         bool CheckValidUsername(QString username);
         bool CheckUniqueUsername(QString username);
 

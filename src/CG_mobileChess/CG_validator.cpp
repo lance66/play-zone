@@ -5,7 +5,7 @@ CG_validator::CG_validator(QLabel & feedback) :
 { }
 
 /***************************************************************************
- * Function Name:  CheckLength
+ * Function Name:  CheckUsernameLength
  *
  * Purpose:  Check to see if the username passed in is of a length between
  * 2 and 20 characters.  Returns a value describing whether the QString
@@ -18,7 +18,7 @@ CG_validator::CG_validator(QLabel & feedback) :
  * length of a valid username.  A false value is returned if the username's
  * length is less than 2 characters long or more than 20 characters long.
  **************************************************************************/
-bool CG_validator::CheckLength(QString username)
+bool CG_validator::CheckUsernameLength(QString username)
 {
     bool valid_length = true;
 
@@ -37,7 +37,7 @@ bool CG_validator::CheckLength(QString username)
 }
 
 /***************************************************************************
- * Function Name:  CheckNotNull
+ * Function Name:  CheckUsernameNotNull
  *
  * Purpose:  Check to see if the username passed in is null.  If a username
  * is null, the feedback label will be updated to let the user know they
@@ -51,7 +51,7 @@ bool CG_validator::CheckLength(QString username)
  * return a false value.  Otherwise, if the username is not null, this will
  * return a true value.
  **************************************************************************/
-bool CG_validator::CheckNotNull(QString username)
+bool CG_validator::CheckUsernameNotNull(QString username)
 {
     bool not_null = true;
 
@@ -65,7 +65,7 @@ bool CG_validator::CheckNotNull(QString username)
 }
 
 /***************************************************************************
- * Function Name:  CheckValidCharacters
+ * Function Name:  CheckUsernameValidCharacters
  *
  * Purpose:  Check to see if the username passed in only contains valid
  * characters within it.  Valid characters for a username include all
@@ -81,7 +81,7 @@ bool CG_validator::CheckNotNull(QString username)
  * will return a false value and update a label to inform the user of the
  * issue.
  **************************************************************************/
-bool CG_validator::CheckValidCharacters(QString username)
+bool CG_validator::CheckUsernameValidCharacters(QString username)
 {
     bool valid_characters = true;
 
@@ -98,7 +98,7 @@ bool CG_validator::CheckValidCharacters(QString username)
 }
 
 /***************************************************************************
- * Function Name:  CheckInvalidPeriods
+ * Function Name:  CheckUsernameInvalidPeriods
  *
  * Purpose:  Check to see if the username passed in uses periods (.)
  * correctly within the string of characters.  A username cannot start with
@@ -112,7 +112,7 @@ bool CG_validator::CheckValidCharacters(QString username)
  * (.) at the start of end of the username.  This will return a false value
  * and set a label to inform the username of the error.
  **************************************************************************/
-bool CG_validator::CheckInvalidPeriods(QString username)
+bool CG_validator::CheckUsernameInvalidPeriods(QString username)
 {
     bool valid_period_placement = true;
 
@@ -135,7 +135,7 @@ bool CG_validator::CheckInvalidPeriods(QString username)
 }
 
 /***************************************************************************
- * Function Name:  CheckForWebsite
+ * Function Name:  CheckUsernameForWebsite
  *
  * Purpose:  Check to see if the username passed in looks like a website
  * or not.  If it does, it will inform the user that a username cannot look
@@ -148,7 +148,7 @@ bool CG_validator::CheckInvalidPeriods(QString username)
  * website.  If it does, it will return false and set a label to inform the
  * user of the error in their username.
  **************************************************************************/
-bool CG_validator::CheckForWebsite(QString username)
+bool CG_validator::CheckUsernameForWebsite(QString username)
 {
     bool notAWebsite = true;
     QRegExp WebsiteRegex("^.*\\.+\\b(com|co|uk|org|net|edu)\\b$"); //A language describing a variety of email endings.
@@ -163,7 +163,7 @@ bool CG_validator::CheckForWebsite(QString username)
 }
 
 /***************************************************************************
- * Function Name:  CheckForInvalidSpaces
+ * Function Name:  CheckUsernameForInvalidSpaces
  *
  * Purpose:  Check to see if the username passed in uses spaces correctly
  * within the string.  A space is used incorrectly if the username starts or
@@ -178,7 +178,7 @@ bool CG_validator::CheckForWebsite(QString username)
  * correctly within the string.  It will set a label to describe the error
  * if it returns a false value.
  **************************************************************************/
-bool CG_validator::CheckForInvalidSpaces(QString username)
+bool CG_validator::CheckUsernameForInvalidSpaces(QString username)
 {
     bool validSpaces = true;
     QRegExp startWithSpace("^\\s.*$");
@@ -208,9 +208,12 @@ bool CG_validator::CheckValidUsername(QString username)
 {
     bool valid_username = true;
 
-    valid_username = CheckNotNull(username) && CheckLength(username) &&
-                     CheckValidCharacters(username) && CheckInvalidPeriods(username) &&
-                     CheckForWebsite(username) && CheckForInvalidSpaces(username);
+    valid_username = CheckUsernameNotNull(username) &&
+                     CheckUsernameLength(username) &&
+                     CheckUsernameValidCharacters(username) &&
+                     CheckUsernameInvalidPeriods(username) &&
+                     CheckUsernameForWebsite(username) &&
+                     CheckUsernameForInvalidSpaces(username);
 
     if (valid_username)
         lbl_feedback->clear();
@@ -258,12 +261,12 @@ bool CG_validator::CheckPasswordLength(QString password)
 {
     bool valid_length = true;
 
-    if (password.length() < 8) //If a username is less than 8 characters long.
+    if (password.length() < 8) //If a password is less than 8 characters long.
     {
         valid_length = false;
         lbl_feedback->setText("Password is too short.");
     }
-    else if (password.length() > 256) //If a username is more than 256 characters long.
+    else if (password.length() > 64) //If a password is more than 64 characters long.
     {
         valid_length = false;
         lbl_feedback->setText("Password is too long.");
