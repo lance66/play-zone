@@ -7,6 +7,24 @@
 #include <QtSql/QSqlQuery>
 #include <QCryptographicHash>  // Needed for encrypting in SHA256
 
+/******************************************************************************
+* Class: CG_dbManager
+*
+* Constructors:
+*	CG_dbManager(QString str_connection)
+*       Opens the SQLite database for connection based upon the db path passed.
+*
+* Methods:
+*   bool UserExists(QString str_username)
+*       Returns whether or not a user with the passed username exists in
+*       the database.
+*   bool CorrectUserInfo(QString str_username, QString str_password)
+*       Returns whether or not the username and password info are correct
+*       and in the database.
+*   bool AddUser(QString str_username, QString str_password, QString str_email)
+*       Returns true if the user is successfully added into the database.
+*******************************************************************************/
+
 class CG_dbManager
 {
     public:

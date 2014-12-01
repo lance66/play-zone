@@ -11,9 +11,12 @@
 *            are connected to slots.
 ****************************************************************/
 
-CG_login::CG_login(QWidget * parent) :
-    QWidget(parent), gb_login(""), btn_login("Login"), btn_register("Register"), pm_logo("cg_logo_hires_app.png"), db_chessgames(QDir::currentPath() + "/chessgames.db")
+CG_login::CG_login(CG_user * user, QWidget * parent) :
+    QWidget(parent), gb_login(""), btn_login("Login"), btn_register("Register"), pm_logo("cg_logo_hires_app.png")
 {   
+    //Pass the reference to the CG_user
+    cg_usr = user;
+
     //Hide the password entry
     le_password.setEchoMode(QLineEdit::Password);
 
@@ -94,7 +97,7 @@ CG_login::~CG_login()
 void CG_login::on_btn_login_clicked()
 {
     //If username and password is not correct, display
-    if (!db_chessgames.CorrectUserInfo(le_username.text(), le_password.text()))
+    if (!cg_usr->LogIn(le_username.text(), le_password.text()))
         lbl_isOpen.setText("Username or password is incorrect.");
     else
         //If username and password is correct, display user is logged in
@@ -118,7 +121,7 @@ void CG_login::on_btn_login_clicked()
 void CG_login::on_btn_register_clicked()
 {
     //If user already exists in the database
-    if (!db_chessgames.UserExists(le_username.text()))
+    if (!cg_usr->GetUser(le_username.text()))
     {
         le_email.setPlaceholderText("Enter email");
         le_email.show();
@@ -146,7 +149,7 @@ void CG_login::on_btn_register_clicked()
 
 void CG_login::addUser()
 {
-    if (db_chessgames.AddUser(le_username.text(), le_password.text(), le_email.text()))
+    if (cg_usr->AddUser(le_username.text(), le_password.text(), le_email.text()))
         lbl_isOpen.setText("Successfully created user.");
 }
 

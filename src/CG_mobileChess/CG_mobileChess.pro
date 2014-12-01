@@ -15,12 +15,14 @@ TEMPLATE = app
 SOURCES += main.cpp\
     CG_login.cpp \
     CG_validator.cpp \
-    CG_dbManager.cpp
+    CG_dbManager.cpp \
+    CG_user.cpp
 
 HEADERS  += \
     CG_login.h \
     CG_validator.h \
-    CG_dbManager.h
+    CG_dbManager.h \
+    CG_user.h
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 

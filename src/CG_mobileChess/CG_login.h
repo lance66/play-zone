@@ -10,13 +10,13 @@
 #include <QDir>
 #include <QFrame>
 #include "CG_validator.h"
-#include "CG_dbManager.h"
+#include "CG_user.h"
 
 /************************************************************************
 * Class: CG_login
 *
 * Constructors:
-*	CG_login(QWidget * parent = 0)
+*	CG_login(CG_user * user, QWidget * parent = 0)
 *
 * Slots:
 *   void on_btn_login_clicked()
@@ -43,7 +43,7 @@ class CG_login : public QWidget
     Q_OBJECT
 
     public:
-        CG_login(QWidget * parent = 0);
+        CG_login(CG_user * user, QWidget * parent = 0);
         ~CG_login();
 
     private slots:
@@ -57,6 +57,8 @@ class CG_login : public QWidget
         virtual void resizeEvent(QResizeEvent * event);
 
     private:
+        CG_user * cg_usr;
+
         QGroupBox gb_login;
 
         QLineEdit le_username;
@@ -73,9 +75,6 @@ class CG_login : public QWidget
 
         QGridLayout gl_widget;
         QGridLayout gl_login;
-
-        CG_dbManager db_chessgames;
-
 };
 
 #endif

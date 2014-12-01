@@ -1,13 +1,31 @@
 #include "CG_dbManager.h"
 
+/**************************************************************
+*	  Purpose:  Constructor. Opens the database based upon the
+*               db path specified.
+*
+*     Entry:  User has opened the app.
+*
+*     Exit:  The database is set to SQLite and the path to the
+*            db is specified.
+****************************************************************/
+
 CG_dbManager::CG_dbManager(QString str_connection)
 {
     //Connect to database
     db_login = QSqlDatabase::addDatabase("QSQLITE");
-
-    //For deployment use the line below rather than the one above
     db_login.setDatabaseName(str_connection);
 }
+
+/**************************************************************
+*	  Purpose:  To check whether or not the user entered the
+*               correct username and password and it exists in
+*               the database.
+*
+*     Entry:  User has clicked the login button
+*
+*     Exit:  Returns whether or not the login info is correct.
+****************************************************************/
 
 bool CG_dbManager::CorrectUserInfo(QString str_username, QString str_password)
 {
@@ -33,6 +51,15 @@ bool CG_dbManager::CorrectUserInfo(QString str_username, QString str_password)
     return count > 0;
 }
 
+/**************************************************************
+*	  Purpose:  To check whether or not the user exists in the
+*               database.
+*
+*     Entry:  User has clicked the register button
+*
+*     Exit:  Returns whether or not the user exists.
+****************************************************************/
+
 bool CG_dbManager::UserExists(QString str_username)
 {
     int count = 0;
@@ -51,6 +78,16 @@ bool CG_dbManager::UserExists(QString str_username)
 
     return count > 0;
 }
+
+/**************************************************************
+*	  Purpose:  To add a user into the database with the passed
+*               parameters: username, password and email.
+*
+*     Entry:  User has clicked the register button
+*
+*     Exit:  Returns whether or not the user was successfully
+*            added into the database.
+****************************************************************/
 
 bool CG_dbManager::AddUser(QString str_username, QString str_password, QString str_email)
 {
@@ -75,6 +112,16 @@ bool CG_dbManager::AddUser(QString str_username, QString str_password, QString s
 
     return added_user;
 }
+
+/**************************************************************
+*	  Purpose:  To encrypt a password using the SHA256 hashing
+*               function.
+*
+*     Entry:  User is attempting to login or register.
+*
+*     Exit:  Alters the password string based upon the SHA256
+*            encryption.
+****************************************************************/
 
 void CG_dbManager::EncryptPassword(QString & password)
 {
