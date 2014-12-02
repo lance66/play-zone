@@ -47,6 +47,7 @@
 *       This is a pointer to a label that will report feedback on
 *       errors when validating usernames, passwords, and email addresses.
 *************************************************************************/
+
 class CG_validator
 {
     public:

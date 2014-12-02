@@ -17,6 +17,7 @@ CG_validator::CG_validator(QLabel & feedback) :
  *             the username's length is less than 2 characters long or more
  *             than 20 characters long.
  **************************************************************************/
+
 bool CG_validator::CheckUsernameLength(QString username)
 {
     bool valid_length = true;
@@ -48,6 +49,7 @@ bool CG_validator::CheckUsernameLength(QString username)
  *             know the error and return a false value.  Otherwise, if the
  *             username is not null, this will return a true value.
  **************************************************************************/
+
 bool CG_validator::CheckUsernameNotNull(QString username)
 {
     bool not_null = true;
@@ -77,6 +79,7 @@ bool CG_validator::CheckUsernameNotNull(QString username)
  *             in the username, it will return a false value and update a
  *             label to inform the user of the issue.
  **************************************************************************/
+
 bool CG_validator::CheckUsernameValidCharacters(QString username)
 {
     bool valid_characters = true;
@@ -108,6 +111,7 @@ bool CG_validator::CheckUsernameValidCharacters(QString username)
  *             return a false value and set a label to inform the username
  *             of the error.
  **************************************************************************/
+
 bool CG_validator::CheckUsernameInvalidPeriods(QString username)
 {
     bool valid_period_placement = true;
@@ -143,6 +147,7 @@ bool CG_validator::CheckUsernameInvalidPeriods(QString username)
  *             like a website.  If it does, it will return false and set a
  *             label to inform the user of the error in their username.
  **************************************************************************/
+
 bool CG_validator::CheckUsernameForWebsite(QString username)
 {
     bool notAWebsite = true;
@@ -172,6 +177,7 @@ bool CG_validator::CheckUsernameForWebsite(QString username)
  *             spaces correctly within the string.  It will set a label to
  *             describe the error if it returns a false value.
  **************************************************************************/
+
 bool CG_validator::CheckUsernameForInvalidSpaces(QString username)
 {
     bool validSpaces = true;
@@ -213,6 +219,7 @@ bool CG_validator::CheckUsernameForInvalidSpaces(QString username)
  *             the specifications of a valid username.  This is done by
  *             running it through a gauntlet of validations.
  **************************************************************************/
+
 bool CG_validator::CheckValidUsername(QString username)
 {
     bool valid_username = true;
@@ -244,6 +251,7 @@ bool CG_validator::CheckValidUsername(QString username)
  *             correct length.  Will change the error label if password
  *             does not meet the specifications.
  **************************************************************************/
+
 bool CG_validator::CheckPasswordLength(QString password)
 {
     bool valid_length = true;
@@ -275,6 +283,7 @@ bool CG_validator::CheckPasswordLength(QString password)
  *      Exit:  Returns a boolean value describing if the password contains
  *             the required characters.
  **************************************************************************/
+
 bool CG_validator::CheckRequiredPasswordCharacters(QString password)
 {
     QRegExp requiredUpperCase("^.*[A-Z].*$"); //Contains an uppercase letter.
@@ -306,6 +315,7 @@ bool CG_validator::CheckRequiredPasswordCharacters(QString password)
  *      Exit:  Returns a boolean value describing if the email takes on
  *             the correct form of an email address.
  **************************************************************************/
+
 bool CG_validator::CheckValidEmailAddress(QString email)
 {
     QRegExp valid_email("^.+@.+\\.\\b(com|co|uk|org|net|edu)\\b$");
@@ -332,6 +342,7 @@ bool CG_validator::CheckValidEmailAddress(QString email)
  *
  *      Exit:  Returns a boolean value describing if the password is valid.
  **************************************************************************/
+
 bool CG_validator::CheckValidPassword(QString password)
 {
     bool valid_password = true;
