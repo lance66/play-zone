@@ -286,14 +286,14 @@ bool CG_validator::CheckPasswordLength(QString password)
  **************************************************************************/
 bool CG_validator::CheckRequiredPasswordCharacters(QString password)
 {
-    QRegExp requiredUpperCase("^[A-Z]+$"); //Contains an uppercase letter.
-    QRegExp requiredLowerCase("^[a-z]+$"); //Contains a lowercase letter.
-    QRegExp requiredNumber("^[0-9]+$"); //Contains a number.
+    QRegExp requiredUpperCase("^.*[A-Z].*$"); //Contains an uppercase letter.
+    QRegExp requiredLowerCase("^.*[a-z].*$"); //Contains a lowercase letter.
+    QRegExp requiredNumber("^.*[0-9].*$"); //Contains a number.
 
     bool contains_requiredCharacters = true;
 
     if (!password.contains(requiredUpperCase) || !password.contains(requiredLowerCase)
-        || !password.contains(requiredNumber)) //If the password does not contain required valid characters.
+            || !password.contains(requiredNumber)) //If the password does not contain required valid characters.
     {
         contains_requiredCharacters = false;
         lbl_feedback->setText("Password must contain atleast 1 lowercase letter, 1 uppercase letter, and 1 number.");

@@ -21,8 +21,7 @@ CG_login::CG_login(CG_user * user, QWidget * parent) :
     //Hide the password entry
     le_password.setEchoMode(QLineEdit::Password);
 
-    gb_login.setStyleSheet("background: #448ed3; border-style: outset; border-radius: 10px;" +
-                           "border-color: #448ed3; min-width: 10em; padding: 6px;");
+    gb_login.setStyleSheet("background: #448ed3; border-style: outset; border-radius: 10px; border-color: #448ed3; min-width: 10em; padding: 6px;");
     btn_login.setStyleSheet("background: #b6ee65;");
     btn_register.setStyleSheet("background: #b6ee65;");
     le_username.setStyleSheet("background: #FFFFFF;");
