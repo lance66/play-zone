@@ -31,18 +31,12 @@ CG_login::CG_login(CG_user * user, QWidget * parent) :
     lbl_logo.setPixmap(pm_logo);
 
     //Add all the controls to the login layout
-    //gl_login.addWidget(&lbl_username, 0, 0);
-
     gl_login.addWidget(&lbl_logo, 0, 0);
     gl_login.addWidget(&le_username, 1, 0);
-
-    //gl_login.addWidget(&lbl_password, 1, 0);
     gl_login.addWidget(&le_password, 2, 0);
-
-    //gl_login.addWidget(&lbl_email, 2, 0);
     gl_login.addWidget(&le_email, 3, 0);
 
-    //lbl_email.hide();
+    //Hide the email until the user selects the register button
     le_email.hide();
 
     le_username.setPlaceholderText("Chessgames username");
@@ -76,19 +70,6 @@ CG_login::CG_login(CG_user * user, QWidget * parent) :
 
     //Connect email validation color to email when text is changed
     connect(&le_email, SIGNAL(textChanged(QString)), this, SLOT(setEmailValidator()));
-}
-
-/**************************************************************
-*	  Purpose:  Destructor.  Deletes CG_user.
-*
-*     Entry:  Close login window button has been pressed.
-*
-*     Exit:  Login screen is exited.
-****************************************************************/
-
-CG_login::~CG_login()
-{
-
 }
 
 /**************************************************************
