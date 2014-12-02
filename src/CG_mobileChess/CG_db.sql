@@ -20,8 +20,8 @@ CREATE TABLE CG_user
 	Username			nvarchar(32)	NOT NULL		UNIQUE, --User nvarchar
 	Passwd				nvarchar(64)	NOT NULL,				--for unicode standards.
 	Email				nvarchar(64)	NOT NULL,
-	JoinDate			date,
-	CurrentELO			float			DEFAULT 0,
+	JoinDate			date		DEFAULT CURRENT_DATE,
+	CurrentELO			float			DEFAULT 1500,
 	NumGames			int				DEFAULT 0,
 	TotalScore			float			DEFAULT 0,
 	TotalOpponentELO	decimal(38, 1)	DEFAULT 0,
