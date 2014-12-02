@@ -3,6 +3,27 @@
 #include "CG_dbManager.h"
 #include <QApplication>
 
+/***************************************************************************
+ * Author:                                                        ChessGames
+ * Date Created:                                                  11/10/2014
+ * Date Last Modified:                                            12/01/2014
+ * File Name:                                                   src/main.cpp
+ *
+ * Overview: Creates the foundation for our login application. Sets up the
+ * database manager (Persistence Layer), chessgames user (Business Layer),
+ * login widget (forms part of our Presentation Layer), and resizes our
+ * window for our testing purposes.
+ *
+ * Input: Requires a valid username, password, and email for registration.
+ * If user is already registered then the user simply enters a username, and
+ * password. All usernames must follow a certain guideline as outlined by
+ * the validation the user will see when main is executing. Such validations
+ * include no double spaces, etc.
+ *
+ * Output: Displays the window, with the size that is specified, along with
+ * QLineEdits where the username, password, email for inputs, along with
+ * two buttons, one for registering an account, and the other for loggin in.
+ **************************************************************************/
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
