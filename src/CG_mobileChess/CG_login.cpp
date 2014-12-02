@@ -156,8 +156,9 @@ void CG_login::on_btn_register_clicked()
 
 void CG_login::addUser()
 {
-    if (cg_usr->AddUser(le_username.text(), le_password.text(), le_email.text()))
-        lbl_isOpen.setText("Successfully created user.");
+    if (setUsernameValidator() && setPasswordValidator() && setEmailValidator())
+        if (cg_usr->AddUser(le_username.text(), le_password.text(), le_email.text()))
+            lbl_isOpen.setText("Successfully created user.");
 }
 
 /**************************************************************
@@ -186,8 +187,10 @@ void CG_login::resizeEvent(QResizeEvent * event)
 *     Exit:  Displays whether the username is valid or not.
 ****************************************************************/
 
-void CG_login::setUsernameValidator()
+bool CG_login::setUsernameValidator()
 {
+    bool valid_username = true;
+
     //If email is visible, that must mean user clicked the register button
     if (le_email.isVisible())
     {
@@ -195,11 +198,16 @@ void CG_login::setUsernameValidator()
         if (cg_validator.CheckValidUsername(le_username.text()))
             le_username.setStyleSheet("background: #77FF77");
         else
+        {
+            valid_username = false;
             le_username.setStyleSheet("background: #FF7777");
+        }
     }
 
     //Go back to login screen
     update();
+
+    return valid_username;
 }
 
 /**************************************************************
@@ -210,8 +218,10 @@ void CG_login::setUsernameValidator()
 *     Exit:  Displays whether the password is valid or not.
 ****************************************************************/
 
-void CG_login::setPasswordValidator()
+bool CG_login::setPasswordValidator()
 {
+    bool valid_password = true;
+
     //If email is visible, that must mean user clicked the register button
     if (le_email.isVisible())
     {
@@ -219,11 +229,16 @@ void CG_login::setPasswordValidator()
         if (cg_validator.CheckValidPassword(le_password.text()))
             le_password.setStyleSheet("background: #77FF77");
         else
+        {
+            valid_password = false;
             le_password.setStyleSheet("background: #FF7777");
+        }
     }
 
     //Go back to login screen
     update();
+
+    return valid_password;
 }
 
 /**************************************************************
@@ -234,8 +249,10 @@ void CG_login::setPasswordValidator()
 *     Exit:  Displays whether the email is valid or not.
 ****************************************************************/
 
-void CG_login::setEmailValidator()
+bool CG_login::setEmailValidator()
 {
+    bool valid_email = true;
+
     //If email is visible, that must mean user clicked the register button
     if (le_email.isVisible())
     {
@@ -243,9 +260,14 @@ void CG_login::setEmailValidator()
         if (cg_validator.CheckValidEmailAddress(le_email.text()))
             le_email.setStyleSheet("background: #77FF77");
         else
+        {
+            valid_email = false;
             le_email.setStyleSheet("background: #FF7777");
+        }
     }
 
     //Go back to login screen
     update();
+
+    return valid_email;
 }

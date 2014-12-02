@@ -52,13 +52,13 @@ class CG_login : public QWidget
         void addUser();
 
         //This is for the text changed slot of the username
-        void setUsernameValidator();
+        bool setUsernameValidator();
 
         //This is for the text changed slot of the password
-        void setPasswordValidator();
+        bool setPasswordValidator();
 
         //This is for the text changed slot of the email
-        void setEmailValidator();
+        bool setEmailValidator();
 
     protected:
         virtual void resizeEvent(QResizeEvent * event);
