@@ -12,7 +12,8 @@
 ****************************************************************/
 
 CG_login::CG_login(CG_user * user, QWidget * parent) :
-    QWidget(parent), gb_login(""), btn_login("Login"), btn_register("Register"), pm_logo("cg_logo_hires_app.png")
+    QWidget(parent), cg_validator(lbl_isOpen), gb_login(""), btn_login("Login"),
+    btn_register("Register"), pm_logo("cg_logo_hires_app.png")
 {   
     //Pass the reference to the CG_user
     cg_usr = user;
@@ -20,7 +21,7 @@ CG_login::CG_login(CG_user * user, QWidget * parent) :
     //Hide the password entry
     le_password.setEchoMode(QLineEdit::Password);
 
-    gb_login.setStyleSheet("background: #448ed3; border-style: outset; border-radius: 10px;border-color: #448ed3;min-width: 10em; padding: 6px;");
+    gb_login.setStyleSheet("background: #448ed3; border-style: outset; border-radius: 10px; border-color: #448ed3; min-width: 10em; padding: 6px;");
     btn_login.setStyleSheet("background: #b6ee65;");
     btn_register.setStyleSheet("background: #b6ee65;");
     le_username.setStyleSheet("background: #FFFFFF;");
@@ -69,6 +70,12 @@ CG_login::CG_login(CG_user * user, QWidget * parent) :
 
     //Connect username validation color to username when text is changed
     connect(&le_username, SIGNAL(textChanged(QString)), this, SLOT(setUsernameValidator()));
+
+    //Connect password validation color to password when text is changed
+    connect(&le_password, SIGNAL(textChanged(QString)), this, SLOT(setPasswordValidator()));
+
+    //Connect email validation color to email when text is changed
+    connect(&le_email, SIGNAL(textChanged(QString)), this, SLOT(setEmailValidator()));
 }
 
 /**************************************************************
@@ -101,7 +108,7 @@ void CG_login::on_btn_login_clicked()
         lbl_isOpen.setText("Username or password is incorrect.");
     else
         //If username and password is correct, display user is logged in
-        lbl_isOpen.setText("Successfully logged in.");
+        lbl_isOpen.setText("Successfully logged in. Hello, " + le_username.text() + "!");
 
     //Ensure email is hidden while logging in
     le_email.hide();
@@ -176,23 +183,67 @@ void CG_login::resizeEvent(QResizeEvent * event)
 *
 *     Entry:  User has clicked register.
 *
-*     Exit:  Email is hidden again and user is back
-*            at login screen.
+*     Exit:  Displays whether the username is valid or not.
 ****************************************************************/
 
 void CG_login::setUsernameValidator()
 {
-    //Instantiate validator class
-    CG_validator vld_username(lbl_isOpen);
-
     //If email is visible, that must mean user clicked the register button
     if (le_email.isVisible())
     {
         //If user enters valid username, background = green.  Else, background = red.
-        if (vld_username.CheckValidUsername(le_username.text()))
+        if (cg_validator.CheckValidUsername(le_username.text()))
             le_username.setStyleSheet("background: #77FF77");
         else
             le_username.setStyleSheet("background: #FF7777");
+    }
+
+    //Go back to login screen
+    update();
+}
+
+/**************************************************************
+*	  Purpose:  Ensures the password is valid when registering.
+*
+*     Entry:  User has clicked register.
+*
+*     Exit:  Displays whether the password is valid or not.
+****************************************************************/
+
+void CG_login::setPasswordValidator()
+{
+    //If email is visible, that must mean user clicked the register button
+    if (le_email.isVisible())
+    {
+        //If user enters valid password, background = green. Else, background = red.
+        if (cg_validator.CheckValidPassword(le_password.text()))
+            le_password.setStyleSheet("background: #77FF77");
+        else
+            le_password.setStyleSheet("background: #FF7777");
+    }
+
+    //Go back to login screen
+    update();
+}
+
+/**************************************************************
+*	  Purpose:  Ensures the email is valid when registering.
+*
+*     Entry:  User has clicked register.
+*
+*     Exit:  Displays whether the email is valid or not.
+****************************************************************/
+
+void CG_login::setEmailValidator()
+{
+    //If email is visible, that must mean user clicked the register button
+    if (le_email.isVisible())
+    {
+        //If user enters valid email, background = green. Else, background = red.
+        if (cg_validator.CheckValidEmailAddress(le_email.text()))
+            le_email.setStyleSheet("background: #77FF77");
+        else
+            le_email.setStyleSheet("background: #FF7777");
     }
 
     //Go back to login screen
