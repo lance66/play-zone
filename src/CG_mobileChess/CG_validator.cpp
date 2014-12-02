@@ -249,7 +249,8 @@ bool CG_validator::CheckValidUsername(QString username)
  * attempting to login or register.
  *
  * Exit:  Returns a boolean value describing if the password is of a correct
- * length
+ * length.  Will change the error label if password does not meet the
+ * specifications.
  **************************************************************************/
 bool CG_validator::CheckPasswordLength(QString password)
 {
@@ -269,13 +270,30 @@ bool CG_validator::CheckPasswordLength(QString password)
     return valid_length;
 }
 
+/***************************************************************************
+ * Function Name:  CheckRequiredPasswordCharacters
+ *
+ * Purpose:  Check to see if the password passed in has the following
+ * characters included in it:  at least 1 lowercase letter,
+ * at least 1 uppercase letter, and at least 1 number.  Will update an
+ * error label if the password does not meet these requirements.
+ *
+ * Entry:  Takes in a QString which represents a password of a user that is
+ * attempting to login or register.
+ *
+ * Exit:  Returns a boolean value describing if the password contains the
+ * required characters
+ **************************************************************************/
 bool CG_validator::CheckRequiredPasswordCharacters(QString password)
 {
-    QRegExp requiredCharacters("^([a-z]*[A-Z]*[0-9]*)*$");
+    QRegExp requiredUpperCase("^[A-Z]+$"); //Contains an uppercase letter.
+    QRegExp requiredLowerCase("^[a-z]+$"); //Contains a lowercase letter.
+    QRegExp requiredNumber("^[0-9]+$"); //Contains a number.
 
     bool contains_requiredCharacters = true;
 
-    if (!password.contains(requiredCharacters)) //If the password does not contain required valid characters.
+    if (!password.contains(requiredUpperCase) || !password.contains(requiredLowerCase)
+        || !password.contains(requiredNumber)) //If the password does not contain required valid characters.
     {
         contains_requiredCharacters = false;
         lbl_feedback->setText("Password must contain atleast 1 lowercase letter, 1 uppercase letter, and 1 number.");
