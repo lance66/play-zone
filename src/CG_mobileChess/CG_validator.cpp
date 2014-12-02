@@ -204,6 +204,22 @@ bool CG_validator::CheckUsernameForInvalidSpaces(QString username)
     return validSpaces;
 }
 
+/***************************************************************************
+ * Function Name:  CheckValidUsername
+ *
+ * Purpose:  Check to see if the username passed in fits all the
+ * requirements for a valid username.  This involves checking to see if a
+ * username is not null, of a specific length, has only valid characters,
+ * doesn't use periods incorrectly, doesn't look like a website, and that
+ * there are no incorrectly used spaces.
+ *
+ * Entry:  Takes in a QString which represents a username of a user that is
+ * attempting to login or register.
+ *
+ * Exit:  Returns a boolean value describing if the username fits all the
+ * specifications of a valid username.  This is done by running it through
+ * a gauntlet of validations.
+ **************************************************************************/
 bool CG_validator::CheckValidUsername(QString username)
 {
     bool valid_username = true;
@@ -221,42 +237,20 @@ bool CG_validator::CheckValidUsername(QString username)
     return valid_username;
 }
 
-//This function will need to be modified for its communication to the database.
-//It should have to acquire database info via communication with the database manager.
-bool CG_validator::CheckUniqueUsername(QString username)
-{
-    bool unique_username = true;
-    int count = 0;
-
-    //Connect to database
-    QSqlDatabase db_logins = QSqlDatabase::addDatabase("QSQLITE");
-
-    //For deployment use the line below rather than the one above
-    db_logins.setDatabaseName(QDir::currentPath() + "/chessgames.db");
-
-    if(!db_logins.open())
-        lbl_feedback->setText("Failed to connect to the database");
-
-    QSqlQuery qry( db_logins );
-    qry.prepare( "SELECT UserID FROM CG_user WHERE Username = ?" );
-    qry.addBindValue(username);
-
-    if(qry.exec())
-    {
-        for(; qry.next(); count++);
-
-        if (count > 0)
-        {
-            unique_username = false;
-            lbl_feedback->setText("That username already exists.");
-        }
-    }
-
-    db_logins.close();
-
-    return unique_username;
-}
-
+/***************************************************************************
+ * Function Name:  CheckPasswordLength
+ *
+ * Purpose:  Check to see if the password passed in is at least 8 characters
+ * long and less than or equal to 64 characters long.  Returns a boolean
+ * that describes if the password fulfills this requirement, and will set
+ * a label if it does not.
+ *
+ * Entry:  Takes in a QString which represents a password of a user that is
+ * attempting to login or register.
+ *
+ * Exit:  Returns a boolean value describing if the password is of a correct
+ * length
+ **************************************************************************/
 bool CG_validator::CheckPasswordLength(QString password)
 {
     bool valid_length = true;
@@ -302,6 +296,9 @@ bool CG_validator::CheckValidEmailAddress(QString email)
         lbl_feedback->setText("You must have a valid email address.");
     }
 
+    if (is_email)
+        lbl_feedback->clear();
+
     return is_email;
 }
 
@@ -312,6 +309,8 @@ bool CG_validator::CheckValidPassword(QString password)
     valid_password = CheckPasswordLength(password) &&
                      CheckRequiredPasswordCharacters(password);
 
+    if (valid_password)
+        lbl_feedback->clear();
 
     return valid_password;
 }

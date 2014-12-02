@@ -21,7 +21,6 @@ class CG_validator
         bool CheckUsernameForWebsite(QString username);
         bool CheckUsernameForInvalidSpaces(QString username);
         bool CheckValidUsername(QString username);
-        bool CheckUniqueUsername(QString username);
 
         bool CheckPasswordLength(QString password);
         bool CheckRequiredPasswordCharacters(QString password);
