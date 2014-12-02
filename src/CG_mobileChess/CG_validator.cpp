@@ -5,18 +5,17 @@ CG_validator::CG_validator(QLabel & feedback) :
 { }
 
 /***************************************************************************
- * Function Name:  CheckUsernameLength
+ *      Purpose:  Check to see if the username passed in is of a length
+ *                between 2 and 20 characters.  Returns a value describing
+ *                whether the QString passed or failed this check.
  *
- * Purpose:  Check to see if the username passed in is of a length between
- * 2 and 20 characters.  Returns a value describing whether the QString
- * passed or failed this check.
+ *      Entry:  Takes in a QString which represents a username of a user
+ *              that is attempting to login or register.
  *
- * Entry:  Takes in a QString which represents a username of a user that is
- * attempting to login or register.
- *
- * Exit:  Returns a boolean value describing if the username fits the
- * length of a valid username.  A false value is returned if the username's
- * length is less than 2 characters long or more than 20 characters long.
+ *      Exit:  Returns a boolean value describing if the username fits the
+ *             length of a valid username.  A false value is returned if
+ *             the username's length is less than 2 characters long or more
+ *             than 20 characters long.
  **************************************************************************/
 bool CG_validator::CheckUsernameLength(QString username)
 {
@@ -37,19 +36,17 @@ bool CG_validator::CheckUsernameLength(QString username)
 }
 
 /***************************************************************************
- * Function Name:  CheckUsernameNotNull
+ *      Purpose:  Check to see if the username passed in is null.  If a
+ *                username is null, the feedback label will be updated to
+ *                let the user know they must have a username.
  *
- * Purpose:  Check to see if the username passed in is null.  If a username
- * is null, the feedback label will be updated to let the user know they
- * must have a username.
+ *      Entry:  Takes in a QString which represents a username of a user
+ *              that is attempting to login or register.
  *
- * Entry:  Takes in a QString which represents a username of a user that is
- * attempting to login or register.
- *
- * Exit:  Returns a boolean value describing if the username is null.  If a
- * username is null, a feedback label will let the user know the error and
- * return a false value.  Otherwise, if the username is not null, this will
- * return a true value.
+ *      Exit:  Returns a boolean value describing if the username is null.
+ *             If a username is null, a feedback label will let the user
+ *             know the error and return a false value.  Otherwise, if the
+ *             username is not null, this will return a true value.
  **************************************************************************/
 bool CG_validator::CheckUsernameNotNull(QString username)
 {
@@ -65,21 +62,20 @@ bool CG_validator::CheckUsernameNotNull(QString username)
 }
 
 /***************************************************************************
- * Function Name:  CheckUsernameValidCharacters
+ *      Purpose:  Check to see if the username passed in only contains
+ *                valid characters within it.  Valid characters for a
+ *                username include all lowercase and uppercase letters,
+ *                numbers, dashes (-), spaces, and periods (.).  If a
+ *                username happens to contain a character that isn't
+ *                valid, it will return a value describing that.
  *
- * Purpose:  Check to see if the username passed in only contains valid
- * characters within it.  Valid characters for a username include all
- * lowercase and uppercase letters, numbers, dashes (-), spaces, and
- * periods (.).  If a username happens to contain a character that isn't
- * valid, it will return a value describing that.
+ *      Entry:  Takes in a QString which represents a username of a user
+ *              that is attempting to login or register.
  *
- * Entry:  Takes in a QString which represents a username of a user that is
- * attempting to login or register.
- *
- * Exit:  Returns a boolean value describing if the username only contains
- * valid characters.  If an invalid character exists in the username, it
- * will return a false value and update a label to inform the user of the
- * issue.
+ *      Exit:  Returns a boolean value describing if the username only
+ *             contains valid characters.  If an invalid character exists
+ *             in the username, it will return a false value and update a
+ *             label to inform the user of the issue.
  **************************************************************************/
 bool CG_validator::CheckUsernameValidCharacters(QString username)
 {
@@ -98,19 +94,19 @@ bool CG_validator::CheckUsernameValidCharacters(QString username)
 }
 
 /***************************************************************************
- * Function Name:  CheckUsernameInvalidPeriods
+ *      Purpose:  Check to see if the username passed in uses periods (.)
+ *                correctly within the string of characters.  A username
+ *                cannot start with a period, nor can it end with a period.
+ *                If a username matches either of these cases, it will
+ *                inform the user of the error.
  *
- * Purpose:  Check to see if the username passed in uses periods (.)
- * correctly within the string of characters.  A username cannot start with
- * a period, nor can it end with a period.  If a username matches either of
- * these cases, it will inform the user of the error.
+ *      Entry:  Takes in a QString which represents a username of a user
+ *              that is attempting to login or register.
  *
- * Entry:  Takes in a QString which represents a username of a user that is
- * attempting to login or register.
- *
- * Exit:  Returns a boolean value describing if the username has a period
- * (.) at the start of end of the username.  This will return a false value
- * and set a label to inform the username of the error.
+ *      Exit:  Returns a boolean value describing if the username has a
+ *             period (.) at the start of end of the username.  This will
+ *             return a false value and set a label to inform the username
+ *             of the error.
  **************************************************************************/
 bool CG_validator::CheckUsernameInvalidPeriods(QString username)
 {
@@ -135,18 +131,17 @@ bool CG_validator::CheckUsernameInvalidPeriods(QString username)
 }
 
 /***************************************************************************
- * Function Name:  CheckUsernameForWebsite
+ *      Purpose:  Check to see if the username passed in looks like a
+ *                website or not.  If it does, it will inform the user
+ *                that a username cannot look like a website and return
+ *                a false value.
  *
- * Purpose:  Check to see if the username passed in looks like a website
- * or not.  If it does, it will inform the user that a username cannot look
- * like a website and return a false value.
+ *      Entry:  Takes in a QString which represents a username of a user
+ *              that is attempting to login or register.
  *
- * Entry:  Takes in a QString which represents a username of a user that is
- * attempting to login or register.
- *
- * Exit:  Returns a boolean value describing if the username looks like a
- * website.  If it does, it will return false and set a label to inform the
- * user of the error in their username.
+ *      Exit:  Returns a boolean value describing if the username looks
+ *             like a website.  If it does, it will return false and set a
+ *             label to inform the user of the error in their username.
  **************************************************************************/
 bool CG_validator::CheckUsernameForWebsite(QString username)
 {
@@ -163,20 +158,19 @@ bool CG_validator::CheckUsernameForWebsite(QString username)
 }
 
 /***************************************************************************
- * Function Name:  CheckUsernameForInvalidSpaces
+ *      Purpose:  Check to see if the username passed in uses spaces
+ *                correctly within the string.  A space is used incorrectly
+ *                if the username starts or ends with a space, or if there
+ *                are at least 2 spaces in a row.  If spaces are used
+ *                incorrectly in the username, it will set a label to
+ *                inform the user of the error and return false.
  *
- * Purpose:  Check to see if the username passed in uses spaces correctly
- * within the string.  A space is used incorrectly if the username starts or
- * ends with a space, or if there are at least 2 spaces in a row.  If spaces
- * are used incorrectly in the username, it will set a label to inform the
- * user of the error and return false.
+ *      Entry:  Takes in a QString which represents a username of a user
+ *              that is attempting to login or register.
  *
- * Entry:  Takes in a QString which represents a username of a user that is
- * attempting to login or register.
- *
- * Exit:  Returns a boolean value describing if the username uses spaces
- * correctly within the string.  It will set a label to describe the error
- * if it returns a false value.
+ *      Exit:  Returns a boolean value describing if the username uses
+ *             spaces correctly within the string.  It will set a label to
+ *             describe the error if it returns a false value.
  **************************************************************************/
 bool CG_validator::CheckUsernameForInvalidSpaces(QString username)
 {
@@ -205,20 +199,19 @@ bool CG_validator::CheckUsernameForInvalidSpaces(QString username)
 }
 
 /***************************************************************************
- * Function Name:  CheckValidUsername
+ *      Purpose:  Check to see if the username passed in fits all the
+ *                requirements for a valid username.  This involves
+ *                checking to see if a username is not null, of a specific
+ *                length, has only valid characters, doesn't use periods
+ *                incorrectly, doesn't look like a website, and that
+ *                there are no incorrectly used spaces.
  *
- * Purpose:  Check to see if the username passed in fits all the
- * requirements for a valid username.  This involves checking to see if a
- * username is not null, of a specific length, has only valid characters,
- * doesn't use periods incorrectly, doesn't look like a website, and that
- * there are no incorrectly used spaces.
+ *      Entry:  Takes in a QString which represents a username of a user
+ *              that is attempting to login or register.
  *
- * Entry:  Takes in a QString which represents a username of a user that is
- * attempting to login or register.
- *
- * Exit:  Returns a boolean value describing if the username fits all the
- * specifications of a valid username.  This is done by running it through
- * a gauntlet of validations.
+ *      Exit:  Returns a boolean value describing if the username fits all
+ *             the specifications of a valid username.  This is done by
+ *             running it through a gauntlet of validations.
  **************************************************************************/
 bool CG_validator::CheckValidUsername(QString username)
 {
@@ -238,19 +231,18 @@ bool CG_validator::CheckValidUsername(QString username)
 }
 
 /***************************************************************************
- * Function Name:  CheckPasswordLength
+ *      Purpose:  Check to see if the password passed in is at least 8
+ *                characters long and less than or equal to 64 characters
+ *                long.  Returns a boolean that describes if the password
+ *                fulfills this requirement, and will set a label if it
+ *                does not.
  *
- * Purpose:  Check to see if the password passed in is at least 8 characters
- * long and less than or equal to 64 characters long.  Returns a boolean
- * that describes if the password fulfills this requirement, and will set
- * a label if it does not.
+ *      Entry:  Takes in a QString which represents a password of a user
+ *              that is attempting to login or register.
  *
- * Entry:  Takes in a QString which represents a password of a user that is
- * attempting to login or register.
- *
- * Exit:  Returns a boolean value describing if the password is of a correct
- * length.  Will change the error label if password does not meet the
- * specifications.
+ *      Exit:  Returns a boolean value describing if the password is of a
+ *             correct length.  Will change the error label if password
+ *             does not meet the specifications.
  **************************************************************************/
 bool CG_validator::CheckPasswordLength(QString password)
 {
@@ -271,18 +263,17 @@ bool CG_validator::CheckPasswordLength(QString password)
 }
 
 /***************************************************************************
- * Function Name:  CheckRequiredPasswordCharacters
+ *      Purpose:  Check to see if the password passed in has the following
+ *                characters included in it:  at least 1 lowercase letter,
+ *                at least 1 uppercase letter, and at least 1 number.
+ *                Will update an error label if the password does not meet
+ *                these requirements.
  *
- * Purpose:  Check to see if the password passed in has the following
- * characters included in it:  at least 1 lowercase letter,
- * at least 1 uppercase letter, and at least 1 number.  Will update an
- * error label if the password does not meet these requirements.
+ *      Entry:  Takes in a QString which represents a password of a user
+ *              that is attempting to login or register.
  *
- * Entry:  Takes in a QString which represents a password of a user that is
- * attempting to login or register.
- *
- * Exit:  Returns a boolean value describing if the password contains the
- * required characters
+ *      Exit:  Returns a boolean value describing if the password contains
+ *             the required characters.
  **************************************************************************/
 bool CG_validator::CheckRequiredPasswordCharacters(QString password)
 {
