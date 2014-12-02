@@ -5,7 +5,7 @@
 
 /***************************************************************************
  * Author:                                                        ChessGames
- * Date Created:                                                  11/07/2014
+ * Date Created:                                                  11/10/2014
  * Date Last Modified:                                            12/01/2014
  * File Name:                                                   src/main.cpp
  *
@@ -24,7 +24,6 @@
  * QLineEdits where the username, password, email for inputs, along with
  * two buttons, one for registering an account, and the other for loggin in.
  **************************************************************************/
-
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
