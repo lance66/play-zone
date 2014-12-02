@@ -53,11 +53,19 @@ class CG_login : public QWidget
 
         //This is for the text changed slot of the username
         void setUsernameValidator();
+
+        //This is for the text changed slot of the password
+        void setPasswordValidator();
+
+        //This is for the text changed slot of the email
+        void setEmailValidator();
+
     protected:
         virtual void resizeEvent(QResizeEvent * event);
 
     private:
         CG_user * cg_usr;
+        CG_validator cg_validator;
 
         QGroupBox gb_login;
 
