@@ -293,6 +293,19 @@ bool CG_validator::CheckRequiredPasswordCharacters(QString password)
     return contains_requiredCharacters;
 }
 
+/***************************************************************************
+ *      Purpose:  Check to see if the email passed in takes on the form of
+ *                an email address.  An email address has at least 1
+ *                character followed by an @ symbol, then at least 1
+ *                character followed by a period, and then 1 of a variety
+ *                of email endings, like edu and com.
+ *
+ *      Entry:  Takes in a QString which represents an email of a user
+ *              that is attempting to login or register.
+ *
+ *      Exit:  Returns a boolean value describing if the email takes on
+ *             the correct form of an email address.
+ **************************************************************************/
 bool CG_validator::CheckValidEmailAddress(QString email)
 {
     QRegExp valid_email("^.+@.+\\.\\b(com|co|uk|org|net|edu)\\b$");
@@ -311,6 +324,14 @@ bool CG_validator::CheckValidEmailAddress(QString email)
     return is_email;
 }
 
+/***************************************************************************
+ *      Purpose:  Check to see if the password is valid.
+ *
+ *      Entry:  Takes in a QString which represents a password of a user
+ *              that is attempting to login or register.
+ *
+ *      Exit:  Returns a boolean value describing if the password is valid.
+ **************************************************************************/
 bool CG_validator::CheckValidPassword(QString password)
 {
     bool valid_password = true;
