@@ -56,6 +56,9 @@ class CG_login : public QWidget
         //This is for the text changed slot of the password
         bool setPasswordValidator();
 
+        //This is for the text changed slot of the confirm password
+        bool setConfirmPasswordValidator();
+
         //This is for the text changed slot of the email
         bool setEmailValidator();
 
@@ -70,6 +73,7 @@ class CG_login : public QWidget
 
         QLineEdit le_username;
         QLineEdit le_password;
+        QLineEdit le_confirm_password;
         QLineEdit le_email;
 
         QPushButton btn_login;

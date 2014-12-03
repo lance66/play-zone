@@ -20,12 +20,14 @@ CG_login::CG_login(CG_user * user, QWidget * parent) :
 
     //Hide the password entry
     le_password.setEchoMode(QLineEdit::Password);
+    le_confirm_password.setEchoMode(QLineEdit::Password);
 
     gb_login.setStyleSheet("background: #448ed3; border-style: outset; border-radius: 10px; border-color: #448ed3; min-width: 10em; padding: 6px;");
     btn_login.setStyleSheet("background: #b6ee65;");
     btn_register.setStyleSheet("background: #b6ee65;");
     le_username.setStyleSheet("background: #FFFFFF;");
     le_password.setStyleSheet("background: #FFFFFF;");
+    le_confirm_password.setStyleSheet("background: #FFFFFF;");
     le_email.setStyleSheet("background: #FFFFFF;");
 
     lbl_logo.setPixmap(pm_logo);
@@ -34,17 +36,19 @@ CG_login::CG_login(CG_user * user, QWidget * parent) :
     gl_login.addWidget(&lbl_logo, 0, 0);
     gl_login.addWidget(&le_username, 1, 0);
     gl_login.addWidget(&le_password, 2, 0);
-    gl_login.addWidget(&le_email, 3, 0);
+    gl_login.addWidget(&le_confirm_password, 3, 0);
+    gl_login.addWidget(&le_email, 4, 0);
 
-    //Hide the email until the user selects the register button
+    //Hide the email and confirm password until the user selects the register button
+    le_confirm_password.hide();
     le_email.hide();
 
     le_username.setPlaceholderText("Chessgames username");
     le_password.setPlaceholderText("Chessgames password");
 
-    gl_login.addWidget(&btn_login, 4, 0, 1, 2);
-    gl_login.addWidget(&btn_register, 5, 0, 1, 2);
-    gl_login.addWidget(&lbl_isOpen, 6, 0, 1, 2, Qt::AlignCenter);
+    gl_login.addWidget(&btn_login, 5, 0, 1, 2);
+    gl_login.addWidget(&btn_register, 6, 0, 1, 2);
+    gl_login.addWidget(&lbl_isOpen, 7, 0, 1, 2, Qt::AlignCenter);
 
     //Set the group box to the login layout
     gb_login.setLayout(&gl_login);
@@ -67,6 +71,9 @@ CG_login::CG_login(CG_user * user, QWidget * parent) :
 
     //Connect password validation color to password when text is changed
     connect(&le_password, SIGNAL(textChanged(QString)), this, SLOT(setPasswordValidator()));
+
+    //Connect confirm password validation color to confirm password when text is changed
+    connect(&le_confirm_password, SIGNAL(textChanged(QString)), this, SLOT(setConfirmPasswordValidator()));
 
     //Connect email validation color to email when text is changed
     connect(&le_email, SIGNAL(textChanged(QString)), this, SLOT(setEmailValidator()));
@@ -111,8 +118,12 @@ void CG_login::on_btn_register_clicked()
     //If user already exists in the database
     if (!cg_usr->GetUser(le_username.text()))
     {
+        le_confirm_password.setPlaceholderText("Confirm password");
+        le_confirm_password.show();
+
         le_email.setPlaceholderText("Enter email");
         le_email.show();
+
         connect(&btn_register, SIGNAL(released()), this, SLOT(addUser()));
     }
     else
@@ -137,7 +148,7 @@ void CG_login::on_btn_register_clicked()
 
 void CG_login::addUser()
 {
-    if (setUsernameValidator() && setPasswordValidator() && setEmailValidator())
+    if (setUsernameValidator() && setPasswordValidator() && setConfirmPasswordValidator() && setEmailValidator())
         if (cg_usr->AddUser(le_username.text(), le_password.text(), le_email.text()))
             lbl_isOpen.setText("Successfully created user.");
 }
@@ -220,6 +231,37 @@ bool CG_login::setPasswordValidator()
     update();
 
     return valid_password;
+}
+
+/*****************************************************************
+*	  Purpose:  Ensures the password is the same when registering.
+*
+*     Entry:  User has clicked register.
+*
+*     Exit:  Displays whether the confirm password is the same.
+*******************************************************************/
+
+bool CG_login::setConfirmPasswordValidator()
+{
+    bool valid_confirm_password = true;
+
+    //If email is visible, that must mean user clicked the register button
+    if (le_confirm_password.isVisible())
+    {
+        //If user enters the same password, background = green. Else, background = red.
+        if (setPasswordValidator() && le_password.text() == le_confirm_password.text())
+            le_confirm_password.setStyleSheet("background: #77FF77");
+        else
+        {
+            valid_confirm_password = false;
+            le_confirm_password.setStyleSheet("background: #FF7777");
+        }
+    }
+
+    //Go back to login screen
+    update();
+
+    return valid_confirm_password;
 }
 
 /**************************************************************
