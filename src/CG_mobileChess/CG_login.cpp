@@ -256,6 +256,7 @@ bool CG_login::setConfirmPasswordValidator()
         {
             valid_confirm_password = false;
             le_confirm_password.setStyleSheet("background: #FF7777");
+            lbl_isOpen.setText("Passwords do not match, or password is invalid.");
         }
     }
 
