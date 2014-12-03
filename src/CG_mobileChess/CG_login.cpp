@@ -98,7 +98,8 @@ void CG_login::on_btn_login_clicked()
         //If username and password is correct, display user is logged in
         lbl_isOpen.setText("Successfully logged in. Hello, " + le_username.text() + "!");
 
-    //Ensure email is hidden while logging in
+    //Ensure email and password confirmation is hidden while logging in
+    le_confirm_password.hide();
     le_email.hide();
 }
 
