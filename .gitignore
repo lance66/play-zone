@@ -15,12 +15,14 @@
 *.manifest
 *.rc
 *.res
+*.tmp
 # Qt-es
 /.qmake.cache
 /.qmake.stash
 *.pro.user
 *.pro.user.*
 *.moc
+~*
 moc_*.cpp
 qrc_*.cpp
 ui_*.h
