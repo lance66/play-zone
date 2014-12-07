@@ -309,7 +309,7 @@ bool CG_validator::CheckRequiredPasswordCharacters(QString password)
 bool CG_validator::CheckValidEmailAddress(QString email)
 {
     //This regular expression should handle anything that represents a valid email.
-    QRegExp valid_email("^[A-Za-Z0-9\\._%+-]+@[a-zA-Z0-9\\.-]+\\.[a-zA-Z]{2,4}$");
+    QRegExp valid_email("^[A-Za-z0-9\\._%+-]+@[a-zA-Z0-9\\.-]+\\.[a-zA-Z]{2,4}$");
 
     bool is_email = true;
 
