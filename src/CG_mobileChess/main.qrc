@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>chessgames.db</file>
+		<file>cg_logo_hires_app.png</file>
+    </qresource>
+</RCC>
