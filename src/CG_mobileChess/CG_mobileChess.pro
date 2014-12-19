@@ -16,13 +16,15 @@ SOURCES += main.cpp\
     CG_login.cpp \
     CG_validator.cpp \
     CG_dbManager.cpp \
-    CG_user.cpp
+    CG_user.cpp \
+    CG_lobby.cpp
 
 HEADERS  += \
     CG_login.h \
     CG_validator.h \
     CG_dbManager.h \
-    CG_user.h
+    CG_user.h \
+    CG_lobby.h
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
