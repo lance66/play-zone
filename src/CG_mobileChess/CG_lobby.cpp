@@ -103,11 +103,5 @@ void CG_lobby::on_btn_logout_clicked()
 *            width is greater than the height.
 ****************************************************************/
 
-void CG_login::resizeEvent(QResizeEvent * event)
-{
-    //Resize depending on portrait orientation vs landscape orientation
-    if (width() > height())
-        gl_widget.setMaximumSize(width() / 2, height());
-    else
-        gl_widget.setMaximumSize(width(), height() / 2);
-}
+void CG_lobby::resizeEvent(QResizeEvent * event)
+{ }

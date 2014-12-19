@@ -30,7 +30,7 @@
 #include <QLabel>
 #include "CG_user.h"
 
-class CG_lobby
+class CG_lobby : public QWidget
 {
     Q_OBJECT
 
