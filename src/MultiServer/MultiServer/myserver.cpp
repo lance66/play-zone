@@ -22,6 +22,15 @@ void MyServer::StartServer()
 
 void MyServer::incomingConnection(qintptr socketDescriptor)
 {
+    while (hasPendingConnections())
+    {
+        QTcpSocket *chessPlayer = nextPendingConnection();
+        connect(chessPlayer, SIGNAL(disconnected()), this, SLOT(clientDisconnected()));
+
+        //Add user to list of client connections
+        clientConnections.append(chessPlayer);
+    }
+
     qDebug() << socketDescriptor << " Connecting...";
     MyThread *thread = new MyThread(socketDescriptor,this);
 
@@ -46,4 +55,25 @@ void MyServer::incomingConnection(qintptr socketDescriptor)
 
     connect(thread, SIGNAL(finished()),thread, SLOT(deleteLater()));
     thread->start();
+}
+
+void MyServer::clientDisconnected()
+{
+    //Detect client that disconnected
+    QTcpSocket *client = qobject_cast<QTcpSocket *>(sender());
+
+    //If client is not null remove client
+    if (client != nullptr)
+    {
+        clientConnections.removeAll(client);
+        client->deleteLater();
+    }
+}
+
+void MyServer::sendMove(QTcpSocket *client)
+{
+    if(!client)
+        return;
+
+    client->write("Hello!\n\n\n\n");
 }
