@@ -1,12 +1,27 @@
 #include "myserver.h"
 
+/**************************************************************
+*	  Purpose:  Constructor.  Initializes QTcpServer
+*
+*     Entry:  NA
+*
+*     Exit:  Data members are initialized.
+****************************************************************/
 MyServer::MyServer(QObject *parent) :
     QTcpServer(parent)
 {
 
 }
 
-
+/**************************************************************
+*	  Purpose:  Starts the server, and notifies user that it is
+*               listening for connections.
+*
+*     Entry:  Called after an instances of a MyServer object is
+*             created.
+*
+*     Exit:  Starts the server.
+****************************************************************/
 void MyServer::StartServer()
 {
     if(!this->listen(QHostAddress::Any,1234))
@@ -20,6 +35,19 @@ void MyServer::StartServer()
     }
 }
 
+/**************************************************************
+*	  Purpose:  Checks to see if any connections are pending
+*               accepts any connections that are waiting to
+*               be connected. Adds thread to queue, and if
+*               two players are in a queue, it initializes
+*               a match.
+*
+*     Entry:  NA
+*
+*     Exit: Pending connections are accepts, threads are
+*           added to queue, and match is initialized if there
+*           are two players in queue.
+****************************************************************/
 void MyServer::incomingConnection(qintptr socketDescriptor)
 {
     while (hasPendingConnections())
@@ -57,6 +85,15 @@ void MyServer::incomingConnection(qintptr socketDescriptor)
     thread->start();
 }
 
+/**************************************************************
+*	  Purpose:  Disconnects the client by detecting that a
+*               client has disconnected, and removes the client.
+*
+*     Entry:  Entered whenever a client disconnects from the
+*             server.
+*
+*     Exit:  Disconnects the client.
+****************************************************************/
 void MyServer::clientDisconnected()
 {
     //Detect client that disconnected
@@ -70,6 +107,13 @@ void MyServer::clientDisconnected()
     }
 }
 
+/**************************************************************
+*	  Purpose:  Sends the move to the client.
+*
+*     Entry:  Called whenever a client moves.
+*
+*     Exit:  Notifies client of move.
+****************************************************************/
 void MyServer::sendMove(QTcpSocket *client)
 {
     if(!client)
