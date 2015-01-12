@@ -53,4 +53,32 @@ void CG_Match::sendMoveToServer(int whiteID, int blackID)
 
 }
 
+void CG_Match::setWhiteID(int whiteID)
+{
+    this->whiteID = whiteID;
+}
 
+int CG_Match::getWhiteID()
+{
+    return this->whiteID;
+}
+
+void CG_Match::setBlackID(int blackID)
+{
+    this->blackID = blackID;
+}
+
+int CG_Match::getBlackID()
+{
+    return this->blackID;
+}
+
+void CG_Match::setTcpSocket(QTcpSocket *socket)
+{
+    this->socket = socket;
+}
+
+QTcpSocket * CG_Match::getTcpSocket()
+{
+    return this->socket;
+}
