@@ -43,7 +43,7 @@ class CG_Match
         void setTcpSocket(QTcpSocket *socket);
         QTcpSocket * getTcpSocket();
 
-//    private:
+    private:
         int whiteID;
         int blackID;
         QTcpSocket *socket;
