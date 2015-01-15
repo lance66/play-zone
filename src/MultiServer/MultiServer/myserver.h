@@ -45,7 +45,7 @@ protected slots:
 
 protected:
     void incomingConnection(qintptr socketDescriptor);
-    void sendMove(QTcpSocket *client);
+    void sendMove(QTcpSocket *client, qintptr socketDescriptor);
 
     QList<QTcpSocket *> clientConnections;
     QVector<CG_Match> matches;

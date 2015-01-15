@@ -1,4 +1,5 @@
 #include "myserver.h"
+#include <iostream>
 
 /**************************************************************
 *	  Purpose:  Constructor.  Initializes QTcpServer
@@ -68,7 +69,7 @@ void MyServer::incomingConnection(qintptr socketDescriptor)
     qDebug() << "\nNumber of players online: " << clientConnections.size();
 
     //Sample function that sends move from server to player
-    sendMove(chessPlayer);
+    sendMove(chessPlayer, chessPlayer->socketDescriptor());
 
     qDebug() << socketDescriptor << " Connecting...";
     MyThread *thread = new MyThread(socketDescriptor,this);
@@ -77,6 +78,9 @@ void MyServer::incomingConnection(qintptr socketDescriptor)
 
     //Add thread to queue
     oneMinuteQueue.enqueue(ID);
+
+    connect(thread, SIGNAL(finished()),thread, SLOT(deleteLater()));
+    thread->start();
 
     //If two players in queue, initiate match
     if(oneMinuteQueue.length() >= 2)
@@ -93,9 +97,6 @@ void MyServer::incomingConnection(qintptr socketDescriptor)
 
         firstMatch.sendMoveToServer(firstID, secondID);
     }
-
-    connect(thread, SIGNAL(finished()),thread, SLOT(deleteLater()));
-    thread->start();
 }
 
 /**************************************************************
@@ -128,7 +129,7 @@ void MyServer::clientDisconnected()
 *
 *     Exit:  Notifies client of move.
 ****************************************************************/
-void MyServer::sendMove(QTcpSocket *client)
+void MyServer::sendMove(QTcpSocket *client, qintptr socketDescriptor)
 {
     //If client is null, get out of here
     if(!client)
@@ -136,8 +137,22 @@ void MyServer::sendMove(QTcpSocket *client)
         return;
     }
 
+    //Below is a series of conversions in order to write the
+    //socket descriptor to the socket
+
+    //Convert qintptr to int
+    int temp = static_cast<int>(socketDescriptor);
+
+    //Convert int to string
+    std::string s = std::to_string(temp);
+
+    //Convert string to const char *
+    char const *pchar = s.c_str();
+
     //Write to client
-    client->write("Nf3!");
+    client->write("Hello, ");
+    client->write(pchar);
+    client->write("! ");
     client->flush();
 
     //In case of lag, wait for bytes to write to client
