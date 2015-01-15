@@ -1,0 +1,13 @@
+INPUT(
+./release\main.o
+./release\CG_login.o
+./release\CG_validator.o
+./release\CG_dbManager.o
+./release\CG_user.o
+./release\CG_lobby.o
+./release\qrc_resources.o
+./release\moc_CG_login.o
+./release\moc_CG_dbManager.o
+./release\moc_CG_user.o
+./release\moc_CG_lobby.o
+);

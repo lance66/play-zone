@@ -25,11 +25,11 @@ CG_user::CG_user(CG_dbManager * dbManager)
 *            are correct.
 ****************************************************************/
 
-bool CG_user::LogIn(QString username, QString password)
+bool CG_user::logIn(QString username, QString password)
 {
     bool logged_in = false;
 
-    if (db_chessgames->CorrectUserInfo(username, password))
+    if (db_chessgames->correctUserInfo(username, password))
         logged_in = true;
 
     return logged_in;
@@ -44,11 +44,11 @@ bool CG_user::LogIn(QString username, QString password)
 *            database.
 ****************************************************************/
 
-bool CG_user::GetUser(QString username)
+bool CG_user::getUser(QString username)
 {
     bool user_exists = false;
 
-    if(db_chessgames->UserExists(username))
+    if(db_chessgames->userExists(username))
         user_exists = true;
 
     return user_exists;
@@ -64,11 +64,11 @@ bool CG_user::GetUser(QString username)
 *            successfully added to the database.
 ****************************************************************/
 
-bool CG_user::AddUser(QString username, QString password, QString email)
+bool CG_user::addUser(QString username, QString password, QString email)
 {
     bool added_user = false;
 
-    if (db_chessgames->AddUser(username, password, email))
+    if (db_chessgames->addUser(username, password, email))
         added_user = true;
 
     return added_user;

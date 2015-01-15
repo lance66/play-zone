@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QDebug>
 #include <QDir>
+#include <QObject>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 
@@ -48,24 +49,29 @@
 *       errors when validating usernames, passwords, and email addresses.
 *************************************************************************/
 
-class CG_validator
+class CG_validator : public QObject
 {
+    Q_OBJECT
+
     public:
         CG_validator(QLabel & feedback);
 
+    public slots:
         bool CheckUsernameLength(QString username);
         bool CheckUsernameNotNull(QString username);
         bool CheckUsernameValidCharacters(QString username);
         bool CheckUsernameInvalidPeriods(QString username);
         bool CheckUsernameForWebsite(QString username);
         bool CheckUsernameForInvalidSpaces(QString username);
-        bool CheckValidUsername(QString username);
+        bool checkValidUsername(QString username);
 
         bool CheckPasswordLength(QString password);
         bool CheckRequiredPasswordCharacters(QString password);
-        bool CheckValidPassword(QString password);
+        bool checkValidPassword(QString password);
 
-        bool CheckValidEmailAddress(QString email);
+        bool checkValidEmailAddress(QString email);
+
+        QString getFeedback() { return (*lbl_feedback).text(); }
 
     private:
         QLabel * lbl_feedback;

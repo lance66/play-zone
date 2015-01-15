@@ -213,7 +213,7 @@ bool CG_validator::CheckUsernameForInvalidSpaces(QString username)
  *             the specifications of a valid username.  This is done by
  *             running it through a gauntlet of validations.
  **************************************************************************/
-bool CG_validator::CheckValidUsername(QString username)
+bool CG_validator::checkValidUsername(QString username)
 {
     bool valid_username = true;
 
@@ -287,7 +287,7 @@ bool CG_validator::CheckRequiredPasswordCharacters(QString password)
             || !password.contains(requiredNumber)) //If the password does not contain required valid characters.
     {
         contains_requiredCharacters = false;
-        lbl_feedback->setText("Password must contain atleast 1 lowercase letter, 1 uppercase letter, and 1 number.");
+        lbl_feedback->setText("Password must contain atleast 1 lowercase letter,\n 1 uppercase letter, and 1 number.");
     }
 
     return contains_requiredCharacters;
@@ -306,7 +306,7 @@ bool CG_validator::CheckRequiredPasswordCharacters(QString password)
  *      Exit:  Returns a boolean value describing if the email takes on
  *             the correct form of an email address.
  **************************************************************************/
-bool CG_validator::CheckValidEmailAddress(QString email)
+bool CG_validator::checkValidEmailAddress(QString email)
 {
     //This regular expression should handle anything that represents a valid email.
     QRegExp valid_email("^[A-Za-z0-9\\._%+-]+@[a-zA-Z0-9\\.-]+\\.[a-zA-Z]{2,4}$");
@@ -333,7 +333,7 @@ bool CG_validator::CheckValidEmailAddress(QString email)
  *
  *      Exit:  Returns a boolean value describing if the password is valid.
  **************************************************************************/
-bool CG_validator::CheckValidPassword(QString password)
+bool CG_validator::checkValidPassword(QString password)
 {
     bool valid_password = true;
 

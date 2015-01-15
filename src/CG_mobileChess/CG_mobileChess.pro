@@ -5,32 +5,29 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
-TARGET = CG_mobileChess
 TEMPLATE = app
 
+QT += qml quick widgets
+QT += sql
+
+# Additional import path used to resolve QML modules in Qt Creator's code model
+QML_IMPORT_PATH =
+
+include(deployment.pri)
+
+TARGET = CG_mobileChess
+
 SOURCES += main.cpp\
-    CG_login.cpp \
     CG_validator.cpp \
     CG_dbManager.cpp \
-    CG_user.cpp \
-    CG_lobby.cpp
+    CG_user.cpp
 
 HEADERS  += \
-    CG_login.h \
     CG_validator.h \
     CG_dbManager.h \
-    CG_user.h \
-    CG_lobby.h
+    CG_user.h
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
-
-OTHER_FILES += \
-    ../../bin/chessgames.db \
-    ../../img/cg_logo_hires_app.png
 
 RESOURCES += \
     resources.qrc

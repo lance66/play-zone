@@ -27,14 +27,14 @@ CG_dbManager::CG_dbManager(QString str_connection)
 *     Exit:  Returns whether or not the login info is correct.
 ****************************************************************/
 
-bool CG_dbManager::CorrectUserInfo(QString str_username, QString str_password)
+bool CG_dbManager::correctUserInfo(QString str_username, QString str_password)
 {
     int count = 0;
 
     if(db_login.open())
     {
         //Calls encryption password
-        EncryptPassword(str_password);
+        encryptPassword(str_password);
 
         QSqlQuery qry( db_login );
         qry.prepare( "SELECT * FROM CG_user WHERE Username= ? AND Passwd= ? COLLATE NOCASE" );
@@ -60,7 +60,7 @@ bool CG_dbManager::CorrectUserInfo(QString str_username, QString str_password)
 *     Exit:  Returns whether or not the user exists.
 ****************************************************************/
 
-bool CG_dbManager::UserExists(QString str_username)
+bool CG_dbManager::userExists(QString str_username)
 {
     int count = 0;
 
@@ -89,14 +89,14 @@ bool CG_dbManager::UserExists(QString str_username)
 *            added into the database.
 ****************************************************************/
 
-bool CG_dbManager::AddUser(QString str_username, QString str_password, QString str_email)
+bool CG_dbManager::addUser(QString str_username, QString str_password, QString str_email)
 {
     bool added_user = false;
 
     if(db_login.open())
     {
         //Calls encryption password
-        EncryptPassword( str_password );
+        encryptPassword( str_password );
 
         QSqlQuery qry( db_login );
         qry.prepare( "INSERT INTO CG_user (Username, Passwd, Email) VALUES(?, ?, ?)" );
@@ -123,7 +123,7 @@ bool CG_dbManager::AddUser(QString str_username, QString str_password, QString s
 *            encryption.
 ****************************************************************/
 
-void CG_dbManager::EncryptPassword(QString & password)
+void CG_dbManager::encryptPassword(QString & password)
 {
     // Takes the text in the le_password and converts it to Utf8, so it can be placed in a type of 'const char *' next
     QByteArray passwordInBytes = password.toUtf8();

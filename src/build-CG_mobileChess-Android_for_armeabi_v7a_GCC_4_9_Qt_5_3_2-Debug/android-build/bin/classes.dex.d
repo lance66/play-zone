@@ -1,0 +1,27 @@
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes.dex : \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\kde\necessitas\ministro\IMinistro$Stub$Proxy.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\kde\necessitas\ministro\IMinistro$Stub.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\kde\necessitas\ministro\IMinistro.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\kde\necessitas\ministro\IMinistroCallback$Stub$Proxy.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\kde\necessitas\ministro\IMinistroCallback$Stub.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\kde\necessitas\ministro\IMinistroCallback.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\qtproject\example\CG_mobileChess\BuildConfig.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\qtproject\example\CG_mobileChess\R$array.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\qtproject\example\CG_mobileChess\R$attr.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\qtproject\example\CG_mobileChess\R$drawable.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\qtproject\example\CG_mobileChess\R$layout.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\qtproject\example\CG_mobileChess\R$string.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\qtproject\example\CG_mobileChess\R.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\qtproject\qt5\android\bindings\QtActivity$1.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\qtproject\qt5\android\bindings\QtActivity$2.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\qtproject\qt5\android\bindings\QtActivity$3$1$1.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\qtproject\qt5\android\bindings\QtActivity$3$1.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\qtproject\qt5\android\bindings\QtActivity$3.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\qtproject\qt5\android\bindings\QtActivity$4.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\qtproject\qt5\android\bindings\QtActivity$5.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\qtproject\qt5\android\bindings\QtActivity$6.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\qtproject\qt5\android\bindings\QtActivity.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\qtproject\qt5\android\bindings\QtApplication$InvokeResult.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\classes\org\qtproject\qt5\android\bindings\QtApplication.class \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\dexedLibs\QtAndroid-bundled-6ea1433c07e93f6b3ffb42a52a3133dc.jar \
+P:\Applications\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\dexedLibs\QtAndroidAccessibility-bundled-90eb046635f587ba5955fdc9390e6c14.jar \

@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QVariant>
+#include <QObject>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QCryptographicHash>  // Needed for encrypting in SHA256
@@ -25,15 +26,18 @@
 *       Returns true if the user is successfully added into the database.
 *******************************************************************************/
 
-class CG_dbManager
+class CG_dbManager : public QObject
 {
+    Q_OBJECT
+
     public:
         CG_dbManager(QString str_connection);
 
-        bool UserExists(QString str_username);
-        bool CorrectUserInfo(QString str_username, QString str_password);
-        bool AddUser(QString str_username, QString str_password, QString str_email);
-        void EncryptPassword(QString & password);
+    public slots:
+        bool userExists(QString str_username);
+        bool correctUserInfo(QString str_username, QString str_password);
+        bool addUser(QString str_username, QString str_password, QString str_email);
+        void encryptPassword(QString & password);
 
     private:
         QSqlDatabase db_login;

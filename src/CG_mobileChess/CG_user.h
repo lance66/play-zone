@@ -2,6 +2,7 @@
 #define CG_USER_H
 
 #include <QString>
+#include <QObject>
 #include "CG_dbManager.h"
 
 /************************************************************************
@@ -21,14 +22,19 @@
 *       Returns whether or not the user info given is correct.
 *************************************************************************/
 
-class CG_user
+class CG_user : public QObject
 {
+    Q_OBJECT
+
     public:
         CG_user(CG_dbManager * dbManager);
 
-        bool AddUser(QString username, QString password, QString email);
-        bool GetUser(QString username);
-        bool LogIn(QString username, QString password);
+    public slots:
+        bool addUser(QString username, QString password, QString email);
+        bool getUser(QString username);
+        bool logIn(QString username, QString password);
+
+        QString getUsername() { return str_username; }
 
     private:
         CG_dbManager * db_chessgames;

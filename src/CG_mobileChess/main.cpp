@@ -2,6 +2,8 @@
 #include "CG_user.h"
 #include "CG_dbManager.h"
 #include <QApplication>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
 
 /***************************************************************************
  * Author:                                                        ChessGames
@@ -27,10 +29,8 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    QWidget win;
-    win.setWindowTitle("Chessgames");
-    win.setStyleSheet("background-color: #448ed3");
+    QApplication app(argc, argv);
+    QQmlApplicationEngine engine;
 
     //Set up the database manager (Persistence Layer)
     CG_dbManager db_manager(QDir::currentPath() + "/chessgames.db");
@@ -38,17 +38,13 @@ int main(int argc, char *argv[])
     //Set up the chessgames user (Business Layer)
     CG_user cg_user(&db_manager);
 
-    //Set up the login widget (Part of the Presentation Layer)
-    CG_login login(&cg_user, &win);
+    QLabel validator_feedback;
+    CG_validator cg_validator(validator_feedback);
 
-    QGridLayout win_layout;
-    win_layout.addWidget(&login);
+    engine.rootContext()->setContextProperty("User", &cg_user);
+    engine.rootContext()->setContextProperty("Validator", &cg_validator);
 
-    win.setLayout(&win_layout);
+    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
-    //Default size (Just for testing purposes)
-    win.resize(400, 600);
-    win.show();
-
-    return a.exec();
+    return app.exec();
 }
