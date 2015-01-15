@@ -30,7 +30,7 @@ class CG_Match
 {
     public:
         CG_Match();
-        CG_Match(int whiteID, int blackID);
+        CG_Match(int whiteID, int blackID, QTcpSocket *whiteSocket, QTcpSocket *blackSocket);
 
         void sendMoveToServer(int whiteID, int blackID);
 
@@ -46,6 +46,8 @@ class CG_Match
     private:
         int whiteID;
         int blackID;
+        QTcpSocket *whiteSocket;
+        QTcpSocket *blackSocket;
         QTcpSocket *socket;
 };
 

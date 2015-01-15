@@ -10,7 +10,6 @@
 MyServer::MyServer(QObject *parent) :
     QTcpServer(parent)
 {
-
 }
 
 /**************************************************************
@@ -50,14 +49,26 @@ void MyServer::StartServer()
 ****************************************************************/
 void MyServer::incomingConnection(qintptr socketDescriptor)
 {
-    while (hasPendingConnections())
-    {
-        QTcpSocket *chessPlayer = nextPendingConnection();
-        connect(chessPlayer, SIGNAL(disconnected()), this, SLOT(clientDisconnected()));
+    //Couting when a function is called because Qt Debugger is impossible to install
+    //qDebug() << "Incoming Connection called!\n";
 
-        //Add user to list of client connections
-        clientConnections.append(chessPlayer);
-    }
+    //Create new socket
+    QTcpSocket *chessPlayer = new QTcpSocket;
+
+    //Set socket descriptor to socket descriptor it was assigned
+    chessPlayer->setSocketDescriptor(socketDescriptor);
+
+    //When player disconnects, call client disconnected
+    connect(chessPlayer, SIGNAL(disconnected()), this, SLOT(clientDisconnected()));
+
+    //Add user to list of client connections
+    clientConnections.append(chessPlayer);
+
+    //Print number of players online
+    qDebug() << "\nNumber of players online: " << clientConnections.size();
+
+    //Sample function that sends move from server to player
+    sendMove(chessPlayer);
 
     qDebug() << socketDescriptor << " Connecting...";
     MyThread *thread = new MyThread(socketDescriptor,this);
@@ -76,9 +87,11 @@ void MyServer::incomingConnection(qintptr socketDescriptor)
         int secondID = oneMinuteQueue.first();
         oneMinuteQueue.dequeue();
 
-        CG_Match firstMatch(firstID, secondID);
+        CG_Match firstMatch(firstID, secondID, clientConnections.front(), clientConnections.back());
 
         matches.append(firstMatch);
+
+        firstMatch.sendMoveToServer(firstID, secondID);
     }
 
     connect(thread, SIGNAL(finished()),thread, SLOT(deleteLater()));
@@ -102,7 +115,8 @@ void MyServer::clientDisconnected()
     //If client is not null remove client
     if (client != nullptr)
     {
-        clientConnections.removeAll(client);
+        //clientConnections.removeAll(client);
+        clientConnections.removeOne(client);
         client->deleteLater();
     }
 }
@@ -116,8 +130,16 @@ void MyServer::clientDisconnected()
 ****************************************************************/
 void MyServer::sendMove(QTcpSocket *client)
 {
+    //If client is null, get out of here
     if(!client)
+    {
         return;
+    }
 
-    client->write("Hello!\n\n\n\n");
+    //Write to client
+    client->write("Nf3!");
+    client->flush();
+
+    //In case of lag, wait for bytes to write to client
+    client->waitForBytesWritten(3000);
 }

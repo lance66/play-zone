@@ -36,10 +36,10 @@ public:
     explicit MyServer(QObject *parent = 0);
     void StartServer();
 
+
 signals:
 
 public slots:
-
 protected slots:
     void clientDisconnected();
 
@@ -47,8 +47,8 @@ protected:
     void incomingConnection(qintptr socketDescriptor);
     void sendMove(QTcpSocket *client);
 
-    QVector<CG_Match> matches;
     QList<QTcpSocket *> clientConnections;
+    QVector<CG_Match> matches;
     QQueue<int> oneMinuteQueue;
 };
 

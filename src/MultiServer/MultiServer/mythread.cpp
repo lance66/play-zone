@@ -23,9 +23,10 @@ MyThread::MyThread(qintptr ID, QObject *parent) :
 ****************************************************************/
 void MyThread::run()
 {
-    //thread starts here
+
       qDebug() << socketDescriptor << " Starting thread";
       socket = new QTcpSocket();
+
       if(!socket->setSocketDescriptor(this->socketDescriptor))
       {
           emit error(socket->error());

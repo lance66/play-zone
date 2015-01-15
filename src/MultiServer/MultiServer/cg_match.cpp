@@ -23,15 +23,18 @@ CG_Match::CG_Match()
 *
 *     Exit:  Data members are initialized.
 ****************************************************************/
-CG_Match::CG_Match(int whteID, int blckID)
+CG_Match::CG_Match(int whteID, int blckID, QTcpSocket *whiteSocket, QTcpSocket *blackSocket)
     :whiteID(777), blackID(666)
 {
     //Set data members to arguments
     this->whiteID = whteID;
     this->blackID = blckID;
 
+    this->whiteSocket = whiteSocket;
+    this->blackSocket = blackSocket;
+
     //Notify players they are in a match with opponent
-    qDebug() << "Match between " << whiteID << " and " << blackID << " has been started.";
+    qDebug() << "\nMatch between " << whiteID << " and " << blackID << " has been started.\n";
 }
 
 /**************************************************************
@@ -46,11 +49,11 @@ CG_Match::CG_Match(int whteID, int blckID)
 void CG_Match::sendMoveToServer(int whiteID, int blackID)
 {
     //Read data into socket
-    QByteArray data = socket->readLine();
+    //QByteArray data = whiteSocket->readLine();
 
-
-
-
+    blackSocket->write("e4");
+    whiteSocket->write("e5");
+    blackSocket->write("f4");
 }
 
 /**************************************************************
