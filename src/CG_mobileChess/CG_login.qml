@@ -37,6 +37,10 @@ Item {
         {
             id: tf_username
             placeholderText: "Chessgames username"
+
+            // For testing purposes I inputted Trudodyr automatically
+            text: "Trudodyr"
+
             style: cgTextFieldStyle
             width: getControlWidth()
             height: getControlHeight()
@@ -49,6 +53,9 @@ Item {
             placeholderText: "Chessgames password"
             style: cgTextFieldStyle
             echoMode: TextInput.Password
+
+            // For testing purposes I inputted Trudodyr automatically
+            text: "Trudodyr1"
 
             width: getControlWidth()
             height: getControlHeight()

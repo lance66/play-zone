@@ -16,11 +16,11 @@ Item {
     {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
-        spacing: 6
+        anchors.fill: parent
 
         RowLayout
         {
-            Layout.alignment: Qt.AlignCenter
+            Layout.alignment: Qt.AlignTop
             Layout.preferredWidth: parent.width
 
             Clock
@@ -31,8 +31,6 @@ Item {
 
             ColumnLayout
             {
-                spacing: 6
-
                 Text
                 {
                     id: lbl_username
@@ -50,8 +48,6 @@ Item {
                 {
                     id: lbl_eloRating
                     text: "ELO: 2710"
-                    textFormat: horizontalAlignment
-
 
                     color: "white"
                     font.family: "Helvetica"
@@ -104,7 +100,7 @@ Item {
 
         RowLayout
         {
-            Layout.alignment: Qt.AlignCenter
+            Layout.alignment: Qt.AlignBottom && Qt.AlignHCenter
 
             Button
             {
@@ -112,7 +108,6 @@ Item {
                 text: "Logout"
                 style: cgButtonStyle
 
-                Layout.alignment: Qt.AlignCenter
                 Layout.preferredWidth: getControlWidth() / 2
                 Layout.preferredHeight: getControlHeight()
 
@@ -125,7 +120,6 @@ Item {
                 text: "Settings"
                 style: cgButtonStyle
 
-                Layout.alignment: Qt.AlignCenter
                 Layout.preferredWidth: getControlWidth() / 2
                 Layout.preferredHeight: getControlHeight()
 
