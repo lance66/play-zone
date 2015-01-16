@@ -25,7 +25,7 @@ void MyThread::run()
 {
 
       qDebug() << socketDescriptor << " Starting thread";
-      socket = new QTcpSocket();
+      socket = new QTcpSocket;
 
       if(!socket->setSocketDescriptor(this->socketDescriptor))
       {
@@ -54,9 +54,6 @@ void MyThread::readyRead()
      QByteArray Data = socket->readLine();
 
      //Only send the message when the user presses enter
-     socket->write(Data);
-
-     //Only write to socket if user presses enter
      qDebug() << socketDescriptor << " says: " << Data;
 }
 
@@ -75,6 +72,11 @@ void MyThread::disconnected()
 
     socket->deleteLater();
     exit(0);
+}
+
+QTcpSocket *MyThread::getSocket()
+{
+    return socket;
 }
 
 /**************************************************************

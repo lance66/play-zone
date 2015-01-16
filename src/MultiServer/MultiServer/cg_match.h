@@ -40,12 +40,15 @@ class CG_Match
         void setBlackID(int blackID);
         int getBlackID();
 
+        void setIsWhiteToMove(bool &isWhiteToMove);
+
         void setTcpSocket(QTcpSocket *socket);
         QTcpSocket * getTcpSocket();
 
     private:
         int whiteID;
         int blackID;
+        bool isWhiteToMove;
         QTcpSocket *whiteSocket;
         QTcpSocket *blackSocket;
         QTcpSocket *socket;

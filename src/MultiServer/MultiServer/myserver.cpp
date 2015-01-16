@@ -79,6 +79,7 @@ void MyServer::incomingConnection(qintptr socketDescriptor)
     //Add thread to queue
     oneMinuteQueue.enqueue(ID);
 
+    connect(thread, SIGNAL(finished()),this, SLOT(clientDisconnected()));
     connect(thread, SIGNAL(finished()),thread, SLOT(deleteLater()));
     thread->start();
 
@@ -116,10 +117,19 @@ void MyServer::clientDisconnected()
     //If client is not null remove client
     if (client != nullptr)
     {
-        //clientConnections.removeAll(client);
-        clientConnections.removeOne(client);
+        //Remove from list of connections
+        clientConnections.removeAll(client);
+
+        //Remove from queue
+        //oneMinuteQueue.removeOne(client);
+
+        //Delete client
         client->deleteLater();
+        qDebug() << "It worked!  Client disconnected!";
     }
+
+    else
+        clientConnections.removeAll(client);
 }
 
 /**************************************************************

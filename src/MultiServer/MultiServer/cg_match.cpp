@@ -33,8 +33,10 @@ CG_Match::CG_Match(int whteID, int blckID, QTcpSocket *whiteSocket, QTcpSocket *
     this->whiteSocket = whiteSocket;
     this->blackSocket = blackSocket;
 
+    isWhiteToMove = false;
+
     //Notify players they are in a match with opponent
-    qDebug() << "\nMatch between " << whiteID << " and " << blackID << " has been started.\n";
+    qDebug() << "Match between " << whiteID << " and " << blackID << " has been started.";
 }
 
 /**************************************************************
@@ -48,12 +50,26 @@ CG_Match::CG_Match(int whteID, int blckID, QTcpSocket *whiteSocket, QTcpSocket *
 ****************************************************************/
 void CG_Match::sendMoveToServer(int whiteID, int blackID)
 {
-    //Read data into socket
-    //QByteArray data = whiteSocket->readLine();
+    //Switch turns
+    setIsWhiteToMove(isWhiteToMove);
 
-    blackSocket->write("e4");
-    whiteSocket->write("e5");
-    blackSocket->write("f4");
+    //If it's white's turn to move
+    if(isWhiteToMove)
+    {
+        //Read black's socket if it's not the first move
+        if(blackSocket->readLine() != nullptr)
+        {
+            QByteArray move = blackSocket->readLine();
+            whiteSocket->write(move);
+        }
+    }
+
+    //If it's black turn to move
+    else
+    {
+        QByteArray move = whiteSocket->readLine();
+        blackSocket->write(move);
+    }
 }
 
 /**************************************************************
@@ -131,4 +147,9 @@ void CG_Match::setTcpSocket(QTcpSocket *socket)
 QTcpSocket * CG_Match::getTcpSocket()
 {
     return this->socket;
+}
+
+void CG_Match::setIsWhiteToMove(bool &move)
+{
+    move = !move;
 }

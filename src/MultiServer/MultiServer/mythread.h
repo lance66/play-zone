@@ -34,6 +34,7 @@ public:
     explicit MyThread(qintptr ID, QObject *parent = 0);
     void run();
     qintptr getSocketDescriptor();
+    QTcpSocket *getSocket();
 
 signals:
     void error(QTcpSocket::SocketError socketerror);
