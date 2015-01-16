@@ -11,6 +11,7 @@
 MyServer::MyServer(QObject *parent) :
     QTcpServer(parent)
 {
+
 }
 
 /**************************************************************
@@ -50,9 +51,6 @@ void MyServer::StartServer()
 ****************************************************************/
 void MyServer::incomingConnection(qintptr socketDescriptor)
 {
-    //Couting when a function is called because Qt Debugger is impossible to install
-    //qDebug() << "Incoming Connection called!\n";
-
     //Create new socket
     QTcpSocket *chessPlayer = new QTcpSocket;
 
@@ -92,11 +90,8 @@ void MyServer::incomingConnection(qintptr socketDescriptor)
         int secondID = oneMinuteQueue.first();
         oneMinuteQueue.dequeue();
 
-        CG_Match firstMatch(firstID, secondID, clientConnections.front(), clientConnections.back());
-
-        matches.append(firstMatch);
-
-        firstMatch.sendMoveToServer(firstID, secondID);
+        CG_Match match(firstID, secondID, clientConnections.front(), clientConnections.back());
+        matches.append(match);
     }
 }
 
@@ -119,9 +114,6 @@ void MyServer::clientDisconnected()
     {
         //Remove from list of connections
         clientConnections.removeAll(client);
-
-        //Remove from queue
-        //oneMinuteQueue.removeOne(client);
 
         //Delete client
         client->deleteLater();

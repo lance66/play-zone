@@ -26,11 +26,13 @@
 *   void setTcpSocket(QTcpSocket *socket);
 *   QTcpSocket * getTcpSocket();
 *************************************************************************/
+
 class CG_Match
 {
     public:
         CG_Match();
-        CG_Match(int whiteID, int blackID, QTcpSocket *whiteSocket, QTcpSocket *blackSocket);
+        CG_Match(int whiteID, int blackID, QTcpSocket *&whiteSocket, QTcpSocket *&blackSocket);
+        ~CG_Match();
 
         void sendMoveToServer(int whiteID, int blackID);
 
@@ -40,10 +42,13 @@ class CG_Match
         void setBlackID(int blackID);
         int getBlackID();
 
-        void setIsWhiteToMove(bool &isWhiteToMove);
+        void setWhiteSocket(QTcpSocket *socket);
+        void setBlackSocket(QTcpSocket *socket);
 
         void setTcpSocket(QTcpSocket *socket);
         QTcpSocket * getTcpSocket();
+
+        void setIsWhiteToMove(bool &isWhiteToMove);
 
     private:
         int whiteID;
@@ -52,6 +57,11 @@ class CG_Match
         QTcpSocket *whiteSocket;
         QTcpSocket *blackSocket;
         QTcpSocket *socket;
+
+        void readBlacksMove();
+        void readWhitesMove();
+        void setPlayerIDs(int whteID, int blckID);
+        void setPlayerSockets(QTcpSocket *whiteSocket, QTcpSocket *blackSocket);
 };
 
 #endif // CG_MATCH_H

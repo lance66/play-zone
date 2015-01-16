@@ -13,6 +13,10 @@ MyThread::MyThread(qintptr ID, QObject *parent) :
     this->socketDescriptor = ID;
 }
 
+MyThread::~MyThread()
+{
+}
+
 /**************************************************************
 *	  Purpose:  Starts thread, and notifies client that they
 *               are connected.

@@ -32,6 +32,7 @@ class MyThread : public QThread
     Q_OBJECT
 public:
     explicit MyThread(qintptr ID, QObject *parent = 0);
+    ~MyThread();
     void run();
     qintptr getSocketDescriptor();
     QTcpSocket *getSocket();

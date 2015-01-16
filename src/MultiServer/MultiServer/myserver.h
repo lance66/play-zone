@@ -37,6 +37,7 @@ public:
     void StartServer();
 
 
+
 signals:
 
 public slots:
@@ -49,6 +50,7 @@ protected:
 
     QList<QTcpSocket *> clientConnections;
     QVector<CG_Match> matches;
+    CG_Match match;
     QQueue<int> oneMinuteQueue;
 };
 
