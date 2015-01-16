@@ -10,7 +10,7 @@ ApplicationWindow {
     visible: true
     width: 400
     height: 600
-    title: qsTr("Hello World")
+    title: qsTr("Mobile Chess")
     color: "#448ed3"
 
     function getLogoSize()

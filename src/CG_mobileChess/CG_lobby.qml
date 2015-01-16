@@ -17,44 +17,48 @@ Item {
 
     Grid
     {
-        rows: 1
-        columns: 2
-
-        Clock
-        {
-            city: "Klamath Falls"
-            shift: -8
-        }
+        rows: 5
+        columns: 1
 
         Item
         {
-            Text
+            Clock
             {
-                id: lbl_username
-                text: "Trudodyr"
-
-                color: "white"
-                font.family: "Helvetica"
-                font.bold: true
-                font.pixelSize: 16
-                style: Text.Raised
-                styleColor: "black"
+                city: "Klamath Falls"
+                shift: -8
             }
 
-            Text
+            Item
             {
-                id: lbl_eloRating
-                text: "ELO: 2710"
+                Text
+                {
+                    id: lbl_username
+                    text: "Trudodyr"
+
+                    color: "white"
+                    font.family: "Helvetica"
+                    font.bold: true
+                    font.pixelSize: 16
+                    style: Text.Raised
+                    styleColor: "black"
+                }
+
+                Text
+                {
+                    id: lbl_eloRating
+                    text: "ELO: 2710"
 
 
-                color: "white"
-                font.family: "Helvetica"
-                font.bold: true
-                font.pixelSize: 16
-                style: Text.Raised
-                styleColor: "black"
+                    color: "white"
+                    font.family: "Helvetica"
+                    font.bold: true
+                    font.pixelSize: 16
+                    style: Text.Raised
+                    styleColor: "black"
+                }
             }
         }
+
         Button
         {
             id: btn_oneMinuteGame
