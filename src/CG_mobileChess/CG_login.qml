@@ -91,7 +91,7 @@ Item {
 
             onClicked:
             {
-                if (!User.logIn(tf_username.text, tf_password.text))
+                if (User.logIn(tf_username.text, tf_password.text))
                     txt_isOpen.text = "Username or password is incorrect."
                 else
                 {

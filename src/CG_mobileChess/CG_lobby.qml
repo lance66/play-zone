@@ -8,55 +8,50 @@ Item {
     id: root
     width: 400
     height: 600
-    anchors.horizontalCenter: parent.horizontalCenter
-    anchors.verticalCenter: parent.verticalCenter
-    anchors.fill: parent
 
     signal goBack
 
-
     Grid
     {
-        rows: 5
+        rows: 10
         columns: 1
+        spacing: 6
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
 
-        Item
+
+        Clock
         {
-            Clock
-            {
-                city: "Klamath Falls"
-                shift: -8
-            }
+            city: "Klamath Falls"
+            shift: -8
+        }
 
-            Item
-            {
-                Text
-                {
-                    id: lbl_username
-                    text: "Trudodyr"
+        Text
+        {
+            id: lbl_username
+            text: "Trudodyr"
 
-                    color: "white"
-                    font.family: "Helvetica"
-                    font.bold: true
-                    font.pixelSize: 16
-                    style: Text.Raised
-                    styleColor: "black"
-                }
+            color: "white"
+            font.family: "Helvetica"
+            font.bold: true
+            font.pixelSize: 16
+            style: Text.Raised
+            styleColor: "black"
+        }
 
-                Text
-                {
-                    id: lbl_eloRating
-                    text: "ELO: 2710"
+        Text
+        {
+            id: lbl_eloRating
+            text: "ELO: 2710"
+            textFormat: horizontalAlignment
 
 
-                    color: "white"
-                    font.family: "Helvetica"
-                    font.bold: true
-                    font.pixelSize: 16
-                    style: Text.Raised
-                    styleColor: "black"
-                }
-            }
+            color: "white"
+            font.family: "Helvetica"
+            font.bold: true
+            font.pixelSize: 16
+            style: Text.Raised
+            styleColor: "black"
         }
 
         Button
@@ -92,29 +87,26 @@ Item {
             visible: true
         }
 
-        Item
+        Button
         {
-            Button
-            {
-                id: btn_logout
-                text: "Logout"
-                style: cgButtonStyle
-                width: getControlWidth() / 2
-                height: getControlHeight()
-                onClicked: root.goBack()
-                visible: true
-            }
+            id: btn_logout
+            text: "Logout"
+            style: cgButtonStyle
+            width: getControlWidth() / 2
+            height: getControlHeight()
+            onClicked: root.goBack()
+            visible: true
+        }
 
-            Button
-            {
-                id: btn_settings
-                text: "Settings"
-                style: cgButtonStyle
-                width: getControlWidth() / 2
-                height: getControlHeight()
-                onClicked: root.goBack()
-                visible: true
-            }
+        Button
+        {
+            id: btn_settings
+            text: "Settings"
+            style: cgButtonStyle
+            width: getControlWidth() / 2
+            height: getControlHeight()
+            onClicked: root.goBack()
+            visible: true
         }
 
         Component
