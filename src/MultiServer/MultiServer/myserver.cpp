@@ -2,11 +2,11 @@
 #include <iostream>
 
 /**************************************************************
-*	  Purpose:  Constructor.  Initializes QTcpServer
+*   Purpose:  Constructor.  Initializes QTcpServer
 *
 *     Entry:  NA
 *
-*     Exit:  Data members are initialized.
+*      Exit:  Data members are initialized.
 ****************************************************************/
 MyServer::MyServer(QObject *parent) :
     QTcpServer(parent)
@@ -15,13 +15,13 @@ MyServer::MyServer(QObject *parent) :
 }
 
 /**************************************************************
-*	  Purpose:  Starts the server, and notifies user that it is
+*   Purpose:  Starts the server, and notifies user that it is
 *               listening for connections.
 *
 *     Entry:  Called after an instances of a MyServer object is
 *             created.
 *
-*     Exit:  Starts the server.
+*      Exit:  Starts the server.
 ****************************************************************/
 void MyServer::StartServer()
 {
@@ -37,17 +37,17 @@ void MyServer::StartServer()
 }
 
 /**************************************************************
-*	  Purpose:  Checks to see if any connections are pending
-*               accepts any connections that are waiting to
-*               be connected. Adds thread to queue, and if
-*               two players are in a queue, it initializes
-*               a match.
+*   Purpose:  Checks to see if any connections are pending
+*             accepts any connections that are waiting to
+*             be connected. Adds thread to queue, and if
+*             two players are in a queue, it initializes
+*             a match.
 *
-*     Entry:  NA
+*    Entry:  NA
 *
-*     Exit: Pending connections are accepts, threads are
-*           added to queue, and match is initialized if there
-*           are two players in queue.
+*     Exit:  Pending connections are accepts, threads are
+*            added to queue, and match is initialized if there
+*            are two players in queue.
 ****************************************************************/
 void MyServer::incomingConnection(qintptr socketDescriptor)
 {
@@ -96,13 +96,13 @@ void MyServer::incomingConnection(qintptr socketDescriptor)
 }
 
 /**************************************************************
-*	  Purpose:  Disconnects the client by detecting that a
-*               client has disconnected, and removes the client.
+*   Purpose:  Disconnects the client by detecting that a
+*             client has disconnected, and removes the client.
 *
 *     Entry:  Entered whenever a client disconnects from the
 *             server.
 *
-*     Exit:  Disconnects the client.
+*      Exit:  Disconnects the client.
 ****************************************************************/
 void MyServer::clientDisconnected()
 {
@@ -125,11 +125,11 @@ void MyServer::clientDisconnected()
 }
 
 /**************************************************************
-*	  Purpose:  Sends the move to the client.
+*   Purpose:  Sends the move to the client.
 *
 *     Entry:  Called whenever a client moves.
 *
-*     Exit:  Notifies client of move.
+*      Exit:  Notifies client of move.
 ****************************************************************/
 void MyServer::sendMove(QTcpSocket *client, qintptr socketDescriptor)
 {

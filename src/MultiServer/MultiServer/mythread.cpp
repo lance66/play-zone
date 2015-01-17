@@ -1,11 +1,11 @@
 #include "mythread.h"
 
 /**************************************************************
-*	  Purpose:  Constructor.  Initializes data members.
+*   Purpose:  Constructor. Initializes data members.
 *
 *     Entry:  NA
 *
-*     Exit:  Data members are initialized.
+*      Exit:  Data members are initialized.
 ****************************************************************/
 MyThread::MyThread(qintptr ID, QObject *parent) :
     QThread(parent)
@@ -18,24 +18,24 @@ MyThread::~MyThread()
 }
 
 /**************************************************************
-*	  Purpose:  Starts thread, and notifies client that they
-*               are connected.
+*   Purpose:  Starts thread, and notifies client that they
+*             are connected.
 *
 *     Entry:  NA
 *
-*     Exit:  Thread is started, and client is notified.
+*      Exit:  Thread is started, and client is notified.
 ****************************************************************/
 void MyThread::run()
 {
 
-      qDebug() << socketDescriptor << " Starting thread";
-      socket = new QTcpSocket;
+    qDebug() << socketDescriptor << " Starting thread";
+    socket = new QTcpSocket;
 
-      if(!socket->setSocketDescriptor(this->socketDescriptor))
-      {
-          emit error(socket->error());
-          return;
-      }
+    if(!socket->setSocketDescriptor(this->socketDescriptor))
+    {
+        emit error(socket->error());
+        return;
+    }
 
     connect(socket,SIGNAL(readyRead()),this,SLOT(readyRead()),Qt::DirectConnection);
     connect(socket,SIGNAL(disconnected()),this,SLOT(disconnected()),Qt::DirectConnection);
@@ -46,12 +46,12 @@ void MyThread::run()
 }
 
 /**************************************************************
-*	  Purpose:  Sends user's message, and writes message to
-*               the socket.
+*   Purpose:  Sends user's message, and writes message to
+*             the socket.
 *
 *     Entry:  NA
 *
-*     Exit:  Sends users message, and writes it to the socket.
+*      Exit:  Sends users message, and writes it to the socket.
 ****************************************************************/
 void MyThread::readyRead()
 {
@@ -62,13 +62,13 @@ void MyThread::readyRead()
 }
 
 /**************************************************************
-*	  Purpose: Notifies the users that the server is
-*              disconnected and closes the socket, when server
-*              disconnects.
+*   Purpose: Notifies the users that the server is
+*            disconnected and closes the socket, when server
+*            disconnects.
 *
-*     Entry:  NA
+*    Entry:  NA
 *
-*     Exit:  closes socket, and notifies user of disconnection.
+*     Exit:  Closes socket, and notifies user of disconnection.
 ****************************************************************/
 void MyThread::disconnected()
 {
@@ -84,11 +84,11 @@ QTcpSocket *MyThread::getSocket()
 }
 
 /**************************************************************
-*	  Purpose:  Retrives socket descriptor.
+*   Purpose:  Retrives socket descriptor.
 *
 *     Entry:  NA
 *
-*     Exit:  socket descriptor is returned.
+*      Exit:  Socket descriptor is returned.
 ****************************************************************/
 qintptr MyThread::getSocketDescriptor()
 {
