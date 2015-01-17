@@ -98,45 +98,31 @@ void CG_Match::sendMoveToServer(int whiteID, int blackID)
         //Read black's socket if it's not the first move
         if(blackSocket->readLine() != nullptr)
         {
-            readBlacksMove();
+            readPlayersMove(whiteSocket, blackSocket->readLine());
         }
     }
 
     //If it's black turn to move
     else
     {
-        readWhitesMove();
+        readPlayersMove(blackSocket, whiteSocket->readLine());
     }
 }
 
 /****************************************************************
-*	Purpose:  Gets black's lates move by reading the move from
-*             black's socket, and sending it to white by
-*             writing the move to white's socket.
+*	Purpose:  Gets the opposing player's latest move by reading
+*             the move from the opposing player's socket, and
+*             sending it to white by writing the move to white's
+*             socket.
 *
 *     Entry:  NA
 *
-*      Exit:  Blacks move is sent to white.
+*      Exit:  Opposing players move is sent to player, who has
+*             the active turn.
 ****************************************************************/
-void CG_Match::readBlacksMove()
+void CG_Match::readPlayersMove(QTcpSocket *playerSocket, QByteArray move)
 {
-    QByteArray move = blackSocket->readLine();
-    whiteSocket->write(move);
-}
-
-/****************************************************************
-*	Purpose:  Gets white's latest move by reading the move from
-*             white's socket, and sending it to black by
-*             writing the move to black's socket.
-*
-*     Entry:  NA
-*
-*      Exit:  Whites move is sent to black.
-****************************************************************/
-void CG_Match::readWhitesMove()
-{
-    QByteArray move = whiteSocket->readLine();
-    blackSocket->write(move);
+    playerSocket->write(move);
 }
 
 /****************************************************************
@@ -230,11 +216,25 @@ void CG_Match::setIsWhiteToMove(bool &move)
     move = !move;
 }
 
+/****************************************************************
+ *  Purpose:  Sets the white players socket.
+ *
+ *    Entry:  NA
+ *
+ *     Exit:  whiteSocket is set.
+****************************************************************/
 void CG_Match::setWhiteSocket(QTcpSocket *socket)
 {
     whiteSocket = socket;
 }
 
+/****************************************************************
+ *  Purpose:  Sets the black players socket.
+ *
+ *    Entry:  NA
+ *
+ *     Exit:  blackSocket is set.
+****************************************************************/
 void CG_Match::setBlackSocket(QTcpSocket *socket)
 {
     blackSocket = socket;
