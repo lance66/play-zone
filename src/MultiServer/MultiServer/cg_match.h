@@ -58,8 +58,7 @@ class CG_Match
         QTcpSocket *blackSocket;
         QTcpSocket *socket;
 
-        void readBlacksMove();
-        void readWhitesMove();
+        void readPlayersMove(QTcpSocket *playerSocket, QByteArray move);
         void setPlayerIDs(int whteID, int blckID);
         void setPlayerSockets(QTcpSocket *whiteSocket, QTcpSocket *blackSocket);
 };
