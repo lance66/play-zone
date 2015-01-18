@@ -6,7 +6,6 @@
         <file>CG_lobby.qml</file>
         <file>CG_login.qml</file>
         <file>Clock.qml</file>
-        <file>main.cpp</file>
         <file>images/center.png</file>
         <file>images/cg_logo_hires_app.png</file>
         <file>images/clock.png</file>

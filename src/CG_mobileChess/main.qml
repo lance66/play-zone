@@ -13,19 +13,19 @@ ApplicationWindow {
     title: qsTr("Mobile Chess")
     color: "#448ed3"
 
-    function getLogoSize()
+    function getBackgroundWidth()
     {
-        return background.height / 2
+        return background.width
     }
 
-    function getControlWidth()
+    function getBackgroundHeight()
     {
-        return background.width < background.height ? (background.width * 0.9) : (background.height * 0.9)
+        return background.height
     }
 
-    function getControlHeight()
+    function getSmallestOrientation()
     {
-        return background.height / 15
+        return background.width < background.height ? background.width : background.height
     }
 
     CG_login

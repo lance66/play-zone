@@ -1,6 +1,6 @@
 import QtQuick 2.3
 import QtQuick.Controls 1.2
-import QtQuick.Controls.Styles 1.1
+import QtQuick.Controls.Styles 1.2
 import QtQuick.Window 2.0
 import QtGraphicalEffects 1.0
 import "."
@@ -11,6 +11,25 @@ Item {
     height: 600
 
     signal loggedIn
+
+    // The logo width and height is 1/2 of the height when in portrait
+    // and 1/3 of the height when in landscape.
+    function getLogoSize()
+    {
+        return background.width > background.height ? background.height * 0.33 : background.height / 2
+    }
+
+    // The individual control height is 1/15 of the height when in portrait
+    // and (2/3) * (1/8) = apprx 8.33% in landscape.
+    function getControlHeight()
+    {
+        return background.width > background.height ? background.height * 0.0833 : background.height / 15
+    }
+
+    function getControlWidth()
+    {
+        return background.width < background.height ? (background.width * 0.9) : (background.height * 0.9)
+    }
 
     Column
     {
@@ -31,6 +50,7 @@ Item {
             id: txt_isOpen
             anchors.horizontalCenter: parent.horizontalCenter
             text: Validator.getFeedback()
+            font.pixelSize: getSmallestOrientation() * 0.03
         }
 
         TextField
@@ -158,11 +178,13 @@ Item {
 
             TextFieldStyle
             {
+                font.pixelSize: getSmallestOrientation() * 0.03
+
                 background: Rectangle {
                     color: "#FFFFFF"
                     border.color: "#448ed3"
                     smooth: true
-                    radius: 40
+                    radius: 100
                 }
             }
         }
@@ -172,7 +194,7 @@ Item {
             id: cgButtonStyle
 
             ButtonStyle
-            {
+            {                
                 background: Rectangle {
                     gradient: Gradient {
                         GradientStop { position: 0.0; color: control.pressed ? "#b6ee65" : "#76ae25" }
@@ -181,7 +203,19 @@ Item {
 
                     border.color: "#448ed3"
                     smooth: true
-                    radius: 40
+                    radius: 100
+                }
+
+                label: Text {
+                    font.pixelSize: getSmallestOrientation() * 0.03
+
+                    renderType: Text.NativeRendering
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    font.family: "Helvetica"
+                    color: "black"
+
+                    text: control.text
                 }
             }
         }

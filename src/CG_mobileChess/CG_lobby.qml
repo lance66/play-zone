@@ -12,6 +12,17 @@ Item {
 
     signal goBack
 
+    // The individual control height is 1/8 of the total height
+    function getControlHeight()
+    {
+        return background.height / 8
+    }
+
+    function getControlWidth()
+    {
+        return background.width < background.height ? (background.width * 0.9) : (background.height * 0.9)
+    }
+
     ColumnLayout
     {
         anchors.horizontalCenter: parent.horizontalCenter
@@ -20,8 +31,9 @@ Item {
 
         RowLayout
         {
-            Layout.alignment: Qt.AlignTop
-            Layout.preferredWidth: parent.width
+            Layout.alignment: Qt.AlignTop && Qt.AlignHCenter
+            Layout.preferredWidth: getControlWidth()
+            Layout.preferredHeight: getBackgroundHeight() * 0.33
 
             Clock
             {
@@ -31,6 +43,8 @@ Item {
 
             ColumnLayout
             {
+                Layout.alignment: Qt.AlignRight
+
                 Text
                 {
                     id: lbl_username
@@ -39,7 +53,7 @@ Item {
                     color: "white"
                     font.family: "Helvetica"
                     font.bold: true
-                    font.pixelSize: 16
+                    font.pixelSize: getControlWidth() * 0.04
                     style: Text.Raised
                     styleColor: "black"
                 }
@@ -52,7 +66,7 @@ Item {
                     color: "white"
                     font.family: "Helvetica"
                     font.bold: true
-                    font.pixelSize: 16
+                    font.pixelSize: getControlWidth() * 0.04
                     style: Text.Raised
                     styleColor: "black"
                 }
@@ -142,7 +156,19 @@ Item {
 
                 border.color: "#448ed3"
                 smooth: true
-                radius: 40
+                radius: 100
+            }
+
+            label: Text {
+                font.pixelSize: getSmallestOrientation() * 0.03
+
+                renderType: Text.NativeRendering
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+                font.family: "Helvetica"
+                color: "black"
+
+                text: control.text
             }
         }
     }
