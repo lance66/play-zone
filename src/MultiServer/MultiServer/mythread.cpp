@@ -1,6 +1,6 @@
 #include "mythread.h"
 
-/**************************************************************
+/****************************************************************
 *   Purpose:  Constructor. Initializes data members.
 *
 *     Entry:  NA
@@ -13,11 +13,16 @@ MyThread::MyThread(qintptr ID, QObject *parent) :
     this->socketDescriptor = ID;
 }
 
+/****************************************************************
+ *  Purpose:  Destructor
+ *    Entry:
+ *     Exit:
+****************************************************************/
 MyThread::~MyThread()
 {
 }
 
-/**************************************************************
+/****************************************************************
 *   Purpose:  Starts thread, and notifies client that they
 *             are connected.
 *
@@ -45,7 +50,7 @@ void MyThread::run()
     exec();
 }
 
-/**************************************************************
+/****************************************************************
 *   Purpose:  Sends user's message, and writes message to
 *             the socket.
 *
@@ -61,7 +66,7 @@ void MyThread::readyRead()
      qDebug() << socketDescriptor << " says: " << Data;
 }
 
-/**************************************************************
+/****************************************************************
 *   Purpose: Notifies the users that the server is
 *            disconnected and closes the socket, when server
 *            disconnects.
@@ -83,7 +88,7 @@ QTcpSocket *MyThread::getSocket()
     return socket;
 }
 
-/**************************************************************
+/****************************************************************
 *   Purpose:  Retrives socket descriptor.
 *
 *     Entry:  NA
