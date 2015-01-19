@@ -11,7 +11,7 @@
 CG_Match::CG_Match()
     :whiteID(777), blackID(666)
 {
-    qDebug() << "Roar!!!!";
+    qDebug() << "Default CG_Match Constructor Called.";
 }
 
 /****************************************************************
@@ -62,8 +62,8 @@ CG_Match::CG_Match(int whteID, int blckID, QTcpSocket *&whiteSocket, QTcpSocket 
 CG_Match::~CG_Match()
 {
     //Close sockets
-    whiteSocket->close();
-    blackSocket->close();
+//    whiteSocket->close();
+//    blackSocket->close();
 }
 
 void CG_Match::setPlayerIDs(int whteID, int blckID)

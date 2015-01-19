@@ -36,6 +36,7 @@ public:
     void run();
     qintptr getSocketDescriptor();
     QTcpSocket *getSocket();
+    char * Data_Ary;
 
 signals:
     void error(QTcpSocket::SocketError socketerror);

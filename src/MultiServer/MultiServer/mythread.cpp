@@ -11,6 +11,8 @@ MyThread::MyThread(qintptr ID, QObject *parent) :
     QThread(parent)
 {
     this->socketDescriptor = ID;
+    Data_Ary = new char[10];
+    strcpy(Data_Ary, "");
 }
 
 /****************************************************************
@@ -62,8 +64,18 @@ void MyThread::readyRead()
 {
      QByteArray Data = socket->readLine();
 
+     if(Data.at(0) == ':')
+     {
+         qDebug() << socketDescriptor << " says: " << Data_Ary;
+         strcpy(Data_Ary, "");
+     }
+     else
+     {
+         strcat(Data_Ary, Data);
+     }
+
      //Only send the message when the user presses enter
-     qDebug() << socketDescriptor << " says: " << Data;
+     //qDebug() << socketDescriptor << " says: " << Data_Ary;
 }
 
 /****************************************************************
