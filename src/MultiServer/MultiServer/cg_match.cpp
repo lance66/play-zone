@@ -192,7 +192,7 @@ void CG_Match::setWhiteID(int whiteID)
 *
 *      Exit:  Value of white id is returned.
 ****************************************************************/
-int CG_Match::getWhiteID()
+int CG_Match::getWhiteID() const
 {
     return this->whiteID;
 }
@@ -218,7 +218,7 @@ void CG_Match::setBlackID(int blackID)
 *
 *      Exit:  Value of black id is returned.
 ****************************************************************/
-int CG_Match::getBlackID()
+int CG_Match::getBlackID() const
 {
     return this->blackID;
 }
@@ -244,7 +244,7 @@ void CG_Match::setTcpSocket(QTcpSocket *socket)
 *
 *      Exit:  Returns the pointer to the socket.
 ****************************************************************/
-QTcpSocket * CG_Match::getTcpSocket()
+QTcpSocket * CG_Match::getTcpSocket() const
 {
     return this->socket;
 }
