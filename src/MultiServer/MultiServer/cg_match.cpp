@@ -59,11 +59,58 @@ CG_Match::CG_Match(int whteID, int blckID, QTcpSocket *&whiteSocket, QTcpSocket 
     qDebug() << "Match between " << whiteID << " and " << blackID << " has been started.";
 }
 
+void CG_Match::startMatch(int whiteID, int blackID, QTcpSocket *whiteSocket, QTcpSocket *blackSocket)
+{
+    qDebug() << "Match between " << whiteID << " and " << blackID << "has been started.";
+
+    //Convert IDs into const char *'s to write to socket
+    //Convert int to string
+    std::string str_whiteID = std::to_string(whiteID);
+    std::string str_blackID = std::to_string(blackID);
+
+    //Convert string to const char *
+    char const *whitePlayer = str_whiteID.c_str();
+    char const *blackPlaya = str_blackID.c_str();
+
+    //Notify white player of match
+    whiteSocket->write("\nYou are playing with the white pieces against ");
+    whiteSocket->write(blackPlaya);
+    whiteSocket->write(".");
+    whiteSocket->flush();
+    whiteSocket->waitForBytesWritten(3000);
+
+    //Notify black player of match
+    blackSocket->write("\nYou are playing with the black pieces against ");
+    blackSocket->write(whitePlayer);
+    blackSocket->write(".");
+    blackSocket->flush();
+    blackSocket->waitForBytesWritten(3000);
+
+    bool gameOver = false;
+    while (gameOver != true)
+    {
+        //Match starts
+        bool isWhiteTurn = true;
+
+        //Prompt white player to move
+        whiteSocket->write("\n\nEnter move: ");
+        whiteSocket->flush();
+        whiteSocket->waitForBytesWritten(3000);
+
+        //Prompt to black player to wait
+        blackSocket->write("\n\nWaiting for opponent to move...");
+        blackSocket->flush();
+        blackSocket->waitForBytesWritten(3000);
+
+        gameOver = true;
+    }
+}
+
 CG_Match::~CG_Match()
 {
     //Close sockets
-//    whiteSocket->close();
-//    blackSocket->close();
+    whiteSocket->close();
+    blackSocket->close();
 }
 
 void CG_Match::setPlayerIDs(int whteID, int blckID)
@@ -223,9 +270,9 @@ void CG_Match::setIsWhiteToMove(bool &move)
  *
  *     Exit:  whiteSocket is set.
 ****************************************************************/
-void CG_Match::setWhiteSocket(QTcpSocket *socket)
+void CG_Match::setWhiteSocket(QMap<int, QTcpSocket *> socket, int whiteID)
 {
-    whiteSocket = socket;
+    whiteSocket = socket[whiteID];
 }
 
 /****************************************************************
@@ -235,7 +282,7 @@ void CG_Match::setWhiteSocket(QTcpSocket *socket)
  *
  *     Exit:  blackSocket is set.
 ****************************************************************/
-void CG_Match::setBlackSocket(QTcpSocket *socket)
+void CG_Match::setBlackSocket(QMap<int, QTcpSocket *> socket, int blackID)
 {
-    blackSocket = socket;
+    blackSocket = socket[blackID];
 }

@@ -3,6 +3,7 @@
 
 #include <QDebug>
 #include <QTcpSocket>
+#include <QMap>
 
 /************************************************************************
 * Class: CG_Match
@@ -42,18 +43,21 @@ class CG_Match
         void setBlackID(int blackID);
         int getBlackID();
 
-        void setWhiteSocket(QTcpSocket *socket);
-        void setBlackSocket(QTcpSocket *socket);
+        void setWhiteSocket(QMap<int, QTcpSocket *> socket, int whiteID);
+        void setBlackSocket(QMap<int, QTcpSocket *> socket, int blackID);
 
         void setTcpSocket(QTcpSocket *socket);
         QTcpSocket * getTcpSocket();
 
         void setIsWhiteToMove(bool &isWhiteToMove);
 
+        void startMatch(int whiteID, int blackID, QTcpSocket *whiteSocket, QTcpSocket *blackSocket);
+
     private:
         int whiteID;
         int blackID;
         bool isWhiteToMove;
+        bool isMatchOver;
         QTcpSocket *whiteSocket;
         QTcpSocket *blackSocket;
         QTcpSocket *socket;
