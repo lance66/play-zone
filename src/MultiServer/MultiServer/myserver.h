@@ -1,13 +1,14 @@
 #ifndef MYSERVER_H
 #define MYSERVER_H
 
+#include <iostream>
 #include <QTcpServer>
 #include <QTcpSocket>
-//#include <QDebug>
 #include <QVector>
 #include <QQueue>
 #include <QList>
 #include <QMap>
+#include <QString>
 #include "CG_match.h"
 #include "mythread.h"
 
@@ -49,24 +50,45 @@ class MyServer : public QTcpServer
 
     public:
         explicit MyServer(QObject *parent = 0);
+        ~MyServer();
         void StartServer();
 
     signals:
-
     public slots:
-
-
     protected slots:
         void clientDisconnected();
 
     protected:
         void incomingConnection(qintptr socketDescriptor);
-        void sendMove(QTcpSocket *client, qintptr socketDescriptor);
+        void saveUserInfoToDatabase();
+        void loadUserInfoFromDatabase();
+        void updateServerInfo();
+        void disconnectPlayer(int playerID);
+        void oneMinuteGameRequest(int playerID);
+        void fiveMinuteGameRequest(int playerID);
+        void thirtyMinuteGameRequest(int playerID);
+        void kibitzGameRequest(int playerID, int matchID);
+        void connectToOpponent(int playerID, int opponent, int timeControl);
+        void sendMove(int playerID, int opponent, int fromFile, int fromRank, int toFile, int toRank);
+        void sendResignation(int playerID, int opponent);
+        void sendCheckMate(int playerID, int opponent);
+        void removeFromQueue(int playerID);
+        void checkTimeOut();
+        void updateBoard(int playerID, QString updatedboard[8][8]);
 
         QMap<int, QTcpSocket *> clientConnections;
         QVector<CG_Match> matches;
-        CG_Match match;
+        QMap<int, int> opponents;
+        QMap<int, std::string> playersID;
         QQueue<int> oneMinuteQueue;
+        QQueue<int> fiveMinuteQueue;
+        QQueue<int> thirtyMinuteQueue;
+        CG_Match match;
+        int onlineUsers;
+        int playingUsers;
+
+        //QVector<userInfo> userlist;
+        //QVector<ChessClock> playersTime;
 
     private:
         void addPlayerConnection(int socketDescriptor, QTcpSocket *chessPlayer);
@@ -75,6 +97,7 @@ class MyServer : public QTcpServer
         void configureThreadSignalsAndSlots(MyThread * thread);
         void writeSocketDescriptorToSocket(QTcpSocket *client, qintptr socketDescriptor);
         void delaySocket(QTcpSocket * socket, int timeToDelay);
+        void sendMove(QTcpSocket *client, qintptr socketDescriptor);
 };
 
 #endif // MYSERVER_H

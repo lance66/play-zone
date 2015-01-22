@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QTcpSocket>
 #include <QMap>
+#include <QString>
 
 /************************************************************************
 * Class: CG_Match
@@ -36,24 +37,20 @@ class CG_Match
 {
     public:
         CG_Match();
+        CG_Match(userInfo whitePlayer, userInfo blackPlayer, int timeControl);
         CG_Match(int whiteID, int blackID, QTcpSocket *&whiteSocket, QTcpSocket *&blackSocket);
         ~CG_Match();
 
         void sendMoveToServer(int whiteID, int blackID);
-
         void setWhiteID(int whiteID);
         int getWhiteID() const;
-
         void setBlackID(int blackID);
         int getBlackID() const;
-
         void setWhiteSocket(QMap<int, QTcpSocket *> socket, int whiteID);
         void setBlackSocket(QMap<int, QTcpSocket *> socket, int blackID);
-
         void setTcpSocket(QTcpSocket *socket);
-        QTcpSocket * getTcpSocket() const;
-
         void setIsWhiteToMove(bool &isWhiteToMove);
+        QTcpSocket * getTcpSocket() const;
 
         void startMatch(int whiteID, int blackID, QTcpSocket *whiteSocket, QTcpSocket *blackSocket);
 
@@ -64,7 +61,23 @@ class CG_Match
         bool isMatchOver;
         QTcpSocket *whiteSocket;
         QTcpSocket *blackSocket;
-        QTcpSocket *socket;
+        int matchID;
+        int winner;
+        int loser;
+        int status;
+        int timeControl;
+        QString startTime;
+        QString endTime;
+        double whiteTime;
+        double blackTime;
+
+        //ChessClock whiteClock
+        //ChessClock blackClock
+        //UserInfo whitePlayer
+        //UserInfo blackPlayer
+        //UserInfo kibitzers
+        //int eloWon
+        //int eloLost
 
         void readPlayersMove(QTcpSocket *playerSocket, QByteArray move);
         void setPlayerIDs(int whteID, int blckID);

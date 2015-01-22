@@ -14,6 +14,12 @@ MyServer::MyServer(QObject *parent) :
 {
 }
 
+//Document header needed
+MyServer::~MyServer()
+{
+
+}
+
 /****************************************************************
 *   Purpose:  Starts the server, and notifies user that it is
 *             listening for connections.
@@ -258,4 +264,79 @@ void MyServer::delaySocket(QTcpSocket *socket, int timeToDelay)
 {
     //In case of lag, wait for bytes to write to client
     socket->waitForBytesWritten(timeToDelay);
+}
+
+void MyServer::saveUserInfoToDatabase()
+{
+
+}
+
+void MyServer::loadUserInfoFromDatabase()
+{
+
+}
+
+void MyServer::updateServerInfo()
+{
+
+}
+
+void MyServer::disconnectPlayer(int playerID)
+{
+
+}
+
+void MyServer::oneMinuteGameRequest(int playerID)
+{
+
+}
+
+void MyServer::fiveMinuteGameRequest(int playerID)
+{
+
+}
+
+void MyServer::thirtyMinuteGameRequest(int playerID)
+{
+
+}
+
+void MyServer::kibitzGameRequest(int playerID, int matchID)
+{
+
+}
+
+void MyServer::connectToOpponent(int playerID, int opponent, int timeControl)
+{
+
+}
+
+void MyServer::sendMove(int playerID, int opponent, int fromFile, int fromRank, int toFile, int toRank)
+{
+
+}
+
+void MyServer::sendResignation(int playerID, int opponent)
+{
+
+}
+
+void MyServer::sendCheckMate(int playerID, int opponent)
+{
+
+}
+
+void MyServer::removeFromQueue(int playerID)
+{
+
+}
+
+void MyServer::checkTimeOut()
+{
+
+}
+
+void MyServer::updateBoard(int playerID, QString updatedboard[8][8])
+{
+
 }

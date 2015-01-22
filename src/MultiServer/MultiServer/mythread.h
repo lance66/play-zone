@@ -2,6 +2,7 @@
 #define MYTHREAD_H
 
 #include <QThread>
+#include <QString>
 #include <QTcpSocket>
 #include <QDebug>
 #include <QEvent>
@@ -34,6 +35,7 @@ class MyThread : public QThread
 public:
     explicit MyThread(qintptr ID, QObject *parent = 0);
     ~MyThread();
+
     void run();
     qintptr getSocketDescriptor();
     QTcpSocket *getSocket();
@@ -51,6 +53,13 @@ public slots:
 private:
     QTcpSocket *socket;
     qintptr socketDescriptor;
+    QString username;
+    int ID;
+    int ELO;
+    int opponent;
+    int matchID;
+
+    //ChessClock time;
 };
 
 #endif // MYTHREAD_H

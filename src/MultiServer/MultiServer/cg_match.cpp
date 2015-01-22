@@ -59,6 +59,11 @@ CG_Match::CG_Match(int whteID, int blckID, QTcpSocket *&whiteSocket, QTcpSocket 
     qDebug() << "Match between " << whiteID << " and " << blackID << " has been started.";
 }
 
+//CG_Match::CG_Match(userInfo whitePlayer, userInfo blackPlayer, int timeControl)
+//{
+//
+//}
+
 void CG_Match::startMatch(int whiteID, int blackID, QTcpSocket *whiteSocket, QTcpSocket *blackSocket)
 {
     qDebug() << "Match between " << whiteID << " and " << blackID << "has been started.";
