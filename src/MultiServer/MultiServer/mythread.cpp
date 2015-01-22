@@ -69,6 +69,11 @@ void MyThread::readyRead()
          qDebug() << socketDescriptor << " says: " << Data_Ary;
          strcpy(Data_Ary, "");
      }
+     else if(Data.at(0) == 0x0d)
+     {
+         qDebug() << socketDescriptor << " says: " << Data_Ary;
+         strcpy(Data_Ary, "");
+     }
      else if(strlen(Data_Ary) < 9)
      {
          strcat(Data_Ary, Data);

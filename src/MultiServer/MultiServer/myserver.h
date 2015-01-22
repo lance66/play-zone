@@ -63,7 +63,6 @@ class MyServer : public QTcpServer
         void incomingConnection(qintptr socketDescriptor);
         void sendMove(QTcpSocket *client, qintptr socketDescriptor);
 
-        //QList<QTcpSocket *> clientConnections;
         QMap<int, QTcpSocket *> clientConnections;
         QVector<CG_Match> matches;
         CG_Match match;

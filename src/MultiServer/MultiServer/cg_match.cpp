@@ -109,8 +109,8 @@ void CG_Match::startMatch(int whiteID, int blackID, QTcpSocket *whiteSocket, QTc
 CG_Match::~CG_Match()
 {
     //Close sockets
-    whiteSocket->close();
-    blackSocket->close();
+//    whiteSocket->close();
+//    blackSocket->close();
 }
 
 void CG_Match::setPlayerIDs(int whteID, int blckID)
