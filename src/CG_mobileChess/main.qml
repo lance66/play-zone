@@ -1,3 +1,15 @@
+/************************************************************************
+* File Name: main.qml
+*
+* Overview:
+*   This is the Main QML file for our presentation layer. This layer
+*   allows us to switch among the different screens for:
+*       - Login
+*       - Lobby
+*       - Game
+*
+************************************************************************/
+
 import QtQuick 2.3
 import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.1

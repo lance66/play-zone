@@ -1,3 +1,21 @@
+/************************************************************************
+* File Name: CG_lobby.qml
+*
+* Overview:
+*   This QML file is the presentation layer of our lobby screen.
+*
+*   A user can either select a game time for a
+*       - 1 minute game
+*       - 5 minute game
+*       - 30 minute game
+*   Or select the Logout or Settings option.
+*
+*   A local clock is displayed next to the user info, which includes a
+*       - Username
+*       - ELO Rating
+*
+************************************************************************/
+
 import QtQuick 2.3
 import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.1
@@ -5,7 +23,8 @@ import QtQuick.Window 2.0
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.0
 
-Item {
+Item
+{
     id: root
     width: 400
     height: 600
@@ -20,7 +39,7 @@ Item {
 
     function getControlWidth()
     {
-        return background.width < background.height ? (background.width * 0.9) : (background.height * 0.9)
+        return getSmallestOrientation() * 0.9
     }
 
     ColumnLayout
@@ -53,9 +72,11 @@ Item {
                     color: "white"
                     font.family: "Helvetica"
                     font.bold: true
-                    font.pixelSize: getControlWidth() * 0.04
                     style: Text.Raised
                     styleColor: "black"
+
+                    // Adjusts font size for scalability
+                    font.pixelSize: getControlWidth() * 0.04
                 }
 
                 Text
@@ -66,9 +87,11 @@ Item {
                     color: "white"
                     font.family: "Helvetica"
                     font.bold: true
-                    font.pixelSize: getControlWidth() * 0.04
                     style: Text.Raised
                     styleColor: "black"
+
+                    // Adjusts font size for scalability
+                    font.pixelSize: getControlWidth() * 0.04
                 }
             }
         }

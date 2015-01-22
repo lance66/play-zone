@@ -1,3 +1,18 @@
+/************************************************************************
+* File Name: CG_login.qml
+*
+* Overview:
+*   This QML file is the presentation layer of our login screen.
+*
+*   A user can either login to an existing account or register a new one.
+*   The registration info is completely validated with validators for:
+*       - Valid username length
+*       - Valid password length, and contains 1 uppercase, 1 lowercase and
+*           1 number
+*       - Valid email address
+*
+************************************************************************/
+
 import QtQuick 2.3
 import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
@@ -5,7 +20,8 @@ import QtQuick.Window 2.0
 import QtGraphicalEffects 1.0
 import "."
 
-Item {
+Item
+{
     id: root
     width: 400
     height: 600
@@ -50,6 +66,8 @@ Item {
             id: txt_isOpen
             anchors.horizontalCenter: parent.horizontalCenter
             text: Validator.getFeedback()
+
+            // Adjusts the font size for scalability
             font.pixelSize: getSmallestOrientation() * 0.03
         }
 
@@ -61,10 +79,14 @@ Item {
             // For testing purposes I inputted Trudodyr automatically
             text: "Trudodyr"
 
+            // Adjusts the font size for scalability
+            font.pixelSize: getSmallestOrientation() * 0.03
+
             style: cgTextFieldStyle
             width: getControlWidth()
             height: getControlHeight()
             onTextChanged: parent.setUsernameValidator()
+
         }
 
         TextField
@@ -76,6 +98,9 @@ Item {
 
             // For testing purposes I inputted Trudodyr automatically
             text: "Trudodyr1"
+
+            // Adjusts the font size for scalability
+            font.pixelSize: getSmallestOrientation() * 0.03
 
             width: getControlWidth()
             height: getControlHeight()
@@ -91,6 +116,9 @@ Item {
             echoMode: TextInput.Password
             visible: false
 
+            // Adjusts the font size for scalability
+            font.pixelSize: getSmallestOrientation() * 0.03
+
             width: getControlWidth()
             height: getControlHeight()
 
@@ -103,6 +131,9 @@ Item {
             placeholderText: "Email Address"
             style: cgTextFieldStyle
             visible: false
+
+            // Adjusts the font size for scalability
+            font.pixelSize: getSmallestOrientation() * 0.03
 
             width: getControlWidth()
             height: getControlHeight()
@@ -178,8 +209,6 @@ Item {
 
             TextFieldStyle
             {
-                font.pixelSize: getSmallestOrientation() * 0.03
-
                 background: Rectangle {
                     color: "#FFFFFF"
                     border.color: "#448ed3"
@@ -225,6 +254,14 @@ Item {
             return setUsernameValidator() && setPasswordValidator() && setConfirmPasswordValidator() && setEmailValidator()
         }
 
+        /**************************************************************
+        *	  Purpose:  Ensures the username is valid when registering.
+        *
+        *     Entry:  User has clicked register.
+        *
+        *     Exit:  Displays whether the username is valid or not.
+        ****************************************************************/
+
         function setUsernameValidator()
         {
             var valid_username = true
@@ -232,16 +269,28 @@ Item {
             if (tf_confirmPassword.visible == true)
             {
                 if (Validator.checkValidUsername(tf_username.text))
+                {
                     tf_username.textColor = "#00AA00"
+                    tf_username.font.bold = false
+                }
                 else
                 {
                     valid_username = false
                     tf_username.textColor = "#FF0000"
+                    tf_username.font.bold = true
                 }
             }
 
             return valid_username
         }
+
+        /**************************************************************
+        *	  Purpose:  Ensures the password is valid when registering.
+        *
+        *     Entry:  User has clicked register.
+        *
+        *     Exit:  Displays whether the password is valid or not.
+        ****************************************************************/
 
         function setPasswordValidator()
         {
@@ -250,16 +299,28 @@ Item {
             if (tf_confirmPassword.visible == true)
             {
                 if (Validator.checkValidPassword(tf_password.text))
+                {
                     tf_password.textColor = "#00AA00"
+                    tf_password.font.bold = false
+                }
                 else
                 {
                     valid_password = false
                     tf_password.textColor = "#FF0000"
+                    tf_password.font.bold = true
                 }
             }
 
             return valid_password
         }
+
+        /*****************************************************************
+        *	  Purpose:  Ensures the password is the same when registering.
+        *
+        *     Entry:  User has clicked register.
+        *
+        *     Exit:  Displays whether the confirm password is the same.
+        *******************************************************************/
 
         function setConfirmPasswordValidator()
         {
@@ -268,16 +329,28 @@ Item {
             if (tf_confirmPassword.visible == true)
             {
                 if (tf_password.text == tf_confirmPassword.text)
+                {
                     tf_confirmPassword.textColor = "#00AA00"
+                    tf_confirmPassword.font.bold = false
+                }
                 else
                 {
                     valid_confirm_password = false
                     tf_confirmPassword.textColor = "#FF0000"
+                    tf_confirmPassword.font.bold = true
                 }
             }
 
             return valid_confirm_password
         }
+
+        /**************************************************************
+        *	  Purpose:  Ensures the email is valid when registering.
+        *
+        *     Entry:  User has clicked register.
+        *
+        *     Exit:  Displays whether the email is valid or not.
+        ****************************************************************/
 
         function setEmailValidator()
         {
@@ -286,11 +359,15 @@ Item {
             if (tf_confirmPassword.visible == true)
             {
                 if (Validator.checkValidEmailAddress(tf_emailAddress.text))
+                {
                     tf_emailAddress.textColor = "#00AA00"
+                    tf_emailAddress.font.bold = false
+                }
                 else
                 {
                     valid_email = false
                     tf_emailAddress.textColor = "#FF0000"
+                    tf_emailAddress.font.bold = true
                 }
             }
         }
