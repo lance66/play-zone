@@ -7,6 +7,7 @@
 #include <QVector>
 #include <QQueue>
 #include <QList>
+#include <QMap>
 #include "CG_match.h"
 #include "mythread.h"
 
@@ -62,13 +63,13 @@ class MyServer : public QTcpServer
         void incomingConnection(qintptr socketDescriptor);
         void sendMove(QTcpSocket *client, qintptr socketDescriptor);
 
-        QList<QTcpSocket *> clientConnections;
+        QMap<int, QTcpSocket *> clientConnections;
         QVector<CG_Match> matches;
         CG_Match match;
         QQueue<int> oneMinuteQueue;
 
     private:
-        void addPlayerConnection(QTcpSocket *chessPlayer);
+        void addPlayerConnection(int socketDescriptor, QTcpSocket *chessPlayer);
         void startOneMinuteMatch();
         void removeAllClientConnections(QTcpSocket *client);
         void configureThreadSignalsAndSlots(MyThread * thread);

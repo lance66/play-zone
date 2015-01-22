@@ -61,7 +61,7 @@ void MyServer::incomingConnection(qintptr socketDescriptor)
     connect(chessPlayer, SIGNAL(disconnected()), this, SLOT(clientDisconnected()));
 
     //Add user to list of client connections
-    addPlayerConnection(chessPlayer);
+    addPlayerConnection(socketDescriptor, chessPlayer);
 
     //Sample function that sends move from server to player
     sendMove(chessPlayer, chessPlayer->socketDescriptor());
@@ -115,10 +115,10 @@ void MyServer::configureThreadSignalsAndSlots(MyThread * thread)
 *      Exit:  Adds the player to the list of client connections,
 *             and prints the number of players online.
 ****************************************************************/
-void MyServer::addPlayerConnection(QTcpSocket *chessPlayer)
+void MyServer::addPlayerConnection(int socketDescriptor, QTcpSocket *chessPlayer)
 {
-    //Add user to list of client connections
-    clientConnections.append(chessPlayer);
+    //Add user to dictionary of client connections
+    clientConnections.insert(socketDescriptor, chessPlayer);
 
     //Print number of players online
     qDebug() << "\nNumber of players online: " << clientConnections.size();
@@ -142,8 +142,12 @@ void MyServer::startOneMinuteMatch()
     int secondID = oneMinuteQueue.first();
     oneMinuteQueue.dequeue();
 
-    CG_Match match(firstID, secondID, clientConnections.front(), clientConnections.back());
+    match.setWhiteID(firstID);
+    match.setBlackID(secondID);
+    match.setWhiteSocket(clientConnections, firstID);
+    match.setBlackSocket(clientConnections, secondID);
     matches.append(match);
+    match.startMatch(firstID, secondID, clientConnections[firstID], clientConnections[secondID]);
 }
 
 /****************************************************************
@@ -163,10 +167,10 @@ void MyServer::clientDisconnected()
     //If client is not null remove client
     if (client != nullptr)
     {
-        removeAllClientConnections(client);
+        //removeAllClientConnections(client);
     }
-    else
-        clientConnections.removeAll(client);
+   // else
+        //clientConnections.remove()
 }
 
 /****************************************************************
@@ -182,11 +186,11 @@ void MyServer::clientDisconnected()
 void MyServer::removeAllClientConnections(QTcpSocket *client)
 {
     //Remove from list of connections
-    clientConnections.removeAll(client);
+    //clientConnections.removeAll(client);
 
     //Delete client
-    client->deleteLater();
-    qDebug() << "It worked!  Client disconnected!";
+   // client->deleteLater();
+    //qDebug() << "It worked!  Client disconnected!";
 }
 
 /****************************************************************
