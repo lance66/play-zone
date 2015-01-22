@@ -1,5 +1,5 @@
-#ifndef MYTHREAD_H
-#define MYTHREAD_H
+#ifndef CG_PlayerThread_H
+#define CG_PlayerThread_H
 
 #include <QThread>
 #include <QString>
@@ -8,10 +8,10 @@
 #include <QEvent>
 
 /************************************************************************
-* Class: MyThread
+* Class: CG_PlayerThread
 *
 * Constructors:
-*   explicit MyThread(qintptr ID, QObject *parent = 0)
+*   explicit CG_PlayerThread(qintptr ID, QObject *parent = 0)
 *
 * Signals:
 *   void error(QTcpSocket::SocketError socketerror)
@@ -29,12 +29,12 @@
 *   qintptr getSocketDescriptor()
 *       Returns socket descriptor
 *************************************************************************/
-class MyThread : public QThread
+class CG_PlayerThread : public QThread
 {
     Q_OBJECT
 public:
-    explicit MyThread(qintptr ID, QObject *parent = 0);
-    ~MyThread();
+    explicit CG_PlayerThread(qintptr ID, QObject *parent = 0);
+    ~CG_PlayerThread();
 
     void run();
     qintptr getSocketDescriptor();
@@ -62,4 +62,4 @@ private:
     //ChessClock time;
 };
 
-#endif // MYTHREAD_H
+#endif // CG_PlayerThread_H

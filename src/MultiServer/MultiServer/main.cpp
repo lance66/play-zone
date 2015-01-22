@@ -1,5 +1,5 @@
 #include <QtCore/QCoreApplication>
-#include "myserver.h"
+#include "cg_server.h"
 
 /***************************************************************************
  * Author:                                                        ChessGames
@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    MyServer Server;
+    CG_Server Server;
 
     // Starts the server, so that it can listen for incoming connections
     Server.StartServer();

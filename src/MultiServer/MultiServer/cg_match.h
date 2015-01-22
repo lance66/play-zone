@@ -37,7 +37,7 @@ class CG_Match
 {
     public:
         CG_Match();
-        CG_Match(userInfo whitePlayer, userInfo blackPlayer, int timeControl);
+        //CG_Match(userInfo whitePlayer, userInfo blackPlayer, int timeControl);
         CG_Match(int whiteID, int blackID, QTcpSocket *&whiteSocket, QTcpSocket *&blackSocket);
         ~CG_Match();
 
@@ -61,6 +61,7 @@ class CG_Match
         bool isMatchOver;
         QTcpSocket *whiteSocket;
         QTcpSocket *blackSocket;
+        QTcpSocket *socket;
         int matchID;
         int winner;
         int loser;

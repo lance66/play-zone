@@ -73,7 +73,7 @@ void CG_Server::incomingConnection(qintptr socketDescriptor)
     sendMove(chessPlayer, chessPlayer->socketDescriptor());
 
     qDebug() << socketDescriptor << " Connecting...";
-    MyThread *thread = new MyThread(socketDescriptor,this);
+    CG_PlayerThread *thread = new CG_PlayerThread(socketDescriptor,this);
 
     int ID = static_cast<int>(thread->getSocketDescriptor());
 
@@ -100,7 +100,7 @@ void CG_Server::incomingConnection(qintptr socketDescriptor)
  *     Exot:  Configures the signals to their designated slots,
  *            and thread is started.
 ****************************************************************/
-void CG_Server::configureThreadSignalsAndSlots(MyThread * thread)
+void CG_Server::configureThreadSignalsAndSlots(CG_PlayerThread * thread)
 {
     // Associating finsihed signal with the clientDisconnected slot.
     connect(thread, SIGNAL(finished()),this, SLOT(clientDisconnected()));

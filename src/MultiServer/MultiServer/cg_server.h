@@ -94,7 +94,7 @@ class CG_Server : public QTcpServer
         void addPlayerConnection(int socketDescriptor, QTcpSocket *chessPlayer);
         void startOneMinuteMatch();
         void removeAllClientConnections(QTcpSocket *client);
-        void configureThreadSignalsAndSlots(MyThread * thread);
+        void configureThreadSignalsAndSlots(CG_PlayerThread * thread);
         void writeSocketDescriptorToSocket(QTcpSocket *client, qintptr socketDescriptor);
         void delaySocket(QTcpSocket * socket, int timeToDelay);
         void sendMove(QTcpSocket *client, qintptr socketDescriptor);
