@@ -1,5 +1,5 @@
-#ifndef MYSERVER_H
-#define MYSERVER_H
+#ifndef CG_Server_H
+#define CG_Server_H
 
 #include <iostream>
 #include <QTcpServer>
@@ -9,14 +9,14 @@
 #include <QList>
 #include <QMap>
 #include <QString>
-#include "CG_match.h"
-#include "mythread.h"
+#include "cg_match.h"
+#include "cg_playerThread.h"
 
 /************************************************************************
 * Class: CG_Server
 *
 * Constructors:
-*   explicit MyServer(QObject *parent = 0);
+*   explicit CG_Server(QObject *parent = 0);
 *
 * Slots:
 *   void clientDisconnected()
@@ -44,13 +44,13 @@
 *   void delaySocket(QTcpSocket * socket, int timeToDelay)
 *       Waits for bytes to write to client.
 *************************************************************************/
-class MyServer : public QTcpServer
+class CG_Server : public QTcpServer
 {
     Q_OBJECT
 
     public:
-        explicit MyServer(QObject *parent = 0);
-        ~MyServer();
+        explicit CG_Server(QObject *parent = 0);
+        ~CG_Server();
         void StartServer();
 
     signals:
@@ -100,4 +100,4 @@ class MyServer : public QTcpServer
         void sendMove(QTcpSocket *client, qintptr socketDescriptor);
 };
 
-#endif // MYSERVER_H
+#endif // CG_Server_H

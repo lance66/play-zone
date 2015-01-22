@@ -1,4 +1,4 @@
-#include "myserver.h"
+#include "cg_server.h"
 #include <iostream>
 
 /****************************************************************
@@ -9,13 +9,13 @@
 *      Exit:  Data members are initialized.
 ****************************************************************/
 
-MyServer::MyServer(QObject *parent) :
+CG_Server::CG_Server(QObject *parent) :
     QTcpServer(parent)
 {
 }
 
 //Document header needed
-MyServer::~MyServer()
+CG_Server::~CG_Server()
 {
 
 }
@@ -24,12 +24,12 @@ MyServer::~MyServer()
 *   Purpose:  Starts the server, and notifies user that it is
 *             listening for connections.
 *
-*     Entry:  Called after an instances of a MyServer object is
+*     Entry:  Called after an instances of a CG_Server object is
 *             created.
 *
 *      Exit:  Starts the server.
 ****************************************************************/
-void MyServer::StartServer()
+void CG_Server::StartServer()
 {
     if(!this->listen(QHostAddress::Any,1234))
     {
@@ -55,7 +55,7 @@ void MyServer::StartServer()
 *             added to queue, and match is initialized if there
 *             are two players in queue.
 ****************************************************************/
-void MyServer::incomingConnection(qintptr socketDescriptor)
+void CG_Server::incomingConnection(qintptr socketDescriptor)
 {
     //Create new socket
     QTcpSocket *chessPlayer = new QTcpSocket;
@@ -100,7 +100,7 @@ void MyServer::incomingConnection(qintptr socketDescriptor)
  *     Exot:  Configures the signals to their designated slots,
  *            and thread is started.
 ****************************************************************/
-void MyServer::configureThreadSignalsAndSlots(MyThread * thread)
+void CG_Server::configureThreadSignalsAndSlots(MyThread * thread)
 {
     // Associating finsihed signal with the clientDisconnected slot.
     connect(thread, SIGNAL(finished()),this, SLOT(clientDisconnected()));
@@ -121,7 +121,7 @@ void MyServer::configureThreadSignalsAndSlots(MyThread * thread)
 *      Exit:  Adds the player to the list of client connections,
 *             and prints the number of players online.
 ****************************************************************/
-void MyServer::addPlayerConnection(int socketDescriptor, QTcpSocket *chessPlayer)
+void CG_Server::addPlayerConnection(int socketDescriptor, QTcpSocket *chessPlayer)
 {
     //Add user to dictionary of client connections
     clientConnections.insert(socketDescriptor, chessPlayer);
@@ -140,7 +140,7 @@ void MyServer::addPlayerConnection(int socketDescriptor, QTcpSocket *chessPlayer
 *      Exit:  Adds the player to the list of client connections,
 *             and prints the number of players online.
 ****************************************************************/
-void MyServer::startOneMinuteMatch()
+void CG_Server::startOneMinuteMatch()
 {
     int firstID = oneMinuteQueue.first();
     oneMinuteQueue.dequeue();
@@ -165,7 +165,7 @@ void MyServer::startOneMinuteMatch()
 *
 *      Exit:  Disconnects the client.
 ****************************************************************/
-void MyServer::clientDisconnected()
+void CG_Server::clientDisconnected()
 {
     //Detect client that disconnected
     QTcpSocket *client = qobject_cast<QTcpSocket *>(sender());
@@ -189,7 +189,7 @@ void MyServer::clientDisconnected()
  *     Exit:  Removes specified client, and deletes the client
  *            socket.
 ****************************************************************/
-void MyServer::removeAllClientConnections(QTcpSocket *client)
+void CG_Server::removeAllClientConnections(QTcpSocket *client)
 {
     //Remove from list of connections
     //clientConnections.removeAll(client);
@@ -208,7 +208,7 @@ void MyServer::removeAllClientConnections(QTcpSocket *client)
 *      Exit:  Notifies client of move by writing it to the client
 *             socket.
 ****************************************************************/
-void MyServer::sendMove(QTcpSocket *client, qintptr socketDescriptor)
+void CG_Server::sendMove(QTcpSocket *client, qintptr socketDescriptor)
 {
     //If client is null, get out of here
     if(!client)
@@ -232,7 +232,7 @@ void MyServer::sendMove(QTcpSocket *client, qintptr socketDescriptor)
  *     Exit:  Socket descriptor will have gone through a series
  *            of conversions to write to the client socket.
 ****************************************************************/
-void MyServer::writeSocketDescriptorToSocket(QTcpSocket *client, qintptr socketDescriptor)
+void CG_Server::writeSocketDescriptorToSocket(QTcpSocket *client, qintptr socketDescriptor)
 {
     //Convert qintptr to int
     int temp = static_cast<int>(socketDescriptor);
@@ -260,83 +260,83 @@ void MyServer::writeSocketDescriptorToSocket(QTcpSocket *client, qintptr socketD
  *
  *     Exit:  Delays the socket by the specified time.
 ****************************************************************/
-void MyServer::delaySocket(QTcpSocket *socket, int timeToDelay)
+void CG_Server::delaySocket(QTcpSocket *socket, int timeToDelay)
 {
     //In case of lag, wait for bytes to write to client
     socket->waitForBytesWritten(timeToDelay);
 }
 
-void MyServer::saveUserInfoToDatabase()
+void CG_Server::saveUserInfoToDatabase()
 {
 
 }
 
-void MyServer::loadUserInfoFromDatabase()
+void CG_Server::loadUserInfoFromDatabase()
 {
 
 }
 
-void MyServer::updateServerInfo()
+void CG_Server::updateServerInfo()
 {
 
 }
 
-void MyServer::disconnectPlayer(int playerID)
+void CG_Server::disconnectPlayer(int playerID)
 {
 
 }
 
-void MyServer::oneMinuteGameRequest(int playerID)
+void CG_Server::oneMinuteGameRequest(int playerID)
 {
 
 }
 
-void MyServer::fiveMinuteGameRequest(int playerID)
+void CG_Server::fiveMinuteGameRequest(int playerID)
 {
 
 }
 
-void MyServer::thirtyMinuteGameRequest(int playerID)
+void CG_Server::thirtyMinuteGameRequest(int playerID)
 {
 
 }
 
-void MyServer::kibitzGameRequest(int playerID, int matchID)
+void CG_Server::kibitzGameRequest(int playerID, int matchID)
 {
 
 }
 
-void MyServer::connectToOpponent(int playerID, int opponent, int timeControl)
+void CG_Server::connectToOpponent(int playerID, int opponent, int timeControl)
 {
 
 }
 
-void MyServer::sendMove(int playerID, int opponent, int fromFile, int fromRank, int toFile, int toRank)
+void CG_Server::sendMove(int playerID, int opponent, int fromFile, int fromRank, int toFile, int toRank)
 {
 
 }
 
-void MyServer::sendResignation(int playerID, int opponent)
+void CG_Server::sendResignation(int playerID, int opponent)
 {
 
 }
 
-void MyServer::sendCheckMate(int playerID, int opponent)
+void CG_Server::sendCheckMate(int playerID, int opponent)
 {
 
 }
 
-void MyServer::removeFromQueue(int playerID)
+void CG_Server::removeFromQueue(int playerID)
 {
 
 }
 
-void MyServer::checkTimeOut()
+void CG_Server::checkTimeOut()
 {
 
 }
 
-void MyServer::updateBoard(int playerID, QString updatedboard[8][8])
+void CG_Server::updateBoard(int playerID, QString updatedboard[8][8])
 {
 
 }

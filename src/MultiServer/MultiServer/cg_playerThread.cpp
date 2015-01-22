@@ -1,4 +1,4 @@
-#include "mythread.h"
+#include "cg_playerThread.h"
 
 /****************************************************************
 *   Purpose:  Constructor. Initializes data members.
@@ -7,7 +7,7 @@
 *
 *      Exit:  Data members are initialized.
 ****************************************************************/
-MyThread::MyThread(qintptr ID, QObject *parent) :
+CG_PlayerThread::CG_PlayerThread(qintptr ID, QObject *parent) :
     QThread(parent)
 {
     this->socketDescriptor = ID;
@@ -20,7 +20,7 @@ MyThread::MyThread(qintptr ID, QObject *parent) :
  *    Entry:
  *     Exit:
 ****************************************************************/
-MyThread::~MyThread()
+CG_PlayerThread::~CG_PlayerThread()
 {
 }
 
@@ -32,7 +32,7 @@ MyThread::~MyThread()
 *
 *      Exit:  Thread is started, and client is notified.
 ****************************************************************/
-void MyThread::run()
+void CG_PlayerThread::run()
 {
 
     qDebug() << socketDescriptor << " Starting thread";
@@ -60,7 +60,7 @@ void MyThread::run()
 *
 *      Exit:  Sends users message, and writes it to the socket.
 ****************************************************************/
-void MyThread::readyRead()
+void CG_PlayerThread::readyRead()
 {
      QByteArray Data = socket->readLine();
 
@@ -92,7 +92,7 @@ void MyThread::readyRead()
 *
 *     Exit:  Closes socket, and notifies user of disconnection.
 ****************************************************************/
-void MyThread::disconnected()
+void CG_PlayerThread::disconnected()
 {
     qDebug() << socketDescriptor << " Disconnected";
 
@@ -100,7 +100,7 @@ void MyThread::disconnected()
     exit(0);
 }
 
-QTcpSocket *MyThread::getSocket()
+QTcpSocket *CG_PlayerThread::getSocket()
 {
     return socket;
 }
@@ -112,7 +112,7 @@ QTcpSocket *MyThread::getSocket()
 *
 *      Exit:  Socket descriptor is returned.
 ****************************************************************/
-qintptr MyThread::getSocketDescriptor()
+qintptr CG_PlayerThread::getSocketDescriptor()
 {
     return socketDescriptor;
 }

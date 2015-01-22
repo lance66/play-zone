@@ -16,11 +16,11 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    myserver.cpp \
-    mythread.cpp \
-    cg_match.cpp
+    cg_match.cpp \
+    cg_server.cpp \
+    cg_playerThread.cpp
 
 HEADERS += \
-    myserver.h \
-    mythread.h \
-    cg_match.h
+    cg_match.h \
+    cg_server.h \
+    cg_playerThread.h
