@@ -35,20 +35,27 @@ CG_PlayerThread::~CG_PlayerThread()
 void CG_PlayerThread::run()
 {
 
+    //Print starting thread
     qDebug() << socketDescriptor << " Starting thread";
+
+    //Create socket
     socket = new QTcpSocket;
 
+    //If socket descriptor cannot be set, something went wrong and emit an error
     if(!socket->setSocketDescriptor(this->socketDescriptor))
     {
         emit error(socket->error());
         return;
     }
 
+    //When socket is ready to be read, create a direct connection
     connect(socket,SIGNAL(readyRead()),this,SLOT(readyRead()),Qt::DirectConnection);
     connect(socket,SIGNAL(disconnected()),this,SLOT(disconnected()),Qt::DirectConnection);
 
+    //Print which client is connected
     qDebug() << socketDescriptor << " Client Connected";
 
+    //Call this function or thread will randomly stop
     exec();
 }
 
@@ -62,15 +69,13 @@ void CG_PlayerThread::run()
 ****************************************************************/
 void CG_PlayerThread::readyRead()
 {
+    //Read the socket and put it in a byte array
      QByteArray Data = socket->readLine();
 
-     if(Data.at(0) == ':')
+     //When the user presses enter...
+     if(Data.at(0) == 0x0d)
      {
-         qDebug() << socketDescriptor << " says: " << Data_Ary;
-         strcpy(Data_Ary, "");
-     }
-     else if(Data.at(0) == 0x0d)
-     {
+         //Print who is sending data and whatever data they are sending
          qDebug() << socketDescriptor << " says: " << Data_Ary;
          strcpy(Data_Ary, "");
      }
@@ -78,9 +83,6 @@ void CG_PlayerThread::readyRead()
      {
          strcat(Data_Ary, Data);
      }
-
-     //Only send the message when the user presses enter
-     //qDebug() << socketDescriptor << " says: " << Data_Ary;
 }
 
 /****************************************************************
