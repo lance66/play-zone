@@ -34,31 +34,80 @@ CG_Match::CG_Match(int whteID, int blckID, QTcpSocket *&whiteSocket, QTcpSocket 
 
     //Convert IDs into const char *'s to write to socket
     //Convert int to string
-    std::string str_whiteID = std::to_string(whiteID);
-    std::string str_blackID = std::to_string(blackID);
+    char const *whitePlayer = convertIDToCharConstPtr( whiteID );
+    char const *blackPlayer = convertIDToCharConstPtr( blackID );
 
-    //Convert string to const char *
-    char const *whitePlayer = str_whiteID.c_str();
-    char const *blackPlaya = str_blackID.c_str();
-
-    //Notify white player of match
-    whiteSocket->write("\nYou are playing with the white pieces against ");
-    whiteSocket->write(blackPlaya);
-    whiteSocket->write(".");
-    whiteSocket->flush();
-    whiteSocket->waitForBytesWritten(3000);
-
-    //Notify black player of match
-    blackSocket->write("\nYou are playing with the black pieces against ");
-    blackSocket->write(whitePlayer);
-    blackSocket->write(".");
-    blackSocket->flush();
-    blackSocket->waitForBytesWritten(3000);
+    //Notifies both players
+    notifyPlayersOfMatchStarting( whiteSocket, blackSocket, blackPlayer, whitePlayer );
 
     //Notify players they are in a match with opponent
     qDebug() << "Match between " << whiteID << " and " << blackID << " has been started.";
 }
 
+/****************************************************************
+*	Purpose:  Converts player id to a type of const char *
+*
+*     Entry:  Integer representing the players id.
+*
+*      Exit:  Converts the passed in player id to a type
+*             const char *.
+****************************************************************/
+char const * CG_Match::convertIDToCharConstPtr( int playerID )
+{
+    std::string str_playerID = std::to_string( playerID );
+
+    // convert string to const char *
+    return str_playerID.c_str();
+}
+
+/****************************************************************
+*	Purpose:  Notifies players that the match is about to start.
+*
+*     Entry:  character pointer for the black player, and a
+*             character pointer for the white player.
+*
+*      Exit:  Notifies both players that a match is starting.
+****************************************************************/
+void CG_Match::notifyPlayersOfMatchStarting( QTcpSocket *&whiteSocket, QTcpSocket *&blackSocket, char const * blackPlayer, char const * whitePlayer )
+{
+    //Notify white player of match
+    notifyPlayerOfMatchStarting( whiteSocket, blackPlayer, "white pieces" );
+
+    //Notify black player of match
+   notifyPlayerOfMatchStarting( blackSocket, whitePlayer, "black pieces" );
+}
+
+/****************************************************************
+*	Purpose:  Notifies the player passed in that the match is
+*             starting, and who they are playing against.
+*
+*     Entry:  Player socket, so that we can send the message
+*             Character pointer containing the opposing players,
+*             information.
+*
+*      Exit:  Notifies the white player who they are playing
+*             against, and that the match is starting.
+****************************************************************/
+void CG_Match::notifyPlayerOfMatchStarting(QTcpSocket *&playerSocket, char const * player, char const * msg)
+{
+    playerSocket->write("\nYou are playing with the ");
+    playerSocket->write(msg);
+    playerSocket->write(" against ");
+    playerSocket->write(player);
+    playerSocket->write(".");
+    playerSocket->flush();
+    playerSocket->waitForBytesWritten(3000);
+}
+
+/****************************************************************
+*	Purpose:  Starts the match between two players.
+*
+*     Entry:  The id's for both the white and black sockets, and
+*             the TcpSockets for both players, so that they may
+*             be able to transmit their moves to each other.
+*
+*      Exit:  Starts the match between two players.
+****************************************************************/
 void CG_Match::startMatch(int whiteID, int blackID, QTcpSocket *whiteSocket, QTcpSocket *blackSocket)
 {
     qDebug() << "Match between " << whiteID << " and " << blackID << "has been started.";
@@ -106,6 +155,13 @@ void CG_Match::startMatch(int whiteID, int blackID, QTcpSocket *whiteSocket, QTc
     }
 }
 
+/****************************************************************
+*	Purpose:  Destructor - closes the sockets of both players
+*
+*     Entry:  NA
+*
+*      Exit:  Closes the sockets for both players
+****************************************************************/
 CG_Match::~CG_Match()
 {
     //Close sockets
@@ -113,12 +169,28 @@ CG_Match::~CG_Match()
 //    blackSocket->close();
 }
 
+/****************************************************************
+*	Purpose:  Sets the player id's for both players involved
+*             in the match.
+*
+*     Entry:  Two id's of type int, one for each player.
+*
+*      Exit:  Sets up the id's for both players.
+****************************************************************/
 void CG_Match::setPlayerIDs(int whteID, int blckID)
 {
     this->whiteID = whteID;
     this->blackID = blckID;
 }
 
+/****************************************************************
+*	Purpose:  Sets the player sockets for both players involved
+*             in the match.
+*
+*     Entry:  Two QTcpSockets, one for each player.
+*
+*      Exit:  Sets up the socket's for both players.
+****************************************************************/
 void CG_Match::setPlayerSockets(QTcpSocket *whiteSocket, QTcpSocket *blackSocket)
 {
     this->whiteSocket = whiteSocket;
@@ -225,7 +297,7 @@ int CG_Match::getBlackID() const
 
 /****************************************************************
 *	Purpose:  Sets the tcp client to the address that was
-*               passed in.
+*             passed in.
 *
 *     Entry:  QTcpSocket pointer that will be assigned to the
 *             QTcpSocket member.

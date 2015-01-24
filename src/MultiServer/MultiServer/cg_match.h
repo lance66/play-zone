@@ -18,21 +18,46 @@
 *   CG_Match(int whiteID, int blackID)
 *
 * Methods:
-*   void sendMoveToServer(int whiteID, int blackID);
+*   void sendMoveToServer(int whiteID, int blackID)
 *       Sends move to the server.
 *   void setWhiteID(int whiteID)
-*       sets the id for white
+*       Sets the id for white.
 *   int getWhiteID()const
-*       gets the id for white
+*       Gets the id for white.
 *   void setBlackID(int blackID)
-*       sets the id for black
+*       Sets the id for black.
 *   int getBlackID()const
-*       gets the id for black
+*       Gets the id for black.
 *
-*   void setTcpSocket(QTcpSocket *socket);
-*   QTcpSocket * getTcpSocket() const;
+*   void setWhiteSocket(QMap<int, QTcpSocket *> socket, int whiteID)
+*       Sets up the white players socket.
+*   void setBlackSocket(QMap<int, QTcpSocket *> socket, int blackID)
+*       Sets up the black players socket.
+*   void setTcpSocket(QTcpSocket *socket)
+*       Sets up the tcp socket for the players.
+*   void setIsWhiteToMove(bool &isWhiteToMove)
+*       Helps determine who has the legal move.
+*   QTcpSocket * getTcpSocket() const
+*       Gets the players TCP socket.
+*   void setTcpSocket(QTcpSocket *socket)
+*       Sets up the players TCP socket.
+*   QTcpSocket * getTcpSocket() const
+*       Gets the players socket.
+*
+*   void readPlayersMove(QTcpSocket *playerSocket, QByteArray move)
+*       Reads the players move, and writes it to the socket.
+*   void setPlayerIDs(int whteID, int blckID)
+*       Sets up the player ids for the match.
+*   void setPlayerSockets(QTcpSocket *whiteSocket, QTcpSocket *blackSocket)
+*       Sets up the players socket.
+*   char const * convertIDToCharConstPtr(int playerID)
+*       Converts the id's from integers to character constant pointers.
+*   void notifyPlayersOfMatchStarting(QTcpSocket *&whiteSocket, QTcpSocket *&blackSocket, char const * blackPlayer, char const * whitePlayer)
+*       Notifies the players that the match is starting.
+*   void notifyPlayerOfMatchStarting(QTcpSocket *&playerSocket, char const * player, char const * msg)
+*       Notifies players of the the colored pieces they are playing as,
+*       and with who they are playing against.
 *************************************************************************/
-
 class CG_Match
 {
     public:
@@ -83,6 +108,9 @@ class CG_Match
         void readPlayersMove(QTcpSocket *playerSocket, QByteArray move);
         void setPlayerIDs(int whteID, int blckID);
         void setPlayerSockets(QTcpSocket *whiteSocket, QTcpSocket *blackSocket);
+        char const * convertIDToCharConstPtr(int playerID);
+        void notifyPlayersOfMatchStarting(QTcpSocket *&whiteSocket, QTcpSocket *&blackSocket, char const * blackPlayer, char const * whitePlayer);
+        void notifyPlayerOfMatchStarting(QTcpSocket *&playerSocket, char const * player, char const * msg);
 };
 
 #endif // CG_MATCH_H
