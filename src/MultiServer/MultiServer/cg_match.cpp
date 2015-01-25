@@ -96,8 +96,14 @@ void CG_Match::startMatch(int whiteID, int blackID, QTcpSocket *whiteSocket, QTc
         blackSocket->flush();
         blackSocket->waitForBytesWritten(3000);
 
-        //Wait for white to enter move
-        whiteSocket->waitForReadyRead();
+        QByteArray whiteMove;
+        //Wait for black to enter move
+        do
+        {
+            whiteSocket->waitForReadyRead();
+            whiteMove = whiteSocket->readAll();
+        }
+        while(whiteMove.at(0) != 0x0d);
 
         //Write move to black socket
         blackSocket->write("\r\n");
@@ -118,8 +124,14 @@ void CG_Match::startMatch(int whiteID, int blackID, QTcpSocket *whiteSocket, QTc
         whiteSocket->flush();
         whiteSocket->waitForBytesWritten(3000);
 
+        QByteArray blackMove;
         //Wait for black to enter move
-        blackSocket->waitForReadyRead();
+        do
+        {
+            blackSocket->waitForReadyRead();
+            blackMove = blackSocket->readLine();
+        }
+        while(blackMove.at(0) != 0x0d);
 
         //Write move to white socket
         whiteSocket->write("\r\n");
