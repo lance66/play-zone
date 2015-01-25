@@ -17,8 +17,10 @@ CG_PlayerThread::CG_PlayerThread(qintptr ID, QObject *parent) :
 
 /****************************************************************
  *  Purpose:  Destructor
- *    Entry:
- *     Exit:
+ *
+ *    Entry:  NA
+ *
+ *     Exit:  Removes the instance of the invoking player thread.
 ****************************************************************/
 CG_PlayerThread::~CG_PlayerThread()
 {
@@ -103,6 +105,13 @@ void CG_PlayerThread::disconnected()
     exit(0);
 }
 
+/****************************************************************
+*   Purpose: Returns the player's socket.
+*
+*    Entry:  NA
+*
+*     Exit:  Players socket is returned.
+****************************************************************/
 QTcpSocket *CG_PlayerThread::getSocket()
 {
     return socket;

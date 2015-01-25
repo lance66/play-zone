@@ -176,10 +176,10 @@ void CG_Server::clientDisconnected()
     //If client is not null remove client
     if (client != nullptr)
     {
-        //removeAllClientConnections(client);
+        removeAllClientConnections(client);
     }
-   // else
-        //clientConnections.remove()
+    else
+        clientConnections.remove(static_cast<int>(client->socketDescriptor()));
 }
 
 /****************************************************************
@@ -195,11 +195,11 @@ void CG_Server::clientDisconnected()
 void CG_Server::removeAllClientConnections(QTcpSocket *client)
 {
     //Remove from list of connections
-    //clientConnections.removeAll(client);
+    clientConnections.remove(static_cast<int>(client->socketDescriptor()));
 
     //Delete client
-   // client->deleteLater();
-    //qDebug() << "It worked!  Client disconnected!";
+    client->deleteLater();
+    qDebug() << "It worked!  Client disconnected!";
 }
 
 /****************************************************************
