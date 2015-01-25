@@ -73,16 +73,17 @@ void CG_PlayerThread::readyRead()
      QByteArray Data = socket->readLine();
 
      //When the user presses enter...
-     if(Data.at(0) == 0x0d)
-     {
-         //Print who is sending data and whatever data they are sending
-         qDebug() << socketDescriptor << " says: " << Data_Ary;
-         strcpy(Data_Ary, "");
-     }
-     else if(strlen(Data_Ary) < 9)
-     {
-         strcat(Data_Ary, Data);
-     }
+     socket->write(Data);
+//     if(Data.at(0) == 0x0d)
+//     {
+//         //Print who is sending data and whatever data they are sending
+//         qDebug() << socketDescriptor << " says: " << Data_Ary;
+//         strcpy(Data_Ary, "");
+//     }
+//     else if(strlen(Data_Ary) < 9)
+//     {
+//         strcat(Data_Ary, Data);
+//     }
 }
 
 /****************************************************************

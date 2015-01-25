@@ -96,20 +96,24 @@ void CG_Match::startMatch(int whiteID, int blackID, QTcpSocket *whiteSocket, QTc
         blackSocket->flush();
         blackSocket->waitForBytesWritten(3000);
 
+        QByteArray temp;
         QByteArray whiteMove;
-        //Wait for black to enter move
+
+        //Wait for white to enter move
         do
         {
             whiteSocket->waitForReadyRead();
-            whiteMove = whiteSocket->readAll();
+            temp = whiteSocket->readAll();
+            whiteMove += temp;
         }
-        while(whiteMove.at(0) != 0x0d);
+
+        while(temp.at(0) != 0x0d);
 
         //Write move to black socket
         blackSocket->write("\r\n");
         blackSocket->write(whitePlayer);
         blackSocket->write(" moves: ");
-        blackSocket->write(whiteSocket->readAll());
+        blackSocket->write(whiteMove);
 
         //Switch sides
         isWhiteTurn = !isWhiteTurn;
@@ -124,20 +128,22 @@ void CG_Match::startMatch(int whiteID, int blackID, QTcpSocket *whiteSocket, QTc
         whiteSocket->flush();
         whiteSocket->waitForBytesWritten(3000);
 
+        QByteArray temp1;
         QByteArray blackMove;
         //Wait for black to enter move
         do
         {
             blackSocket->waitForReadyRead();
-            blackMove = blackSocket->readLine();
+            temp1 = blackSocket->readLine();
+            blackMove += temp1;
         }
-        while(blackMove.at(0) != 0x0d);
+        while(temp1.at(0) != 0x0d);
 
         //Write move to white socket
         whiteSocket->write("\r\n");
         whiteSocket->write(blackPlayer);
         whiteSocket->write(" moves: ");
-        whiteSocket->write(blackSocket->readAll());
+        whiteSocket->write(blackMove);
 
         //Switch turn
         isWhiteTurn = !isWhiteTurn;
