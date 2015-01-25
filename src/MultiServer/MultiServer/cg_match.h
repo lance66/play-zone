@@ -105,12 +105,13 @@ class CG_Match
         //int eloWon
         //int eloLost
 
+        void promptPlayerOnMove( QTcpSocket *playerSocket, char const * promptMessage );
         void readPlayersMove(QTcpSocket *playerSocket, QByteArray move);
         void setPlayerIDs(int whteID, int blckID);
         void setPlayerSockets(QTcpSocket *whiteSocket, QTcpSocket *blackSocket);
-        char const * convertIDToCharConstPtr(int playerID);
-        void notifyPlayersOfMatchStarting(QTcpSocket *&whiteSocket, QTcpSocket *&blackSocket, char const * blackPlayer, char const * whitePlayer);
-        void notifyPlayerOfMatchStarting(QTcpSocket *&playerSocket, char const * player, char const * msg);
+        void convertIDToCharConstPtr(const char *&, const char *&, int, int);
+        void notifyPlayersOfMatchStarting(QTcpSocket *&whiteSocket, QTcpSocket *&blackSocket, const char * blackPlayer, const char * whitePlayer);
+        void notifyPlayerOfMatchStarting(QTcpSocket *&playerSocket, const char * player, const char * msg);
 };
 
 #endif // CG_MATCH_H
