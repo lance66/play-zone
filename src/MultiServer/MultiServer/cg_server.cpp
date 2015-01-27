@@ -63,11 +63,12 @@ void CG_Server::incomingConnection(qintptr socketDescriptor)
     //Set socket descriptor to socket descriptor it was assigned
     chessPlayer->setSocketDescriptor(socketDescriptor);
 
-    //When player disconnects, call client disconnected
-    connect(chessPlayer, SIGNAL(disconnected()), this, SLOT(clientDisconnected()));
-
     //Add user to list of client connections
     addPlayerConnection(socketDescriptor, chessPlayer);
+
+    //When player disconnects, call client disconnected
+    connect(clientConnections[socketDescriptor], SIGNAL(disconnected()), this, SLOT(clientDisconnected()));
+    connect(clientConnections[socketDescriptor], SIGNAL(disconnected()), this, SLOT(deleteLater()));
 
     //Print which socket descriptor is connecting
     qDebug() << socketDescriptor << " Connecting...";
@@ -86,7 +87,9 @@ void CG_Server::incomingConnection(qintptr socketDescriptor)
 
     //If two players in queue, pair them and initiate match
     if(oneMinuteQueue.length() >= 2)
+    {
         startOneMinuteMatch();
+    }
 }
 
 /****************************************************************
