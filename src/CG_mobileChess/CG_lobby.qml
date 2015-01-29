@@ -31,12 +31,13 @@ Item
 
     signal goBack
 
-    // The individual control height is 1/8 of the total height
+    // The individual control height is 1/8 of the total height.
     function getControlHeight()
     {
         return background.height / 8
     }
 
+    // The individual control width is 90% of the smallest orientation.
     function getControlWidth()
     {
         return getSmallestOrientation() * 0.9

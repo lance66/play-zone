@@ -3,9 +3,6 @@
         <file>../../bin/chessgames.db</file>
         <file>../../img/cg_logo_hires_app.png</file>
         <file>main.qml</file>
-        <file>CG_lobby.qml</file>
-        <file>CG_login.qml</file>
-        <file>Clock.qml</file>
         <file>images/center.png</file>
         <file>images/cg_logo_hires_app.png</file>
         <file>images/clock.png</file>
@@ -14,5 +11,8 @@
         <file>images/minute.png</file>
         <file>images/second.png</file>
         <file>deployment.pri</file>
+        <file>CG_lobby.qml</file>
+        <file>CG_login.qml</file>
+        <file>Clock.qml</file>
     </qresource>
 </RCC>

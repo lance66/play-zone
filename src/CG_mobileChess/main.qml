@@ -15,7 +15,6 @@ import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.1
 import QtQuick.Window 2.0
 import QtGraphicalEffects 1.0
-import "."
 
 ApplicationWindow {
     id: background
@@ -24,21 +23,6 @@ ApplicationWindow {
     height: 600
     title: qsTr("Mobile Chess")
     color: "#448ed3"
-
-    function getBackgroundWidth()
-    {
-        return background.width
-    }
-
-    function getBackgroundHeight()
-    {
-        return background.height
-    }
-
-    function getSmallestOrientation()
-    {
-        return background.width < background.height ? background.width : background.height
-    }
 
     CG_login
     {
@@ -55,5 +39,49 @@ ApplicationWindow {
         onGoBack: { lobby.visible = false
                     login.visible = true }
         visible: false
+    }
+
+    /**************************************************************
+    *	  Purpose:  Get the background width of the app for all
+    *               that need access to it.
+    *
+    *     Entry:    User has opened the application.
+    *
+    *     Exit:     Returns the width of the application.
+    ****************************************************************/
+
+    function getBackgroundWidth()
+    {
+        return background.width
+    }
+
+    /**************************************************************
+    *	  Purpose:  Get the background height of the app for all
+    *               that need access to it.
+    *
+    *     Entry:    User has opened the application.
+    *
+    *     Exit:     Returns the height of the application.
+    ****************************************************************/
+
+    function getBackgroundHeight()
+    {
+        return background.height
+    }
+
+    /**************************************************************
+    *	  Purpose:  Get the smallest orientation for scalability
+    *               purposes, whether it's the portrait or landscape
+    *               orientation.
+    *
+    *     Entry:    User has opened the application.
+    *
+    *     Exit:     Returns the smallest orientation of the
+    *               application.
+    ****************************************************************/
+
+    function getSmallestOrientation()
+    {
+        return background.width < background.height ? background.width : background.height
     }
 }

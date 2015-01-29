@@ -18,7 +18,6 @@ import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
 import QtQuick.Window 2.0
 import QtGraphicalEffects 1.0
-import "."
 
 Item
 {
@@ -42,9 +41,10 @@ Item
         return background.width > background.height ? background.height * 0.0833 : background.height / 15
     }
 
+    // The individual control width is 90% of the smallest orientation.
     function getControlWidth()
     {
-        return background.width < background.height ? (background.width * 0.9) : (background.height * 0.9)
+        return getSmallestOrientation() * 0.9
     }
 
     Column
@@ -75,6 +75,7 @@ Item
         {
             id: tf_username
             placeholderText: "Chessgames username"
+            style: cgTextFieldStyle
 
             // For testing purposes I inputted Trudodyr automatically
             text: "Trudodyr"
@@ -82,11 +83,11 @@ Item
             // Adjusts the font size for scalability
             font.pixelSize: getSmallestOrientation() * 0.03
 
-            style: cgTextFieldStyle
             width: getControlWidth()
             height: getControlHeight()
-            onTextChanged: parent.setUsernameValidator()
 
+            // When the text for the username is changed validate it
+            onTextChanged: parent.setUsernameValidator()
         }
 
         TextField
@@ -105,6 +106,7 @@ Item
             width: getControlWidth()
             height: getControlHeight()
 
+            // When the text for the password is changed validate it
             onTextChanged: parent.setPasswordValidator()
         }
 
@@ -122,6 +124,7 @@ Item
             width: getControlWidth()
             height: getControlHeight()
 
+            // When the text for password confirmation is changed validate it
             onTextChanged: parent.setConfirmPasswordValidator()
         }
 
@@ -138,6 +141,7 @@ Item
             width: getControlWidth()
             height: getControlHeight()
 
+            // When the text for email is changed validate it
             onTextChanged: parent.setEmailValidator()
         }
 
@@ -160,6 +164,7 @@ Item
                 tf_confirmPassword.visible = false
                 tf_emailAddress.visible = false
 
+                // If the user is logging in reset the text color
                 tf_username.textColor = "#000000"
                 tf_password.textColor = "#000000"
             }
@@ -177,10 +182,12 @@ Item
             {
                 txt_isOpen.text = ""
 
+                // If the user does not exist allow the user to create the user.
                 if (!User.getUser(tf_username.text))
                 {
                     if (tf_confirmPassword.visible == true)
                     {
+                        // Check the validators before adding a new user.
                         if (parent.setValidators())
                         {
                             if (User.addUser(tf_username.text, tf_password.text, tf_emailAddress.text))
@@ -189,6 +196,9 @@ Item
                     }
                     else
                     {
+                        /* The first time the register button is clicked it should
+                           reveal the password confirmation and email address fields.*/
+
                         tf_confirmPassword.visible = true
                         tf_emailAddress.visible = true
                         parent.setValidators()
@@ -200,7 +210,6 @@ Item
 
             width: getControlWidth()
             height: getControlHeight()
-
         }
 
         Component
@@ -249,6 +258,15 @@ Item
             }
         }
 
+        /**************************************************************
+        *	  Purpose:  Ensures the control fields pass all the
+        *               validators.
+        *
+        *     Entry:    User has clicked register.
+        *
+        *     Exit:     Returns whether the fields are valid or not.
+        ****************************************************************/
+
         function setValidators()
         {
             return setUsernameValidator() && setPasswordValidator() && setConfirmPasswordValidator() && setEmailValidator()
@@ -257,9 +275,9 @@ Item
         /**************************************************************
         *	  Purpose:  Ensures the username is valid when registering.
         *
-        *     Entry:  User has clicked register.
+        *     Entry:    User has clicked register.
         *
-        *     Exit:  Displays whether the username is valid or not.
+        *     Exit:     Displays whether the username is valid or not.
         ****************************************************************/
 
         function setUsernameValidator()
@@ -287,9 +305,9 @@ Item
         /**************************************************************
         *	  Purpose:  Ensures the password is valid when registering.
         *
-        *     Entry:  User has clicked register.
+        *     Entry:    User has clicked register.
         *
-        *     Exit:  Displays whether the password is valid or not.
+        *     Exit:     Displays whether the password is valid or not.
         ****************************************************************/
 
         function setPasswordValidator()
@@ -317,9 +335,9 @@ Item
         /*****************************************************************
         *	  Purpose:  Ensures the password is the same when registering.
         *
-        *     Entry:  User has clicked register.
+        *     Entry:    User has clicked register.
         *
-        *     Exit:  Displays whether the confirm password is the same.
+        *     Exit:     Displays whether the confirm password is the same.
         *******************************************************************/
 
         function setConfirmPasswordValidator()
@@ -347,9 +365,9 @@ Item
         /**************************************************************
         *	  Purpose:  Ensures the email is valid when registering.
         *
-        *     Entry:  User has clicked register.
+        *     Entry:    User has clicked register.
         *
-        *     Exit:  Displays whether the email is valid or not.
+        *     Exit:     Displays whether the email is valid or not.
         ****************************************************************/
 
         function setEmailValidator()
