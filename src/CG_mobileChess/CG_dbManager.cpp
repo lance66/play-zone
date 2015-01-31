@@ -12,7 +12,7 @@
 
 CG_dbManager::CG_dbManager(QString str_connection)
 {
-    QFile dfile("assets:/db/chessgames.db");
+    QFile dfile("assets:/chessgames.db");
 
     if (dfile.exists())
     {
