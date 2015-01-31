@@ -12,7 +12,6 @@
 *.exe
 *.pdb
 *.ilk
-*.manifest
 *.rc
 *.res
 *.tmp

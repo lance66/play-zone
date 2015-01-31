@@ -6,6 +6,7 @@
 #include <QObject>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
+#include <QFile>
 #include <QCryptographicHash>  // Needed for encrypting in SHA256
 
 /******************************************************************************

@@ -15,6 +15,16 @@ QML_IMPORT_PATH =
 
 include(deployment.pri)
 
+android {
+folder_01.source = database
+folder_01.target = .
+DEPLOYMENTFOLDERS = folder_01
+}
+
+deployment.files += chessgames.db
+deployment.path = /assets
+INSTALLS += deployment
+
 TARGET = CG_mobileChess
 
 SOURCES += main.cpp\
