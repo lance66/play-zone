@@ -66,7 +66,7 @@ class CG_Match
         CG_Match(int whiteID, int blackID, QTcpSocket *&whiteSocket, QTcpSocket *&blackSocket);
         ~CG_Match();
 
-        void sendMoveToServer(int whiteID, int blackID);
+        void sendMoveToServer();
         void setWhiteID(int whiteID);
         int getWhiteID() const;
         void setBlackID(int blackID);
@@ -79,13 +79,23 @@ class CG_Match
 
         void startMatch(int whiteID, int blackID, QTcpSocket *whiteSocket, QTcpSocket *blackSocket);
 
+        void notifyPlayerOfOpponent(QTcpSocket * player, const char * playerColor,
+                                    const char * opponent);
+        void promptPlayerMove(QTcpSocket * player);
+        void promptPlayerWait(QTcpSocket * player);
+        QByteArray readPlayerMove(QTcpSocket * player);
+        void writePlayerMoveToOpponent(const char * player, QTcpSocket * opponent,
+                                       QByteArray playerMove);
+
     private:
-        int whiteID;
-        int blackID;
+        int whiteID; //Is it possible to have a CG_Match hold PlayerThreads for each person,
+        int blackID; //rather than just hold their socketDescriptor?
         bool isWhiteToMove;
         bool isMatchOver;
         QTcpSocket *whiteSocket;
         QTcpSocket *blackSocket;
+        char * whitePlayer;
+        char * blackPlayer;
         QTcpSocket *socket;
         int matchID;
         int winner;
@@ -109,7 +119,7 @@ class CG_Match
         void readPlayersMove(QTcpSocket *playerSocket, QByteArray move);
         void setPlayerIDs(int whteID, int blckID);
         void setPlayerSockets(QTcpSocket *whiteSocket, QTcpSocket *blackSocket);
-        void convertIDToCharConstPtr(const char *&, const char *&, int, int);
+        void convertIDToCharConstPtr(int, int);
         void notifyPlayersOfMatchStarting(QTcpSocket *&whiteSocket, QTcpSocket *&blackSocket, const char * blackPlayer, const char * whitePlayer);
         void notifyPlayerOfMatchStarting(QTcpSocket *&playerSocket, const char * player, const char * msg);
 };

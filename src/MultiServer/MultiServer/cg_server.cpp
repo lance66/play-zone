@@ -157,6 +157,8 @@ void CG_Server::clientDisconnected()
     if (client != nullptr)
     {
         removeAllClientConnections(client);
+        //remove from queue
+        //if in match, destroy match
     }
     else
         clientConnections.remove(static_cast<int>(client->socketDescriptor()));

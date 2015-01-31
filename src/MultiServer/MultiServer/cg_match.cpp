@@ -9,7 +9,9 @@
 *      Exit:  Data members are initialized.
 ****************************************************************/
 CG_Match::CG_Match()
-    :whiteID(777), blackID(666)
+    :whiteID(777), blackID(666), isWhiteToMove(true),
+     isMatchOver(false), whiteSocket(nullptr), blackSocket(nullptr),
+     socket(nullptr), matchID(0), winner(0), loser(0)
 {
     qDebug() << "Default CG_Match Constructor Called.";
 }
@@ -24,21 +26,14 @@ CG_Match::CG_Match()
 *      Exit:  Data members are initialized.
 ****************************************************************/
 CG_Match::CG_Match(int whteID, int blckID, QTcpSocket *&whiteSocket, QTcpSocket *&blackSocket)
-    :whiteID(777), blackID(666)
+    :whiteID(whteID), blackID(blckID), whiteSocket(whiteSocket),
+     blackSocket(blackSocket), isWhiteToMove(true), isMatchOver(false),
+     socket(nullptr), matchID(0), winner(0), loser(0), whitePlayer(nullptr),
+     blackPlayer(nullptr)
 {
-    //Set data members to arguments
-    setPlayerIDs( whteID, blckID );
-    setPlayerSockets( whiteSocket, blackSocket );
-
-    isWhiteToMove = false;
-
     //Convert IDs into const char *'s to write to socket
     //Convert int to string
-    std::string str_whiteID = std::to_string( whiteID );
-    std::string str_blackID = std::to_string( blackID );
-
-    char const * whitePlayer = str_whiteID.c_str();
-    char const * blackPlayer = str_blackID.c_str();
+    convertIDToCharConstPtr(whiteID, blackID);
 
     //Notifies both players
     notifyPlayersOfMatchStarting( whiteSocket, blackSocket, blackPlayer, whitePlayer );
@@ -58,92 +53,47 @@ CG_Match::CG_Match(int whteID, int blckID, QTcpSocket *&whiteSocket, QTcpSocket 
 ****************************************************************/
 void CG_Match::startMatch(int whiteID, int blackID, QTcpSocket *whiteSocket, QTcpSocket *blackSocket)
 {
+    QByteArray playerMove;
     qDebug() << "Match between " << whiteID << " and " << blackID << "has been started.";
 
-    std::string str_whiteID = std::to_string( whiteID );
-    std::string str_blackID = std::to_string( blackID );
-
-    char const * whitePlayer = str_whiteID.c_str();
-    char const * blackPlayer = str_blackID.c_str();
-
     //Notify white player of match
-    whiteSocket->write("\r\nYou are playing with the white pieces against ");
-    whiteSocket->write(blackPlayer);
-    whiteSocket->write(".");
-    whiteSocket->flush();
-    whiteSocket->waitForBytesWritten(3000);
+    notifyPlayerOfOpponent(whiteSocket, "white", blackPlayer);
 
     //Notify black player of match
-    blackSocket->write("\r\nYou are playing with the black pieces against ");
-    blackSocket->write(whitePlayer);
-    blackSocket->write(".");
-    blackSocket->flush();
-    blackSocket->waitForBytesWritten(3000);
+    notifyPlayerOfOpponent(blackSocket, "black", whitePlayer);
 
-    //Match starts
+    //Game starts
     bool gameOver = false;
     bool isWhiteTurn = true;
 
-    while (gameOver != true)
+    while (!gameOver)
     {
         //Prompt white player to move
-        whiteSocket->write("\r\n\r\nEnter move: ");
-        whiteSocket->flush();
-        whiteSocket->waitForBytesWritten(3000);
+        promptPlayerMove(whiteSocket);
 
         //Prompt to black player to wait
-        blackSocket->write("\r\n\r\nWaiting for opponent to move...");
-        blackSocket->flush();
-        blackSocket->waitForBytesWritten(3000);
+        promptPlayerWait(blackSocket);
 
-        QByteArray temp;
-        QByteArray whiteMove;
+        //Calls readPlayerMove to get the white player's move.
+        playerMove = readPlayerMove(whiteSocket);
 
-        //Wait for white to enter move
-        do
-        {
-            whiteSocket->waitForReadyRead();
-            temp = whiteSocket->readAll();
-            whiteMove += temp;
-        }
-        while(temp == nullptr || temp.at(0) != 0x0d);
-
-        //Write move to black socket
-        blackSocket->write("\r\n");
-        blackSocket->write(whitePlayer);
-        blackSocket->write(" moves: ");
-        blackSocket->write(whiteMove);
+        //Write white player's move to black socket
+        writePlayerMoveToOpponent(whitePlayer, blackSocket, playerMove);
 
         //Switch sides
         isWhiteTurn = !isWhiteTurn;
 
         //Prompt black player to move
-        blackSocket->write("\r\n\r\nEnter move: ");
-        blackSocket->flush();
-        blackSocket->waitForBytesWritten(3000);
+        promptPlayerMove(blackSocket);
 
         //Prompt to white player to wait
-        whiteSocket->write("\r\n\r\nWaiting for opponent to move...");
-        whiteSocket->flush();
-        whiteSocket->waitForBytesWritten(3000);
+        promptPlayerWait(whiteSocket);
 
-        QByteArray temp1;
-        QByteArray blackMove;
+        //Calls readPlayerMove to get the black player's move.
+        playerMove = readPlayerMove(blackSocket);
 
-        //Wait for black to enter move
-        do
-        {
-            blackSocket->waitForReadyRead();
-            temp1 = blackSocket->readLine();
-            blackMove += temp1;
-        }
-        while(temp1 == nullptr || temp1.at(0) != 0x0d);
-
-        //Write move to white socket
-        whiteSocket->write("\r\n");
-        whiteSocket->write(blackPlayer);
-        whiteSocket->write(" moves: ");
-        whiteSocket->write(blackMove);
+        //Write black player's move to white socket
+        writePlayerMoveToOpponent(blackPlayer, whiteSocket, playerMove);
 
         //Switch turn
         isWhiteTurn = !isWhiteTurn;
@@ -158,13 +108,13 @@ void CG_Match::startMatch(int whiteID, int blackID, QTcpSocket *whiteSocket, QTc
 *      Exit:  Converts the passed in player id to a type
 *             const char *.
 ****************************************************************/
-void CG_Match::convertIDToCharConstPtr( const char *& whitePlayer, const char *& blackPlayer, int whiteID, int blackID )
+void CG_Match::convertIDToCharConstPtr(int whiteID, int blackID )
 {
     std::string str_whiteID = std::to_string( whiteID );
     std::string str_blackID = std::to_string( blackID );
 
-    whitePlayer = str_whiteID.c_str();
-    blackPlayer = str_blackID.c_str();
+    whitePlayer = const_cast<char *>(str_whiteID.c_str());
+    blackPlayer = const_cast<char *>(str_blackID.c_str());
 }
 
 /****************************************************************
@@ -257,7 +207,7 @@ void CG_Match::setPlayerSockets(QTcpSocket *whiteSocket, QTcpSocket *blackSocket
 *      Exit:  Populates the QByteArray with the number of bytes
 *             that were read
 ****************************************************************/
-void CG_Match::sendMoveToServer(int whiteID, int blackID)
+void CG_Match::sendMoveToServer()
 {
     //Switch turns
     setIsWhiteToMove(isWhiteToMove);
@@ -414,3 +364,56 @@ void CG_Match::setBlackSocket(QMap<int, QTcpSocket *> socket, int blackID)
 //{
 //
 //}
+
+void CG_Match::notifyPlayerOfOpponent(QTcpSocket * player, const char * playerColor,
+                                      const char * opponent)
+{
+    player->write("\r\nYou are playing the ");
+    player->write(playerColor);
+    player->write(" pieces against ");
+    player->write(opponent);
+    player->write(".");
+    player->flush();
+    player->waitForBytesWritten(3000);
+}
+
+void CG_Match::promptPlayerMove(QTcpSocket * player)
+{
+    player->write("\r\n\r\nEnter move: ");
+    player->flush();
+    player->waitForBytesWritten(3000);
+}
+
+void CG_Match::promptPlayerWait(QTcpSocket *player)
+{
+    player->write("\r\n\r\nWaiting for opponent to move...");
+    player->flush();
+    player->waitForBytesWritten(3000);
+}
+
+QByteArray CG_Match::readPlayerMove(QTcpSocket * player)
+{
+    QByteArray temp;
+    QByteArray playerMove;
+
+    //Wait for white to enter move
+    do
+    {
+        player->waitForReadyRead();
+        temp = player->readAll();
+        playerMove += temp;
+    }
+    while(temp == nullptr || temp.at(0) != 0x0d);
+
+    return playerMove;
+}
+
+void CG_Match::writePlayerMoveToOpponent(const char * player,
+                                         QTcpSocket* opponent,
+                                         QByteArray playerMove)
+{
+    opponent->write("\r\n");
+    opponent->write(player);
+    opponent->write(" moves: ");
+    opponent->write(playerMove);
+}
