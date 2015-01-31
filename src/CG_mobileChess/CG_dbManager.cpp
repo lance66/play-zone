@@ -12,17 +12,17 @@
 
 CG_dbManager::CG_dbManager(QString str_connection)
 {
-    QFile dfile("assets:/chessgames.db");
+    QFile dfile("assets:/" + str_connection);
 
     if (dfile.exists())
     {
-        dfile.copy("./chessgames.db");
-        QFile::setPermissions("./chessgames.db", QFile::WriteOwner | QFile::ReadOwner);
+        dfile.copy("./" + str_connection);
+        QFile::setPermissions("./" + str_connection, QFile::WriteOwner | QFile::ReadOwner);
     }
 
     //Connect to database
     db_login = QSqlDatabase::addDatabase("QSQLITE");
-    db_login.setDatabaseName("./chessgames.db");
+    db_login.setDatabaseName("./" + str_connection);
 }
 
 /**************************************************************
