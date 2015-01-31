@@ -66,10 +66,6 @@ void CG_Server::incomingConnection(qintptr socketDescriptor)
     //Add user to list of client connections
     addPlayerConnection(socketDescriptor, chessPlayer);
 
-    //When player disconnects, call client disconnected
-    connect(clientConnections[socketDescriptor], SIGNAL(disconnected()), this, SLOT(clientDisconnected()));
-    connect(clientConnections[socketDescriptor], SIGNAL(disconnected()), this, SLOT(deleteLater()));
-
     //Print which socket descriptor is connecting
     qDebug() << socketDescriptor << " Connecting...";
 
@@ -79,11 +75,17 @@ void CG_Server::incomingConnection(qintptr socketDescriptor)
     //Socket descriptors are int pointers...so they need to be converted to an int
     int ID = static_cast<int>(thread->getSocketDescriptor());
 
+    //When player disconnects, call client disconnected
+    connect(chessPlayer, SIGNAL(disconnected()), this, SLOT(clientDisconnected()));
+    connect(chessPlayer, SIGNAL(disconnected()), this, SLOT(deleteLater()));
+    connect(thread, SIGNAL(finished()),this, SLOT(clientDisconnected()));
+    connect(thread, SIGNAL(finished()),thread, SLOT(deleteLater()));
+
+    //Start thread
+    thread->start();
+
     //Add thread to queue
     oneMinuteQueue.enqueue(ID);
-
-    //Make sure thread gets disconnected and deleted when thread is finished
-    configureThreadSignalsAndSlots(thread);
 
     //If two players in queue, pair them and initiate match
     if(oneMinuteQueue.length() >= 2)

@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: P:\\Applications\\GitHub\\play-zone\\src\\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\\android-build\\src\\org\\kde\\necessitas\\ministro\\IMinistro.aidl
+ * Original file: C:\\Users\\admin\\Documents\\GitHub\\play-zone\\src\\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\\android-build\\src\\org\\kde\\necessitas\\ministro\\IMinistro.aidl
  */
 package org.kde.necessitas.ministro;
 public interface IMinistro extends android.os.IInterface
