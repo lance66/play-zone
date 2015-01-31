@@ -36,13 +36,9 @@
 *       Starts a one minute match, when there are two or more players
 *   void removeAllClientConnections(QTcpSocket *client)
 *       Removes all clients from the connection's list.
-*   void configureThreadSignalsAndSlots(MyThread * thread)
-*       Configures the signals and slots for a thread.
 *   void writeSocketDescriptorToSocket(QTcpSocket *client, qintptr socketDescriptor)
 *       Follows a series of conversions to write socketDescriptor
 *       to the socket.
-*   void delaySocket(QTcpSocket * socket, int timeToDelay)
-*       Waits for bytes to write to client.
 *************************************************************************/
 class CG_Server : public QTcpServer
 {
@@ -94,9 +90,7 @@ class CG_Server : public QTcpServer
         void addPlayerConnection(int socketDescriptor, QTcpSocket *chessPlayer);
         void startOneMinuteMatch();
         void removeAllClientConnections(QTcpSocket *client);
-        void configureThreadSignalsAndSlots(CG_PlayerThread * thread);
         void writeSocketDescriptorToSocket(QTcpSocket *client, qintptr socketDescriptor);
-        void delaySocket(QTcpSocket * socket, int timeToDelay);
         void sendMove(QTcpSocket *client, qintptr socketDescriptor);
 };
 
