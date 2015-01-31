@@ -388,6 +388,8 @@ Item
                     tf_emailAddress.font.bold = true
                 }
             }
+
+            return valid_email
         }
     }
 }
