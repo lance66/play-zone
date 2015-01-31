@@ -95,31 +95,6 @@ void CG_Server::incomingConnection(qintptr socketDescriptor)
 }
 
 /****************************************************************
- *  Purpose:  Configures the signals and slots for threads of
- *            type MyThread, so that when the thread finishes
- *            we may disconnect from the client, and delete the
- *            thread. After Signals and slots are set up, the
- *            thread is started.
- *
- *    Entry:  A thread of type MyThread, so that the threads,
- *            signals and slots can be configured, and started.
- *
- *     Exot:  Configures the signals to their designated slots,
- *            and thread is started.
-****************************************************************/
-void CG_Server::configureThreadSignalsAndSlots(CG_PlayerThread * thread)
-{
-    //When a thread finishes, disconnect the client
-    connect(thread, SIGNAL(finished()),this, SLOT(clientDisconnected()));
-
-    //When a thread finishes, delete the thread at the garbage collector's convenience
-    connect(thread, SIGNAL(finished()),thread, SLOT(deleteLater()));
-
-    //Start thread
-    thread->start();
-}
-
-/****************************************************************
 *   Purpose:  Adds user to the list of client connections, and
 *             prints the number of players online, so tha
 *
@@ -258,20 +233,6 @@ void CG_Server::writeSocketDescriptorToSocket(QTcpSocket *client, qintptr socket
     client->flush();
 
     delaySocket(client, 3000);
-}
-
-/****************************************************************
- *  Purpose:  Delays the socket, in case of lag.
- *
- *    Entry:  Socket that will be delayed, and the time to delay
- *            the socket, measured in milliseconds.
- *
- *     Exit:  Delays the socket by the specified time.
-****************************************************************/
-void CG_Server::delaySocket(QTcpSocket *socket, int timeToDelay)
-{
-    //In case of lag, wait for bytes to write to client
-    socket->waitForBytesWritten(timeToDelay);
 }
 
 void CG_Server::saveUserInfoToDatabase()
