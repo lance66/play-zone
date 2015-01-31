@@ -231,8 +231,7 @@ void CG_Server::writeSocketDescriptorToSocket(QTcpSocket *client, qintptr socket
     client->write(pchar);
     client->write("! ");
     client->flush();
-
-    delaySocket(client, 3000);
+    client->waitForBytesWritten(3000);
 }
 
 void CG_Server::saveUserInfoToDatabase()
