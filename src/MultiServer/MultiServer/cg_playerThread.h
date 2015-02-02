@@ -37,9 +37,8 @@ public:
     ~CG_PlayerThread();
 
     void run();
-    qintptr getSocketDescriptor();
+    qintptr getSocketDescriptor() const;
     QTcpSocket *getSocket();
-    char * Data_Ary;
 
 signals:
     void error(QTcpSocket::SocketError socketerror);

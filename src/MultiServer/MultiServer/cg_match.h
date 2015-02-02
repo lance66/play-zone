@@ -18,8 +18,6 @@
 *   CG_Match(int whiteID, int blackID)
 *
 * Methods:
-*   void sendMoveToServer(int whiteID, int blackID)
-*       Sends move to the server.
 *   void setWhiteID(int whiteID)
 *       Sets the id for white.
 *   int getWhiteID()const
@@ -66,7 +64,6 @@ class CG_Match
         CG_Match(int whiteID, int blackID, QTcpSocket *&whiteSocket, QTcpSocket *&blackSocket);
         ~CG_Match();
 
-        void sendMoveToServer();
         void setWhiteID(int whiteID);
         int getWhiteID() const;
         void setBlackID(int blackID);
@@ -80,7 +77,7 @@ class CG_Match
         void startMatch(int whiteID, int blackID, QTcpSocket *whiteSocket, QTcpSocket *blackSocket);
 
         void notifyPlayerOfOpponent(QTcpSocket * player, const char * playerColor,
-                                    const char * opponent);
+                                    int opponent);
         void promptPlayerMove(QTcpSocket * player);
         void promptPlayerWait(QTcpSocket * player);
         QByteArray readPlayerMove(QTcpSocket * player);

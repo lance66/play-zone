@@ -57,10 +57,10 @@ void CG_Match::startMatch(int whiteID, int blackID, QTcpSocket *whiteSocket, QTc
     qDebug() << "Match between " << whiteID << " and " << blackID << "has been started.";
 
     //Notify white player of match
-    notifyPlayerOfOpponent(whiteSocket, "white", blackPlayer);
+    notifyPlayerOfOpponent(whiteSocket, "white", blackID);
 
     //Notify black player of match
-    notifyPlayerOfOpponent(blackSocket, "black", whitePlayer);
+    notifyPlayerOfOpponent(blackSocket, "black", whiteID);
 
     //Game starts
     bool gameOver = false;
@@ -131,7 +131,7 @@ void CG_Match::notifyPlayersOfMatchStarting( QTcpSocket *&whiteSocket, QTcpSocke
     notifyPlayerOfMatchStarting( whiteSocket, blackPlayer, "white pieces" );
 
     //Notify black player of match
-   notifyPlayerOfMatchStarting( blackSocket, whitePlayer, "black pieces" );
+    notifyPlayerOfMatchStarting( blackSocket, whitePlayer, "black pieces" );
 }
 
 /****************************************************************
@@ -196,37 +196,6 @@ void CG_Match::setPlayerSockets(QTcpSocket *whiteSocket, QTcpSocket *blackSocket
 {
     this->whiteSocket = whiteSocket;
     this->blackSocket = blackSocket;
-}
-
-/****************************************************************
-*	Purpose:  Sends move to the server
-*
-*     Entry:  Two arguments, one for white's id, and the other
-*             black's id.
-*
-*      Exit:  Populates the QByteArray with the number of bytes
-*             that were read
-****************************************************************/
-void CG_Match::sendMoveToServer()
-{
-    //Switch turns
-    setIsWhiteToMove(isWhiteToMove);
-
-    //If it's white's turn to move
-    if(isWhiteToMove)
-    {
-        //Read black's socket if it's not the first move
-        if(blackSocket->readLine() != nullptr)
-        {
-            readPlayersMove(whiteSocket, blackSocket->readLine());
-        }
-    }
-
-    //If it's black turn to move
-    else
-    {
-        readPlayersMove(blackSocket, whiteSocket->readLine());
-    }
 }
 
 /****************************************************************
@@ -366,8 +335,10 @@ void CG_Match::setBlackSocket(QMap<int, QTcpSocket *> socket, int blackID)
 //}
 
 void CG_Match::notifyPlayerOfOpponent(QTcpSocket * player, const char * playerColor,
-                                      const char * opponent)
+                                      int opponent)
 {
+
+
     player->write("\r\nYou are playing the ");
     player->write(playerColor);
     player->write(" pieces against ");

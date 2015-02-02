@@ -11,8 +11,6 @@ CG_PlayerThread::CG_PlayerThread(qintptr ID, QObject *parent) :
     QThread(parent)
 {
     this->socketDescriptor = ID;
-    Data_Ary = new char[10];
-    strcpy(Data_Ary, "");
 }
 
 /****************************************************************
@@ -76,16 +74,6 @@ void CG_PlayerThread::readyRead()
 
      //When the user presses enter...
      socket->write(Data);
-//     if(Data.at(0) == 0x0d)
-//     {
-//         //Print who is sending data and whatever data they are sending
-//         qDebug() << socketDescriptor << " says: " << Data_Ary;
-//         strcpy(Data_Ary, "");
-//     }
-//     else if(strlen(Data_Ary) < 9)
-//     {
-//         strcat(Data_Ary, Data);
-//     }
 }
 
 /****************************************************************
@@ -124,7 +112,7 @@ QTcpSocket *CG_PlayerThread::getSocket()
 *
 *      Exit:  Socket descriptor is returned.
 ****************************************************************/
-qintptr CG_PlayerThread::getSocketDescriptor()
+qintptr CG_PlayerThread::getSocketDescriptor() const
 {
     return socketDescriptor;
 }
