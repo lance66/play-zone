@@ -1,5 +1,7 @@
 C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\QtApp.ap_ \
  : C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\res\drawable-hdpi\icon.png \
+C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\res\drawable-ldpi\icon.png \
+C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\res\drawable-mdpi\icon.png \
 C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\res\layout\splash.xml \
 C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\res\values\libs.xml \
 C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\res\values\strings.xml \
@@ -23,7 +25,10 @@ C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_a
 C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\res\values-zh-rCN\strings.xml \
 C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\res\values-zh-rTW\strings.xml \
 C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\res\drawable-hdpi\icon.png \
+C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\res\drawable-ldpi\icon.png \
+C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\bin\res\drawable-mdpi\icon.png \
 C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\assets\--Added-by-androiddeployqt-- \
+C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\assets\chessgames.db \
 C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\assets\--Added-by-androiddeployqt--\qml \
 C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\assets\--Added-by-androiddeployqt--\qt_cache_pregenerated_file_list \
 C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\assets\--Added-by-androiddeployqt--\qml\Enginio \
