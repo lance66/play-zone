@@ -184,58 +184,6 @@ void CG_Server::removeAllClientConnections(QTcpSocket *client)
     qDebug() << "It worked!  Client disconnected!";
 }
 
-/****************************************************************
-*   Purpose:  Sends the move to the client by writing the socket
-*             descriptor to the socket.
-*
-*     Entry:  Called whenever a client moves.
-*
-*      Exit:  Notifies client of move by writing it to the client
-*             socket.
-****************************************************************/
-void CG_Server::sendMove(QTcpSocket *client, qintptr socketDescriptor)
-{
-    //If client is null, get out of here
-    if(!client)
-    {
-        return;
-    }
-
-    writeSocketDescriptorToSocket(client, socketDescriptor);
-}
-
-/****************************************************************
- *  Purpose:  Writes the socket descriptor to the socket, by
- *            going through a series of conversions in order to
- *            write to the socket.
- *
- *    Entry:  QTcpSocket pointer that will be written to, after
- *            all conversions take place. and a qintptr that will
- *            that contains the descriptor that will be sent to
- *            the client.
- *
- *     Exit:  Socket descriptor will have gone through a series
- *            of conversions to write to the client socket.
-****************************************************************/
-void CG_Server::writeSocketDescriptorToSocket(QTcpSocket *client, qintptr socketDescriptor)
-{
-    //Convert qintptr to int
-    int temp = static_cast<int>(socketDescriptor);
-
-    //Convert int to string
-    std::string s = std::to_string(temp);
-
-    //Convert string to char const *
-    char const *pchar = s.c_str();
-
-    //Write to client
-    client->write("Hello, ");
-    client->write(pchar);
-    client->write("! ");
-    client->flush();
-    client->waitForBytesWritten(3000);
-}
-
 void CG_Server::saveUserInfoToDatabase()
 {
 
