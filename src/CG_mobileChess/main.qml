@@ -36,8 +36,22 @@ ApplicationWindow {
     {
         id: lobby
         anchors.fill: parent
+
         onGoBack: { lobby.visible = false
                     login.visible = true }
+
+        onStartGame: { lobby.visible = false
+                       game.visible = true }
+
+        visible: false
+    }
+
+    CG_game
+    {
+        id: game
+        anchors.fill: parent
+        onFinished: { game.visible = false
+                      lobby.visible = true }
         visible: false
     }
 

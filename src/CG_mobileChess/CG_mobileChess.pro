@@ -25,7 +25,7 @@ deployment.files += chessgames.db
 deployment.path = /assets
 INSTALLS += deployment
 
-TARGET = CG_mobileChess
+TARGET = MobileChess
 
 SOURCES += main.cpp\
     CG_validator.cpp \
@@ -41,3 +41,6 @@ ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
 RESOURCES += \
     resources.qrc
+
+OTHER_FILES += \
+    android/AndroidManifest.xml

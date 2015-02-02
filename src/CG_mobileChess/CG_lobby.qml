@@ -30,6 +30,7 @@ Item
     height: 600
 
     signal goBack
+    signal startGame
 
     // The individual control height is 1/8 of the total height.
     function getControlHeight()
@@ -107,7 +108,7 @@ Item
             Layout.preferredWidth: getControlWidth()
             Layout.preferredHeight: getControlHeight()
 
-            onClicked: root.goBack()
+            onClicked: root.startGame()
         }
 
         Button
