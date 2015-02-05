@@ -8,42 +8,71 @@ import QtQuick.Layouts 1.0
 Item
 {
     id: root
-    width: getSmallestOrientation()
-    height: getSmallestOrientation()
+    width: getBackgroundHeight() / 2
+    height: getBackgroundHeight() / 2
+    anchors.horizontalCenter: parent.horizontalCenter
 
-    /*property int current_piece: 0
-
-    function addPiece()
-    {
-        return current_piece++
-    }*/
+    property int current_x: 0
+    property int current_y: 0
 
     Column
     {
-        anchors.verticalCenter: parent.verticalCenter
-
+        spacing: 1
         Repeater
         {
-            model: 8
+            model: 4
 
-            delegate:
+            Column
+            {
                 Row
                 {
+                    spacing: 1
                     Repeater
                     {
                         model: 8
 
-                        delegate:
-                            Rectangle
-                            {
-                                width: getSmallestOrientation() / 8
-                                height: getSmallestOrientation() / 8
-                                color: "#FFFFFF"
-                                border.color: "#000000"
-                                border.width: 1
-                            }
+                        Rectangle
+                        {
+                            width: root.width / 8
+                            height: root.height / 8
+
+                            color: index % 2 == 0 ? "#FFFFFF" : "#000000"
+                        }
                     }
                 }
+
+                Row
+                {
+                    spacing: 1
+                    Repeater
+                    {
+                        model: 8
+
+                        Rectangle
+                        {
+                            width: root.width / 8
+                            height: root.height / 8
+
+                            color: index % 2 == 0 ? "#000000" : "#FFFFFF"
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    Row
+    {
+        Repeater
+        {
+            model: 6
+
+            Rectangle
+            {
+                radius: 100
+            }
         }
     }
 }
