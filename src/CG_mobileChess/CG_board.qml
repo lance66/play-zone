@@ -82,13 +82,13 @@ Item
                                     if (starting_position == false)
                                     {
                                         starting.x = parent.x
-                                        starting.y = column.y
+                                        starting.y = column.y + (getBackgroundHeight() / 16)
                                         starting_position = true
                                     }
                                     else
                                     {
                                         ending.x = parent.x
-                                        ending.y = column.y
+                                        ending.y = column.y + (getBackgroundHeight() / 16)
                                         starting_position = false
                                     }
                                 }
