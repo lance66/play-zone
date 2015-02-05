@@ -7,15 +7,28 @@ import QtQuick.Dialogs 1.2
 // Displays circles on the screen
 Item
 {
-    width: 100
-    height: 62
+    width: 400
+    height: 600
+
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.verticalCenter: parent.verticalCenter
+
+    function sizeOfCircle()
+    {
+        // 1/7 leaves spacing for the six circles along with the proper
+        // amount of spacing needed for each circle.
+        return getSmallestOrientation() * (1/7)
+    }
+
     Row
     {
         anchors.horizontalCenter: parent.horizontalCenter
-        //anchors.verticalCenter: parent.verticalCenter
-        spacing: 10
+        anchors.verticalCenter: parent.verticalCenter
+
+        // smallest orientation / 6 circles subtract
+        // smallest orientation / 7 circles for the spacing
+        // divide the difference of the result by smallest orientation = .0238.
+        spacing: getSmallestOrientation() * .0238
 
         Repeater
         {
@@ -23,8 +36,8 @@ Item
 
             Rectangle
             {
-                height: 100
-                width: 100
+                height: sizeOfCircle()
+                width: sizeOfCircle()
                 radius: width * .5
                 color: "#b6ee65"
                 smooth: true
