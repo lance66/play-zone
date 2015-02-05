@@ -98,7 +98,7 @@ Item
 
             Layout.alignment: Qt.AlignCenter
             Layout.preferredWidth: getSmallestOrientation() * 0.9
-            Layout.preferredHeight: 50
+            Layout.preferredHeight: getBackgroundHeight() * 0.125
 
             onClicked: root.finished()
         }

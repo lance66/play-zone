@@ -12,48 +12,87 @@ Item
     height: getBackgroundHeight() / 2
     anchors.horizontalCenter: parent.horizontalCenter
 
-    property int current_x: 0
-    property int current_y: 0
+    property bool starting_position: false
 
     Column
     {
-        spacing: 1
         Repeater
         {
             model: 4
 
             Column
             {
+                id: column
+
                 Row
                 {
-                    spacing: 1
                     Repeater
                     {
                         model: 8
 
                         Rectangle
                         {
-                            width: root.width / 8
-                            height: root.height / 8
+                            width: getBackgroundHeight() / 16
+                            height: getBackgroundHeight() / 16
 
                             color: index % 2 == 0 ? "#FFFFFF" : "#000000"
+
+                            MouseArea
+                            {
+                                anchors.fill: parent
+                                onClicked:
+                                {
+
+                                    if (starting_position == false)
+                                    {
+                                        starting.x = parent.x
+                                        starting.y = column.y
+                                        starting_position = true
+                                    }
+                                    else
+                                    {
+                                        ending.x = parent.x
+                                        ending.y = column.y
+                                        starting_position = false
+                                    }
+                                }
+                            }
                         }
                     }
                 }
 
                 Row
                 {
-                    spacing: 1
                     Repeater
                     {
                         model: 8
 
                         Rectangle
                         {
-                            width: root.width / 8
-                            height: root.height / 8
+                            width: getBackgroundHeight() / 16
+                            height: getBackgroundHeight() / 16
 
                             color: index % 2 == 0 ? "#000000" : "#FFFFFF"
+
+                            MouseArea
+                            {
+                                anchors.fill: parent
+                                onClicked:
+                                {
+                                    if (starting_position == false)
+                                    {
+                                        starting.x = parent.x
+                                        starting.y = column.y
+                                        starting_position = true
+                                    }
+                                    else
+                                    {
+                                        ending.x = parent.x
+                                        ending.y = column.y
+                                        starting_position = false
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -61,18 +100,21 @@ Item
         }
     }
 
-
-
-    Row
+    Rectangle
     {
-        Repeater
-        {
-            model: 6
+        id: starting
+        color: "#FF5555"
+        opacity: 0.8
+        width: getBackgroundHeight() / 16
+        height: getBackgroundHeight() / 16
+    }
 
-            Rectangle
-            {
-                radius: 100
-            }
-        }
+    Rectangle
+    {
+        id: ending
+        color: "#5555FF"
+        opacity: 0.8
+        width: getBackgroundHeight() / 16
+        height: getBackgroundHeight() / 16
     }
 }
