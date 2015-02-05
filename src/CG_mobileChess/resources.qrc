@@ -16,5 +16,7 @@
         <file>Clock.qml</file>
         <file>CG_board.qml</file>
         <file>CG_game.qml</file>
+        <file>CG_piece.qml</file>
+        <file>images/cg_temp_pawn.png</file>
     </qresource>
 </RCC>

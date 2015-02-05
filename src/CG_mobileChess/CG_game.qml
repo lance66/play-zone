@@ -33,7 +33,7 @@ Item
                 styleColor: "black"
 
                 // Adjusts font size for scalability
-                font.pixelSize: root.width * 0.04
+                font.pixelSize: getSmallestOrientation() * 0.04
             }
 
             Text
@@ -48,7 +48,7 @@ Item
                 styleColor: "black"
 
                 // Adjusts font size for scalability
-                font.pixelSize: root.width * 0.04
+                font.pixelSize:  getSmallestOrientation() * 0.04
             }
         }
 
@@ -71,7 +71,7 @@ Item
                 styleColor: "black"
 
                 // Adjusts font size for scalability
-                font.pixelSize: root.width * 0.04
+                font.pixelSize:  getSmallestOrientation() * 0.04
             }
 
             Text
@@ -86,7 +86,7 @@ Item
                 styleColor: "black"
 
                 // Adjusts font size for scalability
-                font.pixelSize: root.width * 0.04
+                font.pixelSize:  getSmallestOrientation() * 0.04
             }
         }
 

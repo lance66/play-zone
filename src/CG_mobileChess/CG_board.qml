@@ -42,15 +42,19 @@ Item
                                 anchors.fill: parent
                                 onClicked:
                                 {
+                                    pawn.x = parent.x
+                                    pawn.y = column.y
 
                                     if (starting_position == false)
                                     {
                                         starting.x = parent.x
                                         starting.y = column.y
                                         starting_position = true
+                                        ending.visible = false
                                     }
                                     else
                                     {
+                                        ending.visible = true
                                         ending.x = parent.x
                                         ending.y = column.y
                                         starting_position = false
@@ -79,14 +83,19 @@ Item
                                 anchors.fill: parent
                                 onClicked:
                                 {
+                                    pawn.x = parent.x
+                                    pawn.y = column.y + (getBackgroundHeight() / 16)
+
                                     if (starting_position == false)
                                     {
                                         starting.x = parent.x
                                         starting.y = column.y + (getBackgroundHeight() / 16)
                                         starting_position = true
+                                        ending.visible = false
                                     }
                                     else
                                     {
+                                        ending.visible = true
                                         ending.x = parent.x
                                         ending.y = column.y + (getBackgroundHeight() / 16)
                                         starting_position = false
@@ -114,6 +123,14 @@ Item
         id: ending
         color: "#5555FF"
         opacity: 0.8
+        width: getBackgroundHeight() / 16
+        height: getBackgroundHeight() / 16
+    }
+
+    Image
+    {
+        id: pawn
+        source: "images/cg_temp_pawn.png"
         width: getBackgroundHeight() / 16
         height: getBackgroundHeight() / 16
     }
