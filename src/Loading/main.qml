@@ -6,8 +6,8 @@ import QtQuick.Dialogs 1.2
 ApplicationWindow
 {
     id: background
-    width: 640
-    height: 480
+    width: 400
+    height: 600
     visible: true    
     color: "#448ed3"
 
