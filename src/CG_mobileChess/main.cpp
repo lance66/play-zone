@@ -31,6 +31,7 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+
     QQmlApplicationEngine engine;
 
     //Set up the database manager (Persistence Layer)

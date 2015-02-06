@@ -27,15 +27,22 @@ INSTALLS += deployment
 
 TARGET = MobileChess
 
+
 SOURCES += main.cpp\
     CG_validator.cpp \
     CG_dbManager.cpp \
-    CG_user.cpp
+    CG_user.cpp \
+    CG_board.cpp \
+    CG_square.cpp
 
 HEADERS  += \
     CG_validator.h \
     CG_dbManager.h \
-    CG_user.h
+    CG_user.h \
+    CG_piece.h \
+    CG_square.h \
+    CG_board.h \
+    CG_define.h
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
