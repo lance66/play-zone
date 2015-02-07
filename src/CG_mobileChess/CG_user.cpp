@@ -13,6 +13,8 @@
 CG_user::CG_user(CG_dbManager * dbManager)
 {
     db_chessgames = dbManager;
+    str_username = "SomeUser1";
+    str_currentELO = "2710";
 }
 
 /**************************************************************

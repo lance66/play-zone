@@ -35,6 +35,7 @@ class CG_user : public QObject
         bool logIn(QString username, QString password);
 
         QString getUsername() { return str_username; }
+        QString getCurrentELO() { return str_currentELO; }
 
     private:
         CG_dbManager * db_chessgames;

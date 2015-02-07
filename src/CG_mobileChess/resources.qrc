@@ -18,5 +18,7 @@
         <file>CG_game.qml</file>
         <file>CG_piece.qml</file>
         <file>images/cg_temp_pawn.png</file>
+        <file>images/cg_temp_flag.png</file>
+        <file>images/cg_board.png</file>
     </qresource>
 </RCC>
