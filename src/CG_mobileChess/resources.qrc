@@ -20,5 +20,7 @@
         <file>images/cg_temp_pawn.png</file>
         <file>images/cg_temp_flag.png</file>
         <file>images/cg_board.png</file>
+        <file>images/cg_draw.png</file>
+        <file>images/cg_resign.png</file>
     </qresource>
 </RCC>

@@ -181,15 +181,25 @@ Item
         anchors.horizontalCenter: parent.horizontalCenter
         height: getBackgroundHeight() * (1/6)
         anchors.top: rowPlayerInfo.bottom
+        spacing: getSmallestOrientation() * 0.04
 
         Button
         {
             id: btn_draw
-            text: "</"
             style: cgButtonStyle
 
             width: getSmallestOrientation() * 0.2
             height: getSmallestOrientation() * 0.2
+
+            Image
+            {
+                source: "images/cg_draw.png"
+                width: getSmallestOrientation() * 0.1
+                height: getSmallestOrientation() * 0.1
+
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+            }
 
             onClicked: root.finished()
 
@@ -210,20 +220,26 @@ Item
             // Adjusts font size for scalability
             font.pixelSize:  getSmallestOrientation() * 0.04
 
-            anchors.leftMargin: getSmallestOrientation() * 0.04
-            anchors.rightMargin: getSmallestOrientation() * 0.04
-
             anchors.verticalCenter: parent.verticalCenter
         }
 
         Button
         {
             id: btn_resign
-            text: "X"
             style: cgButtonStyle
 
             width: getSmallestOrientation() * 0.2
             height: getSmallestOrientation() * 0.2
+
+            Image
+            {
+                source: "images/cg_resign.png"
+                width: getSmallestOrientation() * 0.1
+                height: getSmallestOrientation() * 0.1
+
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+            }
 
             onClicked: root.finished()
 
