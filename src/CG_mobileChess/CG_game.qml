@@ -24,9 +24,9 @@ Item
         Image
         {
             id: img_opponentFlag
-            source: "images/cg_temp_flag.png"
-            width: getSmallestOrientation() * 0.08
-            height: getSmallestOrientation() * 0.04
+            source: "images/cg_flag_turkey.jpg"
+            width: getSmallestOrientation() * 0.175
+            height: getSmallestOrientation() * 0.175
 
             anchors.verticalCenter: parent.verticalCenter
         }
@@ -45,7 +45,8 @@ Item
             // Adjusts font size for scalability
             font.pixelSize: getSmallestOrientation() * 0.04
 
-            anchors.verticalCenter: parent.verticalCenter
+            //anchors.verticalCenter: parent.verticalCenter
+            anchors.leftMargin: parent.left
 
         }
 
@@ -141,9 +142,9 @@ Item
         Image
         {
             id: img_player_map
-            source: "images/cg_temp_flag.png"
-            width: getSmallestOrientation() * 0.08
-            height: getSmallestOrientation() * 0.04
+            source: "images/cg_flag_unitedStates.png"
+            width: getSmallestOrientation() * 0.175
+            height: getSmallestOrientation() * 0.175
 
             anchors.verticalCenter: parent.verticalCenter
         }
@@ -188,8 +189,8 @@ Item
             id: btn_draw
             style: cgButtonStyle
 
-            width: getSmallestOrientation() * 0.2
-            height: getSmallestOrientation() * 0.2
+            width: getSmallestOrientation() * 0.1
+            height: getSmallestOrientation() * 0.1
 
             Image
             {
@@ -209,7 +210,7 @@ Item
         Text
         {
             id: lbl_notation
-            text: "1..Nf3"
+            text: "1.Nf3"
 
             color: "white"
             font.family: "Helvetica"
@@ -228,8 +229,8 @@ Item
             id: btn_resign
             style: cgButtonStyle
 
-            width: getSmallestOrientation() * 0.2
-            height: getSmallestOrientation() * 0.2
+            width: getSmallestOrientation() * 0.1
+            height: getSmallestOrientation() * 0.1
 
             Image
             {

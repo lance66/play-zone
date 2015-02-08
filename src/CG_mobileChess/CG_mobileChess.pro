@@ -7,7 +7,7 @@
 
 TEMPLATE = app
 
-QT += qml quick widgets
+QT += qml quick widgets svg
 QT += sql
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
@@ -50,4 +50,6 @@ RESOURCES += \
     resources.qrc
 
 OTHER_FILES += \
-    android/AndroidManifest.xml
+    android/AndroidManifest.xml \
+    images/Flags.svg \
+    images/cg_flag_turkey.jpg
