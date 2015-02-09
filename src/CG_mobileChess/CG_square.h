@@ -2,13 +2,8 @@
 #define CG_SQUARE_H
 
 #include <QObject>
-
-#include "CG_define.h"
-
-//typedef int Rank;
-
-//enum File { a = 1, b, c, d, e, f, g, h };
-//enum Color { White, Black };
+typedef int Rank;
+enum File { a=1, b, c, d, e, f, g, h };
 
 class CG_square : public QObject
 {
@@ -17,7 +12,6 @@ public:
 private:
     File m_file;
     Rank m_rank;
-    Color m_color;
     bool m_clicked;
 };
 

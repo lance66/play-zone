@@ -41,8 +41,7 @@ HEADERS  += \
     CG_user.h \
     CG_piece.h \
     CG_square.h \
-    CG_board.h \
-    CG_define.h
+    CG_board.h
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
