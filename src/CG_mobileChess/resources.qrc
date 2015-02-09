@@ -26,5 +26,6 @@
         <file>images/Flags.svg</file>
         <file>images/cg_flag_turkey.jpg</file>
         <file>images/cg_flag_unitedStates.png</file>
+        <file>CG_loading.qml</file>
     </qresource>
 </RCC>

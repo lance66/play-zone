@@ -195,8 +195,8 @@ Item
             Image
             {
                 source: "images/cg_draw.png"
-                width: getSmallestOrientation() * 0.1
-                height: getSmallestOrientation() * 0.1
+                width: getSmallestOrientation() * 0.05
+                height: getSmallestOrientation() * 0.05
 
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
@@ -227,7 +227,7 @@ Item
         Button
         {
             id: btn_resign
-            style: cgButtonStyle
+            style: cgRedButtonStyle
 
             width: getSmallestOrientation() * 0.1
             height: getSmallestOrientation() * 0.1
@@ -235,8 +235,8 @@ Item
             Image
             {
                 source: "images/cg_resign.png"
-                width: getSmallestOrientation() * 0.1
-                height: getSmallestOrientation() * 0.1
+                width: getSmallestOrientation() * 0.05
+                height: getSmallestOrientation() * 0.05
 
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
@@ -259,6 +259,37 @@ Item
                 gradient: Gradient {
                     GradientStop { position: 0.0; color: control.pressed ? "#b6ee65" : "#76ae25" }
                     GradientStop { position: 0.5; color: control.pressed ? "#76ae25" : "#b6ee65" }
+                }
+
+                border.color: "#448ed3"
+                smooth: true
+                radius: width * 0.5
+            }
+
+            label: Text {
+                font.pixelSize: getSmallestOrientation() * 0.04
+
+                renderType: Text.NativeRendering
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+                font.family: "Helvetica"
+                color: "black"
+
+                text: control.text
+            }
+        }
+    }
+
+    Component
+    {
+        id: cgRedButtonStyle
+
+        ButtonStyle
+        {
+            background: Rectangle {
+                gradient: Gradient {
+                    GradientStop { position: 0.0; color: control.pressed ? "#AA1111" : "#FF5555" }
+                    GradientStop { position: 0.5; color: control.pressed ? "#FF5555" : "#AA1111" }
                 }
 
                 border.color: "#448ed3"

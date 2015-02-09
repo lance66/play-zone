@@ -41,7 +41,19 @@ ApplicationWindow {
                     login.visible = true }
 
         onStartGame: { lobby.visible = false
-                       game.visible = true }
+                       loading.visible = true
+                       loading.timer.start() }
+
+        visible: false
+    }
+
+    CG_loading
+    {
+        id: loading
+        anchors.fill: parent
+
+        onMatched: { loading.visible = false
+                     game.visible = true }
 
         visible: false
     }
