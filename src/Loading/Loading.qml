@@ -5,14 +5,13 @@ import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.0
 
-// Displays circles on the screen
 Item
 {
+    id: root
     width: 400
     height: 600
 
     anchors.horizontalCenter: parent.horizontalCenter
-    anchors.verticalCenter: parent.verticalCenter
 
     function sizeOfCircle()
     {
@@ -21,15 +20,14 @@ Item
         return getSmallestOrientation() * (1/7)
     }
 
+    function getDuration()
+    {
+        return 500
+    }
+
     Row
     {
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-
-        // smallest orientation / 6 circles subtract
-        // smallest orientation / 7 circles for the spacing
-        // divide the difference of the result by smallest orientation = .0238.
-        spacing: getSmallestOrientation() * .0238
 
         Repeater
         {
@@ -37,18 +35,50 @@ Item
 
             Rectangle
             {
+                id: rect
                 height: sizeOfCircle()
                 width: sizeOfCircle()
                 radius: width * .5
                 color: "#b6ee65"
                 smooth: true
+                z: index % 2 == 0 ? -1 : 2
+
+                SequentialAnimation
+                {
+                    running: true
+                    loops: Animation.Infinite
+
+
+                    NumberAnimation
+                    {
+                        target: rect
+                        property: "y"
+                        duration: getDuration()
+                        to:
+                        {
+                            if (index % 2 == 0)
+                                root.height * .25
+                            else
+                                root.height * .75
+                        }
+                    }
+
+
+                    NumberAnimation
+                    {
+                        target: rect
+                        property: "y"
+                        duration: getDuration()
+                        to: (root.height / 2) - 25
+                    }
+                }
             }
         }
     }
 
     Text
     {
-        text: "Gathering pieces..."
+        text: "Finding Opponent..."
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
@@ -59,42 +89,9 @@ Item
         style: Text.Raised
         styleColor: "white"
 
+        z: 1
+
         // Adjusts font size for scalability
         font.pixelSize: getSmallestOrientation() * 0.04
     }
 }
-//  End Displays 6 circles on the screen.
-
-// ********* Below is the sample animation code i was working on I was trying to get it to animate without having to click on anything but it's not doing that************
-//Item
-//{
-//    width: 300; height: 300
-
-//    Rectangle {
-//        id: rect
-//        width: 75; height: 75
-//        color: "blue"
-//        opacity: 1.0
-
-//        MouseArea
-//        {
-//            anchors.fill: parent
-//            onClicked:
-//            {
-//                Animator.start()
-//            }
-//        }
-
-//        PropertyAnimation {id: animateColor; target: rect; properties: "color"; to: "green"; duration: 100}
-
-//        SpringAnimation
-//        {
-//            id: animateOpacity
-//            target: flashingblob
-//            properties:
-//            from: 0.99
-//            to: 1.0
-//            loops: Animation.Infinite
-//            easing {type: Easing.OutBack; overshoot: 500}
-//       }
-//    }
