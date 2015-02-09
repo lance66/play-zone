@@ -1,5 +1,5 @@
 import QtQuick 2.3
-import QtQuick.Controls 1.3
+import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
@@ -12,6 +12,7 @@ Item
     height: 600
 
     anchors.horizontalCenter: parent.horizontalCenter
+    anchors.verticalCenter: parent.verticalCenter
 
     signal matched
 
@@ -40,6 +41,7 @@ Item
     Row
     {
         anchors.horizontalCenter: parent.horizontalCenter
+        y: (getBackgroundHeight() / 2) - (sizeOfCircle() / 2)
 
         Repeater
         {
@@ -68,9 +70,9 @@ Item
                         to:
                         {
                             if (index % 2 == 0)
-                                root.height * .25
+                                getBackgroundHeight() * .25
                             else
-                                root.height * .75
+                                getBackgroundHeight() * .75
                         }
                     }
 
@@ -80,7 +82,7 @@ Item
                         target: rect
                         property: "y"
                         duration: getDuration()
-                        to: (root.height / 2) - 25
+                        to: (getBackgroundHeight() / 2) - (sizeOfCircle() / 2)
                     }
                 }
             }
@@ -92,7 +94,7 @@ Item
         text: "Finding Opponent..."
 
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
+        y: (getBackgroundHeight() / 2) - (getSmallestOrientation() * 0.02)
 
         color: "black"
         font.family: "Helvetica"
