@@ -7,6 +7,7 @@ enum File { a=1, b, c, d, e, f, g, h };
 
 class CG_square : public QObject
 {
+    Q_OBJECT
 public:
     CG_square();
 private:

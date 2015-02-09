@@ -6,6 +6,8 @@
 
 class CG_board : public QObject
 {
+    Q_OBJECT
+
 public:
     CG_board();
 private:

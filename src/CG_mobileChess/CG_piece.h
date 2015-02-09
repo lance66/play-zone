@@ -2,17 +2,20 @@
 #define CG_PIECE_H
 
 #include <QObject>
+#include "CG_board.h"
 enum Color { White, Black };
 
 class CG_piece : public QObject
 {
+    Q_OBJECT
+
 public:
-    virtual void move(CG_board board, File f_to, Rank r_to,
-              File f_from, Rank r_from) = 0;
+    //virtual void move(CG_board board, File f_to, Rank r_to,
+              //File f_from, Rank r_from) = 0;
     bool captured();
 private:
     Color m_pieceColor;
-    CG_square m_position;
+    //CG_square m_position;
 };
 
 #endif // CG_PIECE_H
