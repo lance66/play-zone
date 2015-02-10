@@ -21,7 +21,7 @@ ApplicationWindow {
     visible: true
     width: 400
     height: 600
-    title: qsTr("Mobile Chess")
+    title: qsTr("Chessgames")
     color: "#448ed3"
 
     CG_login
@@ -56,6 +56,7 @@ ApplicationWindow {
                      game.visible = true }
 
         visible: false
+
     }
 
     CG_game

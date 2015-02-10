@@ -27,5 +27,6 @@
         <file>images/cg_flag_turkey.jpg</file>
         <file>images/cg_flag_unitedStates.png</file>
         <file>CG_loading.qml</file>
+        <file>Sounds/01 - Untitled (Album Version).mp3</file>
     </qresource>
 </RCC>

@@ -45,7 +45,6 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("User", &cg_user);
     engine.rootContext()->setContextProperty("Validator", &cg_validator);
-
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
     return app.exec();

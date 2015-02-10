@@ -4,6 +4,7 @@ import QtQuick.Controls.Styles 1.2
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.0
+import QtMultimedia 5.0
 
 Item
 {
@@ -33,7 +34,7 @@ Item
     Timer
     {
         id: timer
-        interval: 5000
+        interval: 48000
         running: false
         onTriggered: root.matched()
     }
@@ -96,8 +97,8 @@ Item
         anchors.horizontalCenter: parent.horizontalCenter
         y: (getBackgroundHeight() / 2) - (getSmallestOrientation() * 0.02)
 
-        color: "black"
-        font.family: "Helvetica"
+        color: "white"
+        font.family: "Calibri"
         font.bold: true
         style: Text.Raised
         styleColor: "white"
@@ -106,6 +107,7 @@ Item
 
         // Adjusts font size for scalability
         font.pixelSize: getSmallestOrientation() * 0.04
+
     }
 }
 

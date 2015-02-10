@@ -22,6 +22,7 @@ import QtQuick.Controls.Styles 1.1
 import QtQuick.Window 2.0
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.0
+import QtMultimedia 5.0
 
 Item
 {
@@ -42,6 +43,13 @@ Item
     function getControlWidth()
     {
         return getSmallestOrientation() * 0.9
+    }
+
+    Audio
+    {
+        id: iPod
+        source: "Sounds/01 - Untitled (Album Version).mp3"
+        autoLoad: true
     }
 
     ColumnLayout
@@ -108,7 +116,8 @@ Item
             Layout.preferredWidth: getControlWidth()
             Layout.preferredHeight: getControlHeight()
 
-            onClicked: root.startGame()
+            onClicked: {root.startGame()
+                        iPod.play()}
         }
 
         Button
