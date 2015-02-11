@@ -9,4 +9,7 @@ INPUT(
 ./release\moc_CG_validator.o
 ./release\moc_CG_dbManager.o
 ./release\moc_CG_user.o
+./release\moc_CG_piece.o
+./release\moc_CG_square.o
+./release\moc_CG_board.o
 );

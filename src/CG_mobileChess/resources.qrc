@@ -24,9 +24,9 @@
         <file>images/cg_resign.png</file>
         <file>images/cg_temp_flag2.eps</file>
         <file>images/Flags.svg</file>
-        <file>images/cg_flag_turkey.jpg</file>
         <file>images/cg_flag_unitedStates.png</file>
         <file>CG_loading.qml</file>
         <file>Sounds/01 - Untitled (Album Version).mp3</file>
+        <file>images/cg_flag_turkey.png</file>
     </qresource>
 </RCC>

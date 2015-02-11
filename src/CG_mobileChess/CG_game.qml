@@ -13,18 +13,40 @@ Item
 
     signal finished
 
+    function setBoardSize()
+    {
+        var temp = 0
+
+        if (getSmallestOrientation() == getBackgroundHeight())
+        {
+            cg_board.width = getBackgroundHeight() * (2/3)
+            cg_board.height = getBackgroundHeight() * (2/3)
+            temp = getBackgroundHeight() * (2/3)
+        }
+        else
+        {
+            cg_board.width = getBackgroundHeight() / 2
+            cg_board.height = getBackgroundHeight() / 2
+            temp = getBackgroundHeight() / 2
+        }
+
+        return temp
+    }
+
     // Opponent Info
     Row
     {
         id: rowOpponentInfo
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: parent.top
+        x: getSmallestOrientation() == getBackgroundHeight() ? (cg_board.x - width) : cg_board.x
+        //y: getSmallestOrientation() == getBackgroundHeight() ? cg_board.y : (cg_board.y - height)
+        //y: getSmallestOrientation() == getBackgroundHeight() ? ((cg_board.y + cg_board.height) - height) : (cg_board.y + cg_board.height)
+
         height: getBackgroundHeight() * (1/6)
 
         Image
         {
             id: img_opponentFlag
-            source: "images/cg_flag_turkey.jpg"
+            source: "images/cg_flag_turkey.png"
             width: getSmallestOrientation() * 0.175
             height: getSmallestOrientation() * 0.175
 
@@ -45,8 +67,8 @@ Item
             // Adjusts font size for scalability
             font.pixelSize: getSmallestOrientation() * 0.04
 
-            //anchors.verticalCenter: parent.verticalCenter
-            anchors.leftMargin: parent.left
+            anchors.verticalCenter: parent.verticalCenter
+            //anchors.leftMargin: parent.left
 
         }
 
@@ -63,8 +85,8 @@ Item
     CG_board
     {
         id: cg_board
-        width: getBackgroundHeight() / 2
-        height: getBackgroundHeight() / 2
+        width: setBoardSize()
+        height: setBoardSize()
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: rowOpponentInfo.bottom
@@ -73,7 +95,7 @@ Item
     // Opponent LED / Clock
     Row
     {
-        anchors.right: parent.right
+        anchors.left: cg_board.right
         y: cg_board.y
 
         Rectangle
@@ -104,7 +126,7 @@ Item
     Row
     {
         id: rowPlayerLED
-        anchors.right: parent.right
+        anchors.left: cg_board.right
         anchors.bottom: cg_board.bottom
 
         Rectangle
@@ -135,8 +157,8 @@ Item
     Row
     {
         id: rowPlayerInfo
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: cg_board.bottom
+        x: getSmallestOrientation() == getBackgroundHeight() ? (cg_board.x - width) : cg_board.x
+        y: getSmallestOrientation() == getBackgroundHeight() ? ((cg_board.y + cg_board.height) - height) : (cg_board.y + cg_board.height)
         height: getBackgroundHeight() * (1/6)
 
         Image
