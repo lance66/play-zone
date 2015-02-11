@@ -32,7 +32,11 @@ bool CG_user::logIn(QString username, QString password)
     bool logged_in = false;
 
     if (db_chessgames->correctUserInfo(username, password))
+    {
         logged_in = true;
+        str_username = username;
+        str_currentELO = db_chessgames->getCurrentELO(username);
+    }
 
     return logged_in;
 }

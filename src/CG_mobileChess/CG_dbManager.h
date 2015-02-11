@@ -25,6 +25,8 @@
 *       and in the database.
 *   bool AddUser(QString str_username, QString str_password, QString str_email)
 *       Returns true if the user is successfully added into the database.
+*   QString getCurrentELO(QString str_username)
+*       Returns the current ELO of a user.
 *******************************************************************************/
 
 class CG_dbManager : public QObject
@@ -39,6 +41,8 @@ class CG_dbManager : public QObject
         bool correctUserInfo(QString str_username, QString str_password);
         bool addUser(QString str_username, QString str_password, QString str_email);
         void encryptPassword(QString & password);
+
+        QString getCurrentELO(QString str_username);
 
     private:
         QSqlDatabase db_login;

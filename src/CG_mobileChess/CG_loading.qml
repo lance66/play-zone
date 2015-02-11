@@ -34,7 +34,7 @@ Item
     Timer
     {
         id: timer
-        interval: 48000
+        interval: 5000
         running: false
         onTriggered: root.matched()
     }

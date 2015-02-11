@@ -174,7 +174,7 @@ Item
         Text
         {
             id: lbl_username
-            text: User.getUsername() + "  " + User.getCurrentELO()
+            text: root.visible == true ? (User.getUsername() + "  " + User.getCurrentELO()) : ""
 
             color: "white"
             font.family: "Helvetica"

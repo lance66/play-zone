@@ -232,7 +232,7 @@ Item
             id: cgButtonStyle
 
             ButtonStyle
-            {                
+            {
                 background: Rectangle {
                     gradient: Gradient {
                         GradientStop { position: 0.0; color: control.pressed ? "#b6ee65" : "#76ae25" }

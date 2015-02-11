@@ -77,7 +77,7 @@ Item
                 Text
                 {
                     id: lbl_username
-                    text: "Trudodyr"
+                    text: root.visible == true ? User.getUsername() : ""
 
                     color: "white"
                     font.family: "Helvetica"
@@ -92,7 +92,7 @@ Item
                 Text
                 {
                     id: lbl_eloRating
-                    text: "ELO: 2710"
+                    text: root.visible == true ? ("ELO: " + User.getCurrentELO()) : ""
 
                     color: "white"
                     font.family: "Helvetica"

@@ -122,6 +122,34 @@ bool CG_dbManager::addUser(QString str_username, QString str_password, QString s
 }
 
 /**************************************************************
+*	  Purpose:  To retrieve the current ELO rating of a user.
+*
+*     Entry:  User is logged in.
+*
+*     Exit:  Returns the current ELO of a user.
+****************************************************************/
+
+QString CG_dbManager::getCurrentELO(QString str_username)
+{
+    QString result;
+
+    if(db_login.open())
+    {
+        QSqlQuery qry( db_login );
+        qry.prepare( "SELECT CurrentELO FROM CG_user WHERE Username= ? COLLATE NOCASE" );
+        qry.addBindValue(str_username);
+
+        if(qry.exec())
+            for (int count = 0; qry.next(); count++)
+                result = qry.value(0).toString();
+
+        db_login.close();
+    }
+
+    return result;
+}
+
+/**************************************************************
 *	  Purpose:  To encrypt a password using the SHA256 hashing
 *               function.
 *
