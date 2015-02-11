@@ -157,7 +157,13 @@ Item
                     txt_isOpen.text = "Username or password is incorrect."
                 else
                 {
-                    txt_isOpen.text = "Successfully logged in. Hello, " + tf_username.text + "!"
+                    // Reset these values for next login.
+                    txt_isOpen.text = ""
+                    tf_username.text = ""
+                    tf_password.text = ""
+                    tf_confirmPassword.text = ""
+                    tf_emailAddress.text = ""
+
                     root.loggedIn()
                 }
 
