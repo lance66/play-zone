@@ -42,11 +42,12 @@ Item
     Row
     {
         anchors.horizontalCenter: parent.horizontalCenter
-        y: (getBackgroundHeight() / 2) - (sizeOfCircle() / 2)
+        anchors.verticalCenter: parent.verticalCenter
+        //y: (getBackgroundHeight() / 2) - (sizeOfCircle() / 2)
 
         Repeater
         {
-            model: 6
+            model: 5
 
             Rectangle
             {
@@ -54,9 +55,14 @@ Item
                 height: sizeOfCircle()
                 width: sizeOfCircle()
                 radius: width * .5
-                color: "#b6ee65"
                 smooth: true
                 z: index % 2 == 0 ? -1 : 2
+
+                gradient: Gradient
+                {
+                    GradientStop { position: 0.0; color: "#76ae25" }
+                    GradientStop { position: 0.5; color: "#b6ee65" }
+                }
 
                 SequentialAnimation
                 {
