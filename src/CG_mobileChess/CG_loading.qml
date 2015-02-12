@@ -77,12 +77,34 @@ Item
                         to:
                         {
                             if (index % 2 == 0)
+                                getBackgroundHeight() * .75
+                            else
+                                getBackgroundHeight() * .25
+                        }
+                    }
+
+
+                    NumberAnimation
+                    {
+                        target: rect
+                        property: "y"
+                        duration: getDuration()
+                        to: (getBackgroundHeight() / 2) - (sizeOfCircle() / 2)
+                    }
+
+                    NumberAnimation
+                    {
+                        target: rect
+                        property: "y"
+                        duration: getDuration()
+                        to:
+                        {
+                            if (index % 2 == 0)
                                 getBackgroundHeight() * .25
                             else
                                 getBackgroundHeight() * .75
                         }
                     }
-
 
                     NumberAnimation
                     {

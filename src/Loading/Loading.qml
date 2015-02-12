@@ -31,7 +31,7 @@ Item
 
         Repeater
         {
-            model: 6
+            model: 5
 
             Rectangle
             {
@@ -57,12 +57,41 @@ Item
                         to:
                         {
                             if (index % 2 == 0)
-                                root.height * .25
-                            else
+                            {
                                 root.height * .75
+                            }
+                            else
+                            {
+                                root.height * .25
+                            }
                         }
                     }
 
+                    NumberAnimation
+                    {
+                        target: rect
+                        property: "y"
+                        duration: getDuration()
+                        to: (root.height / 2) - 25
+                    }
+
+                    NumberAnimation
+                    {
+                        target: rect
+                        property: "y"
+                        duration: getDuration()
+                        to:
+                        {
+                            if (index % 2 == 0)
+                            {
+                                root.height * .25
+                            }
+                            else
+                            {
+                                root.height * .75
+                            }
+                        }
+                    }
 
                     NumberAnimation
                     {
