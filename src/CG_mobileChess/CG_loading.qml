@@ -43,7 +43,7 @@ Item
     {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
-        //y: (getBackgroundHeight() / 2) - (sizeOfCircle() / 2)
+        y: (getBackgroundHeight() / 2) - (sizeOfCircle() / 2)
 
         Repeater
         {
