@@ -2,8 +2,9 @@
 #define CG_SQUARE_H
 
 #include <QObject>
-typedef int Rank;
-enum File { a=1, b, c, d, e, f, g, h };
+#include "CG_piece.h"
+//typedef int Rank;
+//enum File { a=1, b, c, d, e, f, g, h };
 
 class CG_square : public QObject
 {
@@ -14,6 +15,7 @@ private:
     File m_file;
     Rank m_rank;
     bool m_clicked;
+    CG_piece * m_piece;
 };
 
 #endif // CG_SQUARE_H

@@ -42,7 +42,10 @@ HEADERS  += \
     CG_user.h \
     CG_piece.h \
     CG_square.h \
-    CG_board.h
+    CG_board.h \
+    CG_rook.h \
+    CG_bishop.h \
+    CG_queen.h
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
