@@ -29,7 +29,11 @@ public slots:
     }
     QString getSquare(int source_file, int source_rank)
     {
-        return m_board[source_file][source_rank].getPieceName() + ((QString) m_board[source_file][source_rank].getPiece()->getPieceColor());
+        // Temporary just for testing
+        return "Pawn0";
+
+        // The below should be uncommented and the above deleted once m_board is filled
+        //return m_board[source_file][source_rank].getPieceName() + ((QString) m_board[source_file][source_rank].getPiece()->getPieceColor());
     }
 
 private:

@@ -93,7 +93,7 @@ Item
         else if (piece == "Pawn0")
             frame = 11
 
-        return -40*frame
+        return frame
     }
 
     Image
@@ -111,7 +111,7 @@ Item
 
         Rectangle
         {
-            color: "transparent"
+            color: getWhiteOrBlack(index)
 
             opacity: 0.45
             width: getSquareSize()
@@ -119,8 +119,6 @@ Item
 
             x: getX(index)
             y: getY(index)
-
-            ColorAnimation on color { to: getWhiteOrBlack(index); duration: 3000 }
 
             MouseArea
             {
@@ -146,22 +144,32 @@ Item
                     }
                 }
             }
+        }
+    }
 
-            Rectangle
+    // Display Pieces
+    Repeater
+    {
+        model: 64
+
+        Rectangle
+        {
+            width: getSquareSize() * 12
+            height: getSquareSize()
+
+            x: getX(index)
+            y: getY(index)
+
+            color: "transparent"
+
+            CG_piece
             {
-                width: getSquareSize() * 12
+                frame: setPiece(Board.getSquare(getRow(index), getColumn(index)))
+                width: getSquareSize()
                 height: getSquareSize()
-                color: "transparent"
-
-                CG_piece
-                {
-                    frame: 4
-                    width: getSquareSize()
-                    height: getSquareSize()
-                    source: "images/cg_pieces.png"
-                    running: false
-                    frameCount: 12
-                }
+                source: "images/cg_pieces.png"
+                running: false
+                frameCount: 12
             }
         }
     }
