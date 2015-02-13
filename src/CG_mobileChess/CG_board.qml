@@ -17,6 +17,8 @@ Item
 
 
     property bool starting_position: false
+    property int starting_index: -1
+    property int ending_index: -1
 
     function getSquareSize()
     {
@@ -107,6 +109,7 @@ Item
 
     Repeater
     {
+        id: board
         model: 64
 
         Rectangle
@@ -133,6 +136,8 @@ Item
                         starting.x = parent.x
                         starting.y = parent.y
                         starting_position = true
+                        starting_index = index
+
                         ending.visible = false
                     }
                     else
@@ -140,6 +145,10 @@ Item
                         ending.visible = true
                         ending.x = parent.x
                         ending.y = parent.y
+                        ending_index = index
+
+                        Board.move(getRow(starting_index), getColumn(starting_index), getRow(ending_index), getColumn(ending_index))
+
                         starting_position = false
                     }
                 }
