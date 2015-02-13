@@ -9,6 +9,10 @@ class CG_bishop : public CG_piece
     Q_OBJECT
 
 public:
+    CG_bishop() : m_pieceColor(White), m_pieceName("Bishop")
+    {
+
+    }
     virtual bool move(File f_to, Rank r_to, File f_from, Rank r_from)
     {
         bool canMakeMove = false;
