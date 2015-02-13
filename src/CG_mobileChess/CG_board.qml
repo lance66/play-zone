@@ -54,10 +54,53 @@ Item
         return row * getSquareSize() + ((img_boardTexture.width - (getSquareSize() * 8)) / 2)
     }
 
+    function getRow(current_index)
+    {
+        return parseInt(current_index / 8)
+    }
+
+    function getColumn(current_index)
+    {
+        return (current_index % 8)
+    }
+
+    function setPiece(piece)
+    {
+        var frame = 0
+
+        if (piece == "King1")
+            frame = 0
+        else if (piece == "Queen1")
+            frame = 1
+        else if (piece == "Knight1")
+            frame = 2
+        else if (piece == "Bishop1")
+            frame = 3
+        else if (piece == "Rook1")
+            frame = 4
+        else if (piece == "Pawn1")
+            frame = 5
+        else if (piece == "King0")
+            frame = 6
+        else if (piece == "Queen0")
+            frame = 7
+        else if (piece == "Knight0")
+            frame = 8
+        else if (piece == "Bishop0")
+            frame = 9
+        else if (piece == "Rook0")
+            frame = 10
+        else if (piece == "Pawn0")
+            frame = 11
+
+        return -40*frame
+    }
+
     Image
     {
         id: img_boardTexture
         source: "images/cg_board.png"
+
         width: getBackgroundHeight() / 2
         height: getBackgroundHeight() / 2
     }
@@ -103,13 +146,32 @@ Item
                     }
                 }
             }
+
+            Rectangle
+            {
+                width: getSquareSize() * 12
+                height: getSquareSize()
+                color: "transparent"
+
+                CG_piece
+                {
+                    frame: 4
+                    width: getSquareSize()
+                    height: getSquareSize()
+                    source: "images/cg_pieces.png"
+                    running: false
+                    frameCount: 12
+                }
+            }
         }
     }
 
     Rectangle
     {
         id: starting
-        color: "#FF5555"
+        color: "transparent"
+        border.color: "#FF5555"
+        border.width: getSmallestOrientation() * 0.01
         opacity: 0.8
         width: getSquareSize()
         height: getSquareSize()
@@ -121,7 +183,9 @@ Item
     Rectangle
     {
         id: ending
-        color: "#5555FF"
+        color: "transparent"
+        border.color: "#5555FF"
+        border.width: getSmallestOrientation() * 0.01
         opacity: 0.8
         width: getSquareSize()
         height: getSquareSize()
@@ -130,12 +194,17 @@ Item
         y: getY(51)
     }
 
+    // This is going to be eliminated soon in favor of the
+    // business layer controlling the movement.
+    // The presentation layer will send move requests, but
+    // only display from the business layer.
     Image
     {
         id: pawn
         source: "images/cg_temp_pawn.png"
         width: getSquareSize()
         height: getSquareSize()
+        visible: false
 
         x: getX(51)
         y: getY(51)

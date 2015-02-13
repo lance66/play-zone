@@ -11,14 +11,15 @@ class CG_board : public QObject
 
 public:
     CG_board();
-    void move(File f_source, Rank r_source, File f_dest, Rank r_dest)
-    {
 
+public slots:
+    void move(int f_source, int r_source, int f_dest, int r_dest)
+    {
         if(m_board[f_source][r_source].getPiece() != 0)
         {
             if(m_board[f_dest][r_dest].getPiece() == 0)
             {
-                if(m_board[f_source][r_source].getPiece()->move(f_source, r_source, f_dest, r_dest))
+                if(m_board[f_source][r_source].getPiece()->move((File) f_source, (Rank) r_source, (File) f_dest, (Rank) r_dest))
                 {
                     m_board[f_dest][r_dest].setPiece(m_board[f_source][r_source].getPiece());
                     m_board[f_source][r_source].setPiece(0);
@@ -26,9 +27,9 @@ public:
             }
         }
     }
-    QString getSquare(File source_file, Rank source_rank)
+    QString getSquare(int source_file, int source_rank)
     {
-        return m_board[source_file][source_rank].getPieceName();
+        return m_board[source_file][source_rank].getPieceName() + ((QString) m_board[source_file][source_rank].getPiece()->getPieceColor());
     }
 
 private:

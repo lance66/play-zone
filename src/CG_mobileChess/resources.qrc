@@ -28,5 +28,6 @@
         <file>CG_loading.qml</file>
         <file>Sounds/01 - Untitled (Album Version).mp3</file>
         <file>images/cg_flag_turkey.png</file>
+        <file>images/cg_pieces.png</file>
     </qresource>
 </RCC>

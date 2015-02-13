@@ -1,6 +1,7 @@
 #include "CG_login.h"
 #include "CG_user.h"
 #include "CG_dbManager.h"
+#include "CG_board.h"
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -9,7 +10,7 @@
 /***************************************************************************
  * Author:                                                        ChessGames
  * Date Created:                                                  11/07/2014
- * Date Last Modified:                                            12/01/2014
+ * Date Last Modified:                                            2/12/2015
  * File Name:                                                   src/main.cpp
  *
  * Overview: Creates the foundation for our login application. Sets up the
@@ -40,11 +41,15 @@ int main(int argc, char *argv[])
     //Set up the chessgames user (Business Layer)
     CG_user cg_user(&db_manager);
 
+    //Set up the board
+    CG_board cg_board;
+
     QLabel validator_feedback;
     CG_validator cg_validator(validator_feedback);
 
     engine.rootContext()->setContextProperty("User", &cg_user);
     engine.rootContext()->setContextProperty("Validator", &cg_validator);
+    engine.rootContext()->setContextProperty("Board", &cg_board);
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
     return app.exec();

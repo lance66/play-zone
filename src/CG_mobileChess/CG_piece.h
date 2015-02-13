@@ -15,9 +15,20 @@ public:
     virtual bool move(File f_to, Rank r_to,
               File f_from, Rank r_from) = 0;
     virtual bool captured() = 0;
+
+    CG_piece(Color pieceColor, QString pieceName) : m_pieceColor(pieceColor), m_pieceName(pieceName)
+    {
+
+    }
+
     QString getPieceName()
     {
         return m_pieceName;
+    }
+
+    Color getPieceColor()
+    {
+        return m_pieceColor;
     }
 
 private:

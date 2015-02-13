@@ -9,7 +9,7 @@ class CG_bishop : public CG_piece
     Q_OBJECT
 
 public:
-    CG_bishop() : m_pieceColor(White), m_pieceName("Bishop")
+    CG_bishop() : CG_piece(White, "Bishop")
     {
 
     }

@@ -9,7 +9,7 @@ class CG_queen : public CG_piece
     Q_OBJECT
 
 public:
-    CG_queen() : m_pieceColor(White), m_pieceName("Queen")
+    CG_queen() : CG_piece(White, "Queen")
     {
 
     }

@@ -38,8 +38,7 @@ Item
     {
         id: rowOpponentInfo
         x: getSmallestOrientation() == getBackgroundHeight() ? (cg_board.x - width) : cg_board.x
-        //y: getSmallestOrientation() == getBackgroundHeight() ? cg_board.y : (cg_board.y - height)
-        //y: getSmallestOrientation() == getBackgroundHeight() ? ((cg_board.y + cg_board.height) - height) : (cg_board.y + cg_board.height)
+        y: getSmallestOrientation() == getBackgroundHeight() ? cg_board.y : (cg_board.y - height)
 
         height: getBackgroundHeight() * (1/6)
 
@@ -89,7 +88,7 @@ Item
         height: setBoardSize()
 
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: rowOpponentInfo.bottom
+        y: getBackgroundHeight() * (1/6)
     }
 
     // Opponent LED / Clock
@@ -203,7 +202,8 @@ Item
         id: rowDrawAndResign
         anchors.horizontalCenter: parent.horizontalCenter
         height: getBackgroundHeight() * (1/6)
-        anchors.top: rowPlayerInfo.bottom
+
+        y: getSmallestOrientation() == getBackgroundHeight() ? getBackgroundHeight() - height : (rowPlayerInfo.y + rowPlayerInfo.height)
         spacing: getSmallestOrientation() * 0.04
 
         Button

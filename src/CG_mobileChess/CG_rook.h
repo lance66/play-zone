@@ -9,7 +9,7 @@ class CG_rook : public CG_piece
     Q_OBJECT
 
 public:
-    CG_rook() : m_pieceColor(White), m_pieceName("Rook")
+    CG_rook() : CG_piece(White, "Rook")
     {
 
     }
