@@ -7,7 +7,7 @@
 
 TEMPLATE = app
 
-QT += qml quick widgets svg
+QT += qml quick widgets
 QT += sql
 CONFIG += resources_big
 
