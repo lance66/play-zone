@@ -63,4 +63,5 @@ RESOURCES += \
 OTHER_FILES += \
     android/AndroidManifest.xml \
     images/Flags.svg \
-    images/cg_flag_turkey.jpg
+    images/cg_flag_turkey.jpg \
+    Sounds/gameStarted.mp3

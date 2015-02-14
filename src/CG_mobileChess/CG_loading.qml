@@ -52,8 +52,20 @@ Item
         id: timer
         interval: 48000
         running: false
-        onTriggered: root.matched()
+        onTriggered:
+        {
+            root.matched()
+            iPod.play()
+        }
     }
+
+    Audio
+    {
+        id: iPod
+        source: "Sounds/gameStarted.mp3"
+        autoLoad: true
+    }
+
 
     Row
     {
