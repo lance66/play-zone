@@ -12,19 +12,18 @@ Item
     width: 400
     height: 600
 
-    anchors.horizontalCenter: parent.horizontalCenter
-    anchors.verticalCenter: parent.verticalCenter
-
-    signal matched
-
-    property alias timer: timer
-
     function sizeOfCircle()
     {
         // 1/7 leaves spacing for the six circles along with the proper
         // amount of spacing needed for each circle.
         return getSmallestOrientation() * (1/7)
     }
+
+    anchors.horizontalCenter: parent.horizontalCenter
+
+    signal matched
+
+    property alias timer: timer
 
     function getDuration()
     {
@@ -42,8 +41,6 @@ Item
     Row
     {
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-        y: (getBackgroundHeight() / 2) - (sizeOfCircle() / 2)
 
         Repeater
         {

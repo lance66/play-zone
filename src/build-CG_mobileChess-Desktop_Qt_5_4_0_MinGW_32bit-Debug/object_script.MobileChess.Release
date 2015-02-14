@@ -12,4 +12,7 @@ INPUT(
 ./release\moc_CG_piece.o
 ./release\moc_CG_square.o
 ./release\moc_CG_board.o
+./release\moc_CG_rook.o
+./release\moc_CG_bishop.o
+./release\moc_CG_queen.o
 );

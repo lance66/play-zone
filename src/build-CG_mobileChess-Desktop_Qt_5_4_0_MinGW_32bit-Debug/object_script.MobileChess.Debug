@@ -12,4 +12,7 @@ INPUT(
 ./debug\moc_CG_piece.o
 ./debug\moc_CG_square.o
 ./debug\moc_CG_board.o
+./debug\moc_CG_rook.o
+./debug\moc_CG_bishop.o
+./debug\moc_CG_queen.o
 );
