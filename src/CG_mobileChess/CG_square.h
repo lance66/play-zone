@@ -5,8 +5,6 @@
 #include <QString>
 #include "CG_piece.h"
 #include "CG_rook.h"
-//typedef int Rank;
-//enum File { a=1, b, c, d, e, f, g, h };
 
 class CG_square : public QObject
 {

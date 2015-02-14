@@ -70,29 +70,29 @@ Item
     {
         var frame = 0
 
-        if (piece == "King1")
+        if (piece === "King1")
             frame = 0
-        else if (piece == "Queen1")
+        else if (piece === "Queen1")
             frame = 1
-        else if (piece == "Knight1")
+        else if (piece === "Knight1")
             frame = 2
-        else if (piece == "Bishop1")
+        else if (piece === "Bishop1")
             frame = 3
-        else if (piece == "Rook1")
+        else if (piece === "Rook1")
             frame = 4
-        else if (piece == "Pawn1")
+        else if (piece === "Pawn1")
             frame = 5
-        else if (piece == "King0")
+        else if (piece === "King0")
             frame = 6
-        else if (piece == "Queen0")
+        else if (piece === "Queen0")
             frame = 7
-        else if (piece == "Knight0")
+        else if (piece === "Knight0")
             frame = 8
-        else if (piece == "Bishop0")
+        else if (piece === "Bishop0")
             frame = 9
-        else if (piece == "Rook0")
+        else if (piece === "Rook0")
             frame = 10
-        else if (piece == "Pawn0")
+        else if (piece === "Pawn0")
             frame = 11
 
         return frame

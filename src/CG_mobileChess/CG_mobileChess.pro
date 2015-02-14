@@ -34,7 +34,12 @@ SOURCES += main.cpp\
     CG_dbManager.cpp \
     CG_user.cpp \
     CG_board.cpp \
-    CG_square.cpp
+    CG_square.cpp \
+    CG_pawn.cpp \
+    CG_bishop.cpp \
+    CG_knight.cpp \
+    CG_rook.cpp \
+    CG_queen.cpp
 
 HEADERS  += \
     CG_validator.h \
@@ -45,7 +50,10 @@ HEADERS  += \
     CG_board.h \
     CG_rook.h \
     CG_bishop.h \
-    CG_queen.h
+    CG_queen.h \
+    CG_pawn.h \
+    CG_knight.h \
+    CG_king.h
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
