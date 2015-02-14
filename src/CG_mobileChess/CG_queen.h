@@ -9,7 +9,8 @@ class CG_queen : public CG_piece
     Q_OBJECT
 
 public:
-    CG_queen() : CG_piece(White, "Queen")
+    CG_queen()
+        : CG_piece(White, "Queen")
     {
 
     }
