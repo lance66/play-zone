@@ -12,6 +12,15 @@ Item
     width: 400
     height: 600
 
+    /******************************************************************
+      *  Purpose: Retrieves the size of the circle, to aid in the
+      *           dynamically resizing process.
+      *
+      *    Entry: NA
+      *
+      *     Exit: Returns the size of the circle relative to the size
+      *           of the window.
+    ******************************************************************/
     function sizeOfCircle()
     {
         // 1/7 leaves spacing for the six circles along with the proper
@@ -19,16 +28,24 @@ Item
         return getSmallestOrientation() * (1/7)
     }
 
+    /*******************************************************************
+      *  Purpose: Retrieves the time it takes for the circles to
+      *           complete a revolution on the screen.
+      *
+      *    Entry: NA
+      *
+      *     Exit: Returns the duration of a revolution in milliseconds.
+    *******************************************************************/
+    function getDuration()
+    {
+        return 500
+    }
+
     anchors.horizontalCenter: parent.horizontalCenter
 
     signal matched
 
     property alias timer: timer
-
-    function getDuration()
-    {
-        return 500
-    }
 
     Timer
     {
@@ -79,7 +96,6 @@ Item
                                 getBackgroundHeight() * .25
                         }
                     }
-
 
                     NumberAnimation
                     {
@@ -132,7 +148,5 @@ Item
 
         // Adjusts font size for scalability
         font.pixelSize: getSmallestOrientation() * 0.04
-
     }
 }
-
