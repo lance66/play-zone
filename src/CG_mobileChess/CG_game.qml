@@ -224,7 +224,13 @@ Item
                 anchors.verticalCenter: parent.verticalCenter
             }
 
-            onClicked: root.finished()
+            onClicked:
+            {
+                //Flash client screen green with sound effect
+                //Flash opponent's screen green with sound effect
+                //Flash for ten seconds or until opponent makes move
+                root.finished()
+            }
 
             anchors.verticalCenter: parent.verticalCenter
         }
@@ -264,7 +270,19 @@ Item
                 anchors.verticalCenter: parent.verticalCenter
             }
 
-            onClicked: root.finished()
+            onClicked:
+            {
+                //Post results
+                lbl_player_result.visible = true
+                lbl_player_result.text = "0"
+                lbl_player_result.color = "white"
+                lbl_player_result.font.family = "Helvetica"
+                lbl_player_result.font.bold = true
+                lbl_player_result.font.pixelSize = getSmallestOrientation() * 0.04
+
+                //Notify user game is over and how many ELO points were gained/lost
+                //root.finished()
+            }
 
             anchors.verticalCenter: parent.verticalCenter
         }
