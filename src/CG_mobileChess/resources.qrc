@@ -27,5 +27,6 @@
         <file>images/cg_flag_turkey.png</file>
         <file>images/cg_pieces.png</file>
         <file>Sounds/resign.mp3</file>
+        <file>Sounds/successfulLogin.mp3</file>
     </qresource>
 </RCC>

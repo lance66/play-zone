@@ -18,6 +18,7 @@ import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
 import QtQuick.Window 2.0
 import QtGraphicalEffects 1.0
+import QtMultimedia 5.0
 
 Item
 {
@@ -45,6 +46,13 @@ Item
     function getControlWidth()
     {
         return getSmallestOrientation() * 0.9
+    }
+
+    Audio
+    {
+        id: iPod
+        source: "Sounds/successfulLogin.mp3"
+        autoLoad: true
     }
 
     Column
@@ -165,6 +173,7 @@ Item
                     tf_emailAddress.text = ""
 
                     root.loggedIn()
+                    iPod.play()
                 }
 
                 tf_confirmPassword.visible = false
