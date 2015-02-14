@@ -5,6 +5,7 @@ import QtQuick.Window 2.0
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.0
 import QtMultimedia 5.0
+import QtQuick.Dialogs 1.1
 
 Item
 {
@@ -233,9 +234,10 @@ Item
             onClicked:
             {
                 //Flash client screen green with sound effect
+
                 //Flash opponent's screen green with sound effect
                 //Flash for ten seconds or until opponent makes move
-                root.finished()
+                //root.finished()
             }
 
             anchors.verticalCenter: parent.verticalCenter
@@ -261,7 +263,7 @@ Item
         Audio
         {
             id: iPod
-            source: "resign.mp3"
+            source: "Sounds/resign.mp3"
             autoLoad: true
         }
 
@@ -304,8 +306,8 @@ Item
                 lbl_opponentResult.font.pixelSize = getSmallestOrientation() * 0.1
 
                 //Sound effect to notify user of resignation
-                iPod.autoLoad()
                 iPod.play()
+                resignDialog.open()
 
                 //Notify user game is over and how many ELO points were gained/lost
                 //root.finished()
@@ -314,6 +316,17 @@ Item
             anchors.verticalCenter: parent.verticalCenter
         }
 
+    }
+
+    MessageDialog
+    {
+        id: resignDialog
+        title: "Game Over"
+        text: "You resigned against " + lbl_opponent.text.toString()
+        onAccepted:
+        {
+            console.log(":(")
+        }
     }
 
     Component
