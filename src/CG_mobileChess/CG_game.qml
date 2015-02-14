@@ -4,6 +4,7 @@ import QtQuick.Controls.Styles 1.1
 import QtQuick.Window 2.0
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.0
+import QtMultimedia 5.0
 
 Item
 {
@@ -257,6 +258,13 @@ Item
             anchors.verticalCenter: parent.verticalCenter
         }
 
+        Audio
+        {
+            id: iPod
+            source: "resign.mp3"
+            autoLoad: true
+        }
+
         Button
         {
             id: btn_resign
@@ -275,6 +283,8 @@ Item
                 anchors.verticalCenter: parent.verticalCenter
             }
 
+
+
             onClicked:
             {
                 //Post results
@@ -292,6 +302,10 @@ Item
                 lbl_opponentResult.font.family = "Helvetica"
                 lbl_opponentResult.font.bold = true
                 lbl_opponentResult.font.pixelSize = getSmallestOrientation() * 0.1
+
+                //Sound effect to notify user of resignation
+                iPod.autoLoad()
+                iPod.play()
 
                 //Notify user game is over and how many ELO points were gained/lost
                 //root.finished()
