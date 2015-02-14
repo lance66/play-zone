@@ -77,8 +77,11 @@ Item
             visible: false
 
             anchors.verticalCenter: parent.verticalCenter
+
+            horizontalAlignment: Text.AlignRight
+            width: 100
         }
-    }
+}
 
     // Board / Clocks
     CG_board
@@ -193,6 +196,8 @@ Item
             visible: false
 
             anchors.verticalCenter: parent.verticalCenter
+            horizontalAlignment: Text.AlignRight
+            width: 100
         }
     }
 
@@ -275,10 +280,18 @@ Item
                 //Post results
                 lbl_player_result.visible = true
                 lbl_player_result.text = "0"
-                lbl_player_result.color = "white"
+                lbl_player_result.color = "yellow"
                 lbl_player_result.font.family = "Helvetica"
                 lbl_player_result.font.bold = true
-                lbl_player_result.font.pixelSize = getSmallestOrientation() * 0.04
+                lbl_player_result.font.pixelSize = getSmallestOrientation() * 0.1
+
+                //Post results
+                lbl_opponentResult.visible = true
+                lbl_opponentResult.text = "1"
+                lbl_opponentResult.color = "yellow"
+                lbl_opponentResult.font.family = "Helvetica"
+                lbl_opponentResult.font.bold = true
+                lbl_opponentResult.font.pixelSize = getSmallestOrientation() * 0.1
 
                 //Notify user game is over and how many ELO points were gained/lost
                 //root.finished()
