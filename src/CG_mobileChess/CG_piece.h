@@ -4,7 +4,6 @@
 #include <QObject>
 #include <QString>
 
-
 //Definitions
 typedef enum CG_Color { WHITE = 0, BLACK } CG_Color;
 typedef int Rank;
@@ -18,17 +17,20 @@ public:
     //Constructors
     CG_piece(CG_Color pieceColor, QString pieceName);
 
-    //Pure virtual methods
-    virtual bool move(File f_to, Rank r_to, File f_from, Rank r_from) = 0;
-    //virtual bool captured() = 0;
+    //Virtual methods
+    virtual bool move(File f_to, Rank r_to, File f_from, Rank r_from);
 
     //Mutators
     QString getPieceName();
     CG_Color getPieceColor();
+    void setPosition(File file, Rank rank);
 
 private:
     CG_Color m_pieceColor;
     QString m_pieceName;
+
+protected:
+    //virtual bool CanMove(CG_square square);
 };
 
 #endif // CG_PIECE_H

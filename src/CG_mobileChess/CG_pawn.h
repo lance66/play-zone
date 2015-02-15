@@ -11,7 +11,7 @@ public:
     CG_pawn();
 
     //Member Functions
-    virtual bool move(File f_to, Rank r_to, File f_from, Rank r_from);
+    bool move(File f_to, Rank r_to, File f_from, Rank r_from);
     bool canPromote();
     bool enPassant();
     //CG_piece promote(CG_piece promoteTo);

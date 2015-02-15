@@ -2,7 +2,7 @@
 
 //Default constructor
 CG_knight::CG_knight()
-    : CG_piece(WHITE, "knight")
+    : CG_piece(WHITE, "Knight")
 {
 
 }

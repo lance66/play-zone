@@ -41,14 +41,61 @@ public slots:
 //            }
 //        }
 //    }
-//    QString getSquare(int source_file, int source_rank)
-//    {
-//        // Temporary just for testing
-//        return "Pawn0";
+    QString getSquare(int source_rank, int source_file)
+    {
+        //Black pieces
+        if(source_file == 0 && source_rank == 0)
+            return "Rook1";
+        else if (source_file == 1 && source_rank == 0)
+            return "Knight1";
+        else if (source_file == 2 && source_rank == 0)
+            return "Bishop1";
+        else if (source_file == 3 && source_rank == 0)
+            return "Queen1";
+        else if (source_file == 4 && source_rank == 0)
+            return "King1";
+        else if (source_file == 5 && source_rank == 0)
+            return "Bishop1";
+        else if (source_file == 6 && source_rank == 0)
+            return "Knight1";
+        if(source_file == 7 && source_rank == 0)
+            return "Rook1";
 
-//        // The below should be uncommented and the above deleted once m_board is filled
-//        //return m_board[source_file][source_rank].getPieceName() + ((QString) m_board[source_file][source_rank].getPiece()->getPieceColor());
-//    }
+        //White pieces
+        else if (source_file == 0 && source_rank == 7)
+            return "Rook0";
+        else if (source_file == 1 && source_rank == 7)
+            return "Knight0";
+        else if (source_file == 2 && source_rank == 7)
+            return "Bishop0";
+        else if (source_file == 3 && source_rank == 7)
+            return "Queen0";
+        else if (source_file == 4 && source_rank == 7)
+            return "King0";
+        else if (source_file == 5 && source_rank == 7)
+            return "Bishop0";
+        else if (source_file == 6 && source_rank == 7)
+            return "Knight0";
+        else if (source_file == 7 && source_rank == 7)
+            return "Rook0";
+
+        //Don't forget about the pawns
+
+        //Black pawns
+        else if(source_rank == 1)
+            return "Pawn1";
+
+        //White pawns
+        else if(source_rank == 6)
+            return "Pawn0";
+
+        //Empty squares
+        else
+            return "";
+
+        // The below should be uncommented and the above deleted once m_board is filled
+        //return m_board[source_file][source_rank].getPieceName() + ((QString) m_board[source_file][source_rank].getPiece()->getPieceColor());
+    }
 
 private:
     CG_piece * m_board[8][8];
