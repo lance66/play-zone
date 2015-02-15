@@ -9,6 +9,7 @@ TEMPLATE = app
 
 QT += qml quick widgets
 QT += sql
+QT += multimedia
 CONFIG += resources_big
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
