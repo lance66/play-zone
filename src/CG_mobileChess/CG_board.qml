@@ -94,6 +94,8 @@ Item
             frame = 10
         else if (piece === "Pawn0")
             frame = 11
+        else
+            frame = 12
 
         return frame
     }
