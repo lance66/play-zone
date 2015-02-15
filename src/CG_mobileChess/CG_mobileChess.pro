@@ -39,7 +39,9 @@ SOURCES += main.cpp\
     CG_bishop.cpp \
     CG_knight.cpp \
     CG_rook.cpp \
-    CG_queen.cpp
+    CG_queen.cpp \
+    CG_piece.cpp \
+    CG_king.cpp
 
 HEADERS  += \
     CG_validator.h \

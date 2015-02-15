@@ -6,25 +6,15 @@
 
 class CG_bishop : public CG_piece
 {
+    //Macro for all QObjects
     Q_OBJECT
 
 public:
-    CG_bishop() : CG_piece(White, "Bishop")
-    {
+    //Constructors
+    CG_bishop();
 
-    }
-    virtual bool move(File f_to, Rank r_to, File f_from, Rank r_from)
-    {
-        bool canMakeMove = false;
-
-        //Check to see if Bishop only moves diagonally.
-        if ( abs(f_from - f_to) == abs(r_to - r_from) )
-        {
-            canMakeMove = true;
-        }
-
-        return canMakeMove;
-    }
+    //Member functions
+    bool move(File f_to, Rank r_to, File f_from, Rank r_from);
 
 private:
 

@@ -100,7 +100,7 @@ Item
     Row
     {
         anchors.left: cg_board.right
-        y: cg_board.y
+        anchors.bottom: cg_board.top  //y: cg_board.y
 
         Rectangle
         {
@@ -161,8 +161,8 @@ Item
     Row
     {
         id: rowPlayerInfo
-        x: getSmallestOrientation() == getBackgroundHeight() ? (cg_board.x - width) : cg_board.x
-        y: getSmallestOrientation() == getBackgroundHeight() ? ((cg_board.y + cg_board.height) - height) : (cg_board.y + cg_board.height)
+        x: getSmallestOrientation() === getBackgroundHeight() ? (cg_board.x - width) : cg_board.x
+        y: getSmallestOrientation() === getBackgroundHeight() ? ((cg_board.y + cg_board.height) - height) : (cg_board.y + cg_board.height)
         height: getBackgroundHeight() * (1/6)
 
         Image
@@ -210,7 +210,7 @@ Item
         anchors.horizontalCenter: parent.horizontalCenter
         height: getBackgroundHeight() * (1/6)
 
-        y: getSmallestOrientation() == getBackgroundHeight() ? getBackgroundHeight() - height : (rowPlayerInfo.y + rowPlayerInfo.height)
+        y: getSmallestOrientation() === getBackgroundHeight() ? getBackgroundHeight() - height : (rowPlayerInfo.y + rowPlayerInfo.height)
         spacing: getSmallestOrientation() * 0.04
 
         Button
@@ -237,7 +237,7 @@ Item
 
                 //Flash opponent's screen green with sound effect
                 //Flash for ten seconds or until opponent makes move
-                //root.finished()
+                root.finished()
             }
 
             anchors.verticalCenter: parent.verticalCenter
@@ -307,9 +307,11 @@ Item
 
                 //Sound effect to notify user of resignation
                 iPod.play()
-                resignDialog.open()
 
                 //Notify user game is over and how many ELO points were gained/lost
+                resignDialog.open()
+
+                //When user presses OK or close, bring him back to the lobby.
                 //root.finished()
             }
 

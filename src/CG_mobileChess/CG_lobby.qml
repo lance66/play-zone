@@ -116,8 +116,11 @@ Item
             Layout.preferredWidth: getControlWidth()
             Layout.preferredHeight: getControlHeight()
 
-            onClicked: {root.startGame()
-                        iPod.play()}
+            onClicked:
+            {
+                root.startGame()
+                iPod.play()
+            }
         }
 
         Button

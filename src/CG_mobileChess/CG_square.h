@@ -10,31 +10,41 @@ class CG_square : public QObject
 {
     Q_OBJECT
 public:
+    //Default constructor
     CG_square();
-    QString getPieceName() const
-    {
-        QString temp_name = "";
 
-        if(m_piece != 0)
-        {
-            temp_name = m_piece->getPieceName();
-        }
+    //Mutators
+    File getFile();
+    Rank getRank();
+    void setFile(File file);
+    void setRank(Rank rank);
+    void setSquare(File file, Rank rank);
 
-        return temp_name;
-    }
-    CG_piece * getPiece() const
-    {
-        return m_piece;
-    }
-    void setPiece(CG_piece * piece)
-    {
-        m_piece = piece;
-    }
+//    QString getPieceName() const
+//    {
+//        QString temp_name = "";
+
+//        if(m_piece != 0)
+//        {
+//            temp_name = m_piece->getPieceName();
+//        }
+
+//        return temp_name;
+//    }
+//    CG_piece * getPiece() const
+//    {
+//        return m_piece;
+//    }
+//    void setPiece(CG_piece * piece)
+//    {
+//        m_piece = piece;
+//    }
 
 private:
     File m_file;
     Rank m_rank;
-    CG_piece * m_piece;
+
+    //CG_piece * m_piece;
 };
 
 #endif // CG_SQUARE_H

@@ -3,7 +3,10 @@
 
 #include <QObject>
 #include <QString>
-enum Color { White, Black };
+
+
+//Definitions
+typedef enum CG_Color { WHITE = 0, BLACK } CG_Color;
 typedef int Rank;
 enum File { a=1, b, c, d, e, f, g, h };
 
@@ -12,27 +15,19 @@ class CG_piece : public QObject
     Q_OBJECT
 
 public:
-    virtual bool move(File f_to, Rank r_to,
-              File f_from, Rank r_from) = 0;
-    virtual bool captured() = 0;
+    //Constructors
+    CG_piece(CG_Color pieceColor, QString pieceName);
 
-    CG_piece(Color pieceColor, QString pieceName) : m_pieceColor(pieceColor), m_pieceName(pieceName)
-    {
+    //Pure virtual methods
+    virtual bool move(File f_to, Rank r_to, File f_from, Rank r_from) = 0;
+    //virtual bool captured() = 0;
 
-    }
-
-    QString getPieceName()
-    {
-        return m_pieceName;
-    }
-
-    Color getPieceColor()
-    {
-        return m_pieceColor;
-    }
+    //Mutators
+    QString getPieceName();
+    CG_Color getPieceColor();
 
 private:
-    Color m_pieceColor;
+    CG_Color m_pieceColor;
     QString m_pieceName;
 };
 
