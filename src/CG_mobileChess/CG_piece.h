@@ -22,7 +22,7 @@ public:
 
     //Mutators
     QString getPieceName() const;
-    CG_Color getPieceColor() const;
+    int getPieceColor() const;
     void setPosition(File file, Rank rank);
 
 private:

@@ -20,7 +20,7 @@ QString CG_piece::getPieceName() const
     return m_pieceName;
 }
 
-CG_Color CG_piece::getPieceColor() const
+int CG_piece::getPieceColor() const
 {
-    return m_pieceColor;
+    return (int) m_pieceColor;
 }

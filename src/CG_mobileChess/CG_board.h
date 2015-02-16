@@ -52,11 +52,14 @@ public slots:
                 }
             }
         }
+
+        //CG_square temp = m_board[f_source][r_source].getPiece();
+
     }
-    QString getSquare(int source_rank, int source_file)
+    QString getSquare(int source_file, int source_rank)
     {
         //Black pieces
-        if(source_file == 0 && source_rank == 0)
+        /*if(source_file == 0 && source_rank == 0)
             return "Rook1";
         else if (source_file == 1 && source_rank == 0)
             return "Knight1";
@@ -103,10 +106,15 @@ public slots:
 
         //Empty squares
         else
-            return "";
+            return "";*/
 
         // The below should be uncommented and the above deleted once m_board is filled
-        //return m_board[source_file][source_rank].getPieceName() + ((QString) m_board[source_file][source_rank].getPiece()->getPieceColor());
+        char temp = '\0';
+
+        if (m_board[source_file][source_rank].getPiece() != nullptr)
+            temp = m_board[source_file][source_rank].getPiece()->getPieceColor() + 48;
+
+        return m_board[source_file][source_rank].getPieceName() + QString(temp);
     }
 
 private:

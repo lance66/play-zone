@@ -6,6 +6,13 @@ INPUT(
 ./release\CG_user.o
 ./release\CG_board.o
 ./release\CG_square.o
+./release\CG_pawn.o
+./release\CG_bishop.o
+./release\CG_knight.o
+./release\CG_rook.o
+./release\CG_queen.o
+./release\CG_piece.o
+./release\CG_king.o
 ./release\moc_CG_validator.o
 ./release\moc_CG_dbManager.o
 ./release\moc_CG_user.o

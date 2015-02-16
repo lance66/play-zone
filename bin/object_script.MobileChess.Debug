@@ -6,6 +6,13 @@ INPUT(
 ./debug\CG_user.o
 ./debug\CG_board.o
 ./debug\CG_square.o
+./debug\CG_pawn.o
+./debug\CG_bishop.o
+./debug\CG_knight.o
+./debug\CG_rook.o
+./debug\CG_queen.o
+./debug\CG_piece.o
+./debug\CG_king.o
 ./debug\moc_CG_validator.o
 ./debug\moc_CG_dbManager.o
 ./debug\moc_CG_user.o
