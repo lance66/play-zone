@@ -14,11 +14,16 @@ Item
     property int frame:0
     property int frameCount: 0
 
+    // Used for keeping the proportion of the
+    // width to 1/12 of the width of the tilesheet
+    // for each piece.
     onWidthChanged:
     {
         image.width = root.width * 12
     }
 
+    // Used for adjusting the height of the tilesheet
+    // to the full size of the piece height
     onHeightChanged:
     {
         image.height = root.height
@@ -27,9 +32,14 @@ Item
     Image
     {
          id: image
-         x: -root.width*root.frame
-     }
 
+         // Moves the image to the correct position
+         // to display the current frame.
+         x: -root.width * root.frame
+    }
+
+    // Used for animation through the tilesheet if
+    // we ever want to use this in the future.
     Timer
     {
         id:timer
@@ -43,6 +53,7 @@ Item
         }
     }
 
+    // Used to increment through frames
     function nextFrame()
     {
         root.frame = ++root.frame  % root.frameCount

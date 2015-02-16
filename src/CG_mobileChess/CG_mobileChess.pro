@@ -27,7 +27,7 @@ deployment.files += chessgames.db
 deployment.path = /assets
 INSTALLS += deployment
 
-TARGET = MobileChess
+TARGET = Chessgames
 
 
 SOURCES += main.cpp\

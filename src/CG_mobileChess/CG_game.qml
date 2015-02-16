@@ -15,32 +15,13 @@ Item
 
     signal finished
 
-    function setBoardSize()
-    {
-        var temp = 0
-
-        if (getSmallestOrientation() == getBackgroundHeight())
-        {
-            cg_board.width = getBackgroundHeight() * (2/3)
-            cg_board.height = getBackgroundHeight() * (2/3)
-            temp = getBackgroundHeight() * (2/3)
-        }
-        else
-        {
-            cg_board.width = getBackgroundHeight() / 2
-            cg_board.height = getBackgroundHeight() / 2
-            temp = getBackgroundHeight() / 2
-        }
-
-        return temp
-    }
-
     // Opponent Info
     Row
     {
         id: rowOpponentInfo
-        x: getSmallestOrientation() == getBackgroundHeight() ? (cg_board.x - width) : cg_board.x
-        y: getSmallestOrientation() == getBackgroundHeight() ? cg_board.y : (cg_board.y - height)
+
+        anchors.top: parent.top
+        anchors.left: parent.left
 
         height: getBackgroundHeight() * (1/6)
 
@@ -69,8 +50,6 @@ Item
             font.pixelSize: getSmallestOrientation() * 0.04
 
             anchors.verticalCenter: parent.verticalCenter
-            //anchors.leftMargin: parent.left
-
         }
 
         Text
@@ -89,18 +68,19 @@ Item
     CG_board
     {
         id: cg_board
-        width: setBoardSize()
-        height: setBoardSize()
+        width: root.setBoardSize()
+        height: root.setBoardSize()
 
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: isLandscape() === false ? parent.left : rowDrawAndResign.left
+
         y: getBackgroundHeight() * (1/6)
     }
 
     // Opponent LED / Clock
     Row
     {
-        anchors.left: cg_board.right
-        anchors.bottom: cg_board.top  //y: cg_board.y
+        anchors.right: parent.right
+        anchors.top: cg_board.top
 
         Rectangle
         {
@@ -130,7 +110,7 @@ Item
     Row
     {
         id: rowPlayerLED
-        anchors.left: cg_board.right
+        anchors.right: parent.right
         anchors.bottom: cg_board.bottom
 
         Rectangle
@@ -161,8 +141,10 @@ Item
     Row
     {
         id: rowPlayerInfo
-        x: getSmallestOrientation() === getBackgroundHeight() ? (cg_board.x - width) : cg_board.x
-        y: getSmallestOrientation() === getBackgroundHeight() ? ((cg_board.y + cg_board.height) - height) : (cg_board.y + cg_board.height)
+
+        anchors.top: cg_board.bottom
+        anchors.left: parent.left
+
         height: getBackgroundHeight() * (1/6)
 
         Image
@@ -207,10 +189,11 @@ Item
     Row
     {
         id: rowDrawAndResign
-        anchors.horizontalCenter: parent.horizontalCenter
-        height: getBackgroundHeight() * (1/6)
 
-        y: getSmallestOrientation() === getBackgroundHeight() ? getBackgroundHeight() - height : (rowPlayerInfo.y + rowPlayerInfo.height)
+        height: getBackgroundHeight() * (1/6)
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: rowPlayerInfo.bottom
+
         spacing: getSmallestOrientation() * 0.04
 
         Button
@@ -391,5 +374,19 @@ Item
                 text: control.text
             }
         }
+    }
+
+    /**************************************************************
+    *	  Purpose:  Returns the appropriate size the chessboard
+    *               should be.
+    *
+    *     Entry:    User has entered a game.
+    *
+    *     Exit:     The chessboard is set to the appropriate size.
+    ****************************************************************/
+
+    function setBoardSize()
+    {
+        return getBackgroundHeight() / 2
     }
 }

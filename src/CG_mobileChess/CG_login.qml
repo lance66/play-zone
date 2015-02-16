@@ -85,8 +85,8 @@ Item
             placeholderText: "Chessgames username"
             style: cgTextFieldStyle
 
-            // For testing purposes I inputted Trudodyr automatically
-            text: "Trudodyr"
+            // For testing purposes I inputted StarWars automatically
+            text: "StarWars"
 
             // Adjusts the font size for scalability
             font.pixelSize: getSmallestOrientation() * 0.03
@@ -105,8 +105,8 @@ Item
             style: cgTextFieldStyle
             echoMode: TextInput.Password
 
-            // For testing purposes I inputted Trudodyr automatically
-            text: "Trudodyr1"
+            // For testing purposes I inputted StarWars automatically
+            text: "StarWars1"
 
             // Adjusts the font size for scalability
             font.pixelSize: getSmallestOrientation() * 0.03

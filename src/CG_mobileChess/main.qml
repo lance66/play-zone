@@ -111,4 +111,9 @@ ApplicationWindow {
     {
         return background.width < background.height ? background.width : background.height
     }
+
+    function isLandscape()
+    {
+        return getSmallestOrientation() == getBackgroundHeight() ? true : false
+    }
 }

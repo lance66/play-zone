@@ -10,7 +10,7 @@
 /***************************************************************************
  * Author:                                                        ChessGames
  * Date Created:                                                  11/07/2014
- * Date Last Modified:                                            2/12/2015
+ * Date Last Modified:                                            2/15/2015
  * File Name:                                                   src/main.cpp
  *
  * Overview: Creates the foundation for our login application. Sets up the
