@@ -15,12 +15,12 @@ bool CG_piece::move(File f_to, Rank r_to, File f_from, Rank r_from)
 }
 
 //Member functions
-QString CG_piece::getPieceName()
+QString CG_piece::getPieceName() const
 {
     return m_pieceName;
 }
 
-CG_Color CG_piece::getPieceColor()
+CG_Color CG_piece::getPieceColor() const
 {
     return m_pieceColor;
 }

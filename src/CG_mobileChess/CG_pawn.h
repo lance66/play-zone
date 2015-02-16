@@ -8,7 +8,7 @@ class CG_pawn : public CG_piece
 {
 public:
     //Constructors
-    CG_pawn();
+    CG_pawn(CG_Color color = WHITE);
 
     //Member Functions
     bool move(File f_to, Rank r_to, File f_from, Rank r_from);

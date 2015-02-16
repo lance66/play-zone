@@ -21,8 +21,8 @@ public:
     virtual bool move(File f_to, Rank r_to, File f_from, Rank r_from);
 
     //Mutators
-    QString getPieceName();
-    CG_Color getPieceColor();
+    QString getPieceName() const;
+    CG_Color getPieceColor() const;
     void setPosition(File file, Rank rank);
 
 private:

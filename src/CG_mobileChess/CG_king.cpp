@@ -1,8 +1,8 @@
 #include "CG_king.h"
 
 //Default constructor
-CG_king::CG_king()
-    :CG_piece(WHITE, "King")
+CG_king::CG_king(CG_Color color)
+    :CG_piece(color, "King")
 {
 
 }

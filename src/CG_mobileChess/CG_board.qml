@@ -149,7 +149,7 @@ Item
                         ending.y = parent.y
                         ending_index = index
 
-                        Board.move(getRow(starting_index), getColumn(starting_index), getRow(ending_index), getColumn(ending_index))
+                        Board.move(getColumn(starting_index), getRow(starting_index), getColumn(ending_index), getRow(ending_index))
 
                         starting_position = false
                     }

@@ -1,8 +1,8 @@
 #include "CG_queen.h"
 
 //Default constructor
-CG_queen::CG_queen()
-    : CG_piece(WHITE, "Queen")
+CG_queen::CG_queen(CG_Color color)
+    : CG_piece(color, "Queen")
 {
 
 }

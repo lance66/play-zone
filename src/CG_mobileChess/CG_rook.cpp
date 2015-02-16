@@ -1,8 +1,8 @@
 #include "CG_rook.h"
 
 //Default constructor
-CG_rook::CG_rook()
-    : CG_piece(WHITE, "Rook")
+CG_rook::CG_rook(CG_Color color)
+    : CG_piece(color, "Rook")
 {
 
 }

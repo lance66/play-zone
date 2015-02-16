@@ -1,8 +1,8 @@
 #include "CG_bishop.h"
 
 //Default constructor
-CG_bishop::CG_bishop()
-    : CG_piece(WHITE, "Bishop")
+CG_bishop::CG_bishop(CG_Color color)
+    : CG_piece(color, "Bishop")
 {
 
 }

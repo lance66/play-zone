@@ -10,7 +10,7 @@ class CG_queen : public CG_piece
 
 public:
     //Constructors
-    CG_queen();
+    CG_queen(CG_Color color = WHITE);
 
     //Member functions
     bool move(File f_to, Rank r_to, File f_from, Rank r_from);

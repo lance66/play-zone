@@ -1,8 +1,8 @@
 #include "CG_pawn.h"
 
 //Default constructor
-CG_pawn::CG_pawn()
-    : CG_piece(WHITE, "Pawn")
+CG_pawn::CG_pawn(CG_Color color)
+    : CG_piece(color, "Pawn")
 {
 
 }

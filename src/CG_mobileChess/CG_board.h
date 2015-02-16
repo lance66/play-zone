@@ -5,8 +5,6 @@
 #include <QString>
 #include "CG_square.h"
 
-//enum CG_Color {WHITE, BLACK};
-
 class CG_board : public QObject
 {
     Q_OBJECT
@@ -25,22 +23,36 @@ public:
 public slots:
 
 
-
-
 //    void move(int f_source, int r_source, int f_dest, int r_dest)
 //    {
-//        if(m_board[f_source][r_source].getPiece() != 0)
+//        if(m_board[f_source][r_source] != 0)
 //        {
-//            if(m_board[f_dest][r_dest].getPiece() == 0)
+//            if(m_board[f_dest][r_dest] == 0)
 //            {
-//                if(m_board[f_source][r_source].getPiece()->move((File) f_source, (Rank) r_source, (File) f_dest, (Rank) r_dest))
+//                if(m_board[f_source][r_source]->move((File)f_source, r_source, (File)f_dest, r_dest))
 //                {
-//                    m_board[f_dest][r_dest].setPiece(m_board[f_source][r_source].getPiece());
-//                    m_board[f_source][r_source].setPiece(0);
+//                    m_board[f_dest][r_dest] = m_board[f_source][r_source];
+//                    m_board[f_source][r_source] = 0;
 //                }
 //            }
 //        }
 //    }
+
+
+    void move(int f_source, int r_source, int f_dest, int r_dest)
+    {
+        if(m_board[f_source][r_source].getPiece() != nullptr)
+        {
+            if(m_board[f_dest][r_dest].getPiece() == nullptr)
+            {
+                if(m_board[f_source][r_source].getPiece()->move((File) f_source, (Rank) r_source, (File) f_dest, (Rank) r_dest))
+                {
+                    m_board[f_dest][r_dest].setPiece(m_board[f_source][r_source].getPiece());
+                    m_board[f_source][r_source].setPiece(0);
+                }
+            }
+        }
+    }
     QString getSquare(int source_rank, int source_file)
     {
         //Black pieces
@@ -98,11 +110,10 @@ public slots:
     }
 
 private:
-    CG_piece * m_board[8][8];
-    CG_square enPassant;
-    CG_Color turn;
+    //CG_piece * m_board[8][8];
+    //CG_Color turn;
 
-    //CG_square m_board[8][8];
+    CG_square m_board[8][8];
 };
 
 #endif // CG_BOARD_H

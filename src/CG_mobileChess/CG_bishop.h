@@ -11,7 +11,7 @@ class CG_bishop : public CG_piece
 
 public:
     //Constructors
-    CG_bishop();
+    CG_bishop(CG_Color color = WHITE);
 
     //Member functions
     bool move(File f_to, Rank r_to, File f_from, Rank r_from);
