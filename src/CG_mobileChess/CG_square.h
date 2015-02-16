@@ -23,65 +23,19 @@ public:
     CG_square();
 
     //Mutators
-    File getFile();
-    Rank getRank();
+    File getFile() const;
+    Rank getRank() const;
     void setFile(File file);
     void setRank(Rank rank);
     void setSquare(File file, Rank rank);
 
-    QString getPieceName() const
-    {
-        QString temp_name = "";
+    QString getPieceName() const;
 
-        if(m_piece != 0)
-        {
-            temp_name = m_piece->getPieceName();
-        }
+    CG_piece * getPiece() const;
 
-        return temp_name;
-    }
-    CG_piece * getPiece() const
-    {
-        return m_piece;
-    }
+    void setPiece(CG_piece * piece);
 
-    void setPiece(CG_piece * piece)
-    {
-        m_piece = piece;
-    }
-
-    void setPiece(CG_Color color, QString name)
-    {
-        if ( m_piece != nullptr )
-        {
-            delete m_piece;
-        }
-
-        if ( name == "Pawn" )
-        {
-            m_piece = new CG_pawn(color);
-        }
-        else if ( name == "Rook" )
-        {
-            m_piece = new CG_rook(color);
-        }
-        else if ( name == "Knight" )
-        {
-            m_piece = new CG_knight(color);
-        }
-        else if ( name == "Bishop" )
-        {
-            m_piece = new CG_bishop(color);
-        }
-        else if ( name == "Queen" )
-        {
-            m_piece = new CG_queen(color);
-        }
-        else
-        {
-            m_piece = new CG_king(color);
-        }
-    }
+    void setPiece(CG_Color color, QString name);
 
 private:
     File m_file;

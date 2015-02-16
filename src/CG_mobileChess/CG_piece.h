@@ -23,14 +23,12 @@ public:
     //Mutators
     QString getPieceName() const;
     int getPieceColor() const;
-    void setPosition(File file, Rank rank);
 
 private:
     CG_Color m_pieceColor;
     QString m_pieceName;
 
 protected:
-    //virtual bool CanMove(CG_square square);
 };
 
 #endif // CG_PIECE_H

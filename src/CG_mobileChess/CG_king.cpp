@@ -12,7 +12,13 @@ bool CG_king::move(File f_to, Rank r_to, File f_from, Rank r_from)
 {
     bool canMakeMove = false;
 
-    //King logic here
+    //This checks to see if the King moved 1 space in any
+    //direction.  Eventually, logic will need to be applied for
+    //castling purposes.
+    if ( abs(f_to - f_from) == 1 || abs(r_to - r_from) == 1)
+    {
+        canMakeMove = true;
+    }
 
     return canMakeMove;
 }
