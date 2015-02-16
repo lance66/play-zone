@@ -14,40 +14,40 @@ CG_board::CG_board() : m_board()
     }
 
     //Set up all of the white pieces on the board.
-    m_board[0][0].setPiece(WHITE, "Rook");
-    m_board[0][1].setPiece(WHITE, "Knight");
-    m_board[0][2].setPiece(WHITE, "Bishop");
-    m_board[0][3].setPiece(WHITE, "Queen");
-    m_board[0][4].setPiece(WHITE, "King");
-    m_board[0][5].setPiece(WHITE, "Bishop");
-    m_board[0][6].setPiece(WHITE, "Knight");
-    m_board[0][7].setPiece(WHITE, "Rook");
-    m_board[1][0].setPiece(WHITE, "Pawn");
-    m_board[1][1].setPiece(WHITE, "Pawn");
-    m_board[1][2].setPiece(WHITE, "Pawn");
-    m_board[1][3].setPiece(WHITE, "Pawn");
-    m_board[1][4].setPiece(WHITE, "Pawn");
-    m_board[1][5].setPiece(WHITE, "Pawn");
-    m_board[1][6].setPiece(WHITE, "Pawn");
-    m_board[1][7].setPiece(WHITE, "Pawn");
+    m_board[0][0].setPiece(BLACK, "Rook");
+    m_board[0][1].setPiece(BLACK, "Knight");
+    m_board[0][2].setPiece(BLACK, "Bishop");
+    m_board[0][3].setPiece(BLACK, "Queen");
+    m_board[0][4].setPiece(BLACK, "King");
+    m_board[0][5].setPiece(BLACK, "Bishop");
+    m_board[0][6].setPiece(BLACK, "Knight");
+    m_board[0][7].setPiece(BLACK, "Rook");
+    m_board[1][0].setPiece(BLACK, "Pawn");
+    m_board[1][1].setPiece(BLACK, "Pawn");
+    m_board[1][2].setPiece(BLACK, "Pawn");
+    m_board[1][3].setPiece(BLACK, "Pawn");
+    m_board[1][4].setPiece(BLACK, "Pawn");
+    m_board[1][5].setPiece(BLACK, "Pawn");
+    m_board[1][6].setPiece(BLACK, "Pawn");
+    m_board[1][7].setPiece(BLACK, "Pawn");
 
     //Set up all of the black pieces on the board.
-    m_board[7][0].setPiece(BLACK, "Rook");
-    m_board[7][1].setPiece(BLACK, "Knight");
-    m_board[7][2].setPiece(BLACK, "Bishop");
-    m_board[7][3].setPiece(BLACK, "Queen");
-    m_board[7][4].setPiece(BLACK, "King");
-    m_board[7][5].setPiece(BLACK, "Bishop");
-    m_board[7][6].setPiece(BLACK, "Knight");
-    m_board[7][7].setPiece(BLACK, "Rook");
-    m_board[6][0].setPiece(BLACK, "Pawn");
-    m_board[6][1].setPiece(BLACK, "Pawn");
-    m_board[6][2].setPiece(BLACK, "Pawn");
-    m_board[6][3].setPiece(BLACK, "Pawn");
-    m_board[6][4].setPiece(BLACK, "Pawn");
-    m_board[6][5].setPiece(BLACK, "Pawn");
-    m_board[6][6].setPiece(BLACK, "Pawn");
-    m_board[6][7].setPiece(BLACK, "Pawn");
+    m_board[7][0].setPiece(WHITE, "Rook");
+    m_board[7][1].setPiece(WHITE, "Knight");
+    m_board[7][2].setPiece(WHITE, "Bishop");
+    m_board[7][3].setPiece(WHITE, "Queen");
+    m_board[7][4].setPiece(WHITE, "King");
+    m_board[7][5].setPiece(WHITE, "Bishop");
+    m_board[7][6].setPiece(WHITE, "Knight");
+    m_board[7][7].setPiece(WHITE, "Rook");
+    m_board[6][0].setPiece(WHITE, "Pawn");
+    m_board[6][1].setPiece(WHITE, "Pawn");
+    m_board[6][2].setPiece(WHITE, "Pawn");
+    m_board[6][3].setPiece(WHITE, "Pawn");
+    m_board[6][4].setPiece(WHITE, "Pawn");
+    m_board[6][5].setPiece(WHITE, "Pawn");
+    m_board[6][6].setPiece(WHITE, "Pawn");
+    m_board[6][7].setPiece(WHITE, "Pawn");
 }
 
 void CG_board::move(int f_source, int r_source, int f_dest, int r_dest)
