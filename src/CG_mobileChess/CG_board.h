@@ -16,8 +16,8 @@ public:
     //Member functions
     CG_piece *piecePosition(CG_square square);
     CG_piece *piecePosition(File file, Rank rank);
-    void move(CG_square from, CG_square to);
-    void move(CG_square from, CG_square to, CG_square enPassant);
+    //void move(CG_square from, CG_square to);
+    //void move(CG_square from, CG_square to, CG_square enPassant);
     void tryMove(CG_square from, CG_square to);
 
 public slots:
@@ -39,9 +39,11 @@ public slots:
 //    }
 
 
-    void move(int f_source, int r_source, int f_dest, int r_dest)
+    QString move(int f_source, int r_source, int f_dest, int r_dest)
     {
-        if(m_board[f_source][r_source].getPiece() != nullptr)
+        QString temp = "";
+
+        /*if(m_board[f_source][r_source].getPiece() != nullptr)
         {
             if(m_board[f_dest][r_dest].getPiece() == nullptr)
             {
@@ -49,12 +51,18 @@ public slots:
                 {
                     m_board[f_dest][r_dest].setPiece(m_board[f_source][r_source].getPiece());
                     m_board[f_source][r_source].setPiece(0);
+
+                    temp = m_board[f_source][r_source].getPieceName();
                 }
             }
-        }
+        }*/
 
-        //CG_square temp = m_board[f_source][r_source].getPiece();
+        m_board[f_dest][r_dest].setPiece(m_board[f_source][r_source].getPiece());
+        m_board[f_source][r_source].setPiece(0);
 
+        temp = m_board[f_source][r_source].getPieceName() + ", " + m_board[f_dest][r_dest].getPieceName();
+
+        return temp;
     }
     QString getSquare(int source_file, int source_rank)
     {
@@ -113,6 +121,8 @@ public slots:
 
         if (m_board[source_file][source_rank].getPiece() != nullptr)
             temp = m_board[source_file][source_rank].getPiece()->getPieceColor() + 48;
+        else
+            return "";
 
         return m_board[source_file][source_rank].getPieceName() + QString(temp);
     }

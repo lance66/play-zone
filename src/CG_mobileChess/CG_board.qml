@@ -100,6 +100,11 @@ Item
         return frame
     }
 
+    function setColor()
+    {
+        return "#FF0000"
+    }
+
     Image
     {
         id: img_boardTexture
@@ -116,6 +121,7 @@ Item
 
         Rectangle
         {
+            id: rect
             color: getWhiteOrBlack(index)
 
             opacity: 0.45
@@ -124,38 +130,12 @@ Item
 
             x: getX(index)
             y: getY(index)
-
-            MouseArea
-            {
-                anchors.fill: parent
-                onClicked:
-                {
-                    pawn.x = parent.x
-                    pawn.y = parent.y
-
-                    if (starting_position == false)
-                    {
-                        starting.x = parent.x
-                        starting.y = parent.y
-                        starting_position = true
-                        starting_index = index
-
-                        ending.visible = false
-                    }
-                    else
-                    {
-                        ending.visible = true
-                        ending.x = parent.x
-                        ending.y = parent.y
-                        ending_index = index
-
-                        Board.move(getColumn(starting_index), getRow(starting_index), getColumn(ending_index), getRow(ending_index))
-
-                        starting_position = false
-                    }
-                }
-            }
         }
+    }
+
+    Text
+    {
+        id: test
     }
 
     // Display Pieces
@@ -175,12 +155,48 @@ Item
 
             CG_piece
             {
+                id: piece
                 frame: setPiece(Board.getSquare(getRow(index), getColumn(index)))
                 width: getSquareSize()
                 height: getSquareSize()
                 source: "images/cg_pieces.png"
                 running: false
                 frameCount: 12
+            }
+
+            MouseArea
+            {
+                anchors.fill: parent
+                onClicked:
+                {
+                    if (starting_position == false)
+                    {
+                        starting.x = parent.x
+                        starting.y = parent.y
+                        starting_position = true
+                        starting_index = index
+
+
+                        piece.frame = setPiece("")
+
+                        ending.visible = false
+                    }
+                    else
+                    {
+                        starting.visible = true
+                        ending.visible = true
+
+                        ending.x = parent.x
+                        ending.y = parent.y
+                        ending_index = index
+
+                        piece: Board.getSquare(getRow(starting_index), getColumn(starting_index)) !== "" ? Board.move(getRow(starting_index), getColumn(starting_index), getRow(ending_index), getColumn(ending_index)) : piece
+                        //test.text = Board.move(getRow(starting_index), getColumn(starting_index), getRow(ending_index), getColumn(ending_index))
+                        piece.frame = setPiece(Board.getSquare(getRow(ending_index), getColumn(ending_index)))
+
+                        starting_position = false
+                    }
+                }
             }
         }
     }
@@ -194,6 +210,7 @@ Item
         opacity: 0.8
         width: getSquareSize()
         height: getSquareSize()
+        visible: false
 
         x: getX(51)
         y: getY(51)
@@ -208,27 +225,9 @@ Item
         opacity: 0.8
         width: getSquareSize()
         height: getSquareSize()
-
-        x: getX(51)
-        y: getY(51)
-    }
-
-    // This is going to be eliminated soon in favor of the
-    // business layer controlling the movement.
-    // The presentation layer will send move requests, but
-    // only display from the business layer.
-    Image
-    {
-        id: pawn
-        source: "images/cg_temp_pawn.png"
-        width: getSquareSize()
-        height: getSquareSize()
         visible: false
 
         x: getX(51)
         y: getY(51)
-
-        Behavior on x { SpringAnimation { spring: 2; damping: 0.2; mass: 0.8 } }
-        Behavior on y { SpringAnimation { spring: 2; damping: 0.2; mass: 0.8 } }
     }
 }

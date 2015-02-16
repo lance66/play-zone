@@ -7,7 +7,7 @@
 //Definitions
 typedef enum CG_Color { WHITE = 0, BLACK } CG_Color;
 typedef int Rank;
-enum File { a=1, b, c, d, e, f, g, h };
+enum File { a=0, b, c, d, e, f, g, h };
 
 class CG_piece : public QObject
 {
