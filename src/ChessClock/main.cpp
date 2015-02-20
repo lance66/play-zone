@@ -5,12 +5,7 @@
 #include <QVBoxLayout>
 #include <QWindow>
 #include "chessclock.h"
-
-enum
-{
-    WHITE = 0,
-    BLACK = 1
-};
+#include "match.h"
 
 int main(int argc, char *argv[])
 {
@@ -53,12 +48,30 @@ int main(int argc, char *argv[])
     window->setLayout(layout);
     window->show();
 
-    bool turn = WHITE;
+    //Create match class, which will contain turn variable
+    Match *match = new Match;
 
     //Observer pattern to connect buttons to functions
+
+    //Start game and start white's clock
     QObject::connect(btn_start, SIGNAL(clicked()), whiteClock, SLOT(startClock()));
-    QObject::connect(btn_stop, SIGNAL(clicked()), turn ? blackClock : whiteClock, SLOT(stopClock()));
+
+    //White's turn = stop white's clock, black's turn = stop black's clock
+    QObject::connect(btn_stop, SIGNAL(clicked()), match->getTurn() ? blackClock : whiteClock, SLOT(stopClock()));
+
+    //After white stops the clock, change turns and start black's clock
     QObject::connect(whiteClock, SIGNAL(toggleTurn()), blackClock, SLOT(startClock()));
+
+    //Notify match class that it is now black's turn
+    QObject::connect(whiteClock, SIGNAL(toggleTurn()), match, SLOT(toggleTurn()));
+
+    //After black stops the clock, change turns and start white's clock
+    QObject::connect(blackClock, SIGNAL(toggleTurn()), whiteClock, SLOT(startClock()));
+
+    //Notify match class that turn has changed
+    QObject::connect(blackClock, SIGNAL(toggleTurn()), match, SLOT(toggleTurn()));
+
+    //Reset black's clock when you press the reset button
     QObject::connect(btn_reset, SIGNAL(clicked()), blackClock, SLOT(resetClock()));
 
     //Start app

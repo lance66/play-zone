@@ -13,7 +13,9 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    chessclock.cpp
+    chessclock.cpp \
+    match.cpp
 
 HEADERS  += \
-    chessclock.h
+    chessclock.h \
+    match.h
