@@ -36,6 +36,7 @@ void ChessClock::startClock()
 void ChessClock::stopClock()
 {
     this->timer->stop();
+    emit toggleTurn();
 }
 
 void ChessClock::resetClock(TimeControl timeControl)
@@ -79,4 +80,9 @@ void ChessClock::setDisplay()
 QTime * ChessClock::getTimeValue()
 {
     return this->timeValue;
+}
+
+bool ChessClock::getTurn()
+{
+    return m_turn;
 }

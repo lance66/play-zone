@@ -29,8 +29,8 @@ int main(int argc, char *argv[])
     QPushButton *btn_stop = new QPushButton("Stop");
     QPushButton *btn_reset = new QPushButton("Reset");
 
-    layout->addWidget(whiteWidget);
     layout->addWidget(blackWidget);
+    layout->addWidget(whiteWidget);
     layout->addWidget(btn_start);
     layout->addWidget(btn_stop);
     layout->addWidget(btn_reset);
@@ -57,8 +57,8 @@ int main(int argc, char *argv[])
 
     //Observer pattern to connect buttons to functions
     QObject::connect(btn_start, SIGNAL(clicked()), whiteClock, SLOT(startClock()));
-    QObject::connect(btn_start, SIGNAL(clicked()), blackClock, SLOT(startClock()));
-    QObject::connect(btn_stop, SIGNAL(clicked()), turn ? whiteClock : blackClock, SLOT(stopClock()));
+    QObject::connect(btn_stop, SIGNAL(clicked()), turn ? blackClock : whiteClock, SLOT(stopClock()));
+    QObject::connect(whiteClock, SIGNAL(toggleTurn()), blackClock, SLOT(startClock()));
     QObject::connect(btn_reset, SIGNAL(clicked()), blackClock, SLOT(resetClock()));
 
     //Start app

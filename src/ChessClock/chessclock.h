@@ -15,9 +15,9 @@ typedef enum TimeControl
 
 class ChessClock: public QLCDNumber
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
 
     //Constructors
     ChessClock(QWidget * parentWidget,int minutes,int seconds);
@@ -29,18 +29,21 @@ class ChessClock: public QLCDNumber
     void setTimerStart(int time);
 
     QTime * getTimeValue();
+    bool getTurn();
 
-   public slots:
+public slots:
     void resetClock(TimeControl timeControl = FIVE_MINUTE);
     void setDisplay();
     void startClock();
     void stopClock();
 
+signals:
+    void toggleTurn();
 
 private:
-QTimer* timer;
-QTime*  timeValue;
-
+    QTimer* timer;
+    QTime*  timeValue;
+    bool m_turn;
 };
 
 #endif
