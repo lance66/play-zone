@@ -6,6 +6,12 @@
 #include <QWindow>
 #include "chessclock.h"
 
+enum
+{
+    WHITE = 0,
+    BLACK = 1
+};
+
 int main(int argc, char *argv[])
 {
     //Initialize app and window
@@ -47,14 +53,13 @@ int main(int argc, char *argv[])
     window->setLayout(layout);
     window->show();
 
-    //Countdown by 1 second
-    whiteClock->setTimerStart(1000);
-    blackClock->setTimerStart(1000);
+    bool turn = WHITE;
 
     //Observer pattern to connect buttons to functions
+    QObject::connect(btn_start, SIGNAL(clicked()), whiteClock, SLOT(startClock()));
     QObject::connect(btn_start, SIGNAL(clicked()), blackClock, SLOT(startClock()));
-    QObject::connect(btn_stop, SIGNAL(clicked()), blackClock, SLOT(stopClock()));
-    QObject::connect(btn_reset, SIGNAL(clicked()), blackClock, SLOT(resetClock(FIVE_MINUTE)));
+    QObject::connect(btn_stop, SIGNAL(clicked()), turn ? whiteClock : blackClock, SLOT(stopClock()));
+    QObject::connect(btn_reset, SIGNAL(clicked()), blackClock, SLOT(resetClock()));
 
     //Start app
     return app.exec();

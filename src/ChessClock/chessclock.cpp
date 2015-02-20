@@ -30,7 +30,7 @@ ChessClock::~ChessClock()
 //Member functions
 void ChessClock::startClock()
 {
-    this->timer->start();
+    this->timer->start(1000);
 }
 
 void ChessClock::stopClock()

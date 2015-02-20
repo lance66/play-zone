@@ -31,10 +31,11 @@ class ChessClock: public QLCDNumber
     QTime * getTimeValue();
 
    public slots:
+    void resetClock(TimeControl timeControl = FIVE_MINUTE);
     void setDisplay();
     void startClock();
     void stopClock();
-    void resetClock(TimeControl timecontrol);
+
 
 private:
 QTimer* timer;
