@@ -21,18 +21,22 @@ int main(int argc, char *argv[])
     QWidget *whiteWidget = new QWidget(window);
     QWidget *blackWidget = new QWidget(window);
     QPushButton *btn_start = new QPushButton("Start");
-    QPushButton *btn_stop = new QPushButton("Stop");
+    QPushButton *btn_stopWhite = new QPushButton("Stop");
+    QPushButton *btn_stopBlack = new QPushButton("Stop");
     QPushButton *btn_reset = new QPushButton("Reset");
 
+    //Black is always no top, so add it's widget first
     layout->addWidget(blackWidget);
     layout->addWidget(whiteWidget);
     layout->addWidget(btn_start);
-    layout->addWidget(btn_stop);
+    layout->addWidget(btn_stopBlack);
+    layout->addWidget(btn_stopWhite);
     layout->addWidget(btn_reset);
     layout->setAlignment(layout, Qt::AlignHCenter);
 
     btn_start->setFixedSize(45,45);
-    btn_stop->setFixedSize(45,45);
+    btn_stopWhite->setFixedSize(45,45);
+    btn_stopBlack->setFixedSize(45,45);
     btn_reset->setFixedSize(45,45);
 
     //Start counting down from 5 minutes
@@ -57,7 +61,8 @@ int main(int argc, char *argv[])
     QObject::connect(btn_start, SIGNAL(clicked()), whiteClock, SLOT(startClock()));
 
     //White's turn = stop white's clock, black's turn = stop black's clock
-    QObject::connect(btn_stop, SIGNAL(clicked()), match->getTurn() ? blackClock : whiteClock, SLOT(stopClock()));
+    QObject::connect(btn_stopWhite, SIGNAL(clicked()), whiteClock, SLOT(stopClock()));
+    QObject::connect(btn_stopBlack, SIGNAL(clicked()), blackClock, SLOT(stopClock()));
 
     //After white stops the clock, change turns and start black's clock
     QObject::connect(whiteClock, SIGNAL(toggleTurn()), blackClock, SLOT(startClock()));

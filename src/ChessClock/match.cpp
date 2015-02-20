@@ -20,5 +20,5 @@ void Match::toggleTurn()
 //Mutators
 bool Match::getTurn()
 {
-    return turn;
+    return this->turn;
 }
