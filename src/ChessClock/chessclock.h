@@ -5,6 +5,7 @@
 #include <QTimer>
 #include <QTime>
 #include <QDebug>
+#include <QRadioButton>
 
 typedef enum TimeControl
 {
@@ -12,6 +13,12 @@ typedef enum TimeControl
     FIVE_MINUTE = 5,
     THIRTY_MINUTE = 30
 } TimeControl;
+
+typedef enum STATE_LED
+{
+    OFF = 0,
+    ON = 1
+} STATE_LED;
 
 class ChessClock: public QLCDNumber
 {
@@ -36,6 +43,7 @@ public slots:
     void setDisplay();
     void startClock();
     void stopClock();
+    void updateLED();
 
 signals:
     void toggleTurn();
@@ -44,6 +52,7 @@ private:
     QTimer* timer;
     QTime*  timeValue;
     bool m_turn;
+    bool m_led;
 };
 
 #endif

@@ -17,7 +17,6 @@ ChessClock::ChessClock(QWidget * parentWidget,int minutes,int seconds)
 
     //Updates clock
     QObject::connect(timer,SIGNAL(timeout()),this,SLOT(setDisplay()));
-
 }
 
 ChessClock::~ChessClock()
@@ -85,4 +84,11 @@ QTime * ChessClock::getTimeValue()
 bool ChessClock::getTurn()
 {
     return m_turn;
+}
+
+void ChessClock::updateLED()
+{
+    QRadioButton * btn_led;
+    btn_led->setStyleSheet("QRadioButton::indicator::unchecked{background-color:gold;}");
+    emit btn_led;
 }

@@ -2,7 +2,9 @@
 #include <QMainWindow>
 #include <QDebug>
 #include <QPushButton>
+#include <QRadioButton>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QWindow>
 #include "chessclock.h"
 #include "match.h"
@@ -13,9 +15,12 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     QWidget *window = new QWidget;
     QVBoxLayout *layout = new QVBoxLayout;
+    QVBoxLayout *layout2 = new QVBoxLayout;
+
+    layout->addLayout(layout2);
 
     window->setWindowTitle(QString::fromUtf8("Chess Clock"));
-    window->resize(500, 500);
+    window->resize(600, 600);
 
     //Create widget for clock
     QWidget *whiteWidget = new QWidget(window);
@@ -24,6 +29,9 @@ int main(int argc, char *argv[])
     QPushButton *btn_stopWhite = new QPushButton("Stop");
     QPushButton *btn_stopBlack = new QPushButton("Stop");
     QPushButton *btn_reset = new QPushButton("Reset");
+    QRadioButton *btn_ledWhite = new QRadioButton;
+    QRadioButton *btn_ledBlack = new QRadioButton;
+
 
     //Black is always no top, so add it's widget first
     layout->addWidget(blackWidget);
@@ -34,10 +42,16 @@ int main(int argc, char *argv[])
     layout->addWidget(btn_reset);
     layout->setAlignment(layout, Qt::AlignHCenter);
 
+    //Add LEDs to horizontal layout
+    layout2->addWidget(btn_ledWhite);
+    layout2->addWidget(btn_ledBlack);
+
     btn_start->setFixedSize(45,45);
     btn_stopWhite->setFixedSize(45,45);
     btn_stopBlack->setFixedSize(45,45);
     btn_reset->setFixedSize(45,45);
+    btn_ledWhite->setFixedSize(25,25);
+    btn_ledBlack->setFixedSize(25,25);
 
     //Start counting down from 5 minutes
     ChessClock *whiteClock = new ChessClock(whiteWidget,5,0);
@@ -59,6 +73,7 @@ int main(int argc, char *argv[])
 
     //Start game and start white's clock
     QObject::connect(btn_start, SIGNAL(clicked()), whiteClock, SLOT(startClock()));
+    //QObject::connect(btn_start, SIGNAL(clicked()), whiteClock, SLOT(updateLED()));
 
     //White's turn = stop white's clock, black's turn = stop black's clock
     QObject::connect(btn_stopWhite, SIGNAL(clicked()), whiteClock, SLOT(stopClock()));
