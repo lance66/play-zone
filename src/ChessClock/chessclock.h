@@ -24,9 +24,6 @@ class ChessClock: public QLCDNumber
     ~ChessClock();
 
     //Member functions
-    void startClock();
-    void stopClock();
-    void resetClock(TimeControl timecontrol);
 
     //Mutators
     void setTimerStart(int time);
@@ -35,6 +32,9 @@ class ChessClock: public QLCDNumber
 
    public slots:
     void setDisplay();
+    void startClock();
+    void stopClock();
+    void resetClock(TimeControl timecontrol);
 
 private:
 QTimer* timer;

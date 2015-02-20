@@ -28,9 +28,14 @@ ChessClock::~ChessClock()
 }
 
 //Member functions
+void ChessClock::startClock()
+{
+    this->timer->start();
+}
+
 void ChessClock::stopClock()
 {
-    timer->stop();
+    this->timer->stop();
 }
 
 void ChessClock::resetClock(TimeControl timeControl)
@@ -40,14 +45,17 @@ void ChessClock::resetClock(TimeControl timeControl)
     {
     case ONE_MINUTE:
         this->timeValue->setHMS(0,1,0);
+        this->setDisplay();
         break;
 
     case FIVE_MINUTE:
         this->timeValue->setHMS(0,5,0);
+        this->setDisplay();
         break;
 
     case THIRTY_MINUTE:
         this->timeValue->setHMS(0,30,0);
+        this->setDisplay();
         break;
 
     default:
@@ -59,22 +67,13 @@ void ChessClock::resetClock(TimeControl timeControl)
 //Mutators
 void ChessClock::setTimerStart(int time)
 {
-    timer->start(time);
+    this->timer->start(time);
 }
 
 void ChessClock::setDisplay()
 {
   this->timeValue->setHMS(0,this->timeValue->addSecs(-1).minute(),this->timeValue->addSecs(-1).second());
   this->display(this->timeValue->toString());
-
-  // Stop clock
-//  if(this->getTimeValue()->toString("mm::ss") == "04::50")
-//      this->stopClock();
-
-  // Reset clock
-
-    if(this->getTimeValue()->toString("mm::ss") == "04::50")
-        this->resetClock(FIVE_MINUTE);
 }
 
 QTime * ChessClock::getTimeValue()

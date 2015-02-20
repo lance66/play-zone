@@ -1,39 +1,60 @@
 #include <QApplication>
 #include <QMainWindow>
 #include <QDebug>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <QWindow>
 #include "chessclock.h"
 
 int main(int argc, char *argv[])
 {
     //Initialize app and window
     QApplication app(argc, argv);
-    QMainWindow *window = new QMainWindow();
+    QWidget *window = new QWidget;
+    QVBoxLayout *layout = new QVBoxLayout;
 
     window->setWindowTitle(QString::fromUtf8("Chess Clock"));
-    window->resize(250, 250);
+    window->resize(500, 500);
 
     //Create widget for clock
     QWidget *whiteWidget = new QWidget(window);
     QWidget *blackWidget = new QWidget(window);
+    QPushButton *btn_start = new QPushButton("Start");
+    QPushButton *btn_stop = new QPushButton("Stop");
+    QPushButton *btn_reset = new QPushButton("Reset");
+
+    layout->addWidget(whiteWidget);
+    layout->addWidget(blackWidget);
+    layout->addWidget(btn_start);
+    layout->addWidget(btn_stop);
+    layout->addWidget(btn_reset);
+    layout->setAlignment(layout, Qt::AlignHCenter);
+
+    btn_start->setFixedSize(45,45);
+    btn_stop->setFixedSize(45,45);
+    btn_reset->setFixedSize(45,45);
 
     //Start counting down from 5 minutes
     ChessClock *whiteClock = new ChessClock(whiteWidget,5,0);
     ChessClock *blackClock = new ChessClock(blackWidget, 5 ,0);
 
     //Format clocks
-    whiteClock->setFixedSize(245, 245);
-    blackClock->setFixedSize(245, 245);
+    whiteClock->setFixedSize(200, 200);
+    blackClock->setFixedSize(200, 200);
     blackClock->setStyleSheet("color: green");
 
-    window->setCentralWidget(whiteWidget);
-    window->setCentralWidget(blackWidget);
-
     //Display clocks
+    window->setLayout(layout);
     window->show();
 
     //Countdown by 1 second
     whiteClock->setTimerStart(1000);
     blackClock->setTimerStart(1000);
+
+    //Observer pattern to connect buttons to functions
+    QObject::connect(btn_start, SIGNAL(clicked()), blackClock, SLOT(startClock()));
+    QObject::connect(btn_stop, SIGNAL(clicked()), blackClock, SLOT(stopClock()));
+    QObject::connect(btn_reset, SIGNAL(clicked()), blackClock, SLOT(resetClock(FIVE_MINUTE)));
 
     //Start app
     return app.exec();
