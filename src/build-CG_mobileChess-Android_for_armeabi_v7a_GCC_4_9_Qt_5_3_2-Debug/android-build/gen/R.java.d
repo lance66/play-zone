@@ -1,4 +1,4 @@
-C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\gen\org\qtproject\example\CG_mobileChess\R.java \
+C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\gen\org\qtproject\example\Chessgames\R.java \
  : C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\res\drawable-hdpi\icon.png \
 C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\res\drawable-ldpi\icon.png \
 C:\Users\admin\Documents\GitHub\play-zone\src\build-CG_mobileChess-Android_for_armeabi_v7a_GCC_4_9_Qt_5_3_2-Debug\android-build\res\drawable-mdpi\icon.png \
