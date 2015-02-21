@@ -81,7 +81,7 @@ class CG_Match
         void promptPlayerMove(QTcpSocket * player);
         void promptPlayerWait(QTcpSocket * player);
         QByteArray readPlayerMove(QTcpSocket * player);
-        void writePlayerMoveToOpponent(const char * player, QTcpSocket * opponent,
+        void writePlayerMoveToOpponent(int ID, QTcpSocket * opponent,
                                        QByteArray playerMove);
 
     private:

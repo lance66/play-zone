@@ -34,7 +34,20 @@ CG_Match::CG_Match(int whteID, int blckID, QTcpSocket *&whiteSocket, QTcpSocket 
 {
     //Convert IDs into const char *'s to write to socket
     //Convert int to string
-    convertIDToCharConstPtr(whiteID, blackID);
+
+    //Function doesn't work.  Make sure function works before you uncomment this!!!!!!!
+    //convertIDToCharConstPtr(whiteID, blackID);
+
+    std::string str_whiteID = std::to_string( whiteID );
+    std::string str_blackID = std::to_string( blackID );
+
+    const char * tempWhite = nullptr;
+    tempWhite = const_cast<char *>(str_whiteID.c_str());
+    strcpy_s(whitePlayer, 10, tempWhite);
+
+    const char * tempBlack = nullptr;
+    tempBlack = const_cast<char *>(str_blackID.c_str());
+    strcpy_s(blackPlayer, 10, tempBlack);
 
     //Notifies both players
     notifyPlayersOfMatchStarting( whiteSocket, blackSocket, blackPlayer, whitePlayer );
@@ -79,7 +92,7 @@ void CG_Match::startMatch(int whiteID, int blackID, QTcpSocket *whiteSocket, QTc
         playerMove = readPlayerMove(whiteSocket);
 
         //Write white player's move to black socket
-        writePlayerMoveToOpponent(whitePlayer, blackSocket, playerMove);
+        writePlayerMoveToOpponent(whiteID, blackSocket, playerMove);
 
         //Switch sides
         isWhiteTurn = !isWhiteTurn;
@@ -94,7 +107,7 @@ void CG_Match::startMatch(int whiteID, int blackID, QTcpSocket *whiteSocket, QTc
         playerMove = readPlayerMove(blackSocket);
 
         //Write black player's move to white socket
-        writePlayerMoveToOpponent(blackPlayer, whiteSocket, playerMove);
+        writePlayerMoveToOpponent(blackID, whiteSocket, playerMove);
 
         //Switch turn
         isWhiteTurn = !isWhiteTurn;
@@ -114,8 +127,12 @@ void CG_Match::convertIDToCharConstPtr(int whiteID, int blackID )
     std::string str_whiteID = std::to_string( whiteID );
     std::string str_blackID = std::to_string( blackID );
 
-    whitePlayer = const_cast<char *>(str_whiteID.c_str());
-    blackPlayer = const_cast<char *>(str_blackID.c_str());
+    const char * tempWhite = const_cast<char *>(str_whiteID.c_str());
+    strcpy_s(whitePlayer, 10, tempWhite);
+
+    const char * tempBlack = nullptr;
+    tempBlack = const_cast<char *>(str_blackID.c_str());
+    strcpy_s(blackPlayer, 10, tempBlack);
 }
 
 /****************************************************************
@@ -340,7 +357,7 @@ void CG_Match::notifyPlayerOfOpponent(QTcpSocket * player, const char * playerCo
 {
     //Convert int to const char *
     char buf[256];
-    sprintf(buf, "%d", opponent);
+    sprintf_s(buf, "%d", opponent);
 
     player->write("\r\nYou are playing the ");
     player->write(playerColor);
@@ -382,12 +399,16 @@ QByteArray CG_Match::readPlayerMove(QTcpSocket * player)
     return playerMove;
 }
 
-void CG_Match::writePlayerMoveToOpponent(const char * player,
+void CG_Match::writePlayerMoveToOpponent(int ID,
                                          QTcpSocket* opponent,
                                          QByteArray playerMove)
 {
+    //Convert int to const char *
+    char buf[256];
+    sprintf_s(buf, "%d", ID);
+
     opponent->write("\r\n");
-    opponent->write(player);
+    opponent->write(buf);
     opponent->write(" moves: ");
     opponent->write(playerMove);
 }
