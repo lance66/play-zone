@@ -73,7 +73,8 @@ int main(int argc, char *argv[])
 
     //Start game and start white's clock
     QObject::connect(btn_start, SIGNAL(clicked()), whiteClock, SLOT(startClock()));
-    //QObject::connect(btn_start, SIGNAL(clicked()), whiteClock, SLOT(updateLED()));
+    QObject::connect(btn_start, SIGNAL(clicked()), whiteClock, SLOT(updateLED()));
+    //QQbject::connect(whiteClock, SIGNAL(turnOnLED(QRadioButton*)),
 
     //White's turn = stop white's clock, black's turn = stop black's clock
     QObject::connect(btn_stopWhite, SIGNAL(clicked()), whiteClock, SLOT(stopClock()));

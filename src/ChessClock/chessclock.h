@@ -47,6 +47,7 @@ public slots:
 
 signals:
     void toggleTurn();
+    void turnOnLED(QRadioButton *);
 
 private:
     QTimer* timer;

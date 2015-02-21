@@ -88,7 +88,8 @@ bool ChessClock::getTurn()
 
 void ChessClock::updateLED()
 {
-    QRadioButton * btn_led;
+    QRadioButton * btn_led = new QRadioButton;
     btn_led->setStyleSheet("QRadioButton::indicator::unchecked{background-color:gold;}");
     emit btn_led;
+    delete btn_led;
 }
