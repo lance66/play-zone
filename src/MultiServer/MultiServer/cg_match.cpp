@@ -1,4 +1,5 @@
 #include "cg_match.h"
+#include <stdio.h>
 
 /****************************************************************
 *	Purpose:  Constructor.  Initializes white's and black's
@@ -337,12 +338,14 @@ void CG_Match::setBlackSocket(QMap<int, QTcpSocket *> socket, int blackID)
 void CG_Match::notifyPlayerOfOpponent(QTcpSocket * player, const char * playerColor,
                                       int opponent)
 {
-
+    //Convert int to const char *
+    char buf[256];
+    sprintf(buf, "%d", opponent);
 
     player->write("\r\nYou are playing the ");
     player->write(playerColor);
     player->write(" pieces against ");
-    player->write(opponent);
+    player->write(buf);
     player->write(".");
     player->flush();
     player->waitForBytesWritten(3000);
