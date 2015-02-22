@@ -50,7 +50,7 @@ Item
     Timer
     {
         id: timer
-        interval: 48000
+        interval: 3000
         running: false
         onTriggered:
         {

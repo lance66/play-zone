@@ -70,7 +70,51 @@ Item
             MouseArea
             {
                 anchors.fill: parent
-                onClicked:
+
+                onPressed:
+                {
+                    current_piece.visible = true
+                    current_piece.x = root.getX(index)
+                    current_piece.y = root.getY(index)
+                    current_piece.frame = piece.frame
+                }
+
+                onReleased:
+                {
+                    current_piece.visible = false
+
+                    if (starting_position == false)
+                    {
+                        starting.visible = false
+                        ending.visible = false
+
+                        starting.x = parent.x
+                        starting.y = parent.y
+                        starting_position = true
+                        starting_index = index
+
+
+                        piece.frame = root.setPiece("")
+
+                        ending.visible = false
+                    }
+                    else
+                    {
+                        starting.visible = true
+                        ending.visible = true
+
+                        ending.x = parent.x
+                        ending.y = parent.y
+                        ending_index = index
+
+                        piece: Board.getSquare(root.getRow(starting_index), root.getColumn(starting_index)) !== "" ? Board.move(root.getRow(starting_index), root.getColumn(starting_index), root.getRow(ending_index), root.getColumn(ending_index)) : piece
+                        piece.frame = setPiece(Board.getSquare(root.getRow(ending_index), root.getColumn(ending_index)))
+
+                        starting_position = false
+                    }
+                }
+
+                /*onClicked:
                 {
                     if (starting_position == false)
                     {
@@ -102,6 +146,12 @@ Item
                         starting_position = false
                     }
                 }
+
+                drag
+                {
+                    target: current_piece
+                    axis: Drag.XandYAxis
+                }*/
             }
         }
     }
@@ -140,6 +190,17 @@ Item
 
         x: getX(51)
         y: getY(51)
+    }
+
+    CG_piece
+    {
+        id: current_piece
+        visible: false
+        width: root.getSquareSize()
+        height: root.getSquareSize()
+        source: "images/cg_pieces.png"
+        running: false
+        frameCount: 12
     }
 
     /**************************************************************

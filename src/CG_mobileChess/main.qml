@@ -16,7 +16,8 @@ import QtQuick.Controls.Styles 1.1
 import QtQuick.Window 2.0
 import QtGraphicalEffects 1.0
 
-ApplicationWindow {
+ApplicationWindow
+{
     id: background
     visible: true
     width: 400

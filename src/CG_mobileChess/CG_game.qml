@@ -62,7 +62,7 @@ Item
             horizontalAlignment: Text.AlignRight
             width: 100
         }
-}
+    }
 
     // Board / Clocks
     CG_board
