@@ -12,6 +12,7 @@ Item
     property bool starting_position: false
     property int starting_index: -1
     property int ending_index: -1
+    property int whiteBlackMove: 0
 
     Image
     {
@@ -71,18 +72,8 @@ Item
             {
                 anchors.fill: parent
 
-                onPressed:
+                onClicked:
                 {
-                    current_piece.visible = true
-                    current_piece.x = root.getX(index)
-                    current_piece.y = root.getY(index)
-                    current_piece.frame = piece.frame
-                }
-
-                onReleased:
-                {
-                    current_piece.visible = false
-
                     if (starting_position == false)
                     {
                         starting.visible = false
@@ -109,6 +100,8 @@ Item
 
                         piece: Board.getSquare(root.getRow(starting_index), root.getColumn(starting_index)) !== "" ? Board.move(root.getRow(starting_index), root.getColumn(starting_index), root.getRow(ending_index), root.getColumn(ending_index)) : piece
                         piece.frame = setPiece(Board.getSquare(root.getRow(ending_index), root.getColumn(ending_index)))
+
+                        whiteBlackMove = whiteBlackMove == 1 ? 0 : 1
 
                         starting_position = false
                     }

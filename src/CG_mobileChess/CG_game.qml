@@ -88,9 +88,10 @@ Item
             width: getSmallestOrientation() * 0.04
             height: getSmallestOrientation() * 0.04
             radius: width * 0.5
+            color: cg_board.whiteBlackMove == 1 ? "#00FF00" : "#FFFFFF"
         }
 
-        Text
+        /*Text
         {
             id: lbl_opponentClock
             text: "01:00"
@@ -103,6 +104,14 @@ Item
 
             // Adjusts font size for scalability
             font.pixelSize: getSmallestOrientation() * 0.04
+        }*/
+
+        CG_clock
+        {
+            id: cg_opponentClock
+            running: cg_board.whiteBlackMove == 1 ? true : false
+            width: getBackgroundWidth() * 0.2
+            height: getBackgroundWidth() * 0.07
         }
     }
 
@@ -119,9 +128,10 @@ Item
             width: getSmallestOrientation() * 0.04
             height: getSmallestOrientation() * 0.04
             radius: width * 0.5
+            color: cg_board.whiteBlackMove == 0 ? "#00FF00" : "#FFFFFF"
         }
 
-        Text
+        /*Text
         {
             id: lbl_playerClock
             text: "01:00"
@@ -134,6 +144,16 @@ Item
 
             // Adjusts font size for scalability
             font.pixelSize: getSmallestOrientation() * 0.04
+        }*/
+
+        CG_clock
+        {
+            id: cg_playerClock
+
+            width: getBackgroundWidth() * 0.2
+            height: getBackgroundWidth() * 0.07
+
+            running: cg_board.whiteBlackMove == 0 ? true : false
         }
     }
 
