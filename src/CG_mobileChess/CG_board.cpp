@@ -53,27 +53,33 @@ CG_board::CG_board() : m_board()
 void CG_board::move(int f_source, int r_source, int f_dest, int r_dest)
 {
 
-    //This code will eventually be implemented for validation of piece movement.
-    //As of current, pieces can move wherever to test that pieces can move on the board.
-    /*if(m_board[f_source][r_source].getPiece() != nullptr)
+    //If the square selected has a piece in it.
+    if(m_board[f_source][r_source].getPiece() != nullptr)
     {
-        if(m_board[f_dest][r_dest].getPiece() == nullptr)
+        //If the destination doesn't have a piece
+        //or the destination has a piece of a different color
+        if(m_board[f_dest][r_dest].getPiece() == nullptr ||
+           m_board[f_source][r_source].getPiece()->getPieceColor() !=
+           m_board[f_dest][r_dest].getPiece()->getPieceColor())
         {
+            //If the piece can actually make that movement pattern
             if(m_board[f_source][r_source].getPiece()->move((File) f_source, (Rank) r_source, (File) f_dest, (Rank) r_dest))
             {
-                m_board[f_dest][r_dest].setPiece(m_board[f_source][r_source].getPiece());
-                m_board[f_source][r_source].setPiece(0);
-
-                temp = m_board[f_source][r_source].getPieceName();
+                if(CheckForClearPath( f_source, r_source, f_dest, r_dest))
+                {
+                    //Move the piece from its source to the destination.
+                    m_board[f_dest][r_dest].setPiece(m_board[f_source][r_source].getPiece());
+                    m_board[f_source][r_source].setPiece(0);
+                }
             }
         }
-    }*/
+    }
 
     //Make the destination CG_square hold the CG_piece from the source CG_square,
     //and make the source CG_square hold a null pointer to a CG_piece.
     //Thus, this empties the source CG_square of its CG_piece.
-    m_board[f_dest][r_dest].setPiece(m_board[f_source][r_source].getPiece());
-    m_board[f_source][r_source].setPiece(0);
+    //m_board[f_dest][r_dest].setPiece(m_board[f_source][r_source].getPiece());
+    //m_board[f_source][r_source].setPiece(0);
 }
 
 QString CG_board::getSquare(int source_file, int source_rank)
@@ -92,4 +98,48 @@ QString CG_board::getSquare(int source_file, int source_rank)
 
     //Return the QString representing the CG_piece in the CG_square.
     return ret_str;
+}
+
+bool CG_board::CheckForClearPath(int f_to, int r_to, int f_from, int r_from)
+{
+    bool path_clear = true;
+
+    if ( f_to == f_from || r_to == r_from )
+    {
+        CheckHorizontally(f_to, r_to, f_from, r_from, path_clear);
+    }
+    else if ( abs(f_from - f_to) == abs(r_to - r_from) )
+    {
+        //CheckVertically(f_to, r_to, f_from, r_from, path_clear);
+    }
+
+    return path_clear;
+}
+
+void CG_board::CheckHorizontally(int f_source, int r_source, int f_dest, int r_dest, bool & valid)
+{
+    if ( f_source == f_dest )
+    {
+        for(int i = r_dest < r_source ? r_dest + 1 : r_source + 1;
+            (i < (r_dest < r_source ? r_source : r_dest)) && valid;
+            i++)
+        {
+            if(m_board[f_dest][i].getPiece() != nullptr)
+            {
+                valid = false;
+            }
+        }
+    }
+    else
+    {
+        for(int i = f_dest < f_source ? f_dest + 1 : f_source + 1;
+            (i < (f_dest < f_source ? f_source : f_dest)) && valid;
+            i++)
+        {
+            if(m_board[i][r_dest].getPiece() != nullptr)
+            {
+                valid = false;
+            }
+        }
+    }
 }
