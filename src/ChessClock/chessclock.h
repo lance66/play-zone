@@ -43,11 +43,11 @@ public slots:
     void setDisplay();
     void startClock();
     void stopClock();
-    void updateLED();
+    void updateLED(QWidget *btn_led);
+    void turnOffLED(QWidget *btn_led);
 
 signals:
     void toggleTurn();
-    void turnOnLED(QRadioButton *);
 
 private:
     QTimer* timer;
