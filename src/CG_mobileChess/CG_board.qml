@@ -19,8 +19,8 @@ Item
         id: img_boardTexture
         source: "images/cg_board.png"
 
-        width: getBackgroundHeight() / 2
-        height: getBackgroundHeight() / 2
+        width: root.width
+        height: root.height
     }
 
     Repeater
@@ -216,7 +216,7 @@ Item
 
     function getSquareSize()
     {
-        return getBackgroundHeight() / 18
+        return root.width / 9
     }
 
     /**************************************************************

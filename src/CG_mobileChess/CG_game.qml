@@ -20,7 +20,7 @@ Item
     {
         id: rowOpponentInfo
 
-        anchors.top: parent.top
+        anchors.top: isLandscape() ? cg_board.top : parent.top
         anchors.left: parent.left
 
         height: getBackgroundHeight() * (1/6)
@@ -71,16 +71,20 @@ Item
         width: root.setBoardSize()
         height: root.setBoardSize()
 
-        anchors.left: isLandscape() === false ? parent.left : rowDrawAndResign.left
+        anchors.left: isLandscape() === false ? parent.left : rowPlayerInfo.right
 
-        y: getBackgroundHeight() * (1/6)
+        y: isLandscape() ? 0 : (getBackgroundHeight() * (1/6))
     }
 
     // Opponent LED / Clock
     Row
     {
+        id: rowOpponentLED
+
         anchors.right: parent.right
         anchors.top: cg_board.top
+
+        spacing: getSmallestOrientation() * 0.02
 
         Rectangle
         {
@@ -112,8 +116,11 @@ Item
     Row
     {
         id: rowPlayerLED
+
         anchors.right: parent.right
         anchors.bottom: cg_board.bottom
+
+        spacing: getSmallestOrientation() * 0.02
 
         Rectangle
         {
@@ -146,7 +153,8 @@ Item
     {
         id: rowPlayerInfo
 
-        anchors.top: cg_board.bottom
+        anchors.top: isLandscape() ? undefined : cg_board.bottom
+        anchors.bottom: isLandscape() ? cg_board.bottom : undefined
         anchors.left: parent.left
 
         height: getBackgroundHeight() * (1/6)
@@ -298,6 +306,10 @@ Item
                 //Notify user game is over and how many ELO points were gained/lost
                 resignDialog.open()
 
+                //Stop the clocks from running
+                cg_opponentClock.running = false
+                cg_playerClock.running = false
+
                 //When user presses OK or close, bring him back to the lobby.
                 //root.finished()
             }
@@ -391,6 +403,6 @@ Item
 
     function setBoardSize()
     {
-        return getBackgroundHeight() / 2
+        return isLandscape() ? (getBackgroundHeight() - (getBackgroundHeight() * (1/6))) : getBackgroundHeight() / 2
     }
 }
