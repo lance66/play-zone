@@ -85,7 +85,8 @@ Item
                         starting_index = index
 
 
-                        piece.frame = root.setPiece("")
+                        //piece.frame = root.setPiece("")
+                        piece.visible = false
 
                         ending.visible = false
                     }
@@ -98,7 +99,15 @@ Item
                         ending.y = parent.y
                         ending_index = index
 
-                        piece: Board.getSquare(root.getRow(starting_index), root.getColumn(starting_index)) !== "" ? Board.move(root.getRow(starting_index), root.getColumn(starting_index), root.getRow(ending_index), root.getColumn(ending_index)) : piece
+                        piece:
+                        {
+
+                            if (Board.getSquare(root.getRow(starting_index), root.getColumn(starting_index)) !== "")
+                                Board.move(root.getRow(starting_index), root.getColumn(starting_index), root.getRow(ending_index), root.getColumn(ending_index))
+                            else
+                                piece
+                        }
+
                         piece.frame = setPiece(Board.getSquare(root.getRow(ending_index), root.getColumn(ending_index)))
 
                         whiteBlackMove = whiteBlackMove == 1 ? 0 : 1

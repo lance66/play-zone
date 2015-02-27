@@ -91,27 +91,20 @@ Item
             color: cg_board.whiteBlackMove == 1 ? "#00FF00" : "#FFFFFF"
         }
 
-        /*Text
-        {
-            id: lbl_opponentClock
-            text: "01:00"
-
-            color: "white"
-            font.family: "Helvetica"
-            font.bold: true
-            style: Text.Raised
-            styleColor: "black"
-
-            // Adjusts font size for scalability
-            font.pixelSize: getSmallestOrientation() * 0.04
-        }*/
-
         CG_clock
         {
             id: cg_opponentClock
-            running: cg_board.whiteBlackMove == 1 ? true : false
+
             width: getSmallestOrientation() * 0.2
             height: width * (172/475)
+
+            running:
+            {
+                if (cg_board.whiteBlackMove == 1 && root.visible == true)
+                    true
+                else
+                    false
+            }
         }
     }
 
@@ -131,21 +124,6 @@ Item
             color: cg_board.whiteBlackMove == 0 ? "#00FF00" : "#FFFFFF"
         }
 
-        /*Text
-        {
-            id: lbl_playerClock
-            text: "01:00"
-
-            color: "white"
-            font.family: "Helvetica"
-            font.bold: true
-            style: Text.Raised
-            styleColor: "black"
-
-            // Adjusts font size for scalability
-            font.pixelSize: getSmallestOrientation() * 0.04
-        }*/
-
         CG_clock
         {
             id: cg_playerClock
@@ -153,7 +131,13 @@ Item
             width: getSmallestOrientation() * 0.2
             height: width * (172/475)
 
-            running: cg_board.whiteBlackMove == 0 ? true : false
+            running:
+            {
+                if (cg_board.whiteBlackMove == 0 && root.visible == true)
+                    true
+                else
+                    false
+            }
         }
     }
 
