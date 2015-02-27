@@ -13,6 +13,7 @@ Item
     property int starting_index: -1
     property int ending_index: -1
     property int whiteBlackMove: 0
+    property int movement: -1
 
     Image
     {
@@ -45,12 +46,15 @@ Item
     // Display Pieces
     Repeater
     {
+        id: repeaterPieces
         model: 64
 
         Rectangle
         {
             width: root.getSquareSize() * 12
             height: root.getSquareSize()
+
+            property int currentFrame: root.setPiece(Board.getSquare(root.getRow(index), root.getColumn(index)))
 
             x: root.getX(index)
             y: root.getY(index)
@@ -60,7 +64,7 @@ Item
             CG_piece
             {
                 id: piece
-                frame: root.setPiece(Board.getSquare(root.getRow(index), root.getColumn(index)))
+                frame: currentFrame
                 width: root.getSquareSize()
                 height: root.getSquareSize()
                 source: "images/cg_pieces.png"
@@ -86,7 +90,6 @@ Item
 
 
                         //piece.frame = root.setPiece("")
-                        piece.visible = false
 
                         ending.visible = false
                     }
@@ -109,6 +112,7 @@ Item
                         }
 
                         piece.frame = setPiece(Board.getSquare(root.getRow(ending_index), root.getColumn(ending_index)))
+                        repeaterPieces.itemAt(starting_index).currentFrame = setPiece(Board.getSquare(root.getRow(starting_index), root.getColumn(starting_index)))
 
                         whiteBlackMove = whiteBlackMove == 1 ? 0 : 1
 
