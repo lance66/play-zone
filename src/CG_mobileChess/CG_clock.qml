@@ -83,6 +83,6 @@ Item
         interval: 1000
         running: false
         repeat: true
-        onTriggered: --clockTime
+        onTriggered: clockTime > 0 ? --clockTime : undefined
     }
 }

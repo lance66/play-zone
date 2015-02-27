@@ -31,7 +31,9 @@ Item
     height: 600
 
     signal goBack
-    signal startGame
+    signal startOneMinuteGame
+    signal startFiveMinuteGame
+    signal startThirtyMinuteGame
 
     // The individual control height is 1/8 of the total height.
     function getControlHeight()
@@ -118,7 +120,7 @@ Item
 
             onClicked:
             {
-                root.startGame()
+                root.startOneMinuteGame()
                 iPod.play()
             }
         }
@@ -133,7 +135,11 @@ Item
             Layout.preferredWidth: getControlWidth()
             Layout.preferredHeight: getControlHeight()
 
-            onClicked: root.goBack()
+            onClicked:
+            {
+                root.startFiveMinuteGame()
+                iPod.play()
+            }
         }
 
         Button
@@ -146,7 +152,11 @@ Item
             Layout.preferredWidth: getControlWidth()
             Layout.preferredHeight: getControlHeight()
 
-            onClicked: root.goBack()
+            onClicked:
+            {
+                root.startThirtyMinuteGame()
+                iPod.play()
+            }
         }
 
         RowLayout

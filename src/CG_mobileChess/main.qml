@@ -41,9 +41,20 @@ ApplicationWindow
         onGoBack: { lobby.visible = false
                     login.visible = true }
 
-        onStartGame: { lobby.visible = false
-                       loading.visible = true
-                       loading.timer.start() }
+        onStartOneMinuteGame: { lobby.visible = false
+                                loading.visible = true
+                                loading.timer.start()
+                                game.gameTimeInMinutes = 1 }
+
+        onStartFiveMinuteGame: { lobby.visible = false
+                                loading.visible = true
+                                loading.timer.start()
+                                game.gameTimeInMinutes = 5 }
+
+        onStartThirtyMinuteGame: { lobby.visible = false
+                                   loading.visible = true
+                                   loading.timer.start()
+                                   game.gameTimeInMinutes = 30 }
 
         visible: false
     }

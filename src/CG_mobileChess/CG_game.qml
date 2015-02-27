@@ -14,6 +14,7 @@ Item
     height: 600
 
     signal finished
+    property int gameTimeInMinutes: 1
 
     // Opponent Info
     Row
@@ -102,6 +103,8 @@ Item
             width: getSmallestOrientation() * 0.2
             height: width * (172/475)
 
+            clockTime: gameTimeInMinutes * 60
+
             running:
             {
                 if (cg_board.whiteBlackMove == 1 && root.visible == true)
@@ -137,6 +140,8 @@ Item
 
             width: getSmallestOrientation() * 0.2
             height: width * (172/475)
+
+            clockTime: gameTimeInMinutes * 60
 
             running:
             {
