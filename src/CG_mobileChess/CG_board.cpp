@@ -50,8 +50,9 @@ CG_board::CG_board() : m_board()
     m_board[6][7].setPiece(WHITE, "Pawn");
 }
 
-void CG_board::move(int f_source, int r_source, int f_dest, int r_dest)
+bool CG_board::move(int f_source, int r_source, int f_dest, int r_dest)
 {
+    bool move_made = false;
 
     //If the square selected has a piece in it.
     if(m_board[f_source][r_source].getPiece() != nullptr)
@@ -70,10 +71,13 @@ void CG_board::move(int f_source, int r_source, int f_dest, int r_dest)
                     //Move the piece from its source to the destination.
                     m_board[f_dest][r_dest].setPiece(m_board[f_source][r_source].getPiece());
                     m_board[f_source][r_source].setPiece();
+                    move_made = true;
                 }
             }
         }
     }
+
+    return move_made;
 
     //Make the destination CG_square hold the CG_piece from the source CG_square,
     //and make the source CG_square hold a null pointer to a CG_piece.
