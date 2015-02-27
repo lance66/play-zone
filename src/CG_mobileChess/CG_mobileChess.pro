@@ -22,16 +22,18 @@ android {
 folder_01.source = database
 folder_01.target = .
 DEPLOYMENTFOLDERS = folder_01
-}
-
-deployment.files += chessgames.db
 
 #For Android
-#deployment.path = /assets
+deployment.path = /assets
+}
 
+ios {
 #For iOS
 deployment.path =
 QMAKE_BUNDLE_DATA += deployment
+}
+
+deployment.files += chessgames.db
 
 INSTALLS += deployment
 
