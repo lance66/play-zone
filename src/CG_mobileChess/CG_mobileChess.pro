@@ -10,6 +10,7 @@ TEMPLATE = app
 QT += qml quick widgets
 QT += sql
 QT += multimedia
+
 CONFIG += resources_big
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
@@ -24,7 +25,14 @@ DEPLOYMENTFOLDERS = folder_01
 }
 
 deployment.files += chessgames.db
-deployment.path = /assets
+
+#For Android
+#deployment.path = /assets
+
+#For iOS
+deployment.path =
+QMAKE_BUNDLE_DATA += deployment
+
 INSTALLS += deployment
 
 TARGET = Chessgames
@@ -67,4 +75,5 @@ OTHER_FILES += \
     android/AndroidManifest.xml \
     images/Flags.svg \
     images/cg_flag_turkey.jpg \
-    Sounds/gameStarted.mp3
+    Sounds/gameStarted.mp3 \
+    Sounds/resign.mp3
