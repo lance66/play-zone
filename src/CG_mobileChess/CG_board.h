@@ -17,7 +17,8 @@ public slots:
 
     void move(int f_source, int r_source, int f_dest, int r_dest);
     bool CheckForClearPath(int f_source, int r_source, int f_dest, int r_dest);
-    void CheckHorizontally(int f_source, int r_source, int f_dest, int r_dest, bool & valid);
+    void CheckRookMovement(int f_source, int r_source, int f_dest, int r_dest, bool & valid);
+    void CheckBishopMovement(int f_source, int r_source, int f_dest, int r_dest, bool & valid);
 
     QString getSquare(int source_file, int source_rank);
 

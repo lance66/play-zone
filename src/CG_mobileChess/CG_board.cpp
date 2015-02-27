@@ -69,7 +69,7 @@ void CG_board::move(int f_source, int r_source, int f_dest, int r_dest)
                 {
                     //Move the piece from its source to the destination.
                     m_board[f_dest][r_dest].setPiece(m_board[f_source][r_source].getPiece());
-                    m_board[f_source][r_source].setPiece(0);
+                    m_board[f_source][r_source].setPiece();
                 }
             }
         }
@@ -106,18 +106,19 @@ bool CG_board::CheckForClearPath(int f_to, int r_to, int f_from, int r_from)
 
     if ( f_to == f_from || r_to == r_from )
     {
-        CheckHorizontally(f_to, r_to, f_from, r_from, path_clear);
+        CheckRookMovement(f_to, r_to, f_from, r_from, path_clear);
     }
     else if ( abs(f_from - f_to) == abs(r_to - r_from) )
     {
-        //CheckVertically(f_to, r_to, f_from, r_from, path_clear);
+        CheckBishopMovement(f_to, r_to, f_from, r_from, path_clear);
     }
 
     return path_clear;
 }
 
-void CG_board::CheckHorizontally(int f_source, int r_source, int f_dest, int r_dest, bool & valid)
+void CG_board::CheckRookMovement(int f_source, int r_source, int f_dest, int r_dest, bool & valid)
 {
+
     if ( f_source == f_dest )
     {
         for(int i = r_dest < r_source ? r_dest + 1 : r_source + 1;
@@ -142,4 +143,29 @@ void CG_board::CheckHorizontally(int f_source, int r_source, int f_dest, int r_d
             }
         }
     }
+}
+
+void CG_board::CheckBishopMovement(int f_source, int r_source, int f_dest, int r_dest, bool &valid)
+{
+    //These variables help decide how to adjust the file and rank
+    //when checking the squares diagonally.  If the file source
+    //is larger than the file destination, it will set the movement
+    //pattern to move down by 1 (-1) each time, or vice versa.
+    int f_movement = f_source > f_dest ? -1 : 1;
+    int r_movement = r_source > r_dest ? -1 : 1;
+
+    //This is going to check each square inbetween the source and destination
+    //diagonally to see if a piece exists in any of those squares.
+    //If a piece is found, then the movement isn't valid.
+    for( int i = f_source + f_movement,
+         j = r_source + r_movement;
+         i != f_dest && j != r_dest;
+         i += f_movement, j += r_movement)
+    {
+        if(m_board[i][j].getPiece() != nullptr)
+        {
+            valid = false;
+        }
+    }
+
 }

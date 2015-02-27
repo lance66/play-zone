@@ -16,6 +16,7 @@ class CG_piece : public QObject
 public:
     //Constructors
     CG_piece(CG_Color pieceColor, QString pieceName);
+    //CG_piece & operator=(CG_piece & rhs );
 
     //Virtual methods
     virtual bool move(File f_to, Rank r_to, File f_from, Rank r_from);

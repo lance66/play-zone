@@ -49,6 +49,11 @@ CG_piece * CG_square::getPiece() const
 //This sets the CG_piece pointer to that of another pointer.
 void CG_square::setPiece(CG_piece * piece)
 {
+//    if ( m_piece != nullptr )
+//    {
+//        delete m_piece;
+//    }
+
     m_piece = piece;
 }
 

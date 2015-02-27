@@ -33,7 +33,7 @@ public:
 
     CG_piece * getPiece() const;
 
-    void setPiece(CG_piece * piece);
+    void setPiece(CG_piece * piece = nullptr);
 
     void setPiece(CG_Color color, QString name);
 
