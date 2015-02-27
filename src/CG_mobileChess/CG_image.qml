@@ -7,9 +7,6 @@ Item
 
     property alias source:image.source
 
-    property alias pieceWidth: image.width
-    property alias pieceHeight: image.height
-
     property int frame:0
     property int frameCount: 0
 

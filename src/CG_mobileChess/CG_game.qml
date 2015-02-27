@@ -110,8 +110,8 @@ Item
         {
             id: cg_opponentClock
             running: cg_board.whiteBlackMove == 1 ? true : false
-            width: getBackgroundWidth() * 0.2
-            height: getBackgroundWidth() * 0.07
+            width: getSmallestOrientation() * 0.2
+            height: width * 0.373
         }
     }
 
@@ -150,8 +150,8 @@ Item
         {
             id: cg_playerClock
 
-            width: getBackgroundWidth() * 0.2
-            height: getBackgroundWidth() * 0.07
+            width: getSmallestOrientation() * 0.2
+            height: width * 0.373
 
             running: cg_board.whiteBlackMove == 0 ? true : false
         }

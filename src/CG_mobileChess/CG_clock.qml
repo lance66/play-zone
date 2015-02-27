@@ -3,7 +3,7 @@ import QtQuick 2.0
 Item
 {
     id: root
-    property int clockTime: 300 //In seconds
+    property int clockTime: 60 //In seconds
     property alias running: timer.running
 
     onWidthChanged:
@@ -29,8 +29,8 @@ Item
         CG_image
         {
             id: tensOfMinutes
-            width: 70
-            height: 124
+            width: 89
+            height: 166
             source: "images/cg_seven_segment.png"
             frame: parseInt((clockTime / 60) / 10)
             frameCount: 11
@@ -39,8 +39,8 @@ Item
         CG_image
         {
             id: onesOfMinutes
-            width: 70
-            height: 124
+            width: 89
+            height: 166
             source: "images/cg_seven_segment.png"
             frame: ((clockTime / 60) % 10)
             frameCount: 11
@@ -49,8 +49,8 @@ Item
         CG_image
         {
             id: colon
-            width: 70
-            height: 124
+            width: 89
+            height: 166
             source: "images/cg_seven_segment.png"
             frame: 10
             frameCount: 11
@@ -59,8 +59,8 @@ Item
         CG_image
         {
             id: tensOfSeconds
-            width: 70
-            height: 124
+            width: 89
+            height: 166
             source: "images/cg_seven_segment.png"
             frame: parseInt((clockTime % 60) / 10)
             frameCount: 11
@@ -69,8 +69,8 @@ Item
         CG_image
         {
             id: onesOfSeconds
-            width: 70
-            height: 124
+            width: 89
+            height: 166
             source: "images/cg_seven_segment.png"
             frame: ((clockTime % 60) % 10)
             frameCount: 11
