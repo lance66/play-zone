@@ -111,7 +111,7 @@ Item
             id: cg_opponentClock
             running: cg_board.whiteBlackMove == 1 ? true : false
             width: getSmallestOrientation() * 0.2
-            height: width * 0.373
+            height: width * (172/475)
         }
     }
 
@@ -151,7 +151,7 @@ Item
             id: cg_playerClock
 
             width: getSmallestOrientation() * 0.2
-            height: width * 0.373
+            height: width * (172/475)
 
             running: cg_board.whiteBlackMove == 0 ? true : false
         }

@@ -8,11 +8,11 @@ Item
 
     onWidthChanged:
     {
-        tensOfMinutes.width = root.width / 11
-        onesOfMinutes.width = root.width / 11
-        tensOfSeconds.width = root.width / 11
-        onesOfSeconds.width = root.width / 11
-        colon.width = root.width / 11
+        tensOfMinutes.width = root.width / 5
+        onesOfMinutes.width = root.width / 5
+        tensOfSeconds.width = root.width / 5
+        onesOfSeconds.width = root.width / 5
+        colon.width = root.width / 5
     }
 
     onHeightChanged:
@@ -29,8 +29,8 @@ Item
         CG_image
         {
             id: tensOfMinutes
-            width: 89
-            height: 166
+            width: 95
+            height: 172
             source: "images/cg_seven_segment.png"
             frame: parseInt((clockTime / 60) / 10)
             frameCount: 11
@@ -40,7 +40,7 @@ Item
         {
             id: onesOfMinutes
             width: 89
-            height: 166
+            height: 172
             source: "images/cg_seven_segment.png"
             frame: ((clockTime / 60) % 10)
             frameCount: 11
@@ -49,8 +49,8 @@ Item
         CG_image
         {
             id: colon
-            width: 89
-            height: 166
+            width: 95
+            height: 172
             source: "images/cg_seven_segment.png"
             frame: 10
             frameCount: 11
@@ -59,8 +59,8 @@ Item
         CG_image
         {
             id: tensOfSeconds
-            width: 89
-            height: 166
+            width: 95
+            height: 172
             source: "images/cg_seven_segment.png"
             frame: parseInt((clockTime % 60) / 10)
             frameCount: 11
@@ -69,8 +69,8 @@ Item
         CG_image
         {
             id: onesOfSeconds
-            width: 89
-            height: 166
+            width: 95
+            height: 172
             source: "images/cg_seven_segment.png"
             frame: ((clockTime % 60) % 10)
             frameCount: 11
