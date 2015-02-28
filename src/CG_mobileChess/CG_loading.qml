@@ -151,7 +151,7 @@ Item
         y: (getBackgroundHeight() / 2) - (getSmallestOrientation() * 0.02)
 
         color: "white"
-        font.family: "Calibri"
+        font.family: "Chocolate Dealer"
         font.bold: true
         style: Text.Raised
         styleColor: "white"

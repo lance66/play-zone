@@ -42,7 +42,7 @@ Item
             text: "Trudodyr  2715"
 
             color: "white"
-            font.family: "Helvetica"
+            font.family: "Chocolate Dealer"
             font.bold: true
             style: Text.Raised
             styleColor: "black"
@@ -180,7 +180,7 @@ Item
             text: root.visible == true ? (User.getUsername() + "  " + User.getCurrentELO()) : ""
 
             color: "white"
-            font.family: "Helvetica"
+            font.family: "Chocolate Dealer"
             font.bold: true
             style: Text.Raised
             styleColor: "black"
@@ -249,7 +249,7 @@ Item
             text: "1.Nf3"
 
             color: "white"
-            font.family: "Helvetica"
+            font.family: "Chocolate Dealer"
             font.bold: true
             style: Text.Raised
             styleColor: "black"
@@ -293,7 +293,7 @@ Item
                 lbl_player_result.visible = true
                 lbl_player_result.text = "0"
                 lbl_player_result.color = "yellow"
-                lbl_player_result.font.family = "Helvetica"
+                lbl_player_result.font.family = "Chocolate Dealer"
                 lbl_player_result.font.bold = true
                 lbl_player_result.font.pixelSize = getSmallestOrientation() * 0.1
 
@@ -301,7 +301,7 @@ Item
                 lbl_opponentResult.visible = true
                 lbl_opponentResult.text = "1"
                 lbl_opponentResult.color = "yellow"
-                lbl_opponentResult.font.family = "Helvetica"
+                lbl_opponentResult.font.family = "Chocolate Dealer"
                 lbl_opponentResult.font.bold = true
                 lbl_opponentResult.font.pixelSize = getSmallestOrientation() * 0.1
 
@@ -358,7 +358,7 @@ Item
                 renderType: Text.NativeRendering
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
-                font.family: "Helvetica"
+                font.family: "Chocolate Dealer"
                 color: "black"
 
                 text: control.text
@@ -389,7 +389,7 @@ Item
                 renderType: Text.NativeRendering
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
-                font.family: "Helvetica"
+                font.family: "Chocolate Dealer"
                 color: "black"
 
                 text: control.text

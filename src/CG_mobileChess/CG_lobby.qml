@@ -41,7 +41,7 @@ Item
         return background.height / 8
     }
 
-    // The individual control width is 90% of the smallest orientation.
+    // The individual control width is 100% of the smallest orientation.
     function getControlWidth()
     {
         return getSmallestOrientation() * 0.9
@@ -82,13 +82,13 @@ Item
                     text: root.visible == true ? User.getUsername() : ""
 
                     color: "white"
-                    font.family: "Helvetica"
+                    font.family: "Chocolate Dealer"
                     font.bold: true
                     style: Text.Raised
                     styleColor: "black"
 
                     // Adjusts font size for scalability
-                    font.pixelSize: getControlWidth() * 0.04
+                    font.pixelSize: getControlWidth() * 0.1
                 }
 
                 Text
@@ -103,7 +103,7 @@ Item
                     styleColor: "black"
 
                     // Adjusts font size for scalability
-                    font.pixelSize: getControlWidth() * 0.04
+                    font.pixelSize: getControlWidth() * 0.09
                 }
             }
         }
@@ -111,7 +111,7 @@ Item
         Button
         {
             id: btn_oneMinuteGame
-            text: "1 Minute"
+            text: "One Minute"
             style: cgButtonStyle
 
             Layout.alignment: Qt.AlignCenter
@@ -128,7 +128,7 @@ Item
         Button
         {
             id: btn_fiveMinuteGame
-            text: "5 Minute"
+            text: "Five Minute"
             style: cgButtonStyle
 
             Layout.alignment: Qt.AlignCenter
@@ -145,7 +145,7 @@ Item
         Button
         {
             id: btn_thirtyMinuteGame
-            text: "30 Minute"
+            text: "Thirty Minute"
             style: cgButtonStyle
 
             Layout.alignment: Qt.AlignCenter
@@ -207,12 +207,12 @@ Item
             }
 
             label: Text {
-                font.pixelSize: getSmallestOrientation() * 0.03
+                font.pixelSize: getSmallestOrientation() * 0.1
 
                 renderType: Text.NativeRendering
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
-                font.family: "Helvetica"
+                font.family: "Chocolate Dealer"
                 color: "black"
 
                 text: control.text

@@ -250,23 +250,24 @@ Item
             {
                 background: Rectangle {
                     gradient: Gradient {
-                        GradientStop { position: 0.0; color: control.pressed ? "#b6ee65" : "#76ae25" }
-                        GradientStop { position: 0.5; color: control.pressed ? "#76ae25" : "#b6ee65" }
+                        GradientStop { position: 0.0; color: control.pressed ? "yellow" : "#66CCFF" }//"#b6ee65" : "#76ae25" }
+                        GradientStop { position: 0.5; color: control.pressed ? "yellow" : "#66CCFF" /*"#fbdb65"*/ }//"#76ae25" : "#b6ee65" }
                     }
 
-                    border.color: "#448ed3"
+                    border.color: "#1c375b" //"#448ed3"
+                    border.width: 4
                     smooth: true
                     radius: 100
                 }
 
                 label: Text {
-                    font.pixelSize: getSmallestOrientation() * 0.03
+                    font.pixelSize: getSmallestOrientation() * 0.1
 
                     renderType: Text.NativeRendering
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
-                    font.family: "Helvetica"
-                    color: "black"
+                    font.family: "Chocolate Dealer"
+                    color: "#032149"
 
                     text: control.text
                 }
