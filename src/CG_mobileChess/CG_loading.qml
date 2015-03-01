@@ -5,6 +5,7 @@ import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.0
 import QtMultimedia 5.0
+import "CG_definitions.js" as Definitions
 
 Item
 {
@@ -86,8 +87,8 @@ Item
 
                 gradient: Gradient
                 {
-                    GradientStop { position: 0.0; color: "#76ae25" }
-                    GradientStop { position: 0.5; color: "#b6ee65" }
+                    GradientStop { position: 0.0; color: Definitions.TOP_COLOR_FOR_BUTTON }
+                    GradientStop { position: 0.5; color: Definitions.BOTTOM_COLOR_FOR_BUTTON }
                 }
 
                 SequentialAnimation

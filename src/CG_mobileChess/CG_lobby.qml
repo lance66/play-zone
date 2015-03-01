@@ -23,6 +23,7 @@ import QtQuick.Window 2.0
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.0
 import QtMultimedia 5.0
+import "CG_definitions.js" as Definitions
 
 Item
 {
@@ -195,10 +196,12 @@ Item
 
         ButtonStyle
         {
-            background: Rectangle {
-                gradient: Gradient {
-                    GradientStop { position: 0.0; color: control.pressed ? "#b6ee65" : "#76ae25" }
-                    GradientStop { position: 0.5; color: control.pressed ? "#76ae25" : "#b6ee65" }
+            background: Rectangle
+            {
+                gradient: Gradient
+                {
+                    GradientStop { position: 0.0; color: control.pressed ? Definitions.BUTTON_COLOR_ON_CLICK : Definitions.TOP_COLOR_FOR_BUTTON }
+                    GradientStop { position: 0.5; color: control.pressed ? Definitions.BUTTON_COLOR_ON_CLICK : Definitions.BOTTOM_COLOR_FOR_BUTTON }
                 }
 
                 border.color: "#448ed3"

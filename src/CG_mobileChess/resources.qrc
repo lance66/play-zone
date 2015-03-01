@@ -32,5 +32,6 @@
         <file>CG_image.qml</file>
         <file>CG_clock.qml</file>
         <file>images/cg_seven_segment.png</file>
+        <file>CG_definitions.js</file>
     </qresource>
 </RCC>
