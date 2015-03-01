@@ -250,8 +250,8 @@ Item
             {
                 background: Rectangle {
                     gradient: Gradient {
-                        GradientStop { position: 0.0; color: control.pressed ? "yellow" : "#66CCFF" }//"#b6ee65" : "#76ae25" }
-                        GradientStop { position: 0.5; color: control.pressed ? "yellow" : "#66CCFF" /*"#fbdb65"*/ }//"#76ae25" : "#b6ee65" }
+                        GradientStop { position: 0.0; color: control.pressed ? "333366" : "#336666" }//"#b6ee65" : "#76ae25" }
+                        GradientStop { position: 0.5; color: control.pressed ? "333366" : "#333366" /*"#fbdb65"*/ }//"#76ae25" : "#b6ee65" }
                     }
 
                     border.color: "#1c375b" //"#448ed3"
@@ -267,7 +267,7 @@ Item
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     font.family: "Chocolate Dealer"
-                    color: "#032149"
+                    color: "#CCFFFF"
 
                     text: control.text
                 }

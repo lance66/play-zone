@@ -159,6 +159,6 @@ Item
         z: 1
 
         // Adjusts font size for scalability
-        font.pixelSize: getSmallestOrientation() * 0.04
+        font.pixelSize: getSmallestOrientation() * 0.08
     }
 }

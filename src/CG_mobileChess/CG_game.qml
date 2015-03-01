@@ -15,6 +15,20 @@ Item
 
     signal finished
     property int gameTimeInMinutes: 1
+    property int moveNumber: 1
+    property string currentMove: moveNumber + ". Nf3"
+
+    //Functions
+    function getCurrentMove()
+    {
+        return currentMove
+    }
+
+    function setCurrentMove(string)
+    {
+        currentMove = string
+    }
+
 
     // Opponent Info
     Row
@@ -42,7 +56,7 @@ Item
             text: "Trudodyr  2715"
 
             color: "white"
-            font.family: "Chocolate Dealer"
+            font.family: "Helvetica"
             font.bold: true
             style: Text.Raised
             styleColor: "black"
@@ -180,7 +194,7 @@ Item
             text: root.visible == true ? (User.getUsername() + "  " + User.getCurrentELO()) : ""
 
             color: "white"
-            font.family: "Chocolate Dealer"
+            font.family: "Helvetica"
             font.bold: true
             style: Text.Raised
             styleColor: "black"
@@ -246,10 +260,10 @@ Item
         Text
         {
             id: lbl_notation
-            text: "1.Nf3"
+            text: getCurrentMove()
 
             color: "white"
-            font.family: "Chocolate Dealer"
+            font.family: "Helvetica"
             font.bold: true
             style: Text.Raised
             styleColor: "black"
@@ -293,7 +307,7 @@ Item
                 lbl_player_result.visible = true
                 lbl_player_result.text = "0"
                 lbl_player_result.color = "yellow"
-                lbl_player_result.font.family = "Chocolate Dealer"
+                lbl_player_result.font.family = "Helvetica"
                 lbl_player_result.font.bold = true
                 lbl_player_result.font.pixelSize = getSmallestOrientation() * 0.1
 
@@ -301,7 +315,7 @@ Item
                 lbl_opponentResult.visible = true
                 lbl_opponentResult.text = "1"
                 lbl_opponentResult.color = "yellow"
-                lbl_opponentResult.font.family = "Chocolate Dealer"
+                lbl_opponentResult.font.family = "Helvetica"
                 lbl_opponentResult.font.bold = true
                 lbl_opponentResult.font.pixelSize = getSmallestOrientation() * 0.1
 
