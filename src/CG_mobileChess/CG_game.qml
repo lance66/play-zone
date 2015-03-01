@@ -15,8 +15,7 @@ Item
 
     signal finished
     property int gameTimeInMinutes: 1
-    property int moveNumber: 1
-    property string currentMove: moveNumber + ". Nf3"
+    property string currentMove: moveNumber + ".Nf3"
 
     //Functions
     function getCurrentMove()
@@ -28,7 +27,6 @@ Item
     {
         currentMove = string
     }
-
 
     // Opponent Info
     Row
@@ -251,7 +249,9 @@ Item
 
                 //Flash opponent's screen green with sound effect
                 //Flash for ten seconds or until opponent makes move
-                root.finished()
+                setCurrentMove("1...c5")
+
+                //root.finished()
             }
 
             anchors.verticalCenter: parent.verticalCenter

@@ -5,6 +5,7 @@ import QtQuick.Window 2.0
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.0
 
+
 Item
 {
     id: root
@@ -15,6 +16,7 @@ Item
     property int whiteBlackMove: 0
 
     property int starting_piece: -1
+    property int moveNumber: 1
 
     Image
     {
@@ -170,6 +172,19 @@ Item
                         ending_index = getIndex(parent.x + mouse.x, parent.y + mouse.y)
                         ending.x = getX(ending_index)
                         ending.y = getY(ending_index)
+
+                        //Get move number
+                        moveNumber++
+
+                        //Convert y to file
+                        var file = root.getColumn(ending_index)
+
+                        //Convert x to rank
+                        var rank = root.getRow(ending_index)
+
+                        //Convert current_piece to piece
+
+                        setCurrentMove(moveNumber + pieceToString(current_piece.frame) + yToFile(file) + xToRank(rank))
 
                         piece:
                         {
@@ -412,5 +427,93 @@ Item
             frame = 12
 
         return frame
+    }
+
+    function getMoveNumber()
+    {
+        return moveNumber
+    }
+
+    function pieceToString(frame)
+    {
+        switch(frame)
+        {
+        case 0:
+            return "...K"
+        case 1:
+            return "...Q"
+        case 2:
+            return "...N"
+        case 3:
+            return "...B"
+        case 4:
+            return "...R"
+        case 5:
+            return "..."
+        case 6:
+            return ". K"
+        case 7:
+            return ". Q"
+        case 8:
+            return ". N"
+        case 9:
+            return ". B"
+        case 10:
+            return ". R"
+        case 11:
+            return ". "
+        default:
+            return ""
+        }
+    }
+
+    function yToFile(index)
+    {
+        switch(index)
+        {
+        case 0:
+            return "a"
+        case 1:
+            return "b"
+        case 2:
+            return "c"
+        case 3:
+            return "d"
+        case 4:
+            return "e"
+        case 5:
+            return "f"
+        case 6:
+            return "g"
+        case 7:
+            return "h"
+        default:
+            return ""
+        }
+    }
+
+    function xToRank(index)
+    {
+        switch(index)
+        {
+        case 0:
+            return 8
+        case 1:
+            return 7
+        case 2:
+            return 6
+        case 3:
+            return 5
+        case 4:
+            return 4
+        case 5:
+            return 3
+        case 6:
+            return 2
+        case 7:
+            return 1
+        default:
+            return ""
+        }
     }
 }
