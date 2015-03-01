@@ -83,7 +83,7 @@ Item
                     text: root.visible == true ? User.getUsername() : ""
 
                     color: "white"
-                    font.family: "Chocolate Dealer"
+                    font.family: customFont.name
                     font.bold: true
                     style: Text.Raised
                     styleColor: "black"
@@ -215,7 +215,7 @@ Item
                 renderType: Text.NativeRendering
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
-                font.family: "Chocolate Dealer"
+                font.family: customFont.name
                 color: "black"
 
                 text: control.text

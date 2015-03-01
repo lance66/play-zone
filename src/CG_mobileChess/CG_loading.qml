@@ -147,12 +147,12 @@ Item
     Text
     {
         text: "Finding Opponent..."
+        font.family: customFont.name
 
         anchors.horizontalCenter: parent.horizontalCenter
         y: (getBackgroundHeight() / 2) - (getSmallestOrientation() * 0.02)
 
         color: "white"
-        font.family: "Chocolate Dealer"
         font.bold: true
         style: Text.Raised
         styleColor: "white"

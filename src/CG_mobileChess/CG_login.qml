@@ -270,7 +270,7 @@ Item
                     renderType: Text.NativeRendering
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
-                    font.family: "Chocolate Dealer"
+                    font.family: customFont.name
                     color: "#000000" //"#CCFFFF"
 
                     text: control.text

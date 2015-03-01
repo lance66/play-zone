@@ -33,5 +33,6 @@
         <file>CG_clock.qml</file>
         <file>images/cg_seven_segment.png</file>
         <file>CG_definitions.js</file>
+        <file>fonts/CHOCD TRIAL___.otf</file>
     </qresource>
 </RCC>

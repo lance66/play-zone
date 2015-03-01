@@ -25,6 +25,12 @@ ApplicationWindow
     title: qsTr("Chessgames")
     color: "#448ed3"
 
+    FontLoader
+    {
+        id: customFont
+        source: "fonts/CHOCD TRIAL___.otf"
+    }
+
     CG_login
     {
         id: login
