@@ -108,10 +108,14 @@ bool CG_board::CheckForClearPath(int f_to, int r_to, int f_from, int r_from)
 {
     bool path_clear = true;
 
+    //If the movement matches that of a rook's movement patterns,
+    //meaning it is moving vertically or horizontally.
     if ( f_to == f_from || r_to == r_from )
     {
         CheckRookMovement(f_to, r_to, f_from, r_from, path_clear);
     }
+    //If the movement matches that of a bishop's movement patterns,
+    //meaning it is moving diagonally.
     else if ( abs(f_from - f_to) == abs(r_to - r_from) )
     {
         CheckBishopMovement(f_to, r_to, f_from, r_from, path_clear);
@@ -123,24 +127,34 @@ bool CG_board::CheckForClearPath(int f_to, int r_to, int f_from, int r_from)
 void CG_board::CheckRookMovement(int f_source, int r_source, int f_dest, int r_dest, bool & valid)
 {
 
+    //This checks a vertical movement on the board for any pieces
+    //inbetween the source and destination squares.
     if ( f_source == f_dest )
     {
+        //This loop should check every square inbetween the source and
+        //destination squares to see if a piece exists in that square.
         for(int i = r_dest < r_source ? r_dest + 1 : r_source + 1;
             (i < (r_dest < r_source ? r_source : r_dest)) && valid;
             i++)
         {
+            //If a square in the path contains a piece, then the
+            //movement cannot be a valid movement.
             if(m_board[f_dest][i].getPiece() != nullptr)
             {
                 valid = false;
             }
         }
     }
-    else
+    else //Same thing as vertical, except for horizontal movement.
     {
+        //This loop should check every square inbetween the source and
+        //destination squares to see if a piece exists in that square.
         for(int i = f_dest < f_source ? f_dest + 1 : f_source + 1;
             (i < (f_dest < f_source ? f_source : f_dest)) && valid;
             i++)
         {
+            //If a square in the path contains a piece, then the
+            //movement cannot be a valid movement.
             if(m_board[i][r_dest].getPiece() != nullptr)
             {
                 valid = false;
@@ -166,6 +180,8 @@ void CG_board::CheckBishopMovement(int f_source, int r_source, int f_dest, int r
          i != f_dest && j != r_dest;
          i += f_movement, j += r_movement)
     {
+        //If a square in the path has a piece in it, then the
+        //movement cannot be a valid movement.
         if(m_board[i][j].getPiece() != nullptr)
         {
             valid = false;

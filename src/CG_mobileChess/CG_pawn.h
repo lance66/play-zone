@@ -19,6 +19,7 @@ public:
 private:
     //Data Members
     int direction;
+    bool m_hasMoved;
 };
 
 #endif // CG_PAWN_H

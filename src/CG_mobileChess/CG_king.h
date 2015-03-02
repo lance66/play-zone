@@ -13,6 +13,7 @@ public:
     //Member functions
     bool move(File f_to, Rank r_to, File f_from, Rank r_from);
 private:
+    bool m_hasMoved;
     //Data members
 };
 

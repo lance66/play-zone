@@ -2,7 +2,7 @@
 
 //Default constructor
 CG_rook::CG_rook(CG_Color color)
-    : CG_piece(color, "Rook")
+    : CG_piece(color, "Rook"), m_hasMoved(false)
 {
 
 }

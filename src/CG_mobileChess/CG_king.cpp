@@ -2,7 +2,7 @@
 
 //Default constructor
 CG_king::CG_king(CG_Color color)
-    :CG_piece(color, "King")
+    :CG_piece(color, "King"), m_hasMoved(false)
 {
 
 }
