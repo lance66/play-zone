@@ -156,19 +156,6 @@ Item
 
                 test.text = "X: " + mouse.x + ", Y: " + mouse.y
 
-                //Get move number
-                moveNumber++
-
-                //Convert y to file
-                var file = root.getColumn(ending_index)
-
-                //Convert x to rank
-                var rank = root.getRow(ending_index)
-
-                //Convert current_piece to piece
-
-                setCurrentMove(moveNumber + pieceToString(current_piece.frame) + yToFile(file) + xToRank(rank))
-
                 if (Board.getSquare(root.getRow(starting_index), root.getColumn(starting_index)) !== "")
                 {
                     if (!Board.move(root.getRow(starting_index), root.getColumn(starting_index), root.getRow(ending_index), root.getColumn(ending_index)))
@@ -180,6 +167,17 @@ Item
                     {
                         // Toggle the current player's LED if the movement was made.
                         whiteBlackMove = whiteBlackMove == 1 ? 0 : 1
+
+                        //Get move number
+                        moveNumber++
+
+                        //Convert y to file
+                        var file = root.getColumn(ending_index)
+
+                        //Convert x to rank
+                        var rank = root.getRow(ending_index)
+
+                        setCurrentMove(moveNumber + pieceToString(current_piece.frame) + yToFile(file) + xToRank(rank))
                     }
                 }
 
