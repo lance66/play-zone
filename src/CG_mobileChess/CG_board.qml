@@ -53,7 +53,7 @@ Item
 
         onMouseXChanged:
         {
-            current_piece.x = mouse.x - (Board.getSquareSize() / 2)
+            current_piece.x = mouse.x - (current_piece.width / 2)
 
             if (starting.x != (mouse.x - (mouse.x % Board.getSquareSize())))
                 repeaterPieces.itemAt(starting_index).currentFrame = 12
@@ -61,7 +61,7 @@ Item
 
         onMouseYChanged:
         {
-            current_piece.y = mouse.y - (Board.getSquareSize() / 2)
+            current_piece.y = mouse.y - (current_piece.height / 2)
 
             if (starting.y != (mouse.y - (mouse.y % Board.getSquareSize())))
                 repeaterPieces.itemAt(starting_index).currentFrame = 12
@@ -219,8 +219,8 @@ Item
     {
         id: current_piece
         visible: false
-        width: Board.getSquareSize()
-        height: Board.getSquareSize()
+        width: Board.getSquareSize() * 1.5
+        height: Board.getSquareSize() * 1.5
         source: "images/cg_pieces.png"
         running: false
         frameCount: 12

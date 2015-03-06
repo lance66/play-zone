@@ -81,10 +81,11 @@ Item
         id: btn_draw
         style: cgButtonStyle
 
-        width: isPortrait() ? Game.getBannerHeight() : Game.getBannerHeight() / 4
-        height: isPortrait() ? Game.getBannerHeight() : Game.getBannerHeight() / 4
+        width: isPortrait() ? Game.getBannerHeight() : Game.getBannerHeight() / 3
+        height: isPortrait() ? Game.getBannerHeight() : Game.getBannerHeight() / 3
 
-        anchors.left: isLandscape() ? cg_board.right : cg_board.left
+        anchors.left: isLandscape() ? undefined : cg_board.left
+        anchors.right: isLandscape() ? root.right : undefined
         anchors.top: isLandscape() ? root.top : cg_player.bottom
 
         Image
@@ -141,10 +142,10 @@ Item
         id: btn_resign
         style: cgRedButtonStyle
 
-        width: isPortrait() ? Game.getBannerHeight() : Game.getBannerHeight() / 4
-        height: isPortrait() ? Game.getBannerHeight() : Game.getBannerHeight() / 4
+        width: isPortrait() ? Game.getBannerHeight() : Game.getBannerHeight() / 3
+        height: isPortrait() ? Game.getBannerHeight() : Game.getBannerHeight() / 3
 
-        anchors.left: isLandscape() ? cg_board.right : lbl_notation.right
+        anchors.right: isLandscape() ? root.right : cg_board.right
         anchors.bottom: isLandscape() ? parent.bottom : undefined
         anchors.top: isPortrait() ? cg_player.bottom : undefined
 
