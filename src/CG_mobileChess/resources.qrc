@@ -34,5 +34,6 @@
         <file>images/cg_seven_segment.png</file>
         <file>CG_definitions.js</file>
         <file>fonts/CHOCD TRIAL___.otf</file>
+        <file>CG_banner.qml</file>
     </qresource>
 </RCC>

@@ -46,6 +46,158 @@ Item
         }
     }
 
+    MouseArea
+    {
+        anchors.fill: parent
+
+        /*onClicked:
+        {
+            if (starting_position == false)
+            {
+                starting.visible = false
+                ending.visible = false
+
+                starting.x = parent.x
+                starting.y = parent.y
+                starting_position = true
+                starting_index = index
+
+                // This allows us to undo a movement if not validated.
+                starting_piece = root.setPiece(Board.getSquare(root.getRow(starting_index), root.getColumn(starting_index)))
+
+                // Temporarily picks up the piece by removing it.
+                repeaterPieces.itemAt(starting_index).currentFrame = 12
+
+                ending.visible = false
+            }
+            else
+            {
+                starting.visible = true
+                ending.visible = true
+
+                ending.x = parent.x
+                ending.y = parent.y
+                ending_index = index
+
+                piece:
+                {
+
+                    if (Board.getSquare(root.getRow(starting_index), root.getColumn(starting_index)) !== "")
+                    {
+                        if (!Board.move(root.getRow(starting_index), root.getColumn(starting_index), root.getRow(ending_index), root.getColumn(ending_index)))
+                        {
+                            // If the movement wasn't made then reset the starting piece.
+                            repeaterPieces.itemAt(starting_index).currentFrame = starting_piece
+                        }
+                        else
+                        {
+                            // Toggle the current player's LED if the movement was made.
+                            whiteBlackMove = whiteBlackMove == 1 ? 0 : 1
+                        }
+                    }
+                    else
+                        piece
+                }
+
+                // Update the destination of the piece movement.
+                repeaterPieces.itemAt(ending_index).currentFrame = setPiece(Board.getSquare(root.getRow(ending_index), root.getColumn(ending_index)))
+
+                starting_position = false
+            }
+        }*/
+
+        onMouseXChanged:
+        {
+            current_piece.x = mouse.x - (getSquareSize() / 2)
+        }
+
+        onMouseYChanged:
+        {
+            current_piece.y = mouse.y - (getSquareSize() / 2)
+        }
+
+        onPressed:
+        {
+            if (starting_position == false)
+            {
+                starting.visible = false
+                ending.visible = false
+
+                starting_position = true
+                starting_index = root.getIndex(mouse.x - ((img_boardTexture.width - (getSquareSize() * 8)) / 2), mouse.y - ((img_boardTexture.width - (getSquareSize() * 8)) / 2))
+                starting.x = root.getX(starting_index)
+                starting.y = root.getY(starting_index)
+
+                // This allows us to undo a movement if not validated.
+                starting_piece = repeaterPieces.itemAt(starting_index).currentFrame
+
+                // Temporarily picks up the piece by removing it.
+                repeaterPieces.itemAt(starting_index).currentFrame = 12
+
+                ending.visible = false
+
+                current_piece.frame = starting_piece
+                current_piece.visible = true
+                current_piece.x = starting.x
+                current_piece.y = starting.y
+            }
+        }
+
+        onReleased:
+        {
+            if (starting_position == true)
+            {
+                starting.visible = true
+                ending.visible = true
+
+                ending_index = getIndex(mouse.x - ((img_boardTexture.width - (getSquareSize() * 8)) / 2), mouse.y - ((img_boardTexture.width - (getSquareSize() * 8)) / 2))
+                ending.x = getX(ending_index)
+                ending.y = getY(ending_index)
+
+                test.text = "X: " + mouse.x + ", Y: " + mouse.y
+
+                //Get move number
+                moveNumber++
+
+                //Convert y to file
+                var file = root.getColumn(ending_index)
+
+                //Convert x to rank
+                var rank = root.getRow(ending_index)
+
+                //Convert current_piece to piece
+
+                setCurrentMove(moveNumber + pieceToString(current_piece.frame) + yToFile(file) + xToRank(rank))
+
+                if (Board.getSquare(root.getRow(starting_index), root.getColumn(starting_index)) !== "")
+                {
+                    if (!Board.move(root.getRow(starting_index), root.getColumn(starting_index), root.getRow(ending_index), root.getColumn(ending_index)))
+                    {
+                        // If the movement wasn't made then reset the starting piece.
+                        repeaterPieces.itemAt(starting_index).currentFrame = starting_piece
+                    }
+                    else
+                    {
+                        // Toggle the current player's LED if the movement was made.
+                        whiteBlackMove = whiteBlackMove == 1 ? 0 : 1
+                    }
+                }
+
+                // Update the destination of the piece movement.
+                repeaterPieces.itemAt(ending_index).currentFrame = setPiece(Board.getSquare(root.getRow(ending_index), root.getColumn(ending_index)))
+
+                starting_position = false
+
+                current_piece.visible = false
+            }
+        }
+    }
+
+    Text
+    {
+        id: test
+    }
+
     // Display Pieces
     Repeater
     {
@@ -53,6 +205,31 @@ Item
         model: 64
 
         Rectangle
+        {
+            width: root.getSquareSize()
+            height: root.getSquareSize()
+
+            property int currentFrame: root.setPiece(Board.getSquare(root.getRow(index), root.getColumn(index)))
+
+            x: root.getX(index)
+            y: root.getY(index)
+
+            color: "transparent"
+
+            CG_piece
+            {
+                id: piece
+
+                frame: currentFrame
+                source: "images/cg_pieces.png"
+                running: false
+                frameCount: 12
+
+                anchors.fill: parent
+            }
+        }
+
+        /*Rectangle
         {
             width: root.getSquareSize() * 12
             height: root.getSquareSize()
@@ -79,7 +256,7 @@ Item
             {
                 anchors.fill: parent
 
-                /*onClicked:
+                onClicked:
                 {
                     if (starting_position == false)
                     {
@@ -133,7 +310,7 @@ Item
 
                         starting_position = false
                     }
-                }*/
+                }
 
                 onPressed:
                 {
@@ -169,9 +346,11 @@ Item
                         starting.visible = true
                         ending.visible = true
 
-                        ending_index = getIndex(parent.x + mouse.x, parent.y + mouse.y)
+                        ending_index = getIndex(board.x + mouse.x, board.y + mouse.y)
                         ending.x = getX(ending_index)
                         ending.y = getY(ending_index)
+
+                        test.text = "X: " + (board.x + mouse.x) + ", Y: " + (board.y + mouse.y)
 
                         //Get move number
                         moveNumber++
@@ -217,10 +396,16 @@ Item
                 drag
                 {
                     target: current_piece
-                    axis: Drag.XandYAxis
+
+                    axis:
+                    {
+                        Drag.XandYAxis
+                    }
                 }
+
+
             }
-        }
+        }*/
     }
 
     // Show the start of a move by highlighting the square
@@ -356,7 +541,7 @@ Item
 
     function getIndex(x, y)
     {
-        return (parseInt(y / getSquareSize()) * 8) + parseInt(x / getSquareSize())
+        return (Math.floor(y / getSquareSize()) * 8) + Math.floor(x / getSquareSize())
     }
 
     /**************************************************************

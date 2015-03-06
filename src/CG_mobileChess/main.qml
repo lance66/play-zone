@@ -134,4 +134,9 @@ ApplicationWindow
     {
         return getSmallestOrientation() == getBackgroundHeight() ? true : false
     }
+
+    function isPortrait()
+    {
+        return !isLandscape()
+    }
 }
