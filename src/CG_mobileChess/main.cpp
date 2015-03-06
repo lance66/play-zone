@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("User", &cg_user);
     engine.rootContext()->setContextProperty("Validator", &cg_validator);
-    engine.rootContext()->setContextProperty("Board", &cg_board);
+    engine.rootContext()->setContextProperty("BoardLogic", &cg_board);
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
     return app.exec();

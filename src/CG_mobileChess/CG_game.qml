@@ -7,6 +7,7 @@ import QtQuick.Layouts 1.0
 import QtMultimedia 5.0
 import QtQuick.Dialogs 1.1
 import "CG_definitions.js" as Definitions
+import "CG_game.js" as Game
 
 Item
 {
@@ -16,24 +17,12 @@ Item
 
     signal finished
     property int gameTimeInMinutes: 1
-    property string currentMove: ".Nf3"
-
-    //Functions
-    function getCurrentMove()
-    {
-        return currentMove
-    }
-
-    function setCurrentMove(string)
-    {
-        currentMove = string
-    }
 
     CG_banner
     {
         id: cg_opponent
-        width: getBannerWidth()
-        height: getBannerHeight()
+        width: Game.getBannerWidth()
+        height: Game.getBannerHeight()
 
         countryFlag: "images/cg_flag_turkey.png"
         playerInfo: "Trudodyr\n2715"
@@ -54,8 +43,8 @@ Item
     CG_banner
     {
         id: cg_player
-        width: getBannerWidth()
-        height: getBannerHeight()
+        width: Game.getBannerWidth()
+        height: Game.getBannerHeight()
 
         countryFlag: "images/cg_flag_unitedStates.png"
         playerInfo: root.visible == true ? (User.getUsername() + "\n" + User.getCurrentELO()) : ""
@@ -78,8 +67,8 @@ Item
     CG_board
     {
         id: cg_board
-        width: root.setBoardSize()
-        height: root.setBoardSize()
+        width: Game.getBoardSize()
+        height: Game.getBoardSize()
 
         //anchors.left: isLandscape() === false ? parent.left : rowPlayerInfo.right
         anchors.top: isPortrait() ? cg_opponent.bottom : parent.top
@@ -92,8 +81,8 @@ Item
         id: btn_draw
         style: cgButtonStyle
 
-        width: isPortrait() ? getBannerHeight() : getBannerHeight() / 4
-        height: isPortrait() ? getBannerHeight() : getBannerHeight() / 4
+        width: isPortrait() ? Game.getBannerHeight() : Game.getBannerHeight() / 4
+        height: isPortrait() ? Game.getBannerHeight() : Game.getBannerHeight() / 4
 
         anchors.left: isLandscape() ? cg_board.right : cg_board.left
         anchors.top: isLandscape() ? root.top : cg_player.bottom
@@ -114,7 +103,6 @@ Item
 
             //Flash opponent's screen green with sound effect
             //Flash for ten seconds or until opponent makes move
-            setCurrentMove("1...c5")
 
             root.finished()
         }
@@ -123,7 +111,7 @@ Item
     Text
     {
         id: lbl_notation
-        text: getCurrentMove()
+        text: cg_board.currentMove
 
         color: "white"
         font.family: "Helvetica"
@@ -153,8 +141,8 @@ Item
         id: btn_resign
         style: cgRedButtonStyle
 
-        width: isPortrait() ? getBannerHeight() : getBannerHeight() / 4
-        height: isPortrait() ? getBannerHeight() : getBannerHeight() / 4
+        width: isPortrait() ? Game.getBannerHeight() : Game.getBannerHeight() / 4
+        height: isPortrait() ? Game.getBannerHeight() : Game.getBannerHeight() / 4
 
         anchors.left: isLandscape() ? cg_board.right : lbl_notation.right
         anchors.bottom: isLandscape() ? parent.bottom : undefined
@@ -266,38 +254,5 @@ Item
                 text: control.text
             }
         }
-    }
-
-    /**************************************************************
-    *	  Purpose:  Returns the appropriate size the chessboard
-    *               should be.
-    *
-    *     Entry:    User has entered a game.
-    *
-    *     Exit:     The chessboard is set to the appropriate size.
-    ****************************************************************/
-
-    function setBoardSize()
-    {
-        if (!isLandscape())
-            return getBackgroundWidth()
-        else
-            return getBackgroundHeight()
-    }
-
-    function getBannerHeight()
-    {
-        if (!isLandscape())
-            return (getBackgroundHeight() - getBackgroundWidth()) / 3
-        else
-            return getBackgroundHeight() / 2
-    }
-
-    function getBannerWidth()
-    {
-        if (!isLandscape())
-            return getBackgroundWidth()
-        else
-            return (getBackgroundWidth() - getBackgroundHeight()) / 2
     }
 }

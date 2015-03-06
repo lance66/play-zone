@@ -74,7 +74,6 @@ ApplicationWindow
                      game.visible = true }
 
         visible: false
-
     }
 
     CG_game

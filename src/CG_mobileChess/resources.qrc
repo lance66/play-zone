@@ -3,37 +3,42 @@
         <file>../../bin/chessgames.db</file>
         <file>../../img/cg_logo_hires_app.png</file>
         <file>main.qml</file>
+        <file>CG_banner.qml</file>
+        <file>CG_board.qml</file>
+        <file>CG_clock.qml</file>
+        <file>CG_game.qml</file>
+        <file>CG_image.qml</file>
+        <file>CG_loading.qml</file>
+        <file>CG_lobby.qml</file>
+        <file>CG_login.qml</file>
+        <file>CG_piece.qml</file>
+        <file>Clock.qml</file>
+        <file>CG_board.js</file>
+        <file>CG_definitions.js</file>
+        <file>CG_game.js</file>
+        <file>CG_login.js</file>
+        <file>images/arrow.png</file>
+        <file>images/background.png</file>
         <file>images/center.png</file>
+        <file>images/cg_board.png</file>
+        <file>images/cg_draw.png</file>
+        <file>images/cg_flag_turkey.png</file>
+        <file>images/cg_flag_unitedStates.png</file>
         <file>images/cg_logo_hires_app.png</file>
+        <file>images/cg_pieces.png</file>
+        <file>images/cg_resign.png</file>
+        <file>images/cg_seven_segment.png</file>
+        <file>images/cg_temp_pawn.png</file>
         <file>images/clock.png</file>
         <file>images/clock-night.png</file>
         <file>images/hour.png</file>
         <file>images/minute.png</file>
+        <file>images/quit.png</file>
         <file>images/second.png</file>
-        <file>deployment.pri</file>
-        <file>CG_lobby.qml</file>
-        <file>CG_login.qml</file>
-        <file>Clock.qml</file>
-        <file>CG_board.qml</file>
-        <file>CG_game.qml</file>
-        <file>CG_piece.qml</file>
-        <file>images/cg_temp_pawn.png</file>
-        <file>images/cg_board.png</file>
-        <file>images/cg_draw.png</file>
-        <file>images/cg_resign.png</file>
-        <file>images/cg_flag_unitedStates.png</file>
-        <file>CG_loading.qml</file>
         <file>Sounds/01 - Untitled (Album Version).mp3</file>
-        <file>images/cg_flag_turkey.png</file>
-        <file>images/cg_pieces.png</file>
+        <file>Sounds/gameStarted.mp3</file>
         <file>Sounds/resign.mp3</file>
         <file>Sounds/successfulLogin.mp3</file>
-        <file>Sounds/gameStarted.mp3</file>
-        <file>CG_image.qml</file>
-        <file>CG_clock.qml</file>
-        <file>images/cg_seven_segment.png</file>
-        <file>CG_definitions.js</file>
         <file>fonts/CHOCD TRIAL___.otf</file>
-        <file>CG_banner.qml</file>
     </qresource>
 </RCC>
