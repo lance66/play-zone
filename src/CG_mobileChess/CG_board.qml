@@ -16,8 +16,8 @@ Item
     property int whiteBlackMove: 0
 
     property int starting_piece: -1
-    property int moveNumber: 1
-    property string currentMove: ".Nf3"
+    property int moveNumber: 0
+    property string currentMove: ""
 
     Image
     {
@@ -54,11 +54,17 @@ Item
         onMouseXChanged:
         {
             current_piece.x = mouse.x - (Board.getSquareSize() / 2)
+
+            if (starting.x != (mouse.x - (mouse.x % Board.getSquareSize())))
+                repeaterPieces.itemAt(starting_index).currentFrame = 12
         }
 
         onMouseYChanged:
         {
             current_piece.y = mouse.y - (Board.getSquareSize() / 2)
+
+            if (starting.y != (mouse.y - (mouse.y % Board.getSquareSize())))
+                repeaterPieces.itemAt(starting_index).currentFrame = 12
         }
 
         onPressed:
@@ -77,7 +83,7 @@ Item
                 starting_piece = repeaterPieces.itemAt(starting_index).currentFrame
 
                 // Temporarily picks up the piece by removing it.
-                repeaterPieces.itemAt(starting_index).currentFrame = 12
+                //repeaterPieces.itemAt(starting_index).currentFrame = 12
 
                 ending.visible = false
 
@@ -96,38 +102,44 @@ Item
                 ending.visible = true
 
                 ending_index = Board.getIndex(mouse.x - Board.getBoardOffset(), mouse.y - Board.getBoardOffset())
-                ending.x = Board.getX(ending_index)
-                ending.y = Board.getY(ending_index)
 
-                if (BoardLogic.getSquare(Board.getRow(starting_index), Board.getColumn(starting_index)) !== "")
+                if (starting_index != ending_index)
                 {
-                    if (!BoardLogic.move(Board.getRow(starting_index), Board.getColumn(starting_index), Board.getRow(ending_index), Board.getColumn(ending_index)))
+                    ending.x = Board.getX(ending_index)
+                    ending.y = Board.getY(ending_index)
+
+                    if (BoardLogic.getSquare(Board.getRow(starting_index), Board.getColumn(starting_index)) !== "")
                     {
-                        // If the movement wasn't made then reset the starting piece.
-                        repeaterPieces.itemAt(starting_index).currentFrame = starting_piece
+                        if (!BoardLogic.move(Board.getRow(starting_index), Board.getColumn(starting_index), Board.getRow(ending_index), Board.getColumn(ending_index)))
+                        {
+                            // If the movement wasn't made then reset the starting piece.
+                            repeaterPieces.itemAt(starting_index).currentFrame = starting_piece
+                        }
+                        else
+                        {
+                            repeaterPieces.itemAt(starting_index).currentFrame = 12
+
+                            // Toggle the current player's LED if the movement was made.
+                            whiteBlackMove = whiteBlackMove == 1 ? 0 : 1
+
+                            //Get move number
+                            moveNumber++
+
+                            //Convert y to file
+                            var file = Board.getColumn(ending_index)
+
+                            //Convert x to rank
+                            var rank = Board.getRow(ending_index)
+
+                            currentMove = moveNumber + Board.pieceToString(current_piece.frame) + Board.yToFile(file) + Board.xToRank(rank)
+                        }
                     }
-                    else
-                    {
-                        // Toggle the current player's LED if the movement was made.
-                        whiteBlackMove = whiteBlackMove == 1 ? 0 : 1
 
-                        //Get move number
-                        moveNumber++
+                    // Update the destination of the piece movement.
+                    repeaterPieces.itemAt(ending_index).currentFrame = Board.setPiece(BoardLogic.getSquare(Board.getRow(ending_index), Board.getColumn(ending_index)))
 
-                        //Convert y to file
-                        var file = Board.getColumn(ending_index)
-
-                        //Convert x to rank
-                        var rank = Board.getRow(ending_index)
-
-                        currentMove = moveNumber + Board.pieceToString(current_piece.frame) + Board.yToFile(file) + Board.xToRank(rank)
-                    }
+                    starting_position = false
                 }
-
-                // Update the destination of the piece movement.
-                repeaterPieces.itemAt(ending_index).currentFrame = Board.setPiece(BoardLogic.getSquare(Board.getRow(ending_index), Board.getColumn(ending_index)))
-
-                starting_position = false
 
                 // Set the draggable piece to invisible while not being dragged.
                 current_piece.visible = false
