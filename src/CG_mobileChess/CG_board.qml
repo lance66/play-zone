@@ -55,16 +55,22 @@ Item
         {
             current_piece.x = mouse.x - (current_piece.width / 2)
 
-            if (starting.x != (mouse.x - (mouse.x % Board.getSquareSize())))
+            if (starting_position && starting.x !== ((mouse.x - (mouse.x % Board.getSquareSize())) + Board.getBoardOffset()))
+            {
                 repeaterPieces.itemAt(starting_index).currentFrame = 12
+                current_piece.visible = true
+            }
         }
 
         onMouseYChanged:
         {
             current_piece.y = mouse.y - (current_piece.height / 2)
 
-            if (starting.y != (mouse.y - (mouse.y % Board.getSquareSize())))
+            if (starting_position && starting.y !== ((mouse.y - (mouse.y % Board.getSquareSize())) + Board.getBoardOffset()))
+            {
                 repeaterPieces.itemAt(starting_index).currentFrame = 12
+                current_piece.visible = true
+            }
         }
 
         onPressed:
@@ -82,15 +88,9 @@ Item
                 // This allows us to undo a movement if not validated.
                 starting_piece = repeaterPieces.itemAt(starting_index).currentFrame
 
-                // Temporarily picks up the piece by removing it.
-                //repeaterPieces.itemAt(starting_index).currentFrame = 12
-
                 ending.visible = false
 
                 current_piece.frame = starting_piece
-                current_piece.visible = true
-                current_piece.x = starting.x
-                current_piece.y = starting.y
             }
         }
 
@@ -117,7 +117,11 @@ Item
                         }
                         else
                         {
+                            // Update the starting index
                             repeaterPieces.itemAt(starting_index).currentFrame = 12
+
+                            // Update the destination of the piece movement.
+                            repeaterPieces.itemAt(ending_index).currentFrame = Board.setPiece(BoardLogic.getSquare(Board.getRow(ending_index), Board.getColumn(ending_index)))
 
                             // Toggle the current player's LED if the movement was made.
                             whiteBlackMove = whiteBlackMove == 1 ? 0 : 1
@@ -134,9 +138,6 @@ Item
                             currentMove = moveNumber + Board.pieceToString(current_piece.frame) + Board.yToFile(file) + Board.xToRank(rank)
                         }
                     }
-
-                    // Update the destination of the piece movement.
-                    repeaterPieces.itemAt(ending_index).currentFrame = Board.setPiece(BoardLogic.getSquare(Board.getRow(ending_index), Board.getColumn(ending_index)))
 
                     starting_position = false
                 }
@@ -219,8 +220,8 @@ Item
     {
         id: current_piece
         visible: false
-        width: Board.getSquareSize() * 1.5
-        height: Board.getSquareSize() * 1.5
+        width: Board.getSquareSize() * 2
+        height: Board.getSquareSize() * 2
         source: "images/cg_pieces.png"
         running: false
         frameCount: 12

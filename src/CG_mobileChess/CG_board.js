@@ -98,7 +98,7 @@ function getBoardOffset()
 
 function getIndex(x, y)
 {
-    return (Math.floor(y / getSquareSize()) * 8) + Math.floor(x / getSquareSize())
+    return ((Math.floor(y / getSquareSize()) * 8) + Math.floor(x / getSquareSize())) % 64
 }
 
 /**************************************************************
