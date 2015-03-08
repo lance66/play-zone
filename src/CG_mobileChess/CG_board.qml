@@ -21,6 +21,14 @@ Item
     property int whiteMoveNumber: 0
     property int blackMoveNumber: 0
     property string currentMove: ""
+    property int i: 0
+
+    //Data structure to store the moves of game
+    ListModel
+    {
+        id: moves
+    }
+
 
     Image
     {
@@ -142,7 +150,15 @@ Item
                             //Convert x to rank
                             var rank = Board.getRow(ending_index)
 
+                            //Update current move
                             currentMove = moveNumber + Board.pieceToString(current_piece.frame) + Board.yToFile(file) + Board.xToRank(rank)
+
+                            //Store current move in list
+                            moves.append({"move": currentMove})
+
+                            //Print all moves stored in list
+                            for(i = 0; i < moves.count; i++)
+                                console.log(moves.get(i).move)
                         }
                     }
 

@@ -17,6 +17,7 @@ Item
 
     signal finished
     property int gameTimeInMinutes: 1
+    property bool gameOver: false
 
     CG_banner
     {
@@ -90,7 +91,7 @@ Item
 
         Image
         {
-            source: "images/cg_draw.png"
+            source: gameOver == false ? "images/cg_draw.png" : "images/cg_leftArrow.png"
             width: parent.width * 0.5
             height: parent.height * 0.5
 
@@ -151,7 +152,7 @@ Item
 
         Image
         {
-            source: "images/cg_resign.png"
+            source: gameOver == false ? "images/cg_resign.png" : "images/cg_rightArrow.png"
             width: parent.width * 0.5
             height: parent.height * 0.5
 
@@ -161,6 +162,9 @@ Item
 
         onClicked:
         {
+            //If someone resigned, the game is over
+            gameOver = true
+
             //Post results
             cg_player.result = "0"
             cg_player.resultVisible = true

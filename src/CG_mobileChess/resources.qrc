@@ -40,5 +40,7 @@
         <file>Sounds/resign.mp3</file>
         <file>Sounds/successfulLogin.mp3</file>
         <file>fonts/CHOCD TRIAL___.otf</file>
+        <file>images/cg_rightArrow.png</file>
+        <file>images/cg_leftArrow.png</file>
     </qresource>
 </RCC>
