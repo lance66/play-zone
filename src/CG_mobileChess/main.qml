@@ -62,6 +62,26 @@ ApplicationWindow
                                    loading.timer.start()
                                    game.gameTimeInMinutes = 30 }
 
+        onSettings:
+        {
+            lobby.visible = false
+            settings.visible = true
+        }
+
+        visible: false
+    }
+
+    CG_settings
+    {
+        id: settings
+        anchors.fill: parent
+
+        onGoBack:
+        {
+            settings.visible = false
+            lobby.visible = true
+        }
+
         visible: false
     }
 

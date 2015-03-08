@@ -35,6 +35,7 @@ Item
     signal startOneMinuteGame
     signal startFiveMinuteGame
     signal startThirtyMinuteGame
+    signal settings
 
     // The individual control height is 1/8 of the total height.
     function getControlHeight()
@@ -185,7 +186,7 @@ Item
                 Layout.preferredWidth: getControlWidth() / 2
                 Layout.preferredHeight: getControlHeight()
 
-                onClicked: root.goBack()
+                onClicked: root.settings()
             }
         }
     }
