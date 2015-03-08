@@ -45,12 +45,12 @@ Item
             text: "Settings"
 
             color: "white"
-            font.family: "Aerial"
+            font.family: customFont.name
             font.bold: true
             style: Text.Raised
             styleColor: "black"
 
-            font.pixelSize: 20
+            font.pixelSize: getControlWidth() * 0.1
         }
 
         RowLayout
@@ -63,14 +63,14 @@ Item
                 text: "Country: "
                 width: 20
                 color: "white"
-                font.family: "Aerial"
+                font.family: customFont.name
                 font.bold: true
                 style: Text.Raised
                 styleColor: "black"
 
                 Layout.alignment: Qt.AlignCenter
 
-                font.pixelSize: 15
+                font.pixelSize: getControlWidth() * 0.1
             }
 
             ComboBox
@@ -106,14 +106,14 @@ Item
                 width: 20
 
                 color: "white"
-                font.family: "Aerial"
+                font.family: customFont.name
                 font.bold: true
                 style: Text.Raised
                 styleColor: "black"
 
                 Layout.alignment: Qt.AlignCenter
 
-                font.pixelSize: 15
+                font.pixelSize: getControlWidth() * 0.1
             }
 
             ComboBox
