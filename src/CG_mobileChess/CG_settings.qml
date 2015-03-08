@@ -5,12 +5,15 @@ import QtQuick.Window 2.0
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.0
 import QtMultimedia 5.0
+import "CG_definitions.js" as Definitions
 
 Item
 {
     id: root
     width: 400
     height: 600
+
+    signal goBack
 
     function getSmallestOrientation()
     {
@@ -143,24 +146,58 @@ Item
         {
             id: btn_back
             text: "Back"
-            //style: cgButtonStyle
+            style: cgButtonStyle
 
             Layout.preferredWidth: getControlWidth() / 2
             Layout.preferredHeight: getControlHeight()
 
-            //Program on click event
+            onClicked: root.goBack()
         }
 
         Button
         {
             id: btn_Save
             text: "Save"
-            //style: cgButtonStyle
+            style: cgButtonStyle
 
             Layout.preferredWidth: getControlWidth() / 2
             Layout.preferredHeight: getControlHeight()
 
-            // Program on click event
+            onClicked: root.goBack()
+        }
+    }
+
+    Component
+    {
+        id: cgButtonStyle
+
+        ButtonStyle
+        {
+            background: Rectangle
+            {
+                gradient: Gradient
+                {
+                    GradientStop { position: 0.0; color: control.pressed ? Definitions.BUTTON_COLOR_ON_CLICK : Definitions.TOP_COLOR_FOR_BUTTON }
+                    GradientStop { position: 0.5; color: control.pressed ? Definitions.BUTTON_COLOR_ON_CLICK : Definitions.BOTTOM_COLOR_FOR_BUTTON }
+                }
+
+                border.color: "#448ed3"
+                smooth: true
+                radius: 100
+            }
+
+            label: Text
+            {
+                font.pixelSize: getSmallestOrientation() * 0.1
+
+                renderType: Text.NativeRendering
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+                font.family: customFont.name
+                color: "black"
+
+                text: control.text
+            }
         }
     }
 }

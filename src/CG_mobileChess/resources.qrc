@@ -42,5 +42,6 @@
         <file>fonts/CHOCD TRIAL___.otf</file>
         <file>images/cg_rightArrow.png</file>
         <file>images/cg_leftArrow.png</file>
+        <file>CG_settings.qml</file>
     </qresource>
 </RCC>
