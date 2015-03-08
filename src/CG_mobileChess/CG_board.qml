@@ -16,7 +16,10 @@ Item
     property int whiteBlackMove: 0
 
     property int starting_piece: -1
+    property int plyNumber: 0
     property int moveNumber: 0
+    property int whiteMoveNumber: 0
+    property int blackMoveNumber: 0
     property string currentMove: ""
 
     Image
@@ -126,8 +129,12 @@ Item
                             // Toggle the current player's LED if the movement was made.
                             whiteBlackMove = whiteBlackMove == 1 ? 0 : 1
 
-                            //Get move number
-                            moveNumber++
+                            //Increment ply number
+                            plyNumber++
+
+                            //Check whose turn it is
+                            plyNumber % 2 != 0 ? whiteMoveNumber++ : blackMoveNumber++
+                            plyNumber % 2 != 0 ? moveNumber = whiteMoveNumber : moveNumber = blackMoveNumber
 
                             //Convert y to file
                             var file = Board.getColumn(ending_index)
