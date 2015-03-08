@@ -42,5 +42,7 @@
         <file>fonts/CHOCD TRIAL___.otf</file>
         <file>images/cg_rightArrow.png</file>
         <file>images/cg_leftArrow.png</file>
+        <file>Sounds/move.mp3</file>
+        <file>Sounds/wrongMove.mp3</file>
     </qresource>
 </RCC>

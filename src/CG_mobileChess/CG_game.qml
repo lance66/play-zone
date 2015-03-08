@@ -106,7 +106,9 @@ Item
             //Flash opponent's screen green with sound effect
             //Flash for ten seconds or until opponent makes move
 
-            root.finished()
+            //Go backward throughout the game.
+
+            //root.finished()
         }
     }
 

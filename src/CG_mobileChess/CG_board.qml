@@ -4,6 +4,7 @@ import QtQuick.Controls.Styles 1.1
 import QtQuick.Window 2.0
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.0
+import QtMultimedia 5.0
 import "CG_board.js" as Board
 
 Item
@@ -29,7 +30,6 @@ Item
         id: moves
     }
 
-
     Image
     {
         id: img_boardTexture
@@ -37,6 +37,20 @@ Item
 
         width: root.width
         height: root.height
+    }
+
+    Audio
+    {
+        id: iPod
+        source: "Sounds/move.mp3"
+        autoLoad: true
+    }
+
+    Audio
+    {
+        id: iPod2
+        source: "Sounds/wrongMove.mp3"
+        autoLoad: true
     }
 
     Repeater
@@ -125,6 +139,9 @@ Item
                         {
                             // If the movement wasn't made then reset the starting piece.
                             repeaterPieces.itemAt(starting_index).currentFrame = starting_piece
+
+                            //Play wrong move sound
+                            iPod2.play()
                         }
                         else
                         {
@@ -133,6 +150,9 @@ Item
 
                             // Update the destination of the piece movement.
                             repeaterPieces.itemAt(ending_index).currentFrame = Board.setPiece(BoardLogic.getSquare(Board.getRow(ending_index), Board.getColumn(ending_index)))
+
+                            //Make sound on successful movement
+                            iPod.play()
 
                             // Toggle the current player's LED if the movement was made.
                             whiteBlackMove = whiteBlackMove == 1 ? 0 : 1

@@ -258,3 +258,23 @@ function xToRank(index)
         return ""
     }
 }
+
+function forward()
+{
+    moves.move(moves.count,moves.count + 1, 1)
+}
+
+function backward()
+{
+    //Current index
+    var current = moves.count
+
+    //Move backwards
+    moves.move(moves.count,moves.count - 1, 1)
+
+    //Move current index backwards
+    current--
+
+    //Make sure we're actually moving backwards
+    console.log(moves.get(current).move)
+}

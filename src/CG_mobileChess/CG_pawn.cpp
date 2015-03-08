@@ -25,8 +25,7 @@ bool CG_pawn::move(File f_to, Rank r_to, File f_from, Rank r_from)
     //capturing, en passant, and the 2 space first move will be
     //accounted for.
     if( !m_hasMoved && abs(f_to - f_from) == 2 &&
-        abs(r_to - r_from) == 0 )//&&
-        //direction == f_to - f_from )
+        abs(r_to - r_from) == 0 )
     {
         canMakeMove = true;
         m_hasMoved = true;
