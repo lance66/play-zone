@@ -44,7 +44,6 @@
         <file>Sounds/move.mp3</file>
         <file>Sounds/wrongMove.mp3</file>
         <file>CG_settings.qml</file>
-        <file>../../../../../Downloads/sfx_651607_mp3.zip</file>
         <file>Sounds/successfulLogin.mp3</file>
     </qresource>
 </RCC>
