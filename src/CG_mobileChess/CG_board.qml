@@ -23,23 +23,13 @@ Item
     property int blackMoveNumber: 0
     property string currentMove: ""
     property int i: 0
+    property int currentMoveNumber: 0
+    property var listOfMoves: [{move: "NULL"}]
 
     //Data structure to store the moves of game
     ListModel
     {
         id: moves
-    }
-
-    Component
-    {
-        id: myDelegate
-        Text{text: "Hello, Delegate!"}
-    }
-
-    ListView
-    {
-        model: moves
-        delegate: myDelegate
     }
 
     Image
@@ -187,10 +177,12 @@ Item
 
                             //Store current move in list
                             moves.append({"move": currentMove})
+                            listOfMoves.push({move: currentMove})
+                            currentMoveNumber++
 
                             //Print all moves stored in list
-                            for(i = 0; i < moves.count; i++)
-                                console.log(moves.get(i).move)
+                            for(i = 0; i < listOfMoves.length; i++)
+                                console.log(listOfMoves[i].move)
                         }
                     }
 

@@ -109,7 +109,8 @@ Item
 
             //Go backward throughout the game.
 
-            Board.backward()
+            cg_board.currentMoveNumber = Board.backward(cg_board.listOfMoves, cg_board.currentMoveNumber)
+            iPod2.play()
 
             //root.finished()
         }
@@ -118,7 +119,7 @@ Item
     Text
     {
         id: lbl_notation
-        text: cg_board.currentMove
+        text: Board.current(cg_board.listOfMoves, cg_board.currentMoveNumber)
 
         color: "white"
         font.family: "Helvetica"
@@ -141,6 +142,14 @@ Item
         id: iPod
         source: "Sounds/resign.mp3"
         autoLoad: true
+    }
+
+    Audio
+    {
+        id: iPod2
+        source: "Sounds/move.mp3"
+        autoLoad: true
+        volume: 1.0
     }
 
     Button
@@ -167,26 +176,33 @@ Item
 
         onClicked:
         {
-            //If someone resigned, the game is over
-            gameOver = true
 
-            //Post results
-            cg_player.result = "0"
-            cg_player.resultVisible = true
+            if(gameOver == false)
+            {
+                //If someone resigned, the game is over
+                gameOver = true
 
-            //Post results
-            cg_opponent.result = "1"
-            cg_opponent.resultVisible = true
+                //Post results
+                cg_player.result = "0"
+                cg_player.resultVisible = true
 
-            //Sound effect to notify user of resignation
-            iPod.play()
+                //Post results
+                cg_opponent.result = "1"
+                cg_opponent.resultVisible = true
 
-            //Notify user game is over and how many ELO points were gained/lost
-            resignDialog.open()
+                //Sound effect to notify user of resignation
+                iPod.play()
 
-            //Stop the clocks from running
-            cg_opponent.clockRunning = false
-            cg_player.clockRunning = false
+                //Notify user game is over and how many ELO points were gained/lost
+                resignDialog.open()
+
+                //Stop the clocks from running
+                cg_opponent.clockRunning = false
+                cg_player.clockRunning = false
+            }
+            else
+                cg_board.currentMoveNumber = Board.forward(cg_board.listOfMoves, cg_board.currentMoveNumber)
+                iPod2.play()
 
             //When user presses OK or close, bring him back to the lobby.
             //root.finished()

@@ -36,6 +36,7 @@ Item
         id: iPod
         source: "Sounds/successfulLogin.mp3"
         autoLoad: true
+        loops: 79
     }
 
     Column
@@ -163,6 +164,7 @@ Item
 
                     root.loggedIn()
                     iPod.play()
+
                 }
 
                 tf_confirmPassword.visible = false

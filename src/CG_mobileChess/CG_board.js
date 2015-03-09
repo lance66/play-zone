@@ -259,22 +259,30 @@ function xToRank(index)
     }
 }
 
-function forward()
+function forward(moves, current)
 {
-    moves.move(moves.count,moves.count + 1, 1)
+    //Move current index backwards
+    current++
+
+    //Pump current move to screen
+    console.log(moves[current].move)
+
+    return current
 }
 
-function backward()
+function backward(moves, current)
 {
-    //Current index
-    var current = moves.count
-
-    //Move backwards
-    moves.move(moves.count,moves.count - 1, 1)
-
     //Move current index backwards
     current--
 
-    //Make sure we're actually moving backwards
-    console.log(moves.get(current).move)
+    //Pump current move to screen
+    console.log(moves[current].move)
+
+    return current
 }
+
+function current(moves, current)
+{
+    return moves[current].move
+}
+
