@@ -261,10 +261,10 @@ bool CG_board::CheckKingInCheck(int f_source, int r_source, int f_dest, int r_de
 
     //If the king is the piece moving, we'll update our king_rank & king_file
     //to show that for validation purposes.
-    if ( king_rank == r_source && king_file == f_source )
+    if ( king_rank == r_source + 1 && king_file == f_source + 1 )
     {
-        king_rank = r_dest;
-        king_file = f_dest;
+        king_rank = r_dest + 1;
+        king_file = f_dest + 1;
     }
 
     //Move the piece on the temporary board to test the movement out.
