@@ -6,6 +6,7 @@ import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.0
 import QtMultimedia 5.0
 import QtQuick.Dialogs 1.1
+import "CG_board.js" as Board
 import "CG_definitions.js" as Definitions
 import "CG_game.js" as Game
 
@@ -107,6 +108,8 @@ Item
             //Flash for ten seconds or until opponent makes move
 
             //Go backward throughout the game.
+
+            Board.backward()
 
             //root.finished()
         }

@@ -38,12 +38,13 @@
         <file>Sounds/01 - Untitled (Album Version).mp3</file>
         <file>Sounds/gameStarted.mp3</file>
         <file>Sounds/resign.mp3</file>
-        <file>Sounds/successfulLogin.mp3</file>
         <file>fonts/CHOCD TRIAL___.otf</file>
         <file>images/cg_rightArrow.png</file>
         <file>images/cg_leftArrow.png</file>
         <file>Sounds/move.mp3</file>
         <file>Sounds/wrongMove.mp3</file>
         <file>CG_settings.qml</file>
+        <file>../../../../../Downloads/sfx_651607_mp3.zip</file>
+        <file>Sounds/successfulLogin.mp3</file>
     </qresource>
 </RCC>

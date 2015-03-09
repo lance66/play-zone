@@ -30,6 +30,18 @@ Item
         id: moves
     }
 
+    Component
+    {
+        id: myDelegate
+        Text{text: "Hello, Delegate!"}
+    }
+
+    ListView
+    {
+        model: moves
+        delegate: myDelegate
+    }
+
     Image
     {
         id: img_boardTexture
@@ -41,14 +53,14 @@ Item
 
     Audio
     {
-        id: iPod
+        id: iPod2
         source: "Sounds/move.mp3"
         autoLoad: true
     }
 
     Audio
     {
-        id: iPod2
+        id: iPod
         source: "Sounds/wrongMove.mp3"
         autoLoad: true
     }
