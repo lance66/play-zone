@@ -71,6 +71,20 @@ function getY(current_index)
 }
 
 /**************************************************************
+*	  Purpose:  Refreshes the pieces on the board.
+*
+*     Entry:    User has entered a game.
+*
+*     Exit:     The board's pieces are updated.
+****************************************************************/
+
+function refreshBoard()
+{
+    for (var currentPiece = 0; currentPiece < repeaterPieces.count; ++currentPiece)
+        repeaterPieces.itemAt(currentPiece).currentFrame = setPiece(BoardLogic.getSquare(getRow(currentPiece), getColumn(currentPiece)))
+}
+
+/**************************************************************
 *	  Purpose:  Returns the offset of the board itself.
 *               This is the offset from the texture behind
 *               to the board pattern.
@@ -262,23 +276,13 @@ function xToRank(index)
 function forward(moves, current)
 {
     //Move current index backwards
-    current++
-
-    //Pump current move to screen
-    console.log(moves[current].move)
-
-    return current
+    return ++current
 }
 
 function backward(moves, current)
 {
     //Move current index backwards
-    current--
-
-    //Pump current move to screen
-    console.log(moves[current].move)
-
-    return current
+    return --current
 }
 
 function current(moves, current)

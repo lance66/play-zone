@@ -139,20 +139,11 @@ Item
                     {
                         if (!BoardLogic.move(Board.getRow(starting_index), Board.getColumn(starting_index), Board.getRow(ending_index), Board.getColumn(ending_index)))
                         {
-                            // If the movement wasn't made then reset the starting piece.
-                            repeaterPieces.itemAt(starting_index).currentFrame = starting_piece
-
                             //Play wrong move sound
                             iPod2.play()
                         }
                         else
                         {
-                            // Update the starting index
-                            repeaterPieces.itemAt(starting_index).currentFrame = 12
-
-                            // Update the destination of the piece movement.
-                            repeaterPieces.itemAt(ending_index).currentFrame = Board.setPiece(BoardLogic.getSquare(Board.getRow(ending_index), Board.getColumn(ending_index)))
-
                             //Make sound on successful movement
                             iPod.play()
 
@@ -179,11 +170,10 @@ Item
                             moves.append({"move": currentMove})
                             listOfMoves.push({move: currentMove})
                             currentMoveNumber++
-
-                            //Print all moves stored in list
-                            for(i = 0; i < listOfMoves.length; i++)
-                                console.log(listOfMoves[i].move)
                         }
+
+                        // Update the board's pieces after a movement
+                        Board.refreshBoard()
                     }
 
                     starting_position = false
