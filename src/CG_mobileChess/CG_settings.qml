@@ -50,7 +50,7 @@ Item
             style: Text.Raised
             styleColor: "black"
 
-            font.pixelSize: getControlWidth() * 0.1
+            font.pixelSize: getControlWidth() * 0.15
         }
 
         RowLayout
@@ -79,6 +79,7 @@ Item
                 editable: true
                 currentIndex: -1
                 width: 20
+
                 validator: RegExpValidator { regExp: /^[A-Za-z]+$/ }
 
                 Layout.alignment: Qt.AlignCenter
@@ -88,9 +89,30 @@ Item
                     id: lm_country
 
                     ListElement { text: ""; color: "white" }
-                    ListElement { text: "USA"; color: "yellow" } //color: "yellow" /*american flag*/ }
-                    ListElement { text: "England"; color: "Green" /*English flag*/ }
-                    ListElement { text: "Russia"; color: "Brown" /*russian flag*/ }
+                    ListElement { text: "Austria"; color: "Brown" }
+                    ListElement { text: "Azerbaijan"; color: "yellow" }
+                    ListElement { text: "Belarus"; color: "yellow" }
+                    ListElement { text: "Bulgaria"; color: "yellow" }
+                    ListElement { text: "Croatia"; color: "yellow" }
+                    ListElement { text: "Czech Republic"; color: "yellow" }
+                    ListElement { text: "Denmark"; color: "yellow" }
+                    ListElement { text: "France"; color: "yellow" }
+                    ListElement { text: "Germany"; color: "yellow" }
+                    ListElement { text: "Greece"; color: "yellow" }
+                    ListElement { text: "Italy"; color: "yellow" }
+                    ListElement { text: "Kazakstan"; color: "yellow" }
+                    ListElement { text: "Luxembourg"; color: "yellow" }
+                    ListElement { text: "Poland"; color: "Green" }
+                    ListElement { text: "Portugal"; color: "Green" }
+                    ListElement { text: "Romania"; color: "Green" }
+                    ListElement { text: "Russia"; color: "Green" }
+                    ListElement { text: "Spain"; color: "Green" }
+                    ListElement { text: "Sweden"; color: "Green" }
+                    ListElement { text: "Switzerland"; color: "Green" }
+                    ListElement { text: "Turkey"; color: "Green" }
+                    ListElement { text: "Ukraine"; color: "Green" }
+                    ListElement { text: "United Kingdom"; color: "Green" }
+                    ListElement { text: "United States"; color: "Green" }
                 }
             }
         }
@@ -102,7 +124,7 @@ Item
             Text
             {
                 id: lbl_sound
-                text: "Sound: "
+                text: "   Sound: "
                 width: 20
 
                 color: "white"
