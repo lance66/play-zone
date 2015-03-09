@@ -2,7 +2,7 @@
 #include <QDebug>
 
 //Default constructor
-CG_board::CG_board() : m_board()
+CG_board::CG_board() : m_board(), m_whiteToMove(true)
 {
     //Set up the CG_squares to be the correct file and rank.
     for ( int rank = 1; rank <= 8; rank++)
@@ -53,6 +53,7 @@ CG_board::CG_board() : m_board()
 bool CG_board::move(int f_source, int r_source, int f_dest, int r_dest)
 {
     bool move_made = false;
+    CG_piece * temp_piece = nullptr;
 
     //If the square selected has a piece in it.
     if(m_board[f_source][r_source].getPiece() != nullptr)
@@ -68,10 +69,28 @@ bool CG_board::move(int f_source, int r_source, int f_dest, int r_dest)
             {
                 if(CheckForClearPath( f_source, r_source, f_dest, r_dest))
                 {
+                    //Temporarily store the pointer to the piece being moved.
+                    temp_piece = m_board[f_source][r_source].getPiece();
+
                     //Move the piece from its source to the destination.
-                    m_board[f_dest][r_dest].setPiece(m_board[f_source][r_source].getPiece());
+                    //m_board[f_dest][r_dest].setPiece(m_board[f_source][r_source].getPiece());
+
+                    //Make the square where the piece moved from empty.
                     m_board[f_source][r_source].setPiece();
-                    move_made = true;
+
+                    //If moving this piece would not put the player's king in check,
+                    //Then finish the movement and swap turns.
+                    if ( !CheckKingChecked() )
+                    {
+                        m_board[f_dest][r_dest].setPiece(temp_piece);
+                        move_made = true;
+                        //m_whiteToMove = m_whiteToMove ? false : true;
+                    }
+                    //Else, put the piece that was going to move back in its original spot.
+                    else
+                    {
+                        m_board[f_source][r_source].setPiece(temp_piece);
+                    }
                 }
             }
         }
@@ -188,4 +207,66 @@ void CG_board::CheckBishopMovement(int f_source, int r_source, int f_dest, int r
         }
     }
 
+}
+
+bool CG_board::CheckKingChecked()
+{
+    int king_rank = 0;
+    int king_file = 0;
+    bool king_found = false;
+    bool king_inCheck = false;
+
+    //This code is used to find the king of the color currently moving pieces.
+    for( int rank = 1; rank <= 8 && !king_found; rank++ )
+    {
+        for( int file = 1; file <= 8 && !king_found; file++ )
+        {
+            //Check to see if the square holds a piece in it.
+            if( m_board[rank-1][file-1].getPiece() != nullptr )
+            {
+                //If its white's move and the square has that player's king, mark its location.
+                if ( m_whiteToMove &&
+                     m_board[rank-1][file-1].getPiece()->getPieceColor() == WHITE &&
+                     m_board[rank-1][file-1].getPiece()->getPieceName() == "King" )
+                {
+                    king_found = true;
+                    king_rank = rank;
+                    king_file = file;
+                }
+                //Else if its black's move and the square has that player's king, mark its location.
+                else if ( !m_whiteToMove &&
+                          m_board[rank-1][file-1].getPiece()->getPieceColor() == BLACK &&
+                          m_board[rank-1][file-1].getPiece()->getPieceName() == "King" )
+                {
+                    king_found = true;
+                    king_rank = rank;
+                    king_file = file;
+                }
+            }
+        }
+    }
+
+    //Using the location of the king, we're going to try to see if any piece
+    //of an opposing color can move to that square.
+    for( int rank = 1; rank <= 8 && !king_inCheck; rank++ )
+    {
+        for( int file = 1; file <= 8 && !king_inCheck; file++ )
+        {
+            if( m_board[rank-1][file-1].getPiece() != nullptr )
+            {
+                if( m_whiteToMove &&
+                    m_board[rank-1][file-1].getPiece()->getPieceColor() == BLACK )
+                {
+                    king_inCheck = move(file, rank, king_file, king_rank);
+                }
+                else if ( !m_whiteToMove &&
+                          m_board[rank-1][file-1].getPiece()->getPieceColor() == WHITE )
+                {
+                    king_inCheck = move(file, rank, king_file, king_rank);
+                }
+            }
+        }
+    }
+
+    return king_inCheck;
 }
