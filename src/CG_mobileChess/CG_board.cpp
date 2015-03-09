@@ -73,6 +73,7 @@ CG_board::CG_board(const CG_board & copy ) : m_board(), m_whiteToMove(copy.m_whi
 bool CG_board::move(int f_source, int r_source, int f_dest, int r_dest)
 {
     bool move_made = false;
+    CG_Color currentPlayer = m_whiteToMove ? WHITE : BLACK;
 
     //If the square selected has a piece in it.
     if(m_board[f_source][r_source].getPiece() != nullptr)
@@ -81,10 +82,7 @@ bool CG_board::move(int f_source, int r_source, int f_dest, int r_dest)
         //continue onward.  Otherwise, this is an invalid move.
         //White pieces cannot be moved unless it is the white player moving them,
         //and vice versa for black.
-        if((m_board[f_source][r_source].getPiece()->getPieceColor() == WHITE
-           && m_whiteToMove) ||
-           (m_board[f_source][r_source].getPiece()->getPieceColor() == BLACK
-           && !m_whiteToMove) )
+        if((m_board[f_source][r_source].getPiece()->getPieceColor() == currentPlayer))
         {
             //If the destination doesn't have a piece
             //or the destination has a piece of a different color
@@ -240,7 +238,7 @@ bool CG_board::CheckKingInCheck(int f_source, int r_source, int f_dest, int r_de
     int king_rank = 1;
     int king_file = 1;
     bool king_found = false;
-    CG_Color playerMoving = WHITE;
+    CG_Color playerMoving = m_whiteToMove ? WHITE : BLACK;
 
     //This finds the king of the player currently moving pieces.
     for( int rank = 1; rank <= 8 && !king_found; rank++ )
@@ -250,17 +248,13 @@ bool CG_board::CheckKingInCheck(int f_source, int r_source, int f_dest, int r_de
             //If the king of the player currently moving pieces exists in this location,
             //mark that location for future use in the method.
             if( temp_board.m_board[file-1][rank-1].getPiece() != nullptr &&
-                (( m_whiteToMove &&
-                CG_Color(temp_board.m_board[file-1][rank-1].getPiece()->getPieceColor()) == WHITE)
-                || ( !m_whiteToMove &&
-                CG_Color(temp_board.m_board[file-1][rank-1].getPiece()->getPieceColor()) == BLACK)
-                ) && temp_board.m_board[file-1][rank-1].getPiece()->getPieceName() == "King"
+                (CG_Color(temp_board.m_board[file-1][rank-1].getPiece()->getPieceColor()) == playerMoving)
+                && temp_board.m_board[file-1][rank-1].getPiece()->getPieceName() == "King"
               )
             {
                 king_rank = rank;
                 king_file = file;
                 king_found = true;
-                playerMoving = CG_Color(temp_board.m_board[file-1][rank-1].getPiece()->getPieceColor());
             }
         }
     }
