@@ -2,7 +2,7 @@
 #define CG_HISTORY_H
 
 #include "CG_board.h"
-#include "CG_piece.h"
+//#include "CG_piece.h"
 
 class CG_history
 {

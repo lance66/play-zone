@@ -13,3 +13,13 @@ CG_history::setNext(CG_history next)
 {
     m_next = next;
 }
+
+CG_history::moveBack()
+{
+
+}
+
+CG_history::moveForward()
+{
+
+}
