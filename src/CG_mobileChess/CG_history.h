@@ -8,7 +8,9 @@ class CG_history
 {
 public:
     CG_history(CG_square from, CG_square to, CG_board * board, CG_history * previous);
-
+    setNext(CG_history next);
+    void moveBack();
+    void moveForward();
 private:
     CG_board * m_board;
     CG_history * m_previous;

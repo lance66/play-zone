@@ -52,7 +52,8 @@ SOURCES += main.cpp\
     CG_rook.cpp \
     CG_queen.cpp \
     CG_piece.cpp \
-    CG_king.cpp
+    CG_king.cpp \
+    CG_history.cpp
 
 HEADERS  += \
     CG_validator.h \
