@@ -26,12 +26,6 @@ Item
     property int currentMoveNumber: 0
     property var listOfMoves: [{move: "NULL"}]
 
-    //Data structure to store the moves of game
-    ListModel
-    {
-        id: moves
-    }
-
     Image
     {
         id: img_boardTexture
@@ -167,7 +161,6 @@ Item
                             currentMove = moveNumber + Board.pieceToString(current_piece.frame) + Board.yToFile(file) + Board.xToRank(rank)
 
                             //Store current move in list
-                            moves.append({"move": currentMove})
                             listOfMoves.push({move: currentMove})
                             currentMoveNumber++
                         }

@@ -66,7 +66,8 @@ HEADERS  += \
     CG_queen.h \
     CG_pawn.h \
     CG_knight.h \
-    CG_king.h
+    CG_king.h \
+    CG_history.h
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
