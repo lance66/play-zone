@@ -19,17 +19,29 @@ Item
     onWidthChanged:
     {
         if (isLandscape())
+        {
             gridBanner.columns = 1
-        if (isPortrait())
+            gridBanner.spacing = 0
+        }
+        else if (isPortrait())
+        {
             gridBanner.columns = 2
+            gridBanner.spacing = root.width - (img_flag.width + lbl_player.width + lbl_result.width) - (rect_LED.width + cg_clock.width)
+        }
     }
 
     onHeightChanged:
     {
         if (isLandscape())
+        {
             gridBanner.columns = 1
-        if (isPortrait())
+            gridBanner.spacing = 0
+        }
+        else if (isPortrait())
+        {
             gridBanner.columns = 2
+            gridBanner.spacing = root.width - (img_flag.width + lbl_player.width + lbl_result.width) - (rect_LED.width + cg_clock.width)
+        }
     }
 
     Grid
@@ -37,6 +49,8 @@ Item
         id: gridBanner
 
         columns: 2
+
+        spacing: root.width - (img_flag.width + lbl_player.width + lbl_result.width) - (rect_LED.width + cg_clock.width)
 
         width: root.width
         height: root.height

@@ -1,6 +1,6 @@
 #include "CG_history.h"
 
-CG_history::CG_history(CG_square from, CG_square to, CG_board * board, CG_history * previous)
+/*CG_history::CG_history(CG_square from, CG_square to, CG_board * board, CG_history * previous)
 {
     from = m_from;
     to = m_to;
@@ -23,3 +23,4 @@ void CG_history::moveForward()
 {
 
 }
+*/
