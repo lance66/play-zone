@@ -21,3 +21,14 @@ bool CG_rook::move(File f_to, Rank r_to, File f_from, Rank r_from)
 
     return canMakeMove;
 }
+
+void CG_rook::UpdatePiece()
+{
+    //If a rook has moved, it needs to update the rook accordingly.
+    m_hasMoved = true;
+}
+
+bool CG_rook::getHasMoved()
+{
+    return m_hasMoved;
+}

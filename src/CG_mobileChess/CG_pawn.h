@@ -12,6 +12,7 @@ public:
 
     //Member Functions
     bool move(File f_to, Rank r_to, File f_from, Rank r_from);
+    void UpdatePiece();
     bool canPromote();
     bool enPassant();
     //CG_piece promote(CG_piece promoteTo);

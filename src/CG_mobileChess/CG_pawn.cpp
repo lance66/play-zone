@@ -28,22 +28,25 @@ bool CG_pawn::move(File f_to, Rank r_to, File f_from, Rank r_from)
         abs(r_to - r_from) == 0 )
     {
         canMakeMove = true;
-        m_hasMoved = true;
     }
     else if ( abs(f_to - f_from) == 1 &&
               abs(r_to - r_from) == 0 &&
               direction == f_to - f_from )
     {
         canMakeMove = true;
-        m_hasMoved = true;
     }
     else if ( abs(f_to - f_from) == 1 &&
               abs(r_to - r_from) == 1 &&
               direction == f_to - f_from )
     {
         canMakeMove = true;
-        m_hasMoved = true;
     }
 
     return canMakeMove;
+}
+
+void CG_pawn::UpdatePiece()
+{
+    //This updates the pawn to show that it has moved.
+    m_hasMoved = true;
 }

@@ -89,9 +89,51 @@ bool CG_board::move(int f_source, int r_source, int f_dest, int r_dest)
         //and vice versa for black.
         if((m_board[f_source][r_source].getPiece()->getPieceColor() == currentPlayer))
         {
+            //If the piece being moved is a King and the destination doesn't have
+            //a piece in it, and the king is actually moving only by rank.
+            if (m_board[f_source][r_source].getPiece()->getPieceName() == "King"
+                && m_board[f_dest][r_dest].getPiece() == nullptr
+                && abs(r_source - r_dest) == 2 && abs(f_source - f_dest) == 0
+                && static_cast<CG_king *>(m_board[f_source][r_source].getPiece())->getHasMoved() == false)
+            {
+                //This figures out which rank to use.  If the king is moving right,
+                //the rank should be the rook on the right, and vice versa.
+                int rook_rank = 7 == (r_dest + 1) ? 7 : 0;
+
+                //This determines what side to put the rook on after castling.
+                //If the King castled right, the Rook should be on the King's left,
+                //and vice versa.
+                int rook_side = rook_rank == 0 ? 1 : -1;
+
+                //We need to make sure that the Rook is in the proper place, that it is of the same color,
+                //and that it hasn't moved.
+                if(m_board[f_source][r_source].getPiece()->move((File) f_source, (Rank) r_source, (File) f_dest, (Rank) r_dest)
+                   && (m_board[f_source][rook_rank].getPiece()->getPieceColor() == currentPlayer &&
+                       m_board[f_source][rook_rank].getPiece()->getPieceName() == "Rook" &&
+                       static_cast<CG_rook *>(m_board[f_source][rook_rank].getPiece())->getHasMoved() == false))
+                {
+                    //Check to see if the path between the King and the Rook is clear.
+                    if(CheckForClearPath( f_source, r_source, f_source, rook_rank))
+                    {
+                        //Check to see if the King were to move, would the King be in check.
+                        if ( !CheckKingInCheck(f_source, r_source, f_dest, r_dest))
+                        {
+                            m_board[f_dest][r_dest].setPiece(m_board[f_source][r_source].getPiece());
+                            m_board[f_dest][r_dest].getPiece()->UpdatePiece();
+                            m_board[f_source][r_source].setPiece();
+
+                            m_board[f_dest][r_dest+rook_side].setPiece(m_board[f_source][rook_rank].getPiece());
+                            m_board[f_dest][r_dest+rook_side].getPiece()->UpdatePiece();
+                            m_board[f_dest][rook_rank].setPiece();
+                            move_made = true;
+                            m_whiteToMove = !m_whiteToMove;
+                        }
+                    }
+                }
+            }
             //If the destination doesn't have a piece
             //or the destination has a piece of a different color
-            if(m_board[f_dest][r_dest].getPiece() == nullptr ||
+            else if(m_board[f_dest][r_dest].getPiece() == nullptr ||
                m_board[f_source][r_source].getPiece()->getPieceColor() !=
                m_board[f_dest][r_dest].getPiece()->getPieceColor())
             {
@@ -107,6 +149,9 @@ bool CG_board::move(int f_source, int r_source, int f_dest, int r_dest)
                         {
                             //Move the piece from its source to the destination.
                             m_board[f_dest][r_dest].setPiece(m_board[f_source][r_source].getPiece());
+                            //Update the piece to show that it has moved.
+                            m_board[f_dest][r_dest].getPiece()->UpdatePiece();
+                            //Remove the piece from its original location.
                             m_board[f_source][r_source].setPiece();
                             move_made = true;
                             m_whiteToMove = !m_whiteToMove;
