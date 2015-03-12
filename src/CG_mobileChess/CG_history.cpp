@@ -62,12 +62,14 @@ void CG_history::setNext(CG_square board[8][8], CG_square from, CG_square to)
 
 void CG_history::moveBack()
 {
-    m_currentBoardIndex--;
+    if(m_currentBoardIndex > 0)
+        m_currentBoardIndex--;
 }
 
 void CG_history::moveForward()
 {
-    m_currentBoardIndex++;
+    if(m_currentBoardIndex < m_boardList.size() - 1)
+        m_currentBoardIndex++;
 }
 
 CG_square ** CG_history::getCurrentBoard()
