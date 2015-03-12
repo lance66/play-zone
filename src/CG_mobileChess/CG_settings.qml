@@ -6,7 +6,6 @@ import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.0
 import QtMultimedia 5.0
 import "CG_definitions.js" as Definitions
-import "CG_game.js" as Game
 
 Item
 {
@@ -15,9 +14,6 @@ Item
     height: 600
 
     signal goBack
-    property int countryFlag: 0
-    signal settingsChanged
-
 
     function getSmallestOrientation()
     {
@@ -77,55 +73,46 @@ Item
                 font.pixelSize: getControlWidth() * 0.1
             }
 
-
             ComboBox
             {
                 id: cb_country
                 editable: true
-                currentIndex:
-                {
+                currentIndex: -1
+                width: 20
 
-                    21
-                Game.setCountryFlag(currentIndex)
-                }
-                width: {getControlWidth()
-
-            }
-                height: getControlHeight()
                 validator: RegExpValidator { regExp: /^[A-Za-z]+$/ }
 
                 Layout.alignment: Qt.AlignCenter
-
-
 
                 model: ListModel
                 {
                     id: lm_country
 
-                    ListElement { text: "United States" }
-                    ListElement { text: "Austria" }
-                    ListElement { text: "Azerbaijan" }
-                    ListElement { text: "Belarus" }
-                    ListElement { text: "Bulgaria" }
-                    ListElement { text: "Croatia" }
-                    ListElement { text: "Czech Republic" }
-                    ListElement { text: "Denmark" }
-                    ListElement { text: "France" }
-                    ListElement { text: "Germany" }
-                    ListElement { text: "Greece" }
-                    ListElement { text: "Italy" }
-                    ListElement { text: "Kazakstan" }
-                    ListElement { text: "Luxembourg" }
-                    ListElement { text: "Poland" }
-                    ListElement { text: "Portugal" }
-                    ListElement { text: "Romania" }
-                    ListElement { text: "Russia" }
-                    ListElement { text: "Spain" }
-                    ListElement { text: "Sweden" }
-                    ListElement { text: "Switzerland" }
-                    ListElement { text: "Turkey" }
-                    ListElement { text: "Ukraine" }
-                    ListElement { text: "United Kingdom" }
+                    ListElement { text: ""; color: "white" }
+                    ListElement { text: "Austria"; color: "Brown" }
+                    ListElement { text: "Azerbaijan"; color: "yellow" }
+                    ListElement { text: "Belarus"; color: "yellow" }
+                    ListElement { text: "Bulgaria"; color: "yellow" }
+                    ListElement { text: "Croatia"; color: "yellow" }
+                    ListElement { text: "Czech Republic"; color: "yellow" }
+                    ListElement { text: "Denmark"; color: "yellow" }
+                    ListElement { text: "France"; color: "yellow" }
+                    ListElement { text: "Germany"; color: "yellow" }
+                    ListElement { text: "Greece"; color: "yellow" }
+                    ListElement { text: "Italy"; color: "yellow" }
+                    ListElement { text: "Kazakstan"; color: "yellow" }
+                    ListElement { text: "Luxembourg"; color: "yellow" }
+                    ListElement { text: "Poland"; color: "Green" }
+                    ListElement { text: "Portugal"; color: "Green" }
+                    ListElement { text: "Romania"; color: "Green" }
+                    ListElement { text: "Russia"; color: "Green" }
+                    ListElement { text: "Spain"; color: "Green" }
+                    ListElement { text: "Sweden"; color: "Green" }
+                    ListElement { text: "Switzerland"; color: "Green" }
+                    ListElement { text: "Turkey"; color: "Green" }
+                    ListElement { text: "Ukraine"; color: "Green" }
+                    ListElement { text: "United Kingdom"; color: "Green" }
+                    ListElement { text: "United States"; color: "Green" }
                 }
             }
         }
@@ -195,14 +182,10 @@ Item
             text: "Save"
             style: cgButtonStyle
 
-        Layout.preferredWidth: getControlWidth() / 2
-        Layout.preferredHeight: getControlHeight()
+            Layout.preferredWidth: getControlWidth() / 2
+            Layout.preferredHeight: getControlHeight()
 
-        onClicked:
-        {
-            root.settingsChanged()
-            root.goBack()
-        }
+            onClicked: root.goBack()
         }
     }
 

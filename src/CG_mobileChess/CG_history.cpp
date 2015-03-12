@@ -23,12 +23,12 @@ CG_history::CG_history(CG_square board[8][8])
     delete [] temp;
 
     m_boardList.push_back(temp);
-    m_currentBoardIndex = 0;
+    m_currentBoardIndex = -1;
 }
 
 CG_history::CG_history()
 {
-    m_currentBoardIndex = 0;
+    m_currentBoardIndex = -1;
 }
 
 void CG_history::setNext(CG_square board[8][8], CG_square from, CG_square to)
