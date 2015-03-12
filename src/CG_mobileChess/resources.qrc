@@ -22,8 +22,6 @@
         <file>images/center.png</file>
         <file>images/cg_board.png</file>
         <file>images/cg_draw.png</file>
-        <file>images/cg_flag_turkey.png</file>
-        <file>images/cg_flag_unitedStates.png</file>
         <file>images/cg_logo_hires_app.png</file>
         <file>images/cg_pieces.png</file>
         <file>images/cg_resign.png</file>
@@ -45,5 +43,6 @@
         <file>Sounds/wrongMove.mp3</file>
         <file>CG_settings.qml</file>
         <file>Sounds/successfulLogin.mp3</file>
+        <file>images/countries.png</file>
     </qresource>
 </RCC>

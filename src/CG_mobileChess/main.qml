@@ -82,6 +82,13 @@ ApplicationWindow
             lobby.visible = true
         }
 
+        onSettingsChanged:
+        {
+            game.playerFlagFrame = settings.countryFlag
+            settings.visible = false
+            lobby.visible = true
+        }
+
         visible: false
     }
 

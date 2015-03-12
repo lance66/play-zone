@@ -15,7 +15,7 @@ Item
     // for each piece.
     onWidthChanged:
     {
-        image.width = root.width * 11
+        image.width = root.width * frameCount
     }
 
     // Used for adjusting the height of the tilesheet

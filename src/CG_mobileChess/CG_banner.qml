@@ -9,12 +9,12 @@ Item
 {
     id: root
 
-    property alias countryFlag: img_flag.source
     property alias playerInfo: lbl_player.text
     property bool ledActive: false
     property alias clockRunning: cg_clock.running
     property alias result: lbl_result.text
     property alias resultVisible: lbl_result.visible
+    property alias flagFrame: img_flag.frame
 
     onWidthChanged:
     {
@@ -57,11 +57,14 @@ Item
 
         Row
         {
-            Image
+            CG_image
             {
                 id: img_flag
                 width: isPortrait() ? gridBanner.height : gridBanner.height / 4
                 height: isPortrait() ? gridBanner.height : gridBanner.height / 4
+                source: "images/countries.png"
+                frame: 0
+                frameCount: 24
             }
 
             Text

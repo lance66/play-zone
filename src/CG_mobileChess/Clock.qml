@@ -40,10 +40,7 @@ Item {
     Item {
         anchors.centerIn: parent
         width: 200; height: 240
-
-        Image { id: background; source: "images/clock.png"; visible: clock.night == false }
-        Image { source: "images/clock-night.png"; visible: clock.night == true }
-
+        Image { source: "images/clock-night.png" }
 
         Image {
             x: 92.5; y: 27

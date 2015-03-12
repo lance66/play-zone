@@ -260,4 +260,16 @@ Item
         x: starting.x
         y: starting.y
     }
+
+    onWidthChanged:
+    {
+        starting.visible = false
+        ending.visible = false
+    }
+
+    onHeightChanged:
+    {
+        starting.visible = false
+        ending.visible = false
+    }
 }

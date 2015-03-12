@@ -5,7 +5,7 @@ import QtQuick.Window 2.0
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.0
 import QtMultimedia 5.0
-import QtQuick.Dialogs 1.1
+import QtQuick.Dialogs 1.2
 import "CG_board.js" as Board
 import "CG_definitions.js" as Definitions
 import "CG_game.js" as Game
@@ -19,7 +19,7 @@ Item
     signal finished
     property int gameTimeInMinutes: 1
     property bool gameOver: false
-    property string playersCountryFlag: "images/cg_flag_unitedStates.png"
+    property alias playerFlagFrame: cg_player.flagFrame
 
     CG_banner
     {
@@ -27,9 +27,9 @@ Item
         width: Game.getBannerWidth()
         height: Game.getBannerHeight()
 
-        countryFlag: "images/cg_flag_turkey.png"
         playerInfo: "Trudodyr\n2715"
         ledActive: cg_board.whiteBlackMove == 1 ? true : false
+        flagFrame: 21
 
         clockRunning:
         {
@@ -49,7 +49,6 @@ Item
         width: Game.getBannerWidth()
         height: Game.getBannerHeight()
 
-        countryFlag: playersCountryFlag
         playerInfo: root.visible == true ? (User.getUsername() + "\n" + User.getCurrentELO()) : ""
         ledActive: cg_board.whiteBlackMove == 0 ? true : false
 
@@ -216,15 +215,88 @@ Item
         }
     }
 
-    MessageDialog
+    Dialog
     {
         id: resignDialog
         title: "Game Over"
-        text: "You resigned against " + cg_opponent.playerInfo.toString()
-        onAccepted:
+
+        contentItem: Rectangle
+        {
+            anchors.fill: parent
+            color: "#448ed3"
+
+            Column
+            {
+                Text
+                {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: "You resigned against " + cg_opponent.playerInfo.toString()
+                }
+
+                Button
+                {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    style: cgButtonStyle2
+                    text: "Review Game"
+                    onClicked:
+                    {
+                        resignDialog.close()
+                    }
+                }
+
+                Button
+                {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    style: cgButtonStyle2
+                    text: "Back to Lobby"
+                    onClicked:
+                    {
+                        resignDialog.close()
+                        root.finished()
+                    }
+                }
+
+                Component
+                {
+                    id: cgButtonStyle2
+
+                    ButtonStyle
+                    {
+                        background: Rectangle
+                        {
+                            gradient: Gradient
+                            {
+                                GradientStop { position: 0.0; color: control.pressed ? Definitions.BUTTON_COLOR_ON_CLICK : Definitions.TOP_COLOR_FOR_BUTTON }//"#b6ee65" : "#76ae25" }
+                                GradientStop { position: 0.5; color: control.pressed ? Definitions.BUTTON_COLOR_ON_CLICK : Definitions.BOTTOM_COLOR_FOR_BUTTON /*"#fbdb65"*/ }//"#76ae25" : "#b6ee65" }
+                            }
+
+                            border.color: "#1c375b" //"#448ed3"
+                            border.width: 4
+                            smooth: true
+                            radius: 100
+                        }
+
+                        label: Text
+                        {
+                            font.pixelSize: 30
+
+                            renderType: Text.NativeRendering
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignHCenter
+                            font.family: customFont.name
+                            color: "#000000" //"#CCFFFF"
+
+                            text: control.text
+                        }
+                    }
+                }
+            }
+        }
+
+        /*onAccepted:
         {
             console.log(":(")
-        }
+        }*/
     }
 
     Component

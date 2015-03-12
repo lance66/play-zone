@@ -15,6 +15,7 @@ Item
     height: 600
 
     signal goBack
+    //property alias countryFlag: cb_country.currentIndex
     property int countryFlag: 0
     signal settingsChanged
 
@@ -84,19 +85,13 @@ Item
                 editable: true
                 currentIndex:
                 {
-
                     21
-                Game.setCountryFlag(currentIndex)
                 }
-                width: {getControlWidth()
-
-            }
+                width: {getControlWidth()}
                 height: getControlHeight()
                 validator: RegExpValidator { regExp: /^[A-Za-z]+$/ }
 
                 Layout.alignment: Qt.AlignCenter
-
-
 
                 model: ListModel
                 {
@@ -195,14 +190,14 @@ Item
             text: "Save"
             style: cgButtonStyle
 
-        Layout.preferredWidth: getControlWidth() / 2
-        Layout.preferredHeight: getControlHeight()
+            Layout.preferredWidth: getControlWidth() / 2
+            Layout.preferredHeight: getControlHeight()
 
-        onClicked:
-        {
-            root.settingsChanged()
-            root.goBack()
-        }
+            onClicked:
+            {
+                root.countryFlag = cb_country.currentIndex
+                root.settingsChanged()
+            }
         }
     }
 
