@@ -19,6 +19,7 @@ Item
     signal finished
     property int gameTimeInMinutes: 1
     property bool gameOver: false
+    property string playersCountryFlag: "images/cg_flag_unitedStates.png"
 
     CG_banner
     {
@@ -48,7 +49,7 @@ Item
         width: Game.getBannerWidth()
         height: Game.getBannerHeight()
 
-        countryFlag: "images/cg_flag_unitedStates.png"
+        countryFlag: playersCountryFlag
         playerInfo: root.visible == true ? (User.getUsername() + "\n" + User.getCurrentELO()) : ""
         ledActive: cg_board.whiteBlackMove == 0 ? true : false
 

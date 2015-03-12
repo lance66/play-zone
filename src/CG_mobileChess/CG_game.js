@@ -48,3 +48,11 @@ function getBannerWidth()
     else
         return (getBackgroundWidth() - getBackgroundHeight()) / 2
 }
+
+function setCountryFlag(index)
+{
+    if(index === 21)
+        playersCountryFlag = "images/cg_flag_turkey.png"
+    else
+        playersCountryFlag = "images/cg_flag_unitedStates.png"
+}

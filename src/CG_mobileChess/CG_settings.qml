@@ -6,6 +6,7 @@ import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.0
 import QtMultimedia 5.0
 import "CG_definitions.js" as Definitions
+import "CG_game.js" as Game
 
 Item
 {
@@ -14,6 +15,9 @@ Item
     height: 600
 
     signal goBack
+    property int countryFlag: 0
+    signal settingsChanged
+
 
     function getSmallestOrientation()
     {
@@ -73,47 +77,55 @@ Item
                 font.pixelSize: getControlWidth() * 0.1
             }
 
+
             ComboBox
             {
                 id: cb_country
                 editable: true
-                currentIndex: 0
-                width: getControlWidth()
-                height: getControlHeight()
+                currentIndex:
+                {
 
+                    21
+                Game.setCountryFlag(currentIndex)
+                }
+                width: {getControlWidth()
+
+            }
+                height: getControlHeight()
                 validator: RegExpValidator { regExp: /^[A-Za-z]+$/ }
 
                 Layout.alignment: Qt.AlignCenter
+
+
 
                 model: ListModel
                 {
                     id: lm_country
 
-                    ListElement { text: "Select a country"; /*color: ""*/ }
-                    ListElement { text: "Austria" /*; color: "Austria_Flag" */}
-                    ListElement { text: "Azerbaijan" /*; color: "Azerbaijan_Flag" */}
-                    ListElement { text: "Belarus" /*; color: "Belarus_Flag" */}
-                    ListElement { text: "Bulgaria" /*; color: "Bulgaria_Flag" */}
-                    ListElement { text: "Croatia" /*; color: "Croatia_Flag" */}
-                    ListElement { text: "Czech Republic" /*; color: "Czech_Republic_Flag" */}
-                    ListElement { text: "Denmark" /*; color: "Denmark_Flag" */}
-                    ListElement { text: "France" /*; color: "France_Flag" */}
-                    ListElement { text: "Germany" /*; color: "Germany_Flag" */}
-                    ListElement { text: "Greece" /*; color: "Greece_Flag" */}
-                    ListElement { text: "Italy" /*; color: "Italy_Flag" */}
-                    ListElement { text: "Kazakstan" /*; color: "Kazakstan_Flag" */}
-                    ListElement { text: "Luxembourg" /*; color: "Luxembourg_Flag" */}
-                    ListElement { text: "Poland" /*; color: "Poland_Flag" */}
-                    ListElement { text: "Portugal" /*; color: "Portugal_Flag" */}
-                    ListElement { text: "Romania" /*; color: "Romania_Flag" */}
-                    ListElement { text: "Russia" /*; color: "Russia_Flag" */}
-                    ListElement { text: "Spain" /*; color: "Spain_Flag" */}
-                    ListElement { text: "Sweden" /*; color: "Sweden_Flag" */}
-                    ListElement { text: "Switzerland" /*; color: "Switzerland_Flag" */}
-                    ListElement { text: "Turkey" /*; color: "Turkey_Flag" */}
-                    ListElement { text: "Ukraine" /*; color: "Ukraine" */}
-                    ListElement { text: "United Kingdom" /*; color: "United_Kingdom_Flag" */}
-                    ListElement { text: "United States" /*; color: "United_States_Flag" */}
+                    ListElement { text: "United States" }
+                    ListElement { text: "Austria" }
+                    ListElement { text: "Azerbaijan" }
+                    ListElement { text: "Belarus" }
+                    ListElement { text: "Bulgaria" }
+                    ListElement { text: "Croatia" }
+                    ListElement { text: "Czech Republic" }
+                    ListElement { text: "Denmark" }
+                    ListElement { text: "France" }
+                    ListElement { text: "Germany" }
+                    ListElement { text: "Greece" }
+                    ListElement { text: "Italy" }
+                    ListElement { text: "Kazakstan" }
+                    ListElement { text: "Luxembourg" }
+                    ListElement { text: "Poland" }
+                    ListElement { text: "Portugal" }
+                    ListElement { text: "Romania" }
+                    ListElement { text: "Russia" }
+                    ListElement { text: "Spain" }
+                    ListElement { text: "Sweden" }
+                    ListElement { text: "Switzerland" }
+                    ListElement { text: "Turkey" }
+                    ListElement { text: "Ukraine" }
+                    ListElement { text: "United Kingdom" }
                 }
             }
         }
@@ -183,10 +195,14 @@ Item
             text: "Save"
             style: cgButtonStyle
 
-            Layout.preferredWidth: getControlWidth() / 2
-            Layout.preferredHeight: getControlHeight()
+        Layout.preferredWidth: getControlWidth() / 2
+        Layout.preferredHeight: getControlHeight()
 
-            onClicked: root.goBack()
+        onClicked:
+        {
+            root.settingsChanged()
+            root.goBack()
+        }
         }
     }
 
