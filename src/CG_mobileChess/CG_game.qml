@@ -149,7 +149,7 @@ Item
     Audio
     {
         id: iPod2
-        source: "Sounds/move.mp3"
+        source: "Sounds/wrongMove.mp3"
         autoLoad: true
         volume: 1.0
     }
@@ -205,7 +205,7 @@ Item
             else
             {
                 cg_board.currentMoveNumber = Board.forward(cg_board.listOfMoves, cg_board.currentMoveNumber)
-                BoardLogic.callHistoryForward();
+                BoardLogic.callHistoryForward()
                 Board.refreshBoard(cg_board.pieces)
                 iPod2.play()
             }

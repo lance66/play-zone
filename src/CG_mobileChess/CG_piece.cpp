@@ -25,6 +25,11 @@ bool CG_piece::move(File f_to, Rank r_to, File f_from, Rank r_from)
     return canMakeMove;
 }
 
+void CG_piece::UpdatePiece()
+{
+
+}
+
 //Member functions
 QString CG_piece::getPieceName() const
 {

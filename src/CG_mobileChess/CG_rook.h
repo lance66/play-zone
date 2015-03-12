@@ -11,6 +11,8 @@ class CG_rook : public CG_piece
 public:
     CG_rook(CG_Color color = WHITE);
     bool move(File f_to, Rank r_to, File f_from, Rank r_from);
+    void UpdatePiece();
+    bool getHasMoved();
 
 private:
     bool m_hasMoved;
