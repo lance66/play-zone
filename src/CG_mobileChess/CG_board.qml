@@ -24,7 +24,8 @@ Item
     property string currentMove: ""
     property int i: 0
     property int currentMoveNumber: 0
-    property var listOfMoves: [{move: "NULL"}]
+    property var listOfMoves: [{move: ""}]
+    property alias pieces: repeaterPieces
 
     Image
     {
@@ -131,7 +132,7 @@ Item
 
                     if (BoardLogic.getSquare(Board.getRow(starting_index), Board.getColumn(starting_index)) !== "")
                     {
-                        if (!BoardLogic.move(Board.getRow(starting_index), Board.getColumn(starting_index), Board.getRow(ending_index), Board.getColumn(ending_index)))
+                        if (gameOver || !BoardLogic.move(Board.getRow(starting_index), Board.getColumn(starting_index), Board.getRow(ending_index), Board.getColumn(ending_index)))
                         {
                             //Play wrong move sound
                             iPod2.play()
@@ -166,7 +167,7 @@ Item
                         }
 
                         // Update the board's pieces after a movement
-                        Board.refreshBoard()
+                        Board.refreshBoard(repeaterPieces)
                     }
 
                     starting_position = false

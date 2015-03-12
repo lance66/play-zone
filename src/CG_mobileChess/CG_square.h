@@ -15,9 +15,8 @@
 #define nullptr 0
 #endif
 
-class CG_square : public QObject
+class CG_square
 {
-    Q_OBJECT
 public:
     //Default constructor
     CG_square();
@@ -28,6 +27,7 @@ public:
     void setFile(File file);
     void setRank(Rank rank);
     void setSquare(File file, Rank rank);
+    void Aaron();
 
     QString getPieceName() const;
 
@@ -36,6 +36,7 @@ public:
     void setPiece(CG_piece * piece = nullptr);
 
     void setPiece(CG_Color color, QString name);
+    CG_square &operator=(const CG_square & rhs);
 
 private:
     File m_file;

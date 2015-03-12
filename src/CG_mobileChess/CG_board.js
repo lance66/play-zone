@@ -78,7 +78,7 @@ function getY(current_index)
 *     Exit:     The board's pieces are updated.
 ****************************************************************/
 
-function refreshBoard()
+function refreshBoard(repeaterPieces)
 {
     for (var currentPiece = 0; currentPiece < repeaterPieces.count; ++currentPiece)
         repeaterPieces.itemAt(currentPiece).currentFrame = setPiece(BoardLogic.getSquare(getRow(currentPiece), getColumn(currentPiece)))

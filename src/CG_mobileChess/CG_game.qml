@@ -110,6 +110,8 @@ Item
             //Go backward throughout the game.
 
             cg_board.currentMoveNumber = Board.backward(cg_board.listOfMoves, cg_board.currentMoveNumber)
+            BoardLogic.callHistoryBackward()
+            Board.refreshBoard(cg_board.pieces)
             iPod2.play()
 
             //root.finished()
@@ -201,8 +203,12 @@ Item
                 cg_player.clockRunning = false
             }
             else
+            {
                 cg_board.currentMoveNumber = Board.forward(cg_board.listOfMoves, cg_board.currentMoveNumber)
+                BoardLogic.callHistoryForward();
+                Board.refreshBoard(cg_board.pieces)
                 iPod2.play()
+            }
 
             //When user presses OK or close, bring him back to the lobby.
             //root.finished()

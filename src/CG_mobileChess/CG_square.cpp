@@ -49,11 +49,6 @@ CG_piece * CG_square::getPiece() const
 //This sets the CG_piece pointer to that of another pointer.
 void CG_square::setPiece(CG_piece * piece)
 {
-//    if ( m_piece != nullptr )
-//    {
-//        delete m_piece;
-//    }
-
     m_piece = piece;
 }
 
@@ -93,4 +88,36 @@ void CG_square::setPiece(CG_Color color, QString name)
     {
         m_piece = new CG_king(color);
     }
+}
+
+
+File CG_square::getFile() const
+{
+    return m_file;
+}
+Rank CG_square::getRank() const
+{
+    return m_rank;
+}
+
+CG_square &CG_square::operator=(const CG_square & rhs)
+{
+    //Check for self-assignment
+    if(this != &rhs)
+    {
+        CG_piece ** temp = nullptr;
+
+        //Delete old data
+        delete [] m_piece;
+
+        //Make deep copy of new data
+        m_file = rhs.m_file;
+        m_rank = rhs.m_rank;
+
+        temp = new CG_piece *[sizeof rhs];
+         m_piece = *temp;
+    }
+
+    //Return self-invoking object
+    return *this;
 }

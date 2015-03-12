@@ -48,9 +48,14 @@ CG_board::CG_board() : m_board(), m_whiteToMove(true)
     m_board[6][5].setPiece(WHITE, "Pawn");
     m_board[6][6].setPiece(WHITE, "Pawn");
     m_board[6][7].setPiece(WHITE, "Pawn");
+
+    CG_square tempFrom;
+    CG_square tempTo;
+
+    m_history.setNext(m_board, tempFrom, tempTo);
 }
 
-CG_board::CG_board(const CG_board & copy ) : m_board(), m_whiteToMove(copy.m_whiteToMove)
+CG_board::CG_board(const CG_board & copy ) : m_board(), m_whiteToMove(copy.m_whiteToMove), m_history(m_board)
 {
     for ( int rank = 1; rank <= 8; rank++)
     {
@@ -105,6 +110,10 @@ bool CG_board::move(int f_source, int r_source, int f_dest, int r_dest)
                             m_board[f_source][r_source].setPiece();
                             move_made = true;
                             m_whiteToMove = !m_whiteToMove;
+
+                            //Add move to history list
+                            m_history.setNext(m_board, m_board[f_source][r_source], m_board[f_dest][r_dest]);
+
                         }
                     }
                 }
@@ -294,4 +303,36 @@ bool CG_board::CheckKingInCheck(int f_source, int r_source, int f_dest, int r_de
     }
 
     return king_inCheck;
+}
+
+void CG_board::callHistoryBackward()
+{
+    m_history.moveBack();
+
+    //Set each individual square in board to temp
+    for(int rank = 0; rank < NUMBER_OF_RANKS; rank++)
+    {
+        for (int file = 0; file < NUMBER_OF_RANKS; file++)
+        {
+            m_board[rank][file].setRank(m_history.getCurrentBoard()[rank][file].getRank());
+            m_board[rank][file].setFile(m_history.getCurrentBoard()[rank][file].getFile());
+            m_board[rank][file].setPiece(m_history.getCurrentBoard()[rank][file].getPiece());
+        }
+    }
+}
+
+void CG_board::callHistoryForward()
+{
+    m_history.moveForward();
+
+    //Set each individual square in board to temp
+    for(int rank = 0; rank < NUMBER_OF_RANKS; rank++)
+    {
+        for (int file = 0; file < NUMBER_OF_RANKS; file++)
+        {
+            m_board[rank][file].setRank(m_history.getCurrentBoard()[rank][file].getRank());
+            m_board[rank][file].setFile(m_history.getCurrentBoard()[rank][file].getFile());
+            m_board[rank][file].setPiece(m_history.getCurrentBoard()[rank][file].getPiece());
+        }
+    }
 }
