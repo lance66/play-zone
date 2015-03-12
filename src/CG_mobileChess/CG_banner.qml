@@ -16,21 +16,11 @@ Item
     property alias resultVisible: lbl_result.visible
     property alias flagFrame: img_flag.frame
 
-    onWidthChanged:
-    {
-        if (isLandscape())
-        {
-            gridBanner.columns = 1
-            gridBanner.spacing = 0
-        }
-        else if (isPortrait())
-        {
-            gridBanner.columns = 2
-            gridBanner.spacing = root.width - (img_flag.width + lbl_player.width + lbl_result.width) - (rect_LED.width + cg_clock.width)
-        }
-    }
+    onWidthChanged: setBanner()
+    onHeightChanged: setBanner()
+    onVisibleChanged: setBanner()
 
-    onHeightChanged:
+    function setBanner()
     {
         if (isLandscape())
         {
@@ -49,8 +39,7 @@ Item
         id: gridBanner
 
         columns: 2
-
-        spacing: root.width - (img_flag.width + lbl_player.width + lbl_result.width) - (rect_LED.width + cg_clock.width)
+        anchors.fill: parent
 
         width: root.width
         height: root.height

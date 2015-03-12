@@ -81,7 +81,7 @@ Item
     Button
     {
         id: btn_draw
-        style: cgButtonStyle
+        style: cgButtonStyle2
 
         width: isPortrait() ? Game.getBannerHeight() : Game.getBannerHeight() / 3
         height: isPortrait() ? Game.getBannerHeight() : Game.getBannerHeight() / 3
@@ -130,10 +130,10 @@ Item
         styleColor: "black"
 
         // Adjusts font size for scalability
-        font.pixelSize:  getSmallestOrientation() * 0.04
+        font.pixelSize:  getSmallestOrientation() * 0.08
 
         anchors.verticalCenter: isLandscape() ? parent.verticalCenter : undefined
-        anchors.left: isLandscape() ? cg_board.right : undefined
+        anchors.right: isLandscape() ? parent.right : undefined
 
         anchors.horizontalCenter: isPortrait() ? parent.horizontalCenter : undefined
         anchors.top: isPortrait() ? cg_player.bottom : undefined
@@ -157,7 +157,7 @@ Item
     Button
     {
         id: btn_resign
-        style: cgRedButtonStyle
+        style: cgButtonStyle2
 
         width: isPortrait() ? Game.getBannerHeight() : Game.getBannerHeight() / 3
         height: isPortrait() ? Game.getBannerHeight() : Game.getBannerHeight() / 3
@@ -219,25 +219,44 @@ Item
     {
         id: resignDialog
         title: "Game Over"
+        width: getBackgroundWidth()
+        height: getBackgroundHeight()
 
         contentItem: Rectangle
         {
             anchors.fill: parent
             color: "#448ed3"
 
+            Text
+            {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "You resigned against " + cg_opponent.playerInfo.toString()
+
+                color: "white"
+                font.family: "Helvetica"
+                font.bold: true
+                style: Text.Raised
+                styleColor: "black"
+
+                // Adjusts font size for scalability
+                font.pixelSize: getSmallestOrientation() * 0.04
+            }
+
             Column
             {
-                Text
-                {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    text: "You resigned against " + cg_opponent.playerInfo.toString()
-                }
+                anchors.bottom: parent.bottom
+                anchors.horizontalCenter: parent.horizontalCenter
+                spacing: 6
 
                 Button
                 {
                     anchors.horizontalCenter: parent.horizontalCenter
                     style: cgButtonStyle2
                     text: "Review Game"
+
+                    height: background.width > background.height ? background.height * 0.0833 : background.height / 15
+                    width: getSmallestOrientation() * 0.9
+
                     onClicked:
                     {
                         resignDialog.close()
@@ -249,45 +268,14 @@ Item
                     anchors.horizontalCenter: parent.horizontalCenter
                     style: cgButtonStyle2
                     text: "Back to Lobby"
+
+                    height: background.width > background.height ? background.height * 0.0833 : background.height / 15
+                    width: getSmallestOrientation() * 0.9
+
                     onClicked:
                     {
                         resignDialog.close()
                         root.finished()
-                    }
-                }
-
-                Component
-                {
-                    id: cgButtonStyle2
-
-                    ButtonStyle
-                    {
-                        background: Rectangle
-                        {
-                            gradient: Gradient
-                            {
-                                GradientStop { position: 0.0; color: control.pressed ? Definitions.BUTTON_COLOR_ON_CLICK : Definitions.TOP_COLOR_FOR_BUTTON }//"#b6ee65" : "#76ae25" }
-                                GradientStop { position: 0.5; color: control.pressed ? Definitions.BUTTON_COLOR_ON_CLICK : Definitions.BOTTOM_COLOR_FOR_BUTTON /*"#fbdb65"*/ }//"#76ae25" : "#b6ee65" }
-                            }
-
-                            border.color: "#1c375b" //"#448ed3"
-                            border.width: 4
-                            smooth: true
-                            radius: 100
-                        }
-
-                        label: Text
-                        {
-                            font.pixelSize: 30
-
-                            renderType: Text.NativeRendering
-                            verticalAlignment: Text.AlignVCenter
-                            horizontalAlignment: Text.AlignHCenter
-                            font.family: customFont.name
-                            color: "#000000" //"#CCFFFF"
-
-                            text: control.text
-                        }
                     }
                 }
             }
@@ -324,6 +312,41 @@ Item
                 horizontalAlignment: Text.AlignHCenter
                 font.family: "Chocolate Dealer"
                 color: "black"
+
+                text: control.text
+            }
+        }
+    }
+
+    Component
+    {
+        id: cgButtonStyle2
+
+        ButtonStyle
+        {
+            background: Rectangle
+            {
+                gradient: Gradient
+                {
+                    GradientStop { position: 0.0; color: control.pressed ? Definitions.BUTTON_COLOR_ON_CLICK : Definitions.TOP_COLOR_FOR_BUTTON }//"#b6ee65" : "#76ae25" }
+                    GradientStop { position: 0.5; color: control.pressed ? Definitions.BUTTON_COLOR_ON_CLICK : Definitions.BOTTOM_COLOR_FOR_BUTTON /*"#fbdb65"*/ }//"#76ae25" : "#b6ee65" }
+                }
+
+                border.color: "#1c375b" //"#448ed3"
+                border.width: 4
+                smooth: true
+                radius: width * 0.5
+            }
+
+            label: Text
+            {
+                font.pixelSize: 30
+
+                renderType: Text.NativeRendering
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+                font.family: customFont.name
+                color: "#000000" //"#CCFFFF"
 
                 text: control.text
             }

@@ -49,12 +49,12 @@ Item
         return getSmallestOrientation() * 0.9
     }
 
-    Audio
+    /*Audio
     {
         id: iPod
         source: "Sounds/01 - Untitled (Album Version).mp3"
         autoLoad: true
-    }
+    }*/
 
     ColumnLayout
     {
@@ -123,7 +123,7 @@ Item
             onClicked:
             {
                 root.startOneMinuteGame()
-                iPod.play()
+                //iPod.play()
             }
         }
 
@@ -140,7 +140,7 @@ Item
             onClicked:
             {
                 root.startFiveMinuteGame()
-                iPod.play()
+                //iPod.play()
             }
         }
 
@@ -157,7 +157,7 @@ Item
             onClicked:
             {
                 root.startThirtyMinuteGame()
-                iPod.play()
+                //iPod.play()
             }
         }
 

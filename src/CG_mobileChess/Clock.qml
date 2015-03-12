@@ -81,10 +81,6 @@ Item {
             }
         }
 
-        Image {
-            anchors.centerIn: background; source: "images/center.png"
-        }
-
         Text {
             id: cityLabel
             y: 210; anchors.horizontalCenter: parent.horizontalCenter
