@@ -77,8 +77,9 @@ Item
             {
                 id: cb_country
                 editable: true
-                currentIndex: -1
-                width: 20
+                currentIndex: 0
+                width: getControlWidth()
+                height: getControlHeight()
 
                 validator: RegExpValidator { regExp: /^[A-Za-z]+$/ }
 
@@ -88,31 +89,31 @@ Item
                 {
                     id: lm_country
 
-                    ListElement { text: ""; color: "white" }
-                    ListElement { text: "Austria"; color: "Brown" }
-                    ListElement { text: "Azerbaijan"; color: "yellow" }
-                    ListElement { text: "Belarus"; color: "yellow" }
-                    ListElement { text: "Bulgaria"; color: "yellow" }
-                    ListElement { text: "Croatia"; color: "yellow" }
-                    ListElement { text: "Czech Republic"; color: "yellow" }
-                    ListElement { text: "Denmark"; color: "yellow" }
-                    ListElement { text: "France"; color: "yellow" }
-                    ListElement { text: "Germany"; color: "yellow" }
-                    ListElement { text: "Greece"; color: "yellow" }
-                    ListElement { text: "Italy"; color: "yellow" }
-                    ListElement { text: "Kazakstan"; color: "yellow" }
-                    ListElement { text: "Luxembourg"; color: "yellow" }
-                    ListElement { text: "Poland"; color: "Green" }
-                    ListElement { text: "Portugal"; color: "Green" }
-                    ListElement { text: "Romania"; color: "Green" }
-                    ListElement { text: "Russia"; color: "Green" }
-                    ListElement { text: "Spain"; color: "Green" }
-                    ListElement { text: "Sweden"; color: "Green" }
-                    ListElement { text: "Switzerland"; color: "Green" }
-                    ListElement { text: "Turkey"; color: "Green" }
-                    ListElement { text: "Ukraine"; color: "Green" }
-                    ListElement { text: "United Kingdom"; color: "Green" }
-                    ListElement { text: "United States"; color: "Green" }
+                    ListElement { text: "Select a country"; /*color: ""*/ }
+                    ListElement { text: "Austria" /*; color: "Austria_Flag" */}
+                    ListElement { text: "Azerbaijan" /*; color: "Azerbaijan_Flag" */}
+                    ListElement { text: "Belarus" /*; color: "Belarus_Flag" */}
+                    ListElement { text: "Bulgaria" /*; color: "Bulgaria_Flag" */}
+                    ListElement { text: "Croatia" /*; color: "Croatia_Flag" */}
+                    ListElement { text: "Czech Republic" /*; color: "Czech_Republic_Flag" */}
+                    ListElement { text: "Denmark" /*; color: "Denmark_Flag" */}
+                    ListElement { text: "France" /*; color: "France_Flag" */}
+                    ListElement { text: "Germany" /*; color: "Germany_Flag" */}
+                    ListElement { text: "Greece" /*; color: "Greece_Flag" */}
+                    ListElement { text: "Italy" /*; color: "Italy_Flag" */}
+                    ListElement { text: "Kazakstan" /*; color: "Kazakstan_Flag" */}
+                    ListElement { text: "Luxembourg" /*; color: "Luxembourg_Flag" */}
+                    ListElement { text: "Poland" /*; color: "Poland_Flag" */}
+                    ListElement { text: "Portugal" /*; color: "Portugal_Flag" */}
+                    ListElement { text: "Romania" /*; color: "Romania_Flag" */}
+                    ListElement { text: "Russia" /*; color: "Russia_Flag" */}
+                    ListElement { text: "Spain" /*; color: "Spain_Flag" */}
+                    ListElement { text: "Sweden" /*; color: "Sweden_Flag" */}
+                    ListElement { text: "Switzerland" /*; color: "Switzerland_Flag" */}
+                    ListElement { text: "Turkey" /*; color: "Turkey_Flag" */}
+                    ListElement { text: "Ukraine" /*; color: "Ukraine" */}
+                    ListElement { text: "United Kingdom" /*; color: "United_Kingdom_Flag" */}
+                    ListElement { text: "United States" /*; color: "United_States_Flag" */}
                 }
             }
         }
