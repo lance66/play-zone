@@ -74,3 +74,4 @@ CG_square ** CG_history::getCurrentBoard()
 {
     return m_boardList[m_currentBoardIndex];
 }
+*/
