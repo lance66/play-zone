@@ -92,7 +92,7 @@ Item
                 {
                     id: lm_country
 
-                    ListElement { text: ""               }
+                    ListElement { text: "" }
                     ListElement { text: "United States"  }
                     ListElement { text: "Austria"        }
                     ListElement { text: "Azerbaijan"     }
