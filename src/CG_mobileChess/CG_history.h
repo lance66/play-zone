@@ -17,6 +17,7 @@ public:
     void moveBack();
     void moveForward();
     CG_square ** getCurrentBoard();
+    void resetHistory();
 
 private:
     std::vector<CG_square **> m_boardList;

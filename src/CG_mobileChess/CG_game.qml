@@ -307,6 +307,11 @@ Item
 
                     onClicked:
                     {
+                        //Reset the presentation and business layer
+                        BoardLogic.resetBoard()
+                        Board.refreshBoard(cg_board.pieces)
+                        gameOver = false
+
                         resignDialog.close()
                         root.finished()
                     }

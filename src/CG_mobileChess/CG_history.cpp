@@ -76,3 +76,9 @@ CG_square ** CG_history::getCurrentBoard()
 {
     return m_boardList[m_currentBoardIndex];
 }
+
+void CG_history::resetHistory()
+{
+    m_boardList.clear();
+    m_currentBoardIndex = -1;
+}
