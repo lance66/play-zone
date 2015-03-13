@@ -3,7 +3,6 @@
 
 #include <QDebug>
 #include <vector>
-#include <iterator>
 #include "CG_square.h"
 
 const int NUMBER_OF_RANKS = 8;
