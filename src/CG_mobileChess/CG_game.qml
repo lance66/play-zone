@@ -249,86 +249,23 @@ Item
         }
     }
 
-    /*Dialog
-    {
-        id: resignDialog
-        title: "Game Over"
-        //width: getSmallestOrientation() * 0.9
-        //height: btnReview.height * 4
-
-
-        contentItem: Rectangle
-        {
-            anchors.fill: parent
-            color: "#448ed3"
-
-            Text
-            {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: "You resigned against " + cg_opponent.playerInfo.toString()
-
-                color: "white"
-                font.family: "Helvetica"
-                font.bold: true
-                style: Text.Raised
-                styleColor: "black"
-
-                // Adjusts font size for scalability
-                font.pixelSize: getSmallestOrientation() * 0.04
-            }
-
-            Column
-            {
-                anchors.bottom: parent.bottom
-                anchors.horizontalCenter: parent.horizontalCenter
-                spacing: 6
-
-                Button
-                {
-                    id: btnReview
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    style: cgButtonStyle2
-                    text: "Review Game"
-
-                    height: background.width > background.height ? background.height * 0.0833 : background.height / 15
-                    width: getSmallestOrientation() * 0.9
-
-                    onClicked:
-                    {
-                        resignDialog.close()
-                    }
-                }
-
-                Button
-                {
-                    id: btnBack
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    style: cgButtonStyle2
-                    text: "Back to Lobby"
-
-                    height: background.width > background.height ? background.height * 0.0833 : background.height / 15
-                    width: getSmallestOrientation() * 0.9
-
-                    onClicked:
-                    {
-                        //Reset the presentation and business layer
-                        BoardLogic.resetBoard()
-                        Board.refreshBoard(cg_board.pieces)
-                        gameOver = false
-
-                        resignDialog.close()
-                        root.finished()
-                    }
-                }
-            }
-        }
-    }*/
-
     MessageDialog
     {
         id: resignDialog
         title: "Game Over"
-        text: "You resigned against " + cg_opponent.playerInfo.toString()
+        text: "You resigned against:\n\n" + cg_opponent.playerInfo + "\n\nDo you wish to review the game?"
+        standardButtons: StandardButton.Yes | StandardButton.No
+        onYes: resignDialog.close()
+        onNo:
+        {
+            //Reset the presentation and business layer
+            BoardLogic.resetBoard()
+            Board.refreshBoard(cg_board.pieces)
+            gameOver = false
+
+            resignDialog.close()
+            root.finished()
+        }
     }
 
     Component

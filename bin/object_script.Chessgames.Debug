@@ -13,11 +13,11 @@ INPUT(
 ./debug\CG_queen.o
 ./debug\CG_piece.o
 ./debug\CG_king.o
+./debug\CG_history.o
 ./debug\moc_CG_validator.o
 ./debug\moc_CG_dbManager.o
 ./debug\moc_CG_user.o
 ./debug\moc_CG_piece.o
-./debug\moc_CG_square.o
 ./debug\moc_CG_board.o
 ./debug\moc_CG_rook.o
 ./debug\moc_CG_bishop.o
