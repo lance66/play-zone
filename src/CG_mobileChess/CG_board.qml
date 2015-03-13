@@ -25,7 +25,10 @@ Item
     property int i: 0
     property int currentMoveNumber: 0
     property var listOfMoves: [{move: ""}]
+
     property alias pieces: repeaterPieces
+    property alias startingMove: starting
+    property alias endingMove: ending
 
     Image
     {

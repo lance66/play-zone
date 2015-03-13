@@ -131,6 +131,11 @@ Item
             }
             else
                 resignDialog.open()
+
+            //Make the starting and ending selections invisible when
+            //traversing the history.
+            cg_board.startingMove.visible = false
+            cg_board.endingMove.visible = false
         }
     }
 
@@ -244,12 +249,12 @@ Item
         }
     }
 
-    Dialog
+    /*Dialog
     {
         id: resignDialog
         title: "Game Over"
-        width: getSmallestOrientation() * 0.9
-        height: btnReview.height * 4
+        //width: getSmallestOrientation() * 0.9
+        //height: btnReview.height * 4
 
 
         contentItem: Rectangle
@@ -317,6 +322,13 @@ Item
                 }
             }
         }
+    }*/
+
+    MessageDialog
+    {
+        id: resignDialog
+        title: "Game Over"
+        text: "You resigned against " + cg_opponent.playerInfo.toString()
     }
 
     Component
