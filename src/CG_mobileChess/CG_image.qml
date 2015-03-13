@@ -11,8 +11,8 @@ Item
     property int frameCount: 0
 
     // Used for keeping the proportion of the
-    // width to 1/11 of the width of the tilesheet
-    // for each piece.
+    // width to 1 / frameCount of the width of
+    // the tilesheet for each piece.
     onWidthChanged:
     {
         image.width = root.width * frameCount

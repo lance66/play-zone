@@ -121,10 +121,15 @@ Item
 
             //Go backward throughout the game.
 
-            cg_board.currentMoveNumber = Board.backward(cg_board.listOfMoves, cg_board.currentMoveNumber)
-            BoardLogic.callHistoryBackward()
-            Board.refreshBoard(cg_board.pieces)
-            iPod2.play()
+            if (cg_board.currentMoveNumber - 1 >= 0)
+            {
+                cg_board.currentMoveNumber = Board.backward(cg_board.listOfMoves, cg_board.currentMoveNumber)
+                BoardLogic.callHistoryBackward()
+                Board.refreshBoard(cg_board.pieces)
+                iPod2.play()
+            }
+            else
+                resignDialog.open()
 
             //root.finished()
         }
@@ -237,9 +242,6 @@ Item
                 Board.refreshBoard(cg_board.pieces)
                 iPod2.play()
             }
-
-            //When user presses OK or close, bring him back to the lobby.
-            //root.finished()
         }
     }
 
@@ -247,8 +249,9 @@ Item
     {
         id: resignDialog
         title: "Game Over"
-        width: Screen.width
-        height: Screen.height
+        width: getSmallestOrientation() * 0.9
+        height: btnReview.height * 4
+
 
         contentItem: Rectangle
         {
@@ -278,6 +281,7 @@ Item
 
                 Button
                 {
+                    id: btnReview
                     anchors.horizontalCenter: parent.horizontalCenter
                     style: cgButtonStyle2
                     text: "Review Game"
@@ -293,6 +297,7 @@ Item
 
                 Button
                 {
+                    id: btnBack
                     anchors.horizontalCenter: parent.horizontalCenter
                     style: cgButtonStyle2
                     text: "Back to Lobby"
@@ -308,11 +313,6 @@ Item
                 }
             }
         }
-
-        /*onAccepted:
-        {
-            console.log(":(")
-        }*/
     }
 
     Component

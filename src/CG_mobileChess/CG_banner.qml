@@ -16,103 +16,78 @@ Item
     property alias resultVisible: lbl_result.visible
     property alias flagFrame: img_flag.frame
 
-    onWidthChanged: setBanner()
-    onHeightChanged: setBanner()
-    onVisibleChanged: setBanner()
-
-    function setBanner()
+    Row
     {
-        if (isLandscape())
+        id: rowPlayerInfo
+
+        CG_image
         {
-            gridBanner.columns = 1
-            gridBanner.spacing = 0
+            id: img_flag
+            width: isPortrait() ? root.height : root.height / 4
+            height: isPortrait() ? root.height : root.height / 4
+            source: "images/countries.png"
+            frame: 0
+            frameCount: 24
         }
-        else if (isPortrait())
+
+        Text
         {
-            gridBanner.columns = 2
-            gridBanner.spacing = root.width - (img_flag.width + lbl_player.width + lbl_result.width) - (rect_LED.width + cg_clock.width)
+            id: lbl_player
+
+            color: "white"
+            font.family: "Helvetica"
+            font.bold: true
+            style: Text.Raised
+            styleColor: "black"
+
+            anchors.verticalCenter: img_flag.verticalCenter
+
+            // Adjusts font size for scalability
+            font.pixelSize: getSmallestOrientation() * 0.04
+        }
+
+        Text
+        {
+            id: lbl_result
+            visible: false
+
+            horizontalAlignment: Text.AlignRight
+
+            color: "yellow"
+            font.family: "Helvetica"
+            font.bold: true
+            font.pixelSize: getSmallestOrientation() * 0.1
         }
     }
 
-    Grid
+    Row
     {
-        id: gridBanner
+        id: rowLEDAndClock
+        x: isLandscape() ? 0 : root.width - width
+        y: isLandscape() ? rowPlayerInfo.height : (height / 2)
 
-        columns: 2
-        anchors.fill: parent
-
-        width: root.width
-        height: root.height
-
-        Row
+        Rectangle
         {
-            CG_image
-            {
-                id: img_flag
-                width: isPortrait() ? gridBanner.height : gridBanner.height / 4
-                height: isPortrait() ? gridBanner.height : gridBanner.height / 4
-                source: "images/countries.png"
-                frame: 0
-                frameCount: 24
-            }
+            id: rect_LED
+            width: getSmallestOrientation() * 0.04
+            height: getSmallestOrientation() * 0.04
+            radius: (getSmallestOrientation() * 0.04) * 0.5
+            color: ledActive ? "#00FF00" : "#FFFFFF"
 
-            Text
-            {
-                id: lbl_player
-
-                color: "white"
-                font.family: "Helvetica"
-                font.bold: true
-                style: Text.Raised
-                styleColor: "black"
-
-                anchors.verticalCenter: img_flag.verticalCenter
-
-                // Adjusts font size for scalability
-                font.pixelSize: getSmallestOrientation() * 0.04
-            }
-
-            Text
-            {
-                id: lbl_result
-                visible: false
-
-                horizontalAlignment: Text.AlignRight
-
-                color: "yellow"
-                font.family: "Helvetica"
-                font.bold: true
-                font.pixelSize: getSmallestOrientation() * 0.1
-            }
+            anchors.verticalCenter: parent.verticalCenter
         }
 
-        Row
+        CG_clock
         {
-            id: rowLEDAndClock
+            id: cg_clock
 
-            Rectangle
-            {
-                id: rect_LED
-                width: getSmallestOrientation() * 0.04
-                height: getSmallestOrientation() * 0.04
-                radius: (getSmallestOrientation() * 0.04) * 0.5
-                color: ledActive ? "#00FF00" : "#FFFFFF"
+            width: getSmallestOrientation() * 0.2
+            height: (getSmallestOrientation() * 0.2) * (172/475)
 
-                anchors.verticalCenter: parent.verticalCenter
-            }
+            clockTime: gameTimeInMinutes * 60
+            running: false
 
-            CG_clock
-            {
-                id: cg_clock
-
-                width: getSmallestOrientation() * 0.2
-                height: (getSmallestOrientation() * 0.2) * (172/475)
-
-                clockTime: gameTimeInMinutes * 60
-                running: false
-
-                anchors.verticalCenter: parent.verticalCenter
-            }
+            anchors.verticalCenter: parent.verticalCenter
         }
     }
 }
