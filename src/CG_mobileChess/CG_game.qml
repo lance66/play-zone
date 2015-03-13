@@ -33,6 +33,7 @@ Item
 
         clockRunning:
         {
+            //If it's black's turn and the game is active.
             if (cg_board.whiteBlackMove == 1 && root.visible == true)
                 true
             else
@@ -130,8 +131,6 @@ Item
             }
             else
                 resignDialog.open()
-
-            //root.finished()
         }
     }
 

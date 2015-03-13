@@ -103,7 +103,11 @@ Item
                 ending.visible = false
 
                 starting_position = true
+
+                //Our board has a texture so the board itself is offset
+                //we need to account for it in our indexes.
                 starting_index = Board.getIndex(mouse.x - Board.getBoardOffset(), mouse.y - Board.getBoardOffset())
+
                 starting.x = Board.getX(starting_index)
                 starting.y = Board.getY(starting_index)
 
@@ -123,13 +127,17 @@ Item
                 starting.visible = true
                 ending.visible = true
 
+                //Our board has a texture so the board itself is offset
+                //we need to account for it in our indexes.
                 ending_index = Board.getIndex(mouse.x - Board.getBoardOffset(), mouse.y - Board.getBoardOffset())
 
+                //Ensure the piece has actually moved.
                 if (starting_index != ending_index)
                 {
                     ending.x = Board.getX(ending_index)
                     ending.y = Board.getY(ending_index)
 
+                    //Ensure that the player is actually picking up a piece.
                     if (BoardLogic.getSquare(Board.getRow(starting_index), Board.getColumn(starting_index)) !== "")
                     {
                         if (gameOver || !BoardLogic.move(Board.getRow(starting_index), Board.getColumn(starting_index), Board.getRow(ending_index), Board.getColumn(ending_index)))
@@ -190,6 +198,7 @@ Item
             width: Board.getSquareSize()
             height: Board.getSquareSize()
 
+            //Get the piece from the business layer.
             property int currentFrame: Board.setPiece(BoardLogic.getSquare(Board.getRow(index), Board.getColumn(index)))
 
             x: Board.getX(index)
@@ -261,12 +270,14 @@ Item
         y: starting.y
     }
 
+    //Hide the movement selections when the screen size is changed.
     onWidthChanged:
     {
         starting.visible = false
         ending.visible = false
     }
 
+    //Hide the movement selections when the screen size is changed.
     onHeightChanged:
     {
         starting.visible = false
