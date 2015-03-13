@@ -91,6 +91,7 @@ Item
                     id: lm_country
 
                     ListElement { text: ""; color: "white" }
+                    ListElement { text: "United States"; color: "Green" }
                     ListElement { text: "Austria"; color: "Brown" }
                     ListElement { text: "Azerbaijan"; color: "yellow" }
                     ListElement { text: "Belarus"; color: "yellow" }
@@ -114,7 +115,6 @@ Item
                     ListElement { text: "Turkey"; color: "Green" }
                     ListElement { text: "Ukraine"; color: "Green" }
                     ListElement { text: "United Kingdom"; color: "Green" }
-                    ListElement { text: "United States"; color: "Green" }
                 }
             }
         }
@@ -189,7 +189,7 @@ Item
 
             onClicked:
             {
-                root.countryFlag = cb_country.currentIndex
+                root.countryFlag = cb_country.currentIndex - 1
                 root.settingsChanged()
             }
         }

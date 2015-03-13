@@ -81,14 +81,26 @@ Item
     Button
     {
         id: btn_draw
-        style: cgButtonStyle2
+        style: cgButtonStyle
 
         width: isPortrait() ? Game.getBannerHeight() : Game.getBannerHeight() / 3
         height: isPortrait() ? Game.getBannerHeight() : Game.getBannerHeight() / 3
 
-        anchors.left: isLandscape() ? undefined : cg_board.left
-        anchors.right: isLandscape() ? root.right : undefined
-        anchors.top: isLandscape() ? root.top : cg_player.bottom
+        x:
+        {
+            if (isLandscape())
+                getBackgroundWidth() - width
+            else
+                width
+        }
+
+        y:
+        {
+            if (isLandscape())
+                0
+            else
+                getBackgroundHeight() - height
+        }
 
         Image
         {
@@ -132,11 +144,21 @@ Item
         // Adjusts font size for scalability
         font.pixelSize:  getSmallestOrientation() * 0.08
 
-        anchors.verticalCenter: isLandscape() ? parent.verticalCenter : undefined
-        anchors.right: isLandscape() ? parent.right : undefined
+        x:
+        {
+            if (isLandscape())
+                getBackgroundWidth() - lbl_notation.width
+            else
+                (getBackgroundWidth() / 2) - (lbl_notation.width / 2)
+        }
 
-        anchors.horizontalCenter: isPortrait() ? parent.horizontalCenter : undefined
-        anchors.top: isPortrait() ? cg_player.bottom : undefined
+        y:
+        {
+            if (isLandscape())
+                (getBackgroundHeight() / 2) - (lbl_notation.height / 2)
+            else
+                getBackgroundHeight() - (btn_resign.height / 2) - (lbl_notation.height / 2)
+        }
     }
 
     Audio
@@ -157,14 +179,20 @@ Item
     Button
     {
         id: btn_resign
-        style: cgButtonStyle2
+        style: cgRedButtonStyle
 
         width: isPortrait() ? Game.getBannerHeight() : Game.getBannerHeight() / 3
         height: isPortrait() ? Game.getBannerHeight() : Game.getBannerHeight() / 3
 
-        anchors.right: isLandscape() ? root.right : cg_board.right
-        anchors.bottom: isLandscape() ? parent.bottom : undefined
-        anchors.top: isPortrait() ? cg_player.bottom : undefined
+        x:
+        {
+            if (isLandscape())
+                getBackgroundWidth() - width
+            else
+                getBackgroundWidth() - (width * 2)
+        }
+
+        y: getBackgroundHeight() - height
 
         Image
         {
@@ -219,8 +247,8 @@ Item
     {
         id: resignDialog
         title: "Game Over"
-        width: getBackgroundWidth()
-        height: getBackgroundHeight()
+        width: Screen.width
+        height: Screen.height
 
         contentItem: Rectangle
         {
