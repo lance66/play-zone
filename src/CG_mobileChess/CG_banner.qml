@@ -50,20 +50,6 @@ Item
             // Adjusts font size for scalability
             font.pixelSize: getPlayerInfoFontSize()
         }
-
-        //Result of the game (0, 1) is displayed
-        Text
-        {
-            id: lbl_result
-            visible: false
-
-            horizontalAlignment: Text.AlignRight
-
-            color: "yellow"
-            font.family: "Helvetica"
-            font.bold: true
-            font.pixelSize: getResultFontSize()
-        }
     }
 
     Row
@@ -101,6 +87,21 @@ Item
         }
     }
 
+    //Result of the game (0, 1) is displayed
+    Text
+    {
+        id: lbl_result
+        visible: false
+
+        color: "yellow"
+        opacity: 0.5
+        font.family: "Helvetica"
+        font.bold: true
+        font.pixelSize: getResultFontSize()
+
+        anchors.centerIn: parent
+    }
+
     //If the device or window is in "portrait orientation"
     //then return the full height of the banner so that the
     //image which has equal width and height can fill the
@@ -125,6 +126,6 @@ Item
     //result of the game.
     function getResultFontSize()
     {
-        return getSmallestOrientation() * 0.1
+        return root.height
     }
 }
