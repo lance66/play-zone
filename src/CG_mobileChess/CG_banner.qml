@@ -99,7 +99,25 @@ Item
         font.bold: true
         font.pixelSize: getResultFontSize()
 
-        anchors.centerIn: parent
+        anchors.centerIn: isPortrait() ? parent : undefined
+    }
+
+    onWidthChanged:
+    {
+        if (isLandscape())
+        {
+            lbl_result.y = rowPlayerInfo.height + rowLEDAndClock.height
+            lbl_result.x = 0
+        }
+    }
+
+    onHeightChanged:
+    {
+        if (isLandscape())
+        {
+            lbl_result.y = rowPlayerInfo.height + rowLEDAndClock.height
+            lbl_result.x = 0
+        }
     }
 
     //If the device or window is in "portrait orientation"
@@ -126,6 +144,6 @@ Item
     //result of the game.
     function getResultFontSize()
     {
-        return root.height
+        return isPortrait() ? root.height : root.height - rowPlayerInfo.height - rowLEDAndClock.height
     }
 }
