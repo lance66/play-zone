@@ -20,10 +20,10 @@ import QtQuick 2.3
 import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.1
 import QtQuick.Window 2.0
-import QtWebKit 3.0
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.0
 import QtMultimedia 5.0
+import QtWebView 1.0
 import "CG_definitions.js" as Definitions
 
 Item
@@ -62,33 +62,10 @@ Item
             Layout.preferredWidth: getControlWidth()
             Layout.preferredHeight: getBackgroundHeight() * 0.33
 
-            /*Clock
+            Clock
             {
                 city: "Klamath Falls"
                 shift: -8
-            }*/
-
-            WebView
-            {
-                id: webview
-                url: "http://www.chessgames.com/puzzle.html"
-
-                width: (getBackgroundHeight() * 0.33) * 0.66
-                height: getBackgroundHeight() * 0.33
-
-                onNavigationRequested:
-                {
-                    // detect URL scheme prefix, most likely an external link
-                    var schemaRE = /^\w+:/;
-
-                    if (schemaRE.test(request.url))
-                        request.action = WebView.AcceptRequest;
-                    else
-                    {
-                        request.action = WebView.IgnoreRequest;
-                        // delegate request.url here
-                    }
-                }
             }
 
             ColumnLayout

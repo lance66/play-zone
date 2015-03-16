@@ -81,3 +81,5 @@ OTHER_FILES += \
     images/cg_flag_turkey.jpg \
     Sounds/gameStarted.mp3 \
     Sounds/resign.mp3
+
+DISTFILES +=
