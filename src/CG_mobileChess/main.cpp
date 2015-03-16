@@ -10,23 +10,36 @@
 /***************************************************************************
  * Author:                                                        ChessGames
  * Date Created:                                                  11/07/2014
- * Date Last Modified:                                            2/15/2015
+ * Date Last Modified:                                            3/15/2015
  * File Name:                                                   src/main.cpp
  *
- * Overview: Creates the foundation for our login application. Sets up the
- * database manager (Persistence Layer), chessgames user (Business Layer),
- * login widget (forms part of our Presentation Layer), and resizes our
- * window for our testing purposes.
+ * Overview:
+ * •	We worked on and mostly completed our database design with an Entity
+ *      Relationship Diagram, SQL script for creating the database which we
+ *      later converted into SQLite and sample inserts.
  *
- * Input: Requires a valid username, password, and email for registration.
- * If user is already registered then the user simply enters a username, and
- * password. All usernames must follow a certain guideline as outlined by
- * the validation the user will see when main is executing. Such validations
- * include no double spaces, etc.
+ * •	Connected user to login system and deployed a “Hello World!”
+ *      application to and Android device.
  *
- * Output: Displays the window, with the size that is specified, along with
- * QLineEdits where the username, password, email for inputs, along with
- * two buttons, one for registering an account, and the other for loggin in.
+ * •	Set up the game lobby and the server. This had a foundation for
+ *      different game pools (1 minute, 5 minute, or 30 minute games).
+ *
+ * •	Converted over to QML for our presentation layer.
+ *
+ * •	Created a game window with a board being displayed and the basic
+ *      layout of the board itself, with piece movements and sounds.
+ *
+ * •	Created a loading screen to transition into game.
+ *
+ * •	Validated piece movements, added piece dragging / zooming, cleaned
+ *      up layout.
+ *
+ * •	Implemented chess clocks.
+ *
+ * •	Created a history class to review moves at the end of a game.
+ *
+ * •	Created a settings page currently to change country flags in the
+ *      game window.
  **************************************************************************/
 
 int main(int argc, char *argv[])
