@@ -2,6 +2,7 @@
 #include "CG_user.h"
 #include "CG_dbManager.h"
 #include "CG_board.h"
+#include "CG_serverConnection.h"
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -49,7 +50,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     //Set up the database manager (Persistence Layer)
-    CG_dbManager db_manager("chessgames.db");
+    CG_dbManager db_manager("/../../bin/chessgames.db");
 
     //Set up the chessgames user (Business Layer)
     CG_user cg_user(&db_manager);
@@ -60,9 +61,12 @@ int main(int argc, char *argv[])
     QLabel validator_feedback;
     CG_validator cg_validator(validator_feedback);
 
+    CG_serverConnection cg_serverConnection;
+
     engine.rootContext()->setContextProperty("User", &cg_user);
     engine.rootContext()->setContextProperty("Validator", &cg_validator);
     engine.rootContext()->setContextProperty("BoardLogic", &cg_board);
+    engine.rootContext()->setContextProperty("ServerConnection", &cg_serverConnection);
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
     return app.exec();

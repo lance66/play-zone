@@ -178,6 +178,7 @@ Item
                         }
 
                         // Update the board's pieces after a movement
+                        ServerConnection.sendMove(Board.getRow(starting_index), Board.getColumn(starting_index), Board.getRow(ending_index), Board.getColumn(ending_index))
                         Board.refreshBoard(repeaterPieces)
                     }
 

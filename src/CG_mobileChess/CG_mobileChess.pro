@@ -53,7 +53,8 @@ SOURCES += main.cpp\
     CG_queen.cpp \
     CG_piece.cpp \
     CG_king.cpp \
-    CG_history.cpp
+    CG_history.cpp \
+    CG_serverConnection.cpp
 
 HEADERS  += \
     CG_validator.h \
@@ -68,7 +69,8 @@ HEADERS  += \
     CG_pawn.h \
     CG_knight.h \
     CG_king.h \
-    CG_history.h
+    CG_history.h \
+    CG_serverConnection.h
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 

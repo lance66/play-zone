@@ -1,4 +1,4 @@
-#include "cg_playerThread.h"
+#include "CG_playerConnection.h"
 
 /****************************************************************
 *   Purpose:  Constructor. Initializes data members.
@@ -7,8 +7,8 @@
 *
 *      Exit:  Data members are initialized.
 ****************************************************************/
-CG_PlayerThread::CG_PlayerThread(qintptr ID, QObject *parent) :
-    QThread(parent)
+CG_playerConnection::CG_playerConnection(qintptr ID, QObject *parent) :
+    QThread(parent), m_username("Trudodyr"), m_ELO(2715), m_countryFlag("United States")
 {
     this->socketDescriptor = ID;
 }
@@ -20,7 +20,7 @@ CG_PlayerThread::CG_PlayerThread(qintptr ID, QObject *parent) :
  *
  *     Exit:  Removes the instance of the invoking player thread.
 ****************************************************************/
-CG_PlayerThread::~CG_PlayerThread()
+CG_playerConnection::~CG_playerConnection()
 {
 }
 
@@ -32,9 +32,8 @@ CG_PlayerThread::~CG_PlayerThread()
 *
 *      Exit:  Thread is started, and client is notified.
 ****************************************************************/
-void CG_PlayerThread::run()
+void CG_playerConnection::run()
 {
-
     //Print starting thread
     qDebug() << socketDescriptor << " Starting thread";
 
@@ -67,7 +66,7 @@ void CG_PlayerThread::run()
 *
 *      Exit:  Sends users message, and writes it to the socket.
 ****************************************************************/
-void CG_PlayerThread::readyRead()
+void CG_playerConnection::readyRead()
 {
     //Read the socket and put it in a byte array
      QByteArray Data = socket->readLine();
@@ -85,7 +84,7 @@ void CG_PlayerThread::readyRead()
 *
 *     Exit:  Closes socket, and notifies user of disconnection.
 ****************************************************************/
-void CG_PlayerThread::disconnected()
+void CG_playerConnection::disconnected()
 {
     qDebug() << socketDescriptor << " Disconnected";
 
@@ -100,7 +99,7 @@ void CG_PlayerThread::disconnected()
 *
 *     Exit:  Players socket is returned.
 ****************************************************************/
-QTcpSocket *CG_PlayerThread::getSocket()
+QTcpSocket *CG_playerConnection::getSocket()
 {
     return socket;
 }
@@ -112,7 +111,27 @@ QTcpSocket *CG_PlayerThread::getSocket()
 *
 *      Exit:  Socket descriptor is returned.
 ****************************************************************/
-qintptr CG_PlayerThread::getSocketDescriptor() const
+qintptr CG_playerConnection::getSocketDescriptor() const
 {
     return socketDescriptor;
+}
+
+QString CG_playerConnection::getUsername() const
+{
+    return m_username;
+}
+
+int CG_playerConnection::getELO() const
+{
+    return m_ELO;
+}
+
+void CG_playerConnection::setUsername(QString username)
+{
+    m_username = username;
+}
+
+void CG_playerConnection::setELO(int ELO)
+{
+    m_ELO = ELO;
 }

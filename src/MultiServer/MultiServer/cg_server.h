@@ -9,8 +9,9 @@
 #include <QList>
 #include <QMap>
 #include <QString>
-#include "cg_match.h"
-#include "cg_playerThread.h"
+#include <QSignalMapper>
+#include "CG_match.h"
+#include "CG_playerConnection.h"
 
 /************************************************************************
 * Class: CG_Server
@@ -50,9 +51,12 @@ class CG_Server : public QTcpServer
         void StartServer();
 
     signals:
+        void playersReadyToBeMatched();
     public slots:
     protected slots:
-        void clientDisconnected();
+        void clientDisconnected(CG_playerConnection *);
+        void addPlayerToQueue(CG_playerConnection *);
+        void startOneMinuteMatch();
 
     protected:
         void incomingConnection(qintptr socketDescriptor);
@@ -72,14 +76,18 @@ class CG_Server : public QTcpServer
         void checkTimeOut();
         void updateBoard(int playerID, QString updatedboard[8][8]);
 
+
+
         QMap<int, QTcpSocket *> clientConnections;
-        QVector<CG_Match> matches;
+        QVector<CG_Match *> matches;
         QMap<int, int> opponents;
         QMap<int, std::string> playersID;
-        QQueue<int> oneMinuteQueue;
+
+        QQueue<CG_playerConnection*> oneMinuteQueue;
+        //QQueue<int> oneMinuteQueue;
         QQueue<int> fiveMinuteQueue;
         QQueue<int> thirtyMinuteQueue;
-        CG_Match match;
+        CG_Match * match;
         int onlineUsers;
         int playingUsers;
 
@@ -88,7 +96,6 @@ class CG_Server : public QTcpServer
 
     private:
         void addPlayerConnection(int socketDescriptor, QTcpSocket *chessPlayer);
-        void startOneMinuteMatch();
         void removeAllClientConnections(QTcpSocket *client);
         void writeSocketDescriptorToSocket(QTcpSocket *client, qintptr socketDescriptor);
         void sendMove(QTcpSocket *client, qintptr socketDescriptor);

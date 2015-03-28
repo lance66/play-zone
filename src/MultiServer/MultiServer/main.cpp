@@ -1,5 +1,5 @@
 #include <QtCore/QCoreApplication>
-#include "cg_server.h"
+#include "CG_server.h"
 
 /***************************************************************************
  * Author:                                                        ChessGames

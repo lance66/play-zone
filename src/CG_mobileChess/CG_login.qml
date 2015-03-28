@@ -155,6 +155,9 @@ Item
                     txt_isOpen.text = "Username or password is incorrect."
                 else
                 {
+                    //Send player info to server
+                    ServerConnection.setPlayerInfo(tf_username.text, 2715, "United States")
+
                     // Reset these values for next login.
                     txt_isOpen.text = ""
                     tf_username.text = ""
@@ -162,8 +165,11 @@ Item
                     tf_confirmPassword.text = ""
                     tf_emailAddress.text = ""
 
+                    ServerConnection.connectToServer("192.168.1.100", 9556);
                     root.loggedIn()
                     iPod.play()
+
+
 
                 }
 

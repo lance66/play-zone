@@ -6,6 +6,7 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.0
 import QtMultimedia 5.0
 import "CG_definitions.js" as Definitions
+import "CG_board.js" as Board
 
 Item
 {
@@ -46,19 +47,31 @@ Item
 
     signal matched
 
-    property alias timer: timer
-
-    Timer
+//    property alias timer: timer
+    Connections
     {
-        id: timer
-        interval: 3000
-        running: false
-        onTriggered:
-        {
+        target: ServerConnection
+        onMatchConnected: {
             root.matched()
             iPod.play()
         }
+        onNetworkPlayerMoved: {
+            BoardLogic.move(fromFile, fromRank, toFile, toRank)
+            Board.refreshBoard(repeaterPieces)
+        }
     }
+
+//    Timer
+//    {
+//        id: timer
+//        interval: 3000
+//        running: false
+//        onTriggered:
+//        {
+//            root.matched()
+//            iPod.play()
+//        }
+//    }
 
     Audio
     {

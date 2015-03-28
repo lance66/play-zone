@@ -14,7 +14,8 @@ Item
     height: 600
 
     signal goBack
-    //property alias countryFlag: cb_country.currentIndex
+//    property alias countryFlag: cb_country.currentIndex
+//    property alias dataModel: cb_country.model
     property int countryFlag: 0
     signal settingsChanged
 

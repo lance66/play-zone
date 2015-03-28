@@ -27,7 +27,6 @@ public:
     void setFile(File file);
     void setRank(Rank rank);
     void setSquare(File file, Rank rank);
-    void Aaron();
 
     QString getPieceName() const;
 

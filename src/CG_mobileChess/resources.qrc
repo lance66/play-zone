@@ -42,5 +42,6 @@
         <file>CG_settings.qml</file>
         <file>Sounds/successfulLogin.mp3</file>
         <file>images/countries.png</file>
+        <file>fonts/VAG Rounded Bold.ttf</file>
     </qresource>
 </RCC>

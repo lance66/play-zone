@@ -28,7 +28,7 @@ ApplicationWindow
     FontLoader
     {
         id: customFont
-        source: "fonts/CHOCD TRIAL___.otf"
+        source: "fonts/VAG Rounded Bold.ttf"
     }
 
     CG_login
@@ -49,17 +49,14 @@ ApplicationWindow
 
         onStartOneMinuteGame: { lobby.visible = false
                                 loading.visible = true
-                                loading.timer.start()
                                 game.gameTimeInMinutes = 1 }
 
         onStartFiveMinuteGame: { lobby.visible = false
                                 loading.visible = true
-                                loading.timer.start()
                                 game.gameTimeInMinutes = 5 }
 
         onStartThirtyMinuteGame: { lobby.visible = false
                                    loading.visible = true
-                                   loading.timer.start()
                                    game.gameTimeInMinutes = 30 }
 
         onSettings:

@@ -1,5 +1,5 @@
-#ifndef CG_PlayerThread_H
-#define CG_PlayerThread_H
+#ifndef CG_playerConnection_H
+#define CG_playerConnection_H
 
 #include <QThread>
 #include <QString>
@@ -8,10 +8,10 @@
 #include <QEvent>
 
 /************************************************************************
-* Class: CG_PlayerThread
+* Class: CG_playerConnection
 *
 * Constructors:
-*   explicit CG_PlayerThread(qintptr ID, QObject *parent = 0)
+*   explicit CG_playerConnection(qintptr ID, QObject *parent = 0)
 *
 * Signals:
 *   void error(QTcpSocket::SocketError socketerror)
@@ -29,21 +29,29 @@
 *   qintptr getSocketDescriptor()
 *       Returns socket descriptor
 *************************************************************************/
-class CG_PlayerThread : public QThread
+class CG_playerConnection : public QThread
 {
     Q_OBJECT
 public:
-    explicit CG_PlayerThread(qintptr ID, QObject *parent = 0);
-    ~CG_PlayerThread();
+    explicit CG_playerConnection(qintptr ID, QObject *parent = 0);
+    ~CG_playerConnection();
 
-    void run();
+
+    //Setters
+    void setUsername(QString username);
+    void setELO(int ELO);
+
+    //Getters
     qintptr getSocketDescriptor() const;
+    QString getUsername() const;
+    int getELO() const;
     QTcpSocket *getSocket();
 
 signals:
     void error(QTcpSocket::SocketError socketerror);
 
 public slots:
+    void run();
     void readyRead();
     void disconnected();
 
@@ -51,14 +59,10 @@ public slots:
 
 private:
     QTcpSocket *socket;
-    qintptr socketDescriptor;
-    QString username;
-    int ID;
-    int ELO;
-    int opponent;
-    int matchID;
+    QString m_username;
+    int m_ELO;
+    QString m_countryFlag;
 
-    //ChessClock time;
 };
 
-#endif // CG_PlayerThread_H
+#endif // CG_playerConnection_H
