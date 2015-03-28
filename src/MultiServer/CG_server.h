@@ -12,6 +12,8 @@
 #include <QSignalMapper>
 #include "CG_match.h"
 #include "CG_playerConnection.h"
+#include <QTimer>
+
 
 /************************************************************************
 * Class: CG_Server
@@ -48,15 +50,22 @@ class CG_Server : public QTcpServer
     public:
         explicit CG_Server(QObject *parent = 0);
         ~CG_Server();
+        int getPlayerCount();
+        int getMatchCount();
+        int getQueueCount();
+
         void StartServer();
 
     signals:
         void playersReadyToBeMatched();
+
     public slots:
+
     protected slots:
-        void clientDisconnected(CG_playerConnection *);
+        void clientDisconnected();
         void addPlayerToQueue(CG_playerConnection *);
-        void startOneMinuteMatch();
+        void handleJoinQueue(TimeControl time_type);
+        void queueTimerExpired();
 
     protected:
         void incomingConnection(qintptr socketDescriptor);
@@ -78,24 +87,19 @@ class CG_Server : public QTcpServer
 
 
 
-        QMap<int, QTcpSocket *> clientConnections;
-        QVector<CG_Match *> matches;
-        QMap<int, int> opponents;
-        QMap<int, std::string> playersID;
+        // ALL CONNECTED PLAYERS
+        QList<CG_playerConnection*>  m_connectedPlayers;
+        // QUEUES
+        QList<CG_playerConnection*>  m_minuteQueue;
+        QList<CG_playerConnection*>  m_fiveMinuteQueue;
+        QList<CG_playerConnection*>  m_thirtyMinuteQueue;
+        // OPEN MATCHES
+        QList<CG_Match *>            m_openMatches;
+        QTimer                       m_queueConnectTimer;
 
-        QQueue<CG_playerConnection*> oneMinuteQueue;
-        //QQueue<int> oneMinuteQueue;
-        QQueue<int> fiveMinuteQueue;
-        QQueue<int> thirtyMinuteQueue;
-        CG_Match * match;
-        int onlineUsers;
-        int playingUsers;
-
-        //QVector<userInfo> userlist;
-        //QVector<ChessClock> playersTime;
 
     private:
-        void addPlayerConnection(int socketDescriptor, QTcpSocket *chessPlayer);
+        void addPlayerConnection(QTcpSocket *chessPlayer);
         void removeAllClientConnections(QTcpSocket *client);
         void writeSocketDescriptorToSocket(QTcpSocket *client, qintptr socketDescriptor);
         void sendMove(QTcpSocket *client, qintptr socketDescriptor);

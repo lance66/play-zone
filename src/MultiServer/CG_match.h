@@ -7,6 +7,7 @@
 #include <QString>
 #include <QQueue>
 #include "CG_playerConnection.h"
+#include <QThread>
 
 /************************************************************************
 * Class: CG_Match
@@ -58,13 +59,11 @@
 *       Notifies players of the the colored pieces they are playing as,
 *       and with who they are playing against.
 *************************************************************************/
-class CG_Match
+class CG_Match : public QObject
 {
     public:
-        CG_Match();
-        CG_Match(QQueue<CG_playerConnection*>);
+        CG_Match(CG_playerConnection* player1,CG_playerConnection* player2, int time_control, QObject * parent);
         //CG_Match(userInfo whitePlayer, userInfo blackPlayer, int timeControl);
-        CG_Match(int whiteID, int blackID, QTcpSocket *&whiteSocket, QTcpSocket *&blackSocket);
         ~CG_Match();
 
         void startMatch();
@@ -92,10 +91,16 @@ class CG_Match
 //        void writePlayerMoveToOpponent(int ID, QTcpSocket * opponent,
 //                                       QByteArray playerMove);
 
+    public slots:
+        void onWhitePlayerMove(int startRank, int startFile,int endRank, int endFile);
+        void onBlackPlayerMove(int startRank, int startFile,int endRank, int endFile);
+        void onPlayerReady();
     private:
         CG_playerConnection * m_whitePlayerConnection;
         CG_playerConnection * m_blackPlayerConnection;
-        int timeControl;
+        bool m_whiteReady;
+        bool m_blackReady;
+        int  m_timeControl;
 
 //        int whiteID; //Is it possible to have a CG_Match hold playerConnections for each person,
 //        int blackID; //rather than just hold their socketDescriptor?

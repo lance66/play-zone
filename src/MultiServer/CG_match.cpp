@@ -1,20 +1,11 @@
 #include "CG_match.h"
 #include <stdio.h>
 
-CG_Match::CG_Match(QQueue<CG_playerConnection*> oneMinuteQueue)
+CG_Match::CG_Match(CG_playerConnection* player1, CG_playerConnection* player2, int time_control, QObject * parent)
+    : QObject(parent), m_blackPlayerConnection(player2), m_whitePlayerConnection(player1), m_timeControl(time_control),
+      m_whiteReady(false), m_blackReady(false)
 {
-    //First player in line = white pieces
-    m_whitePlayerConnection = oneMinuteQueue.first();
-    oneMinuteQueue.dequeue();
 
-    //Second player in line = black pieces
-    m_blackPlayerConnection = oneMinuteQueue.first();
-    oneMinuteQueue.dequeue();
-
-    m_blackPlayerConnection->setUsername("Star Wars");
-    m_blackPlayerConnection->setELO(2798);
-
-    //Match started
     qDebug() << "Match between "
              << m_whitePlayerConnection->getUsername() << " ("
              << m_whitePlayerConnection->getELO() << ") "
@@ -22,16 +13,23 @@ CG_Match::CG_Match(QQueue<CG_playerConnection*> oneMinuteQueue)
              << m_blackPlayerConnection->getUsername() << " ("
              << m_blackPlayerConnection->getELO() << ") "
              << "has been started.";
+
+    connect(m_blackPlayerConnection, &CG_playerConnection::playerMadeMove, this, &CG_Match::onBlackPlayerMove);
+    connect(m_whitePlayerConnection, &CG_playerConnection::playerMadeMove, this, &CG_Match::onWhitePlayerMove);
+    connect(m_blackPlayerConnection, &CG_playerConnection::playerReady, this, &CG_Match::onPlayerReady);
+    connect(m_whitePlayerConnection, &CG_playerConnection::playerReady, this, &CG_Match::onPlayerReady);
+
+    startMatch();
 }
 
 void CG_Match::startMatch()
 {
     //Notify white player of match
-    m_whitePlayerConnection->getSocket()->write("Game Started.");
-
+    //m_whitePlayerConnection->getSocket()->write("Game Started.");
+    m_whitePlayerConnection->beginConnectingToPlayer(m_blackPlayerConnection, WHITE);
     //Notify black player of match
-    m_blackPlayerConnection->getSocket()->write("Game Started.");
-
+    //m_blackPlayerConnection->getSocket()->write("Game Started.");
+    m_blackPlayerConnection->beginConnectingToPlayer(m_whitePlayerConnection, BLACK);
     //Game starts
 }
 
@@ -185,6 +183,32 @@ void CG_Match::startMatch()
 //    //Notify black player of match
 //    notifyPlayerOfMatchStarting( blackSocket, whitePlayer, "black pieces" );
 //}
+
+
+void CG_Match::onBlackPlayerMove(int startRank, int startFile, int endRank, int endFile)
+{
+    m_whitePlayerConnection->forwardOpponentMove(startRank,startFile,endRank,endFile);
+}
+
+void CG_Match::onWhitePlayerMove(int startRank, int startFile, int endRank, int endFile)
+{
+     m_blackPlayerConnection->forwardOpponentMove(startRank,startFile,endRank,endFile);
+}
+
+void CG_Match::onPlayerReady()
+{
+    CG_playerConnection * player = qobject_cast<CG_playerConnection*>(sender());
+    if(m_whitePlayerConnection == player)
+        m_whiteReady = true;
+    else
+        m_blackReady = true;
+
+    if(m_whiteReady && m_blackReady)
+    {
+        m_whitePlayerConnection->sendMatchConnected();
+        m_blackPlayerConnection->sendMatchConnected();
+    }
+}
 
 /****************************************************************
 *	Purpose:  Notifies the player passed in that the match is
