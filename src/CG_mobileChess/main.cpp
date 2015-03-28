@@ -7,11 +7,11 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QSettings>
-
+#include "cg_pieceimage.h"
 /***************************************************************************
  * Author:                                                        ChessGames
  * Date Created:                                                  11/07/2014
- * Date Last Modified:                                            3/15/2015
+ * Date Last Modified:                                            3/28/2015
  * File Name:                                                   src/main.cpp
  *
  * Overview:
@@ -67,6 +67,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("Validator", &cg_validator);
     engine.rootContext()->setContextProperty("BoardLogic", &cg_board);
     engine.rootContext()->setContextProperty("ServerConnection", &cg_serverConnection);
+    engine.addImageProvider(QLatin1String("pieces"), new CG_PieceImage(":/images/cg_pieces.png"));
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
     return app.exec();

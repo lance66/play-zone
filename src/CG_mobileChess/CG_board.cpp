@@ -13,7 +13,7 @@ CG_board::CG_board() : m_board(), m_whiteToMove(true)
         }
     }
 
-    //Set up all of the white pieces on the board.
+    //Set up all of the black pieces on the board.
     m_board[0][0].setPiece(BLACK, "Rook");
     m_board[0][1].setPiece(BLACK, "Knight");
     m_board[0][2].setPiece(BLACK, "Bishop");
@@ -31,7 +31,7 @@ CG_board::CG_board() : m_board(), m_whiteToMove(true)
     m_board[1][6].setPiece(BLACK, "Pawn");
     m_board[1][7].setPiece(BLACK, "Pawn");
 
-    //Set up all of the black pieces on the board.
+    //Set up all of the white pieces on the board.
     m_board[7][0].setPiece(WHITE, "Rook");
     m_board[7][1].setPiece(WHITE, "Knight");
     m_board[7][2].setPiece(WHITE, "Bishop");
@@ -185,12 +185,25 @@ QString CG_board::getSquare(int source_file, int source_rank)
     //Add an integer to the end representing the color of the piece.
     if (m_board[source_file][source_rank].getPiece() != nullptr)
     {
-        temp = m_board[source_file][source_rank].getPiece()->getPieceColor() + 48;
-        ret_str += QString(temp);
+        temp = m_board[source_file][source_rank].getPiece()->getPieceColor() ? '1' : '0';
+        //temp = m_board[source_file][source_rank].getPiece()->getPieceColor() + 48;
+        //ret_str += QString(temp);
+        ret_str.append(temp);
     }
 
     //Return the QString representing the CG_piece in the CG_square.
     return ret_str;
+}
+
+bool CG_board::getPieceColorAt(int source_file, int source_rank)
+{
+    //Get the piece
+    CG_piece * tempPiece = m_board[source_file][source_rank].getPiece();
+
+    if(tempPiece)
+    {
+        return tempPiece->getPieceColor();
+    }
 }
 
 bool CG_board::CheckForClearPath(int f_to, int r_to, int f_from, int r_from)

@@ -35,7 +35,7 @@ Item
 
          // Moves the image to the correct position
          // to display the current frame.
-         x: -root.width * root.frame
+         anchors.fill: parent
     }
 
     // Used for animation through the tilesheet if
@@ -51,6 +51,17 @@ Item
         {
             nextFrame();
         }
+    }
+    onFrameChanged:
+    {
+        if(frame != 12)
+        {
+            var filepath = "image://pieces/"
+            filepath += (parseInt(frame))
+            image.source = filepath
+        }
+        else
+            image.source = ""
     }
 
     // Used to increment through frames

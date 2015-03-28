@@ -2,9 +2,10 @@
 
 //Default constructor
 CG_piece::CG_piece(CG_Color pieceColor, QString pieceName)
-    : m_pieceColor(pieceColor), m_pieceName(pieceName)
+    : m_pieceColor(pieceColor)
 {
-
+    m_pieceName = pieceName;
+    //m_pieceName = pieceName.append(m_pieceColor ? "1" : "0");
 }
 
 //CG_piece & CG_piece::operator =(CG_piece & rhs )

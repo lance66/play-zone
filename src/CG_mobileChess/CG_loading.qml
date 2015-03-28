@@ -51,13 +51,10 @@ Item
     Connections
     {
         target: ServerConnection
-        onMatchConnected: {
+        onMatchConnected:
+        {
             root.matched()
             iPod.play()
-        }
-        onNetworkPlayerMoved: {
-            BoardLogic.move(fromFile, fromRank, toFile, toRank)
-            Board.refreshBoard(repeaterPieces)
         }
     }
 

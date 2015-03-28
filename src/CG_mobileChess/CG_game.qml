@@ -20,6 +20,26 @@ Item
     property int gameTimeInMinutes: 1
     property bool gameOver: false
     property alias playerFlagFrame: cg_player.flagFrame
+    property string opponentName: "Trudodyr"
+    property int opponentELO: 2715
+    property bool color: false //White
+
+    Connections
+    {
+        target: ServerConnection
+        onOpponentReceived:
+        {
+            opponentName = ServerConnection.getOpponent();
+            opponentELO = ServerConnection.getOpponentELO()
+            color = ServerConnection.getColor();
+        }
+        onNetworkPlayerMoved:
+        {
+            BoardLogic.move(fromFile, fromRank, toFile, toRank)
+            cg_board.whiteBlackMove = !cg_board.whiteBlackMove;
+            Board.refreshBoard(cg_board.pieces)
+        }
+    }
 
     CG_banner
     {
@@ -27,7 +47,7 @@ Item
         width: Game.getBannerWidth()
         height: Game.getBannerHeight()
 
-        playerInfo: "Trudodyr\n2715"
+        playerInfo: opponentName
         ledActive: cg_board.whiteBlackMove == 1 ? true : false
         flagFrame: 21
 

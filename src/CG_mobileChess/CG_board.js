@@ -81,7 +81,7 @@ function getY(current_index)
 function refreshBoard(repeaterPieces)
 {
     for (var currentPiece = 0; currentPiece < repeaterPieces.count; ++currentPiece)
-        repeaterPieces.itemAt(currentPiece).currentFrame = setPiece(BoardLogic.getSquare(getRow(currentPiece), getColumn(currentPiece)))
+        repeaterPieces.itemAt(currentPiece).frame = setPiece(BoardLogic.getSquare(getRow(currentPiece), getColumn(currentPiece)))
 }
 
 /**************************************************************

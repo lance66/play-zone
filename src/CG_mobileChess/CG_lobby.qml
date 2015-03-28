@@ -116,6 +116,7 @@ Item
 
             onClicked:
             {
+                ServerConnection.sendQueueType(1);
                 root.startOneMinuteGame()
             }
         }
@@ -132,6 +133,7 @@ Item
 
             onClicked:
             {
+                ServerConnection.sendQueueType(5);
                 root.startFiveMinuteGame()
             }
         }
@@ -148,6 +150,7 @@ Item
 
             onClicked:
             {
+                ServerConnection.sendQueueType(30);
                 root.startThirtyMinuteGame()
             }
         }

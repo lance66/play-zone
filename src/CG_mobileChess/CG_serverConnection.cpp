@@ -66,7 +66,7 @@ void CG_serverConnection::onRequestedInformationAboutClient()
 
 void CG_serverConnection::onConnectedToLobby(QJsonObject &data)
 {
-    m_connectionState = LOBBY;
+    m_connectionState = QUEUE;
 
     int playerCount = data["PlayerCount"].toInt();
     int matchCount = data["MatchCount"].toInt();
@@ -85,12 +85,20 @@ void CG_serverConnection::onPairedWithPlayer(QJsonObject &data)
 
     QString opponent = data["Opponent"].toString();
     int ELO = data["ELO"].toInt();
+    bool IsWhite = data["IsWhite"].toBool();
 
     qDebug() << opponent;
     qDebug() << ELO;
+    qDebug() << IsWhite;
 
-    //Emit player received
+    m_opponent = opponent;
+    m_opponentELO = ELO;
+    m_isWhite = IsWhite;
 
+    //Emit opponent received
+    emit opponentReceived();
+
+    sendReady();
 }
 
 void CG_serverConnection::onGameReady()
@@ -139,7 +147,7 @@ void CG_serverConnection::handleRequest(PacketHeader requestID, QJsonObject &dat
     case PLAYER_INFO:
         this->sendPlayerInfo(m_username, m_ELO, m_countryFlag);
         break;
-    case LOBBY_CONNECTED:
+    case QUEUE_CONNECTED:
         this->onConnectedToLobby(data);
         break;
     case CONNECTING_TO_GAME:
@@ -152,6 +160,7 @@ void CG_serverConnection::handleRequest(PacketHeader requestID, QJsonObject &dat
         this->onOpponentMoved(data);
         break;
     default:
+        qDebug() << "Invalid state.";
         break;
     }
 }
@@ -160,8 +169,6 @@ void CG_serverConnection::connectToServer(QString address, int port)
 {
     m_socket = new QTcpSocket;
     this->handleConnections();
-//    QList<QHostAddress> listOfHostAddresses;
-//    m_hostInfo.setAddresses(listOfHostAddresses.append(QHostAddress(address)));
     m_socket->connectToHost(address, port);
 }
 
@@ -190,6 +197,7 @@ void CG_serverConnection::sendMove(int fromFile, int fromRank, int toFile, int t
 
 void CG_serverConnection::onOpponentMoved(QJsonObject &data)
 {
+    //No packet header??
     int fromFile = data["StartFile"].toInt();
     int fromRank = data["StartRank"].toInt();
     int toFile = data["EndFile"].toInt();
@@ -200,5 +208,57 @@ void CG_serverConnection::onOpponentMoved(QJsonObject &data)
     qDebug() << toFile;
     qDebug() << toRank;
 
-    emit networkPlayerMoved(fromRank, fromFile, toRank, toFile);
+    emit networkPlayerMoved(fromFile, fromRank, toFile, toRank);
 }
+
+QString CG_serverConnection::getOpponent()
+{
+    return m_opponent;
+}
+
+int CG_serverConnection::getOpponentELO()
+{
+    return m_opponentELO;
+}
+
+void CG_serverConnection::sendReady()
+{
+    //Create local JSON object
+    QJsonObject userInfo;
+
+    //Create object
+    userInfo["PacketHeader"] = PLAYER_READY;
+
+    //Create JSON document
+    QJsonDocument doc;
+    doc.setObject(userInfo);
+
+    //Debug
+    qDebug() << doc.toJson();
+
+    //Send over socket
+    m_socket->write(doc.toBinaryData());
+}
+
+void CG_serverConnection::sendQueueType(int timeControl)
+{
+    //Create local JSON object
+    QJsonObject userInfo;
+
+    //Create object
+    userInfo["PacketHeader"] = QUEUE_REQUEST;
+    userInfo["TimeControl"] = timeControl;
+
+    //Create JSON document
+    QJsonDocument doc;
+    doc.setObject(userInfo);
+
+    //Send over socket
+    m_socket->write(doc.toBinaryData());
+}
+
+bool CG_serverConnection::getColor()
+{
+    return m_isWhite;
+}
+

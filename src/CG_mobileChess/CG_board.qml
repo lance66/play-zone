@@ -75,14 +75,14 @@ Item
     MouseArea
     {
         anchors.fill: parent
-
+        property bool selectedPieceColor: false
         onMouseXChanged:
         {
             current_piece.x = mouse.x - (current_piece.width / 2)
 
             if (starting_position && starting.x !== ((mouse.x - (mouse.x % Board.getSquareSize())) + Board.getBoardOffset()))
             {
-                repeaterPieces.itemAt(starting_index).currentFrame = 12
+                repeaterPieces.itemAt(starting_index).frame= 12
                 current_piece.visible = true
             }
         }
@@ -93,7 +93,7 @@ Item
 
             if (starting_position && starting.y !== ((mouse.y - (mouse.y % Board.getSquareSize())) + Board.getBoardOffset()))
             {
-                repeaterPieces.itemAt(starting_index).currentFrame = 12
+                repeaterPieces.itemAt(starting_index).frame = 12
                 current_piece.visible = true
             }
         }
@@ -111,11 +111,17 @@ Item
                 //we need to account for it in our indexes.
                 starting_index = Board.getIndex(mouse.x - Board.getBoardOffset(), mouse.y - Board.getBoardOffset())
 
-                starting.x = Board.getX(starting_index)
-                starting.y = Board.getY(starting_index)
+
+                starting.x = mouse.x - Board.getX(0)
+                starting.y = mouse.y - Board.getY(0)
+
+                // starting.x = Board.getX(starting_index)
+                // starting.y = Board.getY(starting_index)
+                selectedPieceColor = BoardLogic.getPieceColorAt(starting.y / Board.getSquareSize(), starting.x / Board.getSquareSize())
+                starting_position = ((selectedPieceColor === ServerConnection.getColor()) && (selectedPieceColor === (whiteBlackMove == 1)) )
 
                 // This allows us to undo a movement if not validated.
-                starting_piece = repeaterPieces.itemAt(starting_index).currentFrame
+                starting_piece = repeaterPieces.itemAt(starting_index).frame
 
                 ending.visible = false
 
@@ -150,6 +156,11 @@ Item
                         }
                         else
                         {
+                            //Make move on server
+
+                            // Update the board's pieces after a movement
+                            ServerConnection.sendMove(Board.getRow(starting_index), Board.getColumn(starting_index), Board.getRow(ending_index), Board.getColumn(ending_index))
+
                             //Make sound on successful movement
                             iPod.play()
 
@@ -177,8 +188,6 @@ Item
                             currentMoveNumber++
                         }
 
-                        // Update the board's pieces after a movement
-                        ServerConnection.sendMove(Board.getRow(starting_index), Board.getColumn(starting_index), Board.getRow(ending_index), Board.getColumn(ending_index))
                         Board.refreshBoard(repeaterPieces)
                     }
 
@@ -203,7 +212,9 @@ Item
             height: Board.getSquareSize()
 
             //Get the piece from the business layer.
-            property int currentFrame: Board.setPiece(BoardLogic.getSquare(Board.getRow(index), Board.getColumn(index)))
+
+            property alias frame: piece.frame
+            //property int currentFrame: Board.setPiece(BoardLogic.getSquare(Board.getRow(index), Board.getColumn(index)))
 
             x: Board.getX(index)
             y: Board.getY(index)
@@ -214,12 +225,21 @@ Item
             {
                 id: piece
 
-                frame: currentFrame
-                source: "images/cg_pieces.png"
+                frame: 12//currentFrame
+
                 running: false
                 frameCount: 12
 
                 anchors.fill: parent
+            }
+        }
+        Component.onCompleted: {
+            var index = 0;
+
+            while(index< 64)
+            {
+                repeaterPieces.itemAt(index).frame = Board.setPiece(BoardLogic.getSquare(Board.getRow(index), Board.getColumn(index)));
+                index += 1;
             }
         }
     }

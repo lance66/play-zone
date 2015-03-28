@@ -21,6 +21,7 @@ public slots:
     bool move(int f_source, int r_source, int f_dest, int r_dest);
     void callHistoryBackward();
     void callHistoryForward();
+    bool getPieceColorAt(int source_file, int source_rank);
     QString getSquare(int source_file, int source_rank);
     void resetBoard();
 

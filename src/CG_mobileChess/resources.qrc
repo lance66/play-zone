@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>../../bin/chessgames.db</file>
         <file>../../img/cg_logo_hires_app.png</file>
         <file>main.qml</file>
         <file>CG_banner.qml</file>
