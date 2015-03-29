@@ -68,76 +68,15 @@ void CG_Server::incomingConnection(qintptr socketDescriptor)
     // Chess player connected
     qDebug() << socketDescriptor << " Connecting...";
 
-    // Every new connection will run in a newly created thread
-    //CG_playerConnection * playerConnection = new CG_playerConnection(socketDescriptor, this);
-
-    // Once thread is not needed, thread is deleted
-    //connect(playerConnection, SIGNAL(finished()), playerConnection, SLOT(deleteLater()));
     QTcpSocket * socket = new QTcpSocket();
     socket->setSocketDescriptor(socketDescriptor);
 
     addPlayerConnection(socket);
-
-    // Start thread
-    //playerConnection->start();
-
-    //Add player to queue
-    //this->addPlayerToQueue(playerConnection);
-
-    // Call this member from reimplemented incomingConnection()
-    // because we do not want to break the Pending Connections mechanism.
-   // this->addPendingConnection(playerConnection->getSocket());
-
-//    //Create new socket
-    //QTcpSocket *chessPlayer = new QTcpSocket;
-
-//    //Set socket descriptor to socket descriptor it was assigned
-    //chessPlayer->setSocketDescriptor(socketDescriptor);
-
-//    //Add user to list of client connections
-//    addPlayerConnection(socketDescriptor, chessPlayer);
-
-//    //Print which socket descriptor is connecting
-//    qDebug() << socketDescriptor << " Connecting...";
-
-//    //Create thread for player logging on
-//    CG_playerConnection *thread = new CG_playerConnection(socketDescriptor,this);
-
-//    //Socket descriptors are int pointers...so they need to be converted to an int
-//    int ID = static_cast<int>(thread->getSocketDescriptor());
-
-//    //When player disconnects, call client disconnected
-//    connect(chessPlayer, SIGNAL(disconnected()), this, SLOT(clientDisconnected()));
-//    connect(chessPlayer, SIGNAL(disconnected()), this, SLOT(deleteLater()));
-//    connect(thread, SIGNAL(finished()),this, SLOT(clientDisconnected()));
-//    connect(thread, SIGNAL(finished()),thread, SLOT(deleteLater()));
-
-//    //Start thread
-//    thread->start();
-
-//    //Add thread to queue
-//    oneMinuteQueue.enqueue(ID);
-
-//    //If two players in queue, pair them and initiate match
-//    if(oneMinuteQueue.length() >= 2)
-//    {
-//        startOneMinuteMatch();
-//    }
 }
 
 void CG_Server::addPlayerToQueue(CG_playerConnection * playerConnection)
 {
-    //Add player to queue
-    //this->oneMinuteQueue.enqueue(playerConnection);
 
-    //Number of players in queue
-    //qDebug() << "Number of players in queue: " << oneMinuteQueue.count();
-
-    //If two players in queue, pair them and initiate match
-    /*if(oneMinuteQueue.count() >= 2)
-    {
-        emit playersReadyToBeMatched();
-    }*/
 }
 
 /****************************************************************
@@ -152,12 +91,6 @@ void CG_Server::addPlayerToQueue(CG_playerConnection * playerConnection)
 ****************************************************************/
 void CG_Server::addPlayerConnection( QTcpSocket *chessPlayer)
 {
-    //Add user to dictionary of client connections
-    //clientConnections.insert(socketDescriptor, chessPlayer);
-
-    //Print number of players online
-
-
 
     CG_playerConnection * player = new CG_playerConnection("","",chessPlayer,0,this);
     connect(player, &CG_playerConnection::queueJoinTypeRequest, this, &CG_Server::handleJoinQueue);
@@ -165,7 +98,6 @@ void CG_Server::addPlayerConnection( QTcpSocket *chessPlayer)
     m_connectedPlayers.append(player);
     player->sendRequestPlayerInfo();
     qDebug() << "\nNumber of players online: " << m_connectedPlayers.size();
-
 }
 
 void CG_Server::queueTimerExpired()
@@ -211,21 +143,6 @@ void CG_Server::clientDisconnected()
     CG_playerConnection * player = qobject_cast<CG_playerConnection *>(sender());
     m_connectedPlayers.removeOne(player);
     player->deleteLater();
-    //Remove thread from queue
-    //oneMinuteQueue.removeAll(playerConnection);
-
-/*    //Detect client that disconnected
-    QTcpSocket *client = qobject_cast<QTcpSocket *>(sender());
-
-    //If client is not null remove client
-    if (client != nullptr)
-    {
-        removeAllClientConnections(client);
-        //remove from queue
-        //if in match, destroy match
-    }
-    else
-        clientConnections.remove(static_cast<int>(client->socketDescriptor())*/
 }
 
 /****************************************************************
@@ -240,8 +157,6 @@ void CG_Server::clientDisconnected()
 ****************************************************************/
 void CG_Server::removeAllClientConnections(QTcpSocket *client)
 {
-    //Remove from list of connections
-    //clientConnections.remove(static_cast<int>(client->socketDescriptor()));
     for(int i = 0; i < m_connectedPlayers.length(); ++i)
     {
         CG_playerConnection * player = m_connectedPlayers.at(i);
@@ -249,8 +164,6 @@ void CG_Server::removeAllClientConnections(QTcpSocket *client)
         player->deleteLater();
     }
 
-    //Delete client
-    //client->deleteLater();
     qDebug() << "It worked!  Client disconnected!";
 }
 

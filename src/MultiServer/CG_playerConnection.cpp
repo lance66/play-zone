@@ -28,40 +28,6 @@ CG_playerConnection::~CG_playerConnection()
 {
 }
 
-/****************************************************************
-*   Purpose:  Starts thread, and notifies client that they
-*             are connected.
-*
-*     Entry:  NA
-*
-*      Exit:  Thread is started, and client is notified.
-****************************************************************/
- /* void CG_playerConnection::run()
-{
-    //Print starting thread
-  qDebug() << socketDescriptor << " Starting thread";
-
-    //Create socket
-    socket = new QTcpSocket;
-
-    //If socket descriptor cannot be set, something went wrong and emit an error
-    if(!socket->setSocketDescriptor(this->socketDescriptor))
-    {
-        emit error(socket->error());
-        return;
-    }
-
-    //When socket is ready to be read, create a direct connection
-    connect(socket,SIGNAL(readyRead()),this,SLOT(readyRead()),Qt::DirectConnection);
-    connect(socket,SIGNAL(disconnected()),this,SLOT(disconnected()),Qt::DirectConnection);
-
-    //Print which client is connected
-    qDebug() << socketDescriptor << " Client Connected";
-
-    //Call this function or thread will randomly stop
-    exec();
-}*/
-
 void CG_playerConnection::connections()
 {
     connect(m_socket, &QTcpSocket::readyRead, this, &CG_playerConnection::readyRead);
@@ -113,10 +79,7 @@ void CG_playerConnection::parsePlayerInfo(QJsonObject &data)
     m_username = data["Username"].toString();
     m_ELO      = data["ELO"].toInt();
     m_countryname = data["CountryFlag"].toString();
-
-
 }
-
 
 void CG_playerConnection::beginConnectingToPlayer(CG_playerConnection *player, bool color)
 {
@@ -204,7 +167,6 @@ void CG_playerConnection::sendRequestPlayerInfo()
 
 }
 
-
 QString CG_playerConnection::getUsername() const
 {
     return m_username;
@@ -224,7 +186,6 @@ void CG_playerConnection::setELO(int ELO)
 {
     m_ELO = ELO;
 }
-
 
 void CG_playerConnection::parsePlayerMove(QJsonObject & data)
 {
@@ -250,13 +211,11 @@ void CG_playerConnection::forwardOpponentMove(int startRank, int startFile,int e
     m_socket->write(message_out);
 }
 
-
 void CG_playerConnection::parseQueueJoinRequest(QJsonObject &data)
 {
     TimeControl timeControl = TimeControl(data["TimeControl"].toInt());
     emit queueJoinTypeRequest(timeControl);
 }
-
 
 void CG_playerConnection::parseReady(QJsonObject &data)
 {
@@ -272,5 +231,3 @@ void CG_playerConnection::sendMatchConnected()
     QByteArray message_out = message.toBinaryData();
     m_socket->write(message_out);
 }
-
-
