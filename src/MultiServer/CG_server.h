@@ -61,43 +61,35 @@ public slots:
 
 protected slots:
     void clientDisconnected();
-    void addPlayerToQueue(CG_playerConnection *);
     void handleJoinQueue(TimeControl time_type);
     void queueTimerExpired();
 
 protected:
     void incomingConnection(qintptr socketDescriptor);
-    void saveUserInfoToDatabase();
-    void loadUserInfoFromDatabase();
-    void updateServerInfo();
-    void disconnectPlayer(int playerID);
-    void oneMinuteGameRequest(int playerID);
-    void fiveMinuteGameRequest(int playerID);
-    void thirtyMinuteGameRequest(int playerID);
-    void kibitzGameRequest(int playerID, int matchID);
-    void connectToOpponent(int playerID, int opponent, int timeControl);
-    void sendMove(int playerID, int opponent, int fromFile, int fromRank, int toFile, int toRank);
-    void sendResignation(int playerID, int opponent);
-    void sendCheckMate(int playerID, int opponent);
-    void removeFromQueue(int playerID);
-    void checkTimeOut();
-    void updateBoard(int playerID, QString updatedboard[8][8]);
 
-    // ALL CONNECTED PLAYERS
     QList<CG_playerConnection*>  m_connectedPlayers;
-    // QUEUES
     QList<CG_playerConnection*>  m_minuteQueue;
     QList<CG_playerConnection*>  m_fiveMinuteQueue;
     QList<CG_playerConnection*>  m_thirtyMinuteQueue;
-    // OPEN MATCHES
     QList<CG_Match *>            m_openMatches;
     QTimer                       m_queueConnectTimer;
 
 private:
     void addPlayerConnection(QTcpSocket *chessPlayer);
     void removeAllClientConnections(QTcpSocket *client);
-    void writeSocketDescriptorToSocket(QTcpSocket *client, qintptr socketDescriptor);
-    void sendMove(QTcpSocket *client, qintptr socketDescriptor);
 };
 
 #endif // CG_Server_H
+
+// TODO -- sendCheckMate()
+// TODO -- sendResignation()
+// TODO -- sendDrawOffer()
+// TODO -- sendDrawOfferAccepted()
+// TODO -- sendStaleMate()
+// TODO -- sendFiftyMoveRule()
+// TODO -- sendThreeFoldRepetition()
+// TODO -- sendDisconnected()
+// TODO -- sendGameOver()
+// TODO -- addPlayerToQueue()
+// TODO -- removePlayerFromQueue()
+// TODO -- kickPlayer()

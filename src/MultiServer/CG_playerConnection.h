@@ -74,22 +74,12 @@ public:
     explicit CG_playerConnection(QString username, QString countryname, QTcpSocket * socket, int elo_rating,  QObject *parent);
     ~CG_playerConnection();
 
-
-    //Setters
-    void setUsername(QString username);
-    void setELO(int ELO);
-    void connections();
-    //Getters
-    QString getUsername() const;
-    int getELO() const;
-    QTcpSocket *getSocket();
-
     // Send Methods (Package outgoing messages)
     void sendRequestPlayerInfo();
     void sendConnectedToQueue();
-    void beginConnectingToPlayer(CG_playerConnection * player, bool color);
     void sendConnectingToGame(QString players_name, int elo, bool color);
     void sendMatchConnected();
+    void beginConnectingToPlayer(CG_playerConnection * player, bool color);
     void forwardOpponentMove(int startRank, int startFile, int endRank, int endFile);
 
     // Receive methods (Parse incomming messages)
@@ -99,6 +89,13 @@ public:
     void parseReady(QJsonObject & data);
     void handleRequest(PacketHeader requestID, QJsonObject &data);
 
+    void setUsername(QString username);
+    void setELO(int ELO);
+    void connections();
+
+    QString getUsername() const;
+    int getELO() const;
+    QTcpSocket *getSocket();
 
 signals:
     void error(QTcpSocket::SocketError socketerror);
@@ -106,11 +103,10 @@ signals:
     void queueJoinTypeRequest(TimeControl time_type);
     void playerReady();
     void playerDisconnected();
+
 public slots:
     void readyRead();
     void disconnected();
-
-public slots:
 
 private:
     QTcpSocket * m_socket;
@@ -119,7 +115,6 @@ private:
     int          m_ELO;
     GameState    m_currentstate;
     QByteArray   m_messagebuffer;
-
 };
 
 

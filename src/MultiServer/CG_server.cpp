@@ -14,7 +14,6 @@ CG_Server::CG_Server(QObject *parent) : QTcpServer(parent)
     // User logs onto server, welcome user to server
     qDebug() << "Welcome to the Chessgames Mobile Server!";
 
-
     //  Do not take too long to connect or your session will timeout.
     m_queueConnectTimer.setInterval(1000);
     m_queueConnectTimer.stop();
@@ -83,11 +82,6 @@ void CG_Server::incomingConnection(qintptr socketDescriptor)
 
     //Add player to list of connected players
     addPlayerConnection(socket);
-}
-
-void CG_Server::addPlayerToQueue(CG_playerConnection * playerConnection)
-{
-
 }
 
 /****************************************************************
@@ -203,29 +197,16 @@ void CG_Server::clientDisconnected()
 ****************************************************************/
 void CG_Server::removeAllClientConnections(QTcpSocket *client)
 {
+    // Loop through all connected players
     for(int i = 0; i < m_connectedPlayers.length(); ++i)
     {
+        // Get rid of them all
         CG_playerConnection * player = m_connectedPlayers.at(i);
         player->getSocket()->close();
         player->deleteLater();
     }
 
     qDebug() << "It worked!  Client disconnected!";
-}
-
-void CG_Server::saveUserInfoToDatabase()
-{
-
-}
-
-void CG_Server::loadUserInfoFromDatabase()
-{
-
-}
-
-void CG_Server::updateServerInfo()
-{
-
 }
 
 // TODO -- Change time_type to timeControl
@@ -280,11 +261,6 @@ void CG_Server::handleJoinQueue(TimeControl time_type)
     }
 }
 
-void CG_Server::disconnectPlayer(int playerID)
-{
-
-}
-
 int CG_Server::getMatchCount()
 {
     return m_openMatches.length();
@@ -299,60 +275,4 @@ int CG_Server::getQueueCount()
 {
     //Add up everyone in the queue and return the result
     return (m_minuteQueue.length() + m_fiveMinuteQueue.length() + m_thirtyMinuteQueue.length());
-}
-
-
-void CG_Server::oneMinuteGameRequest(int playerID)
-{
-
-}
-
-void CG_Server::fiveMinuteGameRequest(int playerID)
-{
-
-}
-
-void CG_Server::thirtyMinuteGameRequest(int playerID)
-{
-
-}
-
-void CG_Server::kibitzGameRequest(int playerID, int matchID)
-{
-
-}
-
-void CG_Server::connectToOpponent(int playerID, int opponent, int timeControl)
-{
-
-}
-
-void CG_Server::sendMove(int playerID, int opponent, int fromFile, int fromRank, int toFile, int toRank)
-{
-
-}
-
-void CG_Server::sendResignation(int playerID, int opponent)
-{
-
-}
-
-void CG_Server::sendCheckMate(int playerID, int opponent)
-{
-
-}
-
-void CG_Server::removeFromQueue(int playerID)
-{
-
-}
-
-void CG_Server::checkTimeOut()
-{
-
-}
-
-void CG_Server::updateBoard(int playerID, QString updatedboard[8][8])
-{
-
 }
