@@ -48,22 +48,6 @@ void CG_serverConnection::setPlayerInfo(QString username, int ELO, QString count
     m_countryFlag = countryFlag;
 }
 
-void CG_serverConnection::sendLoginInformation(QString username, QString password)
-{
-
-}
-
-//State tracking code
-void CG_serverConnection::onRequestedInformationAboutClient()
-{
-    //
-
-
-
-
-    //Call sendPlayerInfo()
-}
-
 void CG_serverConnection::onConnectedToLobby(QJsonObject &data)
 {
     m_connectionState = QUEUE;
@@ -75,8 +59,6 @@ void CG_serverConnection::onConnectedToLobby(QJsonObject &data)
     qDebug() << playerCount;
     qDebug() << matchCount;
     qDebug() << queueCount;
-
-
 }
 
 void CG_serverConnection::onPairedWithPlayer(QJsonObject &data)
@@ -168,6 +150,7 @@ void CG_serverConnection::handleRequest(PacketHeader requestID, QJsonObject &dat
 void CG_serverConnection::connectToServer(QString address, int port)
 {
     m_socket = new QTcpSocket;
+
     this->handleConnections();
     m_socket->connectToHost(address, port);
 }
@@ -197,7 +180,6 @@ void CG_serverConnection::sendMove(int fromFile, int fromRank, int toFile, int t
 
 void CG_serverConnection::onOpponentMoved(QJsonObject &data)
 {
-    //No packet header??
     int fromFile = data["StartFile"].toInt();
     int fromRank = data["StartRank"].toInt();
     int toFile = data["EndFile"].toInt();

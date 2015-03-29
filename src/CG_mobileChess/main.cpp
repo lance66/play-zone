@@ -7,7 +7,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QSettings>
-#include "cg_pieceimage.h"
+#include "CG_pieceImage.h"
 /***************************************************************************
  * Author:                                                        ChessGames
  * Date Created:                                                  11/07/2014

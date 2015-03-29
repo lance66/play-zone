@@ -47,10 +47,8 @@ public:
     void handleConnections();
 
     void sendPlayerInfo(QString username, int ELO, QString countryFlag);
-    void sendLoginInformation(QString username, QString password);
 
     //State tracking code
-    void onRequestedInformationAboutClient();
     void onConnectedToLobby(QJsonObject &data);
     void onPairedWithPlayer(QJsonObject &data);
     void onOpponentMoved(QJsonObject &data);
@@ -95,3 +93,5 @@ private:
 };
 
 #endif // CG_SERVERCONNECTION_H
+
+// TODO -- Write sendLoginInformation()
