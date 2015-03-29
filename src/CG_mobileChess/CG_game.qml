@@ -47,7 +47,7 @@ Item
         width: Game.getBannerWidth()
         height: Game.getBannerHeight()
 
-        playerInfo: opponentName
+        playerInfo: opponentName + "\n" + opponentELO
         ledActive: cg_board.whiteBlackMove == 1 ? true : false
         flagFrame: 21
 
