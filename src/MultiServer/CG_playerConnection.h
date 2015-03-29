@@ -1,7 +1,6 @@
 #ifndef CG_playerConnection_H
 #define CG_playerConnection_H
 
-
 #include <QString>
 #include <QTcpSocket>
 #include <QDebug>
@@ -29,7 +28,6 @@
 *   qintptr getSocketDescriptor()
 *       Returns socket descriptor
 *************************************************************************/
-
 
 enum GameState
 {
@@ -113,7 +111,6 @@ public slots:
     void disconnected();
 
 public slots:
-
 
 private:
     QTcpSocket * m_socket;

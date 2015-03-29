@@ -14,7 +14,6 @@
 #include "CG_playerConnection.h"
 #include <QTimer>
 
-
 /************************************************************************
 * Class: CG_Server
 *
@@ -47,62 +46,58 @@ class CG_Server : public QTcpServer
 {
     Q_OBJECT
 
-    public:
-        explicit CG_Server(QObject *parent = 0);
-        ~CG_Server();
-        int getPlayerCount();
-        int getMatchCount();
-        int getQueueCount();
+public:
+    explicit CG_Server(QObject *parent = 0);
+    ~CG_Server();
+    void StartServer();
+    int getPlayerCount();
+    int getMatchCount();
+    int getQueueCount();
 
-        void StartServer();
+signals:
+    void playersReadyToBeMatched();
 
-    signals:
-        void playersReadyToBeMatched();
+public slots:
 
-    public slots:
+protected slots:
+    void clientDisconnected();
+    void addPlayerToQueue(CG_playerConnection *);
+    void handleJoinQueue(TimeControl time_type);
+    void queueTimerExpired();
 
-    protected slots:
-        void clientDisconnected();
-        void addPlayerToQueue(CG_playerConnection *);
-        void handleJoinQueue(TimeControl time_type);
-        void queueTimerExpired();
+protected:
+    void incomingConnection(qintptr socketDescriptor);
+    void saveUserInfoToDatabase();
+    void loadUserInfoFromDatabase();
+    void updateServerInfo();
+    void disconnectPlayer(int playerID);
+    void oneMinuteGameRequest(int playerID);
+    void fiveMinuteGameRequest(int playerID);
+    void thirtyMinuteGameRequest(int playerID);
+    void kibitzGameRequest(int playerID, int matchID);
+    void connectToOpponent(int playerID, int opponent, int timeControl);
+    void sendMove(int playerID, int opponent, int fromFile, int fromRank, int toFile, int toRank);
+    void sendResignation(int playerID, int opponent);
+    void sendCheckMate(int playerID, int opponent);
+    void removeFromQueue(int playerID);
+    void checkTimeOut();
+    void updateBoard(int playerID, QString updatedboard[8][8]);
 
-    protected:
-        void incomingConnection(qintptr socketDescriptor);
-        void saveUserInfoToDatabase();
-        void loadUserInfoFromDatabase();
-        void updateServerInfo();
-        void disconnectPlayer(int playerID);
-        void oneMinuteGameRequest(int playerID);
-        void fiveMinuteGameRequest(int playerID);
-        void thirtyMinuteGameRequest(int playerID);
-        void kibitzGameRequest(int playerID, int matchID);
-        void connectToOpponent(int playerID, int opponent, int timeControl);
-        void sendMove(int playerID, int opponent, int fromFile, int fromRank, int toFile, int toRank);
-        void sendResignation(int playerID, int opponent);
-        void sendCheckMate(int playerID, int opponent);
-        void removeFromQueue(int playerID);
-        void checkTimeOut();
-        void updateBoard(int playerID, QString updatedboard[8][8]);
+    // ALL CONNECTED PLAYERS
+    QList<CG_playerConnection*>  m_connectedPlayers;
+    // QUEUES
+    QList<CG_playerConnection*>  m_minuteQueue;
+    QList<CG_playerConnection*>  m_fiveMinuteQueue;
+    QList<CG_playerConnection*>  m_thirtyMinuteQueue;
+    // OPEN MATCHES
+    QList<CG_Match *>            m_openMatches;
+    QTimer                       m_queueConnectTimer;
 
-
-
-        // ALL CONNECTED PLAYERS
-        QList<CG_playerConnection*>  m_connectedPlayers;
-        // QUEUES
-        QList<CG_playerConnection*>  m_minuteQueue;
-        QList<CG_playerConnection*>  m_fiveMinuteQueue;
-        QList<CG_playerConnection*>  m_thirtyMinuteQueue;
-        // OPEN MATCHES
-        QList<CG_Match *>            m_openMatches;
-        QTimer                       m_queueConnectTimer;
-
-
-    private:
-        void addPlayerConnection(QTcpSocket *chessPlayer);
-        void removeAllClientConnections(QTcpSocket *client);
-        void writeSocketDescriptorToSocket(QTcpSocket *client, qintptr socketDescriptor);
-        void sendMove(QTcpSocket *client, qintptr socketDescriptor);
+private:
+    void addPlayerConnection(QTcpSocket *chessPlayer);
+    void removeAllClientConnections(QTcpSocket *client);
+    void writeSocketDescriptorToSocket(QTcpSocket *client, qintptr socketDescriptor);
+    void sendMove(QTcpSocket *client, qintptr socketDescriptor);
 };
 
 #endif // CG_Server_H
