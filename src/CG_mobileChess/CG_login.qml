@@ -167,7 +167,8 @@ Item
                     tf_confirmPassword.text = ""
                     tf_emailAddress.text = ""
 
-                    ServerConnection.connectToServer("127.0.0.1", 9556);
+                    ServerConnection.connectToServer("192.168.0.104", 9556);
+                    //ServerConnection.connectToServer("127.0.0.1", 9556);
                     root.loggedIn()
                     iPod.play()
 

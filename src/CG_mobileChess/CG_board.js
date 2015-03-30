@@ -290,3 +290,8 @@ function current(moves, current)
     return moves[current].move
 }
 
+function getCurrentMove()
+{
+    return currentMove
+}
+

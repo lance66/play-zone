@@ -161,29 +161,37 @@ Item
                             // Update the board's pieces after a movement
                             ServerConnection.sendMove(Board.getRow(starting_index), Board.getColumn(starting_index), Board.getRow(ending_index), Board.getColumn(ending_index))
 
-                            //Make sound on successful movement
+                            // TODO -- Move to game.qml
+                            // Make sound on successful movement
                             iPod.play()
 
+                            // TODO -- Move to game.qml
                             // Toggle the current player's LED if the movement was made.
                             whiteBlackMove = whiteBlackMove == 1 ? 0 : 1
 
-                            //Increment ply number
+                            // TODO -- Move to game.qml
+                            // Increment ply number
                             plyNumber++
 
-                            //Check whose turn it is
+                            // TODO -- Move to game.qml
+                            // Check whose turn it is
                             plyNumber % 2 != 0 ? whiteMoveNumber++ : blackMoveNumber++
                             plyNumber % 2 != 0 ? moveNumber = whiteMoveNumber : moveNumber = blackMoveNumber
 
-                            //Convert y to file
+                            // TODO -- Move to game.qml
+                            // Convert y to file
                             var file = Board.getColumn(ending_index)
 
-                            //Convert x to rank
+                            // TODO -- Move to game.qml
+                            // Convert x to rank
                             var rank = Board.getRow(ending_index)
 
-                            //Update current move
+                            // TODO -- Move to game.qml
+                            // Update current move
                             currentMove = moveNumber + Board.pieceToString(current_piece.frame) + Board.yToFile(file) + Board.xToRank(rank)
 
-                            //Store current move in list
+                            // TODO -- Move to game.qml
+                            // Store current move in list
                             listOfMoves.push({move: currentMove})
                             currentMoveNumber++
                         }

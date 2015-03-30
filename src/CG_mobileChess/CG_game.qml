@@ -35,9 +35,17 @@ Item
         }
         onNetworkPlayerMoved:
         {
+            // Make move
             BoardLogic.move(fromFile, fromRank, toFile, toRank)
+
+            // Toggle color
             cg_board.whiteBlackMove = !cg_board.whiteBlackMove;
+
+            // Update board
             Board.refreshBoard(cg_board.pieces)
+
+            // Update notation
+            //Board.current(cg_board.listOfMoves, cg_board.currentMoveNumber) = Board.getCurrentMove()
         }
     }
 

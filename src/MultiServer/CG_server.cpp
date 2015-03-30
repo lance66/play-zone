@@ -43,7 +43,9 @@ void CG_Server::StartServer()
     // Possibly use QHostAddress add("192.168.1.100"); in the future
 
     // Tell server to listen to incoming connections on the following port
-    if(!this->listen(QHostAddress::LocalHost,9556))
+
+    QHostAddress add("192.168.0.104");
+    if(!this->listen(QHostAddress(add), 9556))
     {
         // Could not set listener on localhost, so echo could not start server
         qDebug() << "Could not start server";
@@ -114,7 +116,6 @@ void CG_Server::addPlayerConnection( QTcpSocket *chessPlayer)
     //  TODO -- Display number of players online in lobby, not just echo to console
     qDebug() << "\nNumber of players online: " << m_connectedPlayers.size();
 }
-
 void CG_Server::queueTimerExpired()
 {
     if(m_minuteQueue.length() >= 2)
