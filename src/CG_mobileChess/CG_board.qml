@@ -241,14 +241,11 @@ Item
                 anchors.fill: parent
             }
         }
-        Component.onCompleted: {
-            var index = 0;
 
-            while(index< 64)
-            {
+        Component.onCompleted:
+        {
+            for (var index = 0; index < 64; ++index)
                 repeaterPieces.itemAt(index).frame = Board.setPiece(BoardLogic.getSquare(Board.getRow(index), Board.getColumn(index)));
-                index += 1;
-            }
         }
     }
 

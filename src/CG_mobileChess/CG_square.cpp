@@ -100,6 +100,12 @@ Rank CG_square::getRank() const
     return m_rank;
 }
 
+CG_square::CG_square(const CG_square & copy)
+    :m_file(a), m_rank(1), m_piece(nullptr)
+{
+    *this = copy;
+}
+
 CG_square &CG_square::operator=(const CG_square & rhs)
 {
     //Check for self-assignment
@@ -108,14 +114,19 @@ CG_square &CG_square::operator=(const CG_square & rhs)
         CG_piece ** temp = nullptr;
 
         //Delete old data
-        delete [] m_piece;
+        //if (m_piece != nullptr)
+        //delete [] m_piece;
 
         //Make deep copy of new data
-        m_file = rhs.m_file;
-        m_rank = rhs.m_rank;
+        if(rhs.getPiece() != nullptr)
+        {
+            m_file = rhs.m_file;
+            m_rank = rhs.m_rank;
 
-        temp = new CG_piece *[sizeof rhs];
-         m_piece = *temp;
+            temp = new CG_piece *[sizeof(CG_piece)];
+            *temp = rhs.getPiece();
+            m_piece = *temp;
+        }
     }
 
     //Return self-invoking object

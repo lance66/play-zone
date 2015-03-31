@@ -31,6 +31,11 @@ void CG_piece::UpdatePiece()
 
 }
 
+void CG_piece::ToggleDirection()
+{
+
+}
+
 //Member functions
 QString CG_piece::getPieceName() const
 {

@@ -4,15 +4,6 @@
 //Default constructor
 CG_board::CG_board() : m_board(), m_whiteToMove(true)
 {
-    //Set up the CG_squares to be the correct file and rank.
-    for ( int rank = 1; rank <= 8; rank++)
-    {
-        for ( int file = 1; file <= 8; file++)
-        {
-            m_board[file-1][rank-1].setSquare((File)file, rank);
-        }
-    }
-
     //Set up all of the black pieces on the board.
     m_board[0][0].setPiece(BLACK, "Rook");
     m_board[0][1].setPiece(BLACK, "Knight");
@@ -31,6 +22,10 @@ CG_board::CG_board() : m_board(), m_whiteToMove(true)
     m_board[1][6].setPiece(BLACK, "Pawn");
     m_board[1][7].setPiece(BLACK, "Pawn");
 
+    for (int row = 2; row < 7; row++)
+        for (int col = 0; col < 8; col++)
+            m_board[row][col].setPiece(nullptr);
+
     //Set up all of the white pieces on the board.
     m_board[7][0].setPiece(WHITE, "Rook");
     m_board[7][1].setPiece(WHITE, "Knight");
@@ -48,6 +43,8 @@ CG_board::CG_board() : m_board(), m_whiteToMove(true)
     m_board[6][5].setPiece(WHITE, "Pawn");
     m_board[6][6].setPiece(WHITE, "Pawn");
     m_board[6][7].setPiece(WHITE, "Pawn");
+
+    //startOfGameFlipBoard();
 
     CG_square tempFrom;
     CG_square tempTo;
@@ -200,10 +197,7 @@ bool CG_board::getPieceColorAt(int source_file, int source_rank)
     //Get the piece
     CG_piece * tempPiece = m_board[source_file][source_rank].getPiece();
 
-    if(tempPiece)
-    {
-        return tempPiece->getPieceColor();
-    }
+    return tempPiece != nullptr ? tempPiece->getPieceColor() : false;
 }
 
 bool CG_board::CheckForClearPath(int f_to, int r_to, int f_from, int r_from)
@@ -279,6 +273,63 @@ void CG_board::resetBoard()
 
     //Reset white to first
     m_whiteToMove = true;
+}
+
+void CG_board::flipBoard()
+{
+    for (int rank = 0; rank < 4; ++rank)
+    {
+        for (int file = 0; file < 8; ++file)
+        {
+            CG_square temp;
+            temp.setSquare(File(7 - rank), file);
+            temp.setPiece(m_board[7 - rank][file].getPiece());
+
+            m_board[7 - rank][file].setSquare(File(rank), file);
+            m_board[7 - rank][file].setPiece(m_board[rank][file].getPiece());
+
+            m_board[rank][file].setSquare(temp.getFile(), temp.getRank());
+            m_board[rank][file].setPiece(temp.getPiece());
+        }
+    }
+}
+
+void CG_board::startOfGameFlipBoard()
+{
+    flipBoard();
+
+    int king_queen_rank = -1;
+    int king_file = -1;
+    int queen_file = -1;
+
+    for (int rank = 0; rank < 4; ++rank)
+    {
+        for (int file = 0; file < 8; ++file)
+        {
+            if (m_board[rank][file].getPieceName() == "King")
+            {
+                king_file = file;
+                king_queen_rank = rank;
+            }
+            else if (m_board[rank][file].getPieceName() == "Queen")
+            {
+                queen_file = file;
+                king_queen_rank = rank;
+            }
+            else if (m_board[rank][file].getPieceName() == "Pawn")
+                m_board[rank][file].getPiece()->ToggleDirection();
+        }
+    }
+
+    CG_square temp;
+    temp.setSquare(File(king_queen_rank), king_file);
+    temp.setPiece(m_board[king_queen_rank][king_file].getPiece());
+
+    m_board[king_queen_rank][queen_file].setSquare(File(king_queen_rank), king_file);
+    m_board[king_queen_rank][queen_file].setPiece(m_board[king_queen_rank][king_file].getPiece());
+
+    m_board[king_queen_rank][king_file].setSquare(temp.getFile(), temp.getRank());
+    m_board[king_queen_rank][king_file].setPiece(temp.getPiece());
 }
 
 void CG_board::CheckRookMovement(int f_source, int r_source, int f_dest, int r_dest, bool & valid)

@@ -31,7 +31,7 @@ bool CG_pawn::move(File f_to, Rank r_to, File f_from, Rank r_from)
     }
     else if ( abs(f_to - f_from) == 1 &&
               abs(r_to - r_from) == 0 &&
-              direction == f_to - f_from )
+              (direction == f_to - f_from ) )
     {
         canMakeMove = true;
     }

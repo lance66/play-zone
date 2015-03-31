@@ -21,6 +21,7 @@ public:
     //Virtual methods
     virtual bool move(File f_to, Rank r_to, File f_from, Rank r_from);
     virtual void UpdatePiece();
+    virtual void ToggleDirection();
 
     //Mutators
     QString getPieceName() const;

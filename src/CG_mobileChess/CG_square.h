@@ -18,10 +18,13 @@
 class CG_square
 {
 public:
-    //Default constructor
+    // Default constructor
     CG_square();
 
-    //Mutators
+    // Copy constructor
+    CG_square(const CG_square & copy);
+
+    // Mutators
     File getFile() const;
     Rank getRank() const;
     void setFile(File file);

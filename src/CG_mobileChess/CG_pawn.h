@@ -15,6 +15,8 @@ public:
     void UpdatePiece();
     bool canPromote();
     bool enPassant();
+
+    void ToggleDirection() { direction *= -1; }
     //CG_piece promote(CG_piece promoteTo);
 
 private:
