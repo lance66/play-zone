@@ -4,7 +4,7 @@
 CG_pawn::CG_pawn(CG_Color color)
     : CG_piece(color, "Pawn"), m_hasMoved(false)
 {
-    if(color == WHITE)
+    if(color == !WHITE)
     {
         direction = 1;
     }

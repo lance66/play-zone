@@ -26,7 +26,7 @@ public slots:
     void resetBoard();
     void flipBoard();
     void startOfGameFlipBoard();
-
+    void initBlackView();
 
     bool CheckForClearPath(int f_source, int r_source, int f_dest, int r_dest);
     void CheckRookMovement(int f_source, int r_source, int f_dest, int r_dest, bool & valid);
