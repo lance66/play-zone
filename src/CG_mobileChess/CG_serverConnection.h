@@ -58,6 +58,7 @@ public:
 
 signals:
     void opponentReceived();
+    void iAmBlack();
     void matchConnected();
     void networkPlayerMoved(int fromFile,int fromRank,int toFile,int toRank);
 

@@ -27,6 +27,22 @@ Item
     Connections
     {
         target: ServerConnection
+        onIAmBlack:
+        {
+            // If you are the black pieces,
+            // bottom pieces will be black
+            BoardLogic.initBlackView();
+
+            //Flip clocks
+            cg_player.clockRunning = false
+            cg_player.ledActive = false
+            cg_opponent.clockRunning = true
+            cg_opponent.ledActive = true
+
+            // Update board
+            Board.refreshBoard(cg_board.pieces)
+        }
+
         onOpponentReceived:
         {
             opponentName = ServerConnection.getOpponent();
@@ -41,11 +57,17 @@ Item
             // Toggle color
             cg_board.whiteBlackMove = !cg_board.whiteBlackMove;
 
+            //Toggle clocks
+            cg_player.clockRunning = false
+            cg_player.ledActive = false
+            cg_opponent.clockRunning = true
+            cg_opponent.ledActive = true
+
             // Update board
             Board.refreshBoard(cg_board.pieces)
 
             // Update notation
-            //Board.current(cg_board.listOfMoves, cg_board.currentMoveNumber) = Board.getCurrentMove()
+
         }
     }
 
@@ -57,6 +79,8 @@ Item
 
         playerInfo: opponentName + "\n" + opponentELO
         ledActive: cg_board.whiteBlackMove == 1 ? true : false
+
+        // TODO : Change to opponent.getFlag()
         flagFrame: 21
 
         clockRunning:
@@ -67,6 +91,10 @@ Item
             else
                 false
         }
+
+//        anchors.bottom: isLandscape() ? parent.bottom : undefined
+//        anchors.top: isPortrait() ? cg_board.bottom : undefined
+//        anchors.left: parent.left
 
         anchors.top: parent.top
         anchors.left: parent.left
@@ -88,6 +116,9 @@ Item
             else
                 false
         }
+
+//        anchors.top: parent.top
+//        anchors.left: parent.left
 
         anchors.bottom: isLandscape() ? parent.bottom : undefined
         anchors.top: isPortrait() ? cg_board.bottom : undefined

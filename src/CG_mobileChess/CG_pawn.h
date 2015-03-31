@@ -26,3 +26,5 @@ private:
 };
 
 #endif // CG_PAWN_H
+
+// TODO : Change variable name of direction to m_direction

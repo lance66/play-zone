@@ -44,7 +44,7 @@ CG_board::CG_board() : m_board(), m_whiteToMove(true)
     m_board[6][6].setPiece(WHITE, "Pawn");
     m_board[6][7].setPiece(WHITE, "Pawn");
 
-    initBlackView();
+    //initBlackView();
 
     //startOfGameFlipBoard();
 
@@ -98,6 +98,28 @@ void CG_board::initBlackView()
     m_board[6][5].setPiece(BLACK, "Pawn");
     m_board[6][6].setPiece(BLACK, "Pawn");
     m_board[6][7].setPiece(BLACK, "Pawn");
+
+    for (int rank = 0; rank < 4; ++rank)
+    {
+        for (int file = 0; file < 8; ++file)
+        {
+            CG_square temp;
+            temp.setSquare(File(7 - rank), 7 - file);
+            //temp.setPiece(m_board[7 - rank][7 - file].getPiece());
+
+            m_board[7 - rank][7 - file].setSquare(File(rank), file);
+            //m_board[7 - rank][7 - file].setPiece(m_board[rank][file].getPiece());
+
+            m_board[rank][file].setSquare(temp.getFile(), temp.getRank());
+            //m_board[rank][file].setPiece(temp.getPiece());
+        }
+    }
+
+        for(int file= 0; file < 8; file++)
+        {
+            m_board[1][file].getPiece()->ToggleDirection();
+            m_board[6][file].getPiece()->ToggleDirection();
+        }
 }
 
 CG_board::CG_board(const CG_board & copy ) : m_board(), m_whiteToMove(copy.m_whiteToMove), m_history(m_board)
@@ -124,6 +146,12 @@ bool CG_board::move(int f_source, int r_source, int f_dest, int r_dest)
 {
     bool move_made = false;
     CG_Color currentPlayer = m_whiteToMove ? WHITE : BLACK;
+
+    currentPlayer ? qDebug() << "White moves" : qDebug() << "Black moves";
+    qDebug() << "From file " << f_source;
+    qDebug() << "From rank " << r_source;
+    qDebug() << "To file " << f_dest;
+    qDebug() << "To rank " << r_dest;
 
     //If the square selected has a piece in it.
     if(m_board[f_source][r_source].getPiece() != nullptr)

@@ -1,4 +1,5 @@
 #include "CG_serverConnection.h"
+#include "CG_pawn.h"
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -17,6 +18,10 @@ void CG_serverConnection::handleConnections()
 {
     connect(m_socket, &QTcpSocket::readyRead, this, &CG_serverConnection::onDataReady);
     connect(m_socket, &QTcpSocket::disconnected, this, &CG_serverConnection::onDisconnect);
+
+    //If you are the black pieces, change the pawn to go in opposite direction
+//    connect(this, &CG_serverConnection::iAmBlack, &CG_pawn, &CG_pawn::ToggleDirection);
+    //QObject::connect(this, &CG_serverConnection::iAmBlack, &CG_pawn, &CG_pawn::ToggleDirection);
 }
 
 void CG_serverConnection::sendPlayerInfo(QString username, int ELO, QString countryFlag)
@@ -75,10 +80,18 @@ void CG_serverConnection::onPairedWithPlayer(QJsonObject &data)
 
     m_opponent = opponent;
     m_opponentELO = ELO;
+
+    // TODO -- Change name to isOpponentWhite
     m_isWhite = IsWhite;
 
     //Emit opponent received
     emit opponentReceived();
+
+    //Emit signal that player is black because opponent is white
+    if(m_isWhite == true)
+    {
+        emit iAmBlack();
+    }
 
     sendReady();
 }
