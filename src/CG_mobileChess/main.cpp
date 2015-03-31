@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     //Set up the database manager (Persistence Layer)
-    CG_dbManager db_manager("/../../bin/chessgames.db");
+    CG_dbManager db_manager("chessgames.db");
 
     //Set up the chessgames user (Business Layer)
     CG_user cg_user(&db_manager);
