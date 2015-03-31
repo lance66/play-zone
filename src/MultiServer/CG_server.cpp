@@ -44,7 +44,7 @@ void CG_Server::StartServer()
 
     // Tell server to listen to incoming connections on the following port
 
-    QHostAddress add("192.168.0.104");
+    QHostAddress add("192.168.0.118");
     if(!this->listen(QHostAddress(add), 9556))
     {
         // Could not set listener on localhost, so echo could not start server
