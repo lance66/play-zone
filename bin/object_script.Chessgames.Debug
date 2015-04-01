@@ -14,6 +14,8 @@ INPUT(
 ./debug\CG_piece.o
 ./debug\CG_king.o
 ./debug\CG_history.o
+./debug\CG_serverConnection.o
+./debug\CG_pieceImage.o
 ./debug\moc_CG_validator.o
 ./debug\moc_CG_dbManager.o
 ./debug\moc_CG_user.o
@@ -22,4 +24,5 @@ INPUT(
 ./debug\moc_CG_rook.o
 ./debug\moc_CG_bishop.o
 ./debug\moc_CG_queen.o
+./debug\moc_CG_serverConnection.o
 );

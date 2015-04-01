@@ -115,6 +115,11 @@ function getIndex(x, y)
     return ((Math.floor(y / getSquareSize()) * 8) + Math.floor(x / getSquareSize())) % 64
 }
 
+function getSquareIndex(row, column)
+{
+    return (row * 8) + column
+}
+
 /**************************************************************
 *	  Purpose:  Returns the row of the passed index.
 *

@@ -23,6 +23,7 @@ Item
     property string opponentName: "Trudodyr"
     property int opponentELO: 2715
     property bool color: false //White
+    property int translation: 0
 
     Connections
     {
@@ -41,6 +42,8 @@ Item
 
             // Update board
             Board.refreshBoard(cg_board.pieces)
+
+            translation = 7
         }
 
         onOpponentReceived:
@@ -49,22 +52,27 @@ Item
             opponentELO = ServerConnection.getOpponentELO()
             color = ServerConnection.getColor();
         }
+
+
         onNetworkPlayerMoved:
         {
             // Make move
-            BoardLogic.move(fromFile, fromRank, toFile, toRank)
+            //BoardLogic.move(fromFile, fromRank, toFile, toRank)
 
-            // Toggle color
-            cg_board.whiteBlackMove = !cg_board.whiteBlackMove;
+            if (BoardLogic.move(fromFile, fromRank, toFile, toRank))
+            {
+                // Toggle color
+                cg_board.whiteBlackMove = !cg_board.whiteBlackMove;
 
-            //Toggle clocks
-            cg_player.clockRunning = false
-            cg_player.ledActive = false
-            cg_opponent.clockRunning = true
-            cg_opponent.ledActive = true
+                //Toggle clocks
+                cg_player.clockRunning = false
+                cg_player.ledActive = false
+                cg_opponent.clockRunning = true
+                cg_opponent.ledActive = true
 
-            // Update board
-            Board.refreshBoard(cg_board.pieces)
+                // Update board
+                Board.refreshBoard(cg_board.pieces)
+            }
 
             // Update notation
 

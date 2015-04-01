@@ -29,6 +29,16 @@ Item
     property alias pieces: repeaterPieces
     property alias startingMove: starting
     property alias endingMove: ending
+    property int translation: 0
+
+    Connections
+    {
+        target: ServerConnection
+        onIAmBlack:
+        {
+            translation = 7
+        }
+    }
 
     Image
     {
@@ -149,18 +159,17 @@ Item
                     //Ensure that the player is actually picking up a piece.
                     if (BoardLogic.getSquare(Board.getRow(starting_index), Board.getColumn(starting_index)) !== "")
                     {
-                        if (gameOver || !BoardLogic.move(Board.getRow(starting_index), Board.getColumn(starting_index), Board.getRow(ending_index), Board.getColumn(ending_index)))
+                        if (gameOver)// || !BoardLogic.move(Board.getRow(Math.abs(translation - starting_index)), Board.getColumn(Math.abs(translation - starting_index)), Board.getRow(Math.abs(translation - ending_index)), Board.getColumn(Math.abs(translation - ending_index))))
                         {
                             //Play wrong move sound
                             iPod2.play()
-
                         }
                         else
                         {
                             //Make move on server
 
                             // Update the board's pieces after a movement
-                            ServerConnection.sendMove(Board.getRow(starting_index), Board.getColumn(starting_index), Board.getRow(ending_index), Board.getColumn(ending_index))
+                            ServerConnection.sendMove(Board.getRow(Math.abs(translation - starting_index)), Board.getColumn(Math.abs(translation - starting_index)), Board.getRow(Math.abs(translation - ending_index)), Board.getColumn(Math.abs(translation - ending_index)))
 
                             // TODO -- Move to game.qml
                             // Make sound on successful movement
@@ -246,7 +255,9 @@ Item
         Component.onCompleted:
         {
             for (var index = 0; index < 64; ++index)
-                repeaterPieces.itemAt(index).frame = Board.setPiece(BoardLogic.getSquare(Board.getRow(index), Board.getColumn(index)));
+            {
+                repeaterPieces.itemAt(Board.getSquareIndex(Board.getRow(Math.abs(translation - index)), Board.getColumn(Math.abs(translation - index)))).frame = Board.setPiece(BoardLogic.getSquare(Board.getRow(index), Board.getColumn(index)));
+            }
         }
     }
 
