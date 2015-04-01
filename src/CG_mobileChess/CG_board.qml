@@ -159,7 +159,7 @@ Item
                     //Ensure that the player is actually picking up a piece.
                     if (BoardLogic.getSquare(Board.getRow(starting_index), Board.getColumn(starting_index)) !== "")
                     {
-                        if (gameOver)// || !BoardLogic.move(Board.getRow(Math.abs(translation - starting_index)), Board.getColumn(Math.abs(translation - starting_index)), Board.getRow(Math.abs(translation - ending_index)), Board.getColumn(Math.abs(translation - ending_index))))
+                        if (gameOver || !BoardLogic.move(Math.abs(translation - Board.getRow(starting_index)), Math.abs(translation - Board.getColumn(starting_index)), Math.abs(translation - Board.getRow(ending_index)), Math.abs(translation - Board.getColumn(ending_index))))
                         {
                             //Play wrong move sound
                             iPod2.play()
@@ -169,7 +169,7 @@ Item
                             //Make move on server
 
                             // Update the board's pieces after a movement
-                            ServerConnection.sendMove(Board.getRow(Math.abs(translation - starting_index)), Board.getColumn(Math.abs(translation - starting_index)), Board.getRow(Math.abs(translation - ending_index)), Board.getColumn(Math.abs(translation - ending_index)))
+                            ServerConnection.sendMove(Math.abs(translation - Board.getRow(starting_index)), Math.abs(translation - Board.getColumn(starting_index)), Math.abs(translation - Board.getRow(ending_index)), Math.abs(translation - Board.getColumn(ending_index)))
 
                             // TODO -- Move to game.qml
                             // Make sound on successful movement
@@ -243,7 +243,7 @@ Item
             {
                 id: piece
 
-                frame: 12//currentFrame
+                frame: 12
 
                 running: false
                 frameCount: 12
@@ -254,10 +254,12 @@ Item
 
         Component.onCompleted:
         {
-            for (var index = 0; index < 64; ++index)
-            {
-                repeaterPieces.itemAt(Board.getSquareIndex(Board.getRow(Math.abs(translation - index)), Board.getColumn(Math.abs(translation - index)))).frame = Board.setPiece(BoardLogic.getSquare(Board.getRow(index), Board.getColumn(index)));
-            }
+                for (var index = 0; index < 64; ++index)
+                {
+                    repeaterPieces.itemAt(Board.getSquareIndex(Math.abs(translation - Board.getRow(starting_index)), Math.abs(translation - Board.getColumn(starting_index))));
+
+                    //repeaterPieces.itemAt(Board.getSquareIndex(Board.getRow(Math.abs(translation - index)), Board.getColumn(Math.abs(translation - index)))).frame = Board.setPiece(BoardLogic.getSquare(Board.getRow(index), Board.getColumn(index)));
+                }
         }
     }
 

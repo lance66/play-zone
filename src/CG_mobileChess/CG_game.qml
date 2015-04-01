@@ -32,7 +32,7 @@ Item
         {
             // If you are the black pieces,
             // bottom pieces will be black
-            BoardLogic.initBlackView();
+            //BoardLogic.initBlackView();
 
             //Flip clocks
             cg_player.clockRunning = false
@@ -40,10 +40,10 @@ Item
             cg_opponent.clockRunning = true
             cg_opponent.ledActive = true
 
-            // Update board
-            Board.refreshBoard(cg_board.pieces)
-
             translation = 7
+
+            // Update board
+            Board.refreshBoard(cg_board.pieces, translation)
         }
 
         onOpponentReceived:
@@ -57,22 +57,30 @@ Item
         onNetworkPlayerMoved:
         {
             // Make move
-            //BoardLogic.move(fromFile, fromRank, toFile, toRank)
+            BoardLogic.move(fromFile, fromRank, toFile, toRank);
 
-            if (BoardLogic.move(fromFile, fromRank, toFile, toRank))
+            // Toggle color
+            cg_board.whiteBlackMove = !cg_board.whiteBlackMove;
+
+            //Toggle clocks
+            if(ServerConnection.getColor() === false)
             {
-                // Toggle color
-                cg_board.whiteBlackMove = !cg_board.whiteBlackMove;
-
-                //Toggle clocks
                 cg_player.clockRunning = false
                 cg_player.ledActive = false
                 cg_opponent.clockRunning = true
                 cg_opponent.ledActive = true
-
-                // Update board
-                Board.refreshBoard(cg_board.pieces)
             }
+
+            else
+            {
+                cg_player.clockRunning = true
+                cg_player.ledActive = true
+                cg_opponent.clockRunning = false
+                cg_opponent.ledActive = false
+            }
+
+            // Update board
+            Board.refreshBoard(cg_board.pieces, translation)
 
             // Update notation
 
