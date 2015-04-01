@@ -99,6 +99,14 @@ void CG_board::initBlackView()
     m_board[6][6].setPiece(BLACK, "Pawn");
     m_board[6][7].setPiece(BLACK, "Pawn");
 
+    for(int file = 0; file < 8; file++)
+    {
+        m_board[1][file].getPiece()->ToggleDirection();
+    }
+
+    for(int file = 0; file < 8; file++)
+        m_board[6][file].getPiece()->ToggleDirection();
+
 //    for (int rank = 0; rank < 4; ++rank)
 //    {
 //        for (int file = 0; file < 8; ++file)
