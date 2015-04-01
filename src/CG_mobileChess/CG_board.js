@@ -78,12 +78,13 @@ function getY(current_index)
 *     Exit:     The board's pieces are updated.
 ****************************************************************/
 
+//Shouldn't translate be called translation since this function is using translation?
 function refreshBoard(repeaterPieces, translate)
 {
     for (var currentPiece = 0; currentPiece < repeaterPieces.count; ++currentPiece)
-        repeaterPieces.itemAt(getSquareIndex(Math.abs(translation - getRow(currentPiece)), Math.abs(translation - getColumn(currentPiece)))).frame = setPiece(BoardLogic.getSquare(getRow(currentPiece), getColumn(currentPiece)));
+        //repeaterPieces.itemAt(getSquareIndex(Math.abs(translation - getRow(currentPiece)), Math.abs(translation - getColumn(currentPiece)))).frame = setPiece(BoardLogic.getSquare(getRow(currentPiece), getColumn(currentPiece)));
 
-        //repeaterPieces.itemAt(currentPiece).frame = setPiece(BoardLogic.getSquare(getRow(currentPiece), getColumn(currentPiece)))
+        repeaterPieces.itemAt(currentPiece).frame = setPiece(BoardLogic.getSquare(getRow(currentPiece), getColumn(currentPiece)))
 }
 
 /**************************************************************

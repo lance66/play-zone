@@ -32,7 +32,7 @@ Item
         {
             // If you are the black pieces,
             // bottom pieces will be black
-            //BoardLogic.initBlackView();
+            BoardLogic.initBlackView();
 
             //Flip clocks
             cg_player.clockRunning = false
@@ -40,7 +40,7 @@ Item
             cg_opponent.clockRunning = true
             cg_opponent.ledActive = true
 
-            translation = 7
+            //translation = 7
 
             // Update board
             Board.refreshBoard(cg_board.pieces, translation)
@@ -56,12 +56,6 @@ Item
 
         onNetworkPlayerMoved:
         {
-            // Make move
-            BoardLogic.move(fromFile, fromRank, toFile, toRank);
-
-            // Toggle color
-            cg_board.whiteBlackMove = !cg_board.whiteBlackMove;
-
             //Toggle clocks
             if(ServerConnection.getColor() === false)
             {
@@ -69,6 +63,9 @@ Item
                 cg_player.ledActive = false
                 cg_opponent.clockRunning = true
                 cg_opponent.ledActive = true
+
+                //If you are the white pieces, then...
+                translation = 0
             }
 
             else
@@ -77,7 +74,16 @@ Item
                 cg_player.ledActive = true
                 cg_opponent.clockRunning = false
                 cg_opponent.ledActive = false
+
+                //If you are the black pieces, then...
+                translation = 7
             }
+
+            // Make move
+            BoardLogic.move(Math.abs(translation - fromFile), Math.abs(translation - fromRank), Math.abs(translation - toFile), Math.abs(translation - toRank));
+
+            // Toggle color
+            cg_board.whiteBlackMove = !cg_board.whiteBlackMove;
 
             // Update board
             Board.refreshBoard(cg_board.pieces, translation)
@@ -108,10 +114,6 @@ Item
                 false
         }
 
-//        anchors.bottom: isLandscape() ? parent.bottom : undefined
-//        anchors.top: isPortrait() ? cg_board.bottom : undefined
-//        anchors.left: parent.left
-
         anchors.top: parent.top
         anchors.left: parent.left
     }
@@ -132,9 +134,6 @@ Item
             else
                 false
         }
-
-//        anchors.top: parent.top
-//        anchors.left: parent.left
 
         anchors.bottom: isLandscape() ? parent.bottom : undefined
         anchors.top: isPortrait() ? cg_board.bottom : undefined

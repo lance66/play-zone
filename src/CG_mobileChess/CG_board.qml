@@ -206,7 +206,7 @@ Item
                             currentMoveNumber++
                         }
 
-                        Board.refreshBoard(repeaterPieces)
+                        Board.refreshBoard(repeaterPieces, translation)
                     }
 
                     starting_position = false

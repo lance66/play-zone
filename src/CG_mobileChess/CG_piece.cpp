@@ -42,6 +42,7 @@ QString CG_piece::getPieceName() const
     return m_pieceName;
 }
 
+// TODO : Make getting return a CG_Color
 int CG_piece::getPieceColor() const
 {
     return (int) m_pieceColor;
