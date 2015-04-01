@@ -32,7 +32,7 @@ Item
         {
             // If you are the black pieces,
             // bottom pieces will be black
-            //BoardLogic.initBlackView();
+            BoardLogic.initBlackView();
 
             //Flip clocks
             cg_player.clockRunning = false
@@ -40,7 +40,7 @@ Item
             cg_opponent.clockRunning = true
             cg_opponent.ledActive = true
 
-            //translation = 7
+            translation = 7
 
             // Update board
             Board.refreshBoard(cg_board.pieces, translation)
@@ -52,7 +52,6 @@ Item
             opponentELO = ServerConnection.getOpponentELO()
             color = ServerConnection.getColor();
         }
-
 
         onNetworkPlayerMoved:
         {
@@ -66,6 +65,17 @@ Item
 
                 //If you are the white pieces, then...
                 translation = 0
+                //translation = 7
+
+                // Make move
+                BoardLogic.move(Math.abs(translation - fromFile), Math.abs(translation - fromRank), Math.abs(translation - toFile), Math.abs(translation - toRank));
+                //BoardLogic.move(fromFile, fromRank, toFile, toRank);
+
+                // Toggle color
+                cg_board.whiteBlackMove = !cg_board.whiteBlackMove;
+
+                // Update board
+                Board.refreshBoard(cg_board.pieces, translation)
             }
 
             else
@@ -77,18 +87,31 @@ Item
 
                 //If you are the black pieces, then...
                 translation = 7
+
+                // Make move
+                BoardLogic.move(Math.abs(translation - fromFile), Math.abs(translation - fromRank), Math.abs(translation - toFile), Math.abs(translation - toRank));
+                //BoardLogic.move(fromFile, fromRank, toFile, toRank);
+
+                // Toggle color
+                cg_board.whiteBlackMove = !cg_board.whiteBlackMove;
+
+
+                // Update board
+                Board.refreshBoard(cg_board.pieces, translation)
+
             }
 
             // Make move
-            BoardLogic.move(Math.abs(translation - fromFile), Math.abs(translation - fromRank), Math.abs(translation - toFile), Math.abs(translation - toRank));
+//            BoardLogic.move(Math.abs(translation - fromFile), Math.abs(translation - fromRank), Math.abs(translation - toFile), Math.abs(translation - toRank));
+//            //BoardLogic.move(fromFile, fromRank, toFile, toRank);
 
-            // Toggle color
-            cg_board.whiteBlackMove = !cg_board.whiteBlackMove;
+//            // Toggle color
+//            cg_board.whiteBlackMove = !cg_board.whiteBlackMove;
 
 
-            // Update board
-            Board.refreshBoard(cg_board.pieces, translation)
-
+//            // Update board
+//            Board.refreshBoard(cg_board.pieces, translation)
+              //Board.refreshBoardWithTranslation(cg_board.pieces, translation)
             // Update notation
 
         }

@@ -167,8 +167,10 @@ bool CG_board::move(int f_source, int r_source, int f_dest, int r_dest)
         // continue onward.  Otherwise, this is an invalid move.
         // White pieces cannot be moved unless it is the white player moving them,
         // and vice versa for black.
+
         //if((m_board[f_source][r_source].getPiece()->getPieceColor() == currentPlayer))
         //{
+
             // If the piece being moved is a King and the destination doesn't have
             // a piece in it, and the king is actually moving only by rank.
             if (m_board[f_source][r_source].getPiece()->getPieceName() == "King"
