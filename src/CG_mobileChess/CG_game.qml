@@ -32,7 +32,7 @@ Item
         {
             // If you are the black pieces,
             // bottom pieces will be black
-            BoardLogic.initBlackView();
+            //BoardLogic.initBlackView();
 
             //Flip clocks
             cg_player.clockRunning = false
@@ -84,6 +84,7 @@ Item
 
             // Toggle color
             cg_board.whiteBlackMove = !cg_board.whiteBlackMove;
+
 
             // Update board
             Board.refreshBoard(cg_board.pieces, translation)

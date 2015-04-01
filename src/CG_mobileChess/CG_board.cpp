@@ -145,6 +145,7 @@ CG_board::CG_board(const CG_board & copy ) : m_board(), m_whiteToMove(copy.m_whi
 bool CG_board::move(int f_source, int r_source, int f_dest, int r_dest)
 {
     bool move_made = false;
+
     CG_Color currentPlayer = m_whiteToMove ? WHITE : BLACK;
 
     m_whiteToMove ? qDebug() << "White moves" : qDebug() << "Black moves";
@@ -153,17 +154,23 @@ bool CG_board::move(int f_source, int r_source, int f_dest, int r_dest)
     qDebug() << "To file " << f_dest;
     qDebug() << "To rank " << r_dest;
 
-    //If the square selected has a piece in it.
+    qDebug() << "---------------";
+    qDebug() << "White To Move: " << m_whiteToMove;
+    qDebug() << "Current Player: " << currentPlayer;
+    qDebug() << "Current Piece: " << m_board[f_source][r_source].getPiece()->getPieceColor();
+
+
+    // If the square selected has a piece in it.
     if(m_board[f_source][r_source].getPiece() != nullptr)
     {
-        //If the piece selected is of the color of the player moving,
-        //continue onward.  Otherwise, this is an invalid move.
-        //White pieces cannot be moved unless it is the white player moving them,
-        //and vice versa for black.
-        if((m_board[f_source][r_source].getPiece()->getPieceColor() == currentPlayer))
-        {
-            //If the piece being moved is a King and the destination doesn't have
-            //a piece in it, and the king is actually moving only by rank.
+        // If the piece selected is of the color of the player moving,
+        // continue onward.  Otherwise, this is an invalid move.
+        // White pieces cannot be moved unless it is the white player moving them,
+        // and vice versa for black.
+        //if((m_board[f_source][r_source].getPiece()->getPieceColor() == currentPlayer))
+        //{
+            // If the piece being moved is a King and the destination doesn't have
+            // a piece in it, and the king is actually moving only by rank.
             if (m_board[f_source][r_source].getPiece()->getPieceName() == "King"
                 && m_board[f_dest][r_dest].getPiece() == nullptr
                 && abs(r_source - r_dest) == 2 && abs(f_source - f_dest) == 0
@@ -236,7 +243,7 @@ bool CG_board::move(int f_source, int r_source, int f_dest, int r_dest)
                     }
                 }
             }
-        }
+        //}
     }
 
     return move_made;
