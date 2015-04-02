@@ -158,7 +158,7 @@ Item
                     // TODO -- Remove hardcoded values and have arguments be
                     // database statements
                     // Send player info to server
-                    ServerConnection.setPlayerInfo(User.getUsername(), User.getCurrentELO(), "United States")
+                    ServerConnection.setPlayerInfo(User.getUsername(), User.getCurrentELO(), User.getCountryFlag(User.getUsername()))
 
                     // Reset these values for next login.
                     txt_isOpen.text = ""

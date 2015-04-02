@@ -99,7 +99,7 @@ void CG_Server::incomingConnection(qintptr socketDescriptor)
 void CG_Server::addPlayerConnection( QTcpSocket *chessPlayer)
 {
     // Create new player connection
-    CG_playerConnection * player = new CG_playerConnection("", "", chessPlayer, 0, this);
+    CG_playerConnection * player = new CG_playerConnection("", 8, chessPlayer, 0, this);
 
     // When a players joins a queue, call handle join queue to place him in the right queue
     connect(player, &CG_playerConnection::queueJoinTypeRequest, this, &CG_Server::handleJoinQueue);

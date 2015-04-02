@@ -71,13 +71,13 @@ class CG_playerConnection : public QObject
     Q_OBJECT
 public:
 
-    explicit CG_playerConnection(QString username, QString countryname, QTcpSocket * socket, int elo_rating,  QObject *parent);
+    explicit CG_playerConnection(QString username, int countryname, QTcpSocket * socket, int elo_rating,  QObject *parent);
     ~CG_playerConnection();
 
     // Send Methods (Package outgoing messages)
     void sendRequestPlayerInfo();
     void sendConnectedToQueue();
-    void sendConnectingToGame(QString players_name, int elo, bool color);
+    void sendConnectingToGame(QString players_name, int elo, int countryFlag, bool color);
     void sendMatchConnected();
     void beginConnectingToPlayer(CG_playerConnection * player, bool color);
     void forwardOpponentMove(int startRank, int startFile, int endRank, int endFile);
@@ -91,10 +91,12 @@ public:
 
     void setUsername(QString username);
     void setELO(int ELO);
+    void setCountryFlag(int countryFlag);
     void connections();
 
     QString getUsername() const;
     int getELO() const;
+    int getCountryFlag() const;
     QTcpSocket *getSocket();
 
 signals:
@@ -111,7 +113,7 @@ public slots:
 private:
     QTcpSocket * m_socket;
     QString      m_username;
-    QString      m_countryname;
+    int          m_countryname;
     int          m_ELO;
     GameState    m_currentstate;
     QByteArray   m_messagebuffer;

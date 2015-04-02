@@ -11,7 +11,7 @@
 *
 *      Exit:  Data members are initialized.
 ****************************************************************/
-CG_playerConnection::CG_playerConnection(QString username, QString countryname, QTcpSocket * socket, int elo_rating,  QObject *parent):
+CG_playerConnection::CG_playerConnection(QString username, int countryname, QTcpSocket * socket, int elo_rating,  QObject *parent):
     QObject(parent), m_username(username), m_countryname(countryname), m_socket(socket), m_ELO(elo_rating)
 {
     // Set up signals and slots properly with readyRead and disconnect methods
@@ -87,7 +87,7 @@ void CG_playerConnection::sendConnectedToQueue()
     m_socket->write(message_out);
 }
 
-void CG_playerConnection::sendConnectingToGame(QString players_name, int elo, bool color)
+void CG_playerConnection::sendConnectingToGame(QString players_name, int elo, int countryFlag, bool color)
 {
     // Create local JSON document
     QJsonDocument message;
@@ -99,6 +99,7 @@ void CG_playerConnection::sendConnectingToGame(QString players_name, int elo, bo
     request["PacketHeader"] = CONNECTING_TO_GAME;
     request["Opponent"]  = players_name;
     request["ELO"]       = elo;
+    request["CountryFlag"] = countryFlag;
     request["IsWhite"]   = color;
 
     // Set object to document (i.e. so we can write this to the socket)
@@ -202,7 +203,7 @@ void CG_playerConnection::parsePlayerInfo(QJsonObject &data)
     // Store information inside data members of CG_playerConnection
     m_username = data["Username"].toString();
     m_ELO      = data["ELO"].toInt();
-    m_countryname = data["CountryFlag"].toString();
+    m_countryname = data["CountryFlag"].toInt();
 }
 
 void CG_playerConnection::parsePlayerMove(QJsonObject & data)
@@ -234,7 +235,7 @@ void CG_playerConnection::parseReady(QJsonObject &data)
 void CG_playerConnection::beginConnectingToPlayer(CG_playerConnection *player, bool color)
 {
     // Connect to opponent
-    sendConnectingToGame(player->getUsername(),player->getELO(),color);
+    sendConnectingToGame(player->getUsername(),player->getELO(), player->getCountryFlag(), color);
 }
 
 /****************************************************************
@@ -325,4 +326,14 @@ void CG_playerConnection::setUsername(QString username)
 void CG_playerConnection::setELO(int ELO)
 {
     m_ELO = ELO;
+}
+
+void CG_playerConnection::setCountryFlag(int countryFlag)
+{
+    m_countryname = countryFlag;
+}
+
+int CG_playerConnection::getCountryFlag() const
+{
+    return m_countryname;
 }

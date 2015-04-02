@@ -33,9 +33,12 @@ class CG_user : public QObject
         bool addUser(QString username, QString password, QString email);
         bool getUser(QString username);
         bool logIn(QString username, QString password);
+        bool updateCountryFlag(QString str_username, int country_flag);
+
 
         QString getUsername() { return str_username; }
         QString getCurrentELO() { return str_currentELO; }
+        int getCountryFlag(){return int_countryFlag;}
 
     private:
         CG_dbManager * db_chessgames;
@@ -46,6 +49,7 @@ class CG_user : public QObject
         QString str_currentELO;
 
         int int_numGames;
+        int int_countryFlag;
 
         float flt_totalScore;
         float flt_totalOpponentELO;

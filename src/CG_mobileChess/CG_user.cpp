@@ -36,6 +36,7 @@ bool CG_user::logIn(QString username, QString password)
         logged_in = true;
         str_username = username;
         str_currentELO = db_chessgames->getCurrentELO(username);
+        int_countryFlag = db_chessgames->getCountryFlag(username);
     }
 
     return logged_in;
@@ -79,4 +80,16 @@ bool CG_user::addUser(QString username, QString password, QString email)
 
     return added_user;
 }
+
+bool CG_user::updateCountryFlag(QString str_username, int country_flag)
+{
+    bool result = false;
+
+    result = db_chessgames->updateCountryFlag(str_username, country_flag);
+
+    return result;
+}
+
+
+
 

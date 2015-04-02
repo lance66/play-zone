@@ -24,7 +24,7 @@ void CG_serverConnection::handleConnections()
     //QObject::connect(this, &CG_serverConnection::iAmBlack, &CG_pawn, &CG_pawn::ToggleDirection);
 }
 
-void CG_serverConnection::sendPlayerInfo(QString username, int ELO, QString countryFlag)
+void CG_serverConnection::sendPlayerInfo(QString username, int ELO, int countryFlag)
 {
     //Create local JSON object
     QJsonObject userInfo;
@@ -46,7 +46,7 @@ void CG_serverConnection::sendPlayerInfo(QString username, int ELO, QString coun
     m_socket->write(doc.toBinaryData());
 }
 
-void CG_serverConnection::setPlayerInfo(QString username, int ELO, QString countryFlag)
+void CG_serverConnection::setPlayerInfo(QString username, int ELO, int countryFlag)
 {
     m_username = username;
     m_ELO = ELO;
@@ -72,14 +72,17 @@ void CG_serverConnection::onPairedWithPlayer(QJsonObject &data)
 
     QString opponent = data["Opponent"].toString();
     int ELO = data["ELO"].toInt();
+    int countryFlag = data["CountryFlag"].toInt();
     bool IsWhite = data["IsWhite"].toBool();
 
     qDebug() << opponent;
     qDebug() << ELO;
+    qDebug() << countryFlag;
     qDebug() << IsWhite;
 
     m_opponent = opponent;
     m_opponentELO = ELO;
+    m_countryFlag = countryFlag;
 
     // TODO -- Change name to isOpponentWhite
     m_isWhite = IsWhite;
@@ -216,6 +219,16 @@ int CG_serverConnection::getOpponentELO()
     return m_opponentELO;
 }
 
+bool CG_serverConnection::getColor()
+{
+    return m_isWhite;
+}
+
+int CG_serverConnection::getOpponentFlag()
+{
+    return m_countryFlag;
+}
+
 void CG_serverConnection::sendReady()
 {
     //Create local JSON object
@@ -251,9 +264,3 @@ void CG_serverConnection::sendQueueType(int timeControl)
     //Send over socket
     m_socket->write(doc.toBinaryData());
 }
-
-bool CG_serverConnection::getColor()
-{
-    return m_isWhite;
-}
-

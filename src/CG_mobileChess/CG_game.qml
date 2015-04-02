@@ -56,13 +56,19 @@ Item
 
             // Update board
             Board.refreshBoard(cg_board.pieces, translation)
+            //Board.refreshBoardWithTranslation(cg_board.pieces, translation)
         }
 
         onOpponentReceived:
         {
+            //Set opponent info
             opponentName = ServerConnection.getOpponent();
-            opponentELO = ServerConnection.getOpponentELO()
+            opponentELO = ServerConnection.getOpponentELO();
+            cg_opponent.flagFrame = ServerConnection.getCountryFlag();
             color = ServerConnection.getColor();
+
+            //Set client country
+            cg_player.flagFrame = User.getCountryFlag();
         }
 
         onNetworkPlayerMoved:

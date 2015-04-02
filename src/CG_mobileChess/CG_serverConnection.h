@@ -46,7 +46,7 @@ public:
 
     void handleConnections();
 
-    void sendPlayerInfo(QString username, int ELO, QString countryFlag);
+    void sendPlayerInfo(QString username, int ELO, int countryFlag);
 
     //State tracking code
     void onConnectedToLobby(QJsonObject &data);
@@ -66,11 +66,12 @@ public slots:
     QString getOpponent();
     int getOpponentELO();
     bool getColor();
+    int getOpponentFlag();
 
     void onConnect();
     void onDisconnect();
     void onDataReady();
-    void setPlayerInfo(QString username, int ELO, QString countryFlag);
+    void setPlayerInfo(QString username, int ELO, int countryFlag = 7);
     void connectToServer(QString address, int port);
     void sendMove(int fromFile, int fromRank, int toFile, int toRank);
     void sendReady();
@@ -86,7 +87,7 @@ private:
 
     QString m_username;
     int m_ELO;
-    QString m_countryFlag;
+    int m_countryFlag;
 
     QString m_opponent;
     int m_opponentELO;
