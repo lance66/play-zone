@@ -104,7 +104,7 @@ Item
                 translation = 7
 
                 // Make move
-                BoardLogic.move(Math.abs(translation - fromFile), Math.abs(translation - fromRank), Math.abs(translation - toFile), Math.abs(translation - toRank));
+                BoardLogic.move(Math.abs(translation - fromFile), Math.abs(translation - fromRank), Math.abs(translation - toFile), Math.abs(translation - toRank), translation);
 
                 // Toggle color
                 cg_board.whiteBlackMove = !cg_board.whiteBlackMove;

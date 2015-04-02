@@ -165,7 +165,7 @@ Item
                     //Ensure that the player is actually picking up a piece.
                     if (BoardLogic.getSquare(Board.getRow(starting_index), Board.getColumn(starting_index)) !== "")
                     {
-                        if (gameOver || !BoardLogic.move(Board.getRow(starting_index), Board.getColumn(starting_index), Board.getRow(ending_index), Board.getColumn(ending_index)))
+                        if (gameOver || !BoardLogic.move(Board.getRow(starting_index), Board.getColumn(starting_index), Board.getRow(ending_index), Board.getColumn(ending_index), translation))
                                       //!BoardLogic.move(Math.abs(translation - Board.getRow(starting_index)), Math.abs(translation - Board.getColumn(starting_index)), Math.abs(translation - Board.getRow(ending_index)), Math.abs(translation - Board.getColumn(ending_index))))
                         {
                             //Play wrong move sound

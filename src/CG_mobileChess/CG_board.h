@@ -18,7 +18,7 @@ public:
 
 public slots:
 
-    bool move(int f_source, int r_source, int f_dest, int r_dest);
+    bool move(int f_source, int r_source, int f_dest, int r_dest, int translation = 0);
     void callHistoryBackward();
     void callHistoryForward();
     bool getPieceColorAt(int source_file, int source_rank);

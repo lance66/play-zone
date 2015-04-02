@@ -1,5 +1,6 @@
 #include "CG_board.h"
 #include <QDebug>
+#include <math.h>
 
 //Default constructor
 CG_board::CG_board() : m_board(), m_whiteToMove(true)
@@ -150,7 +151,7 @@ CG_board::CG_board(const CG_board & copy ) : m_board(), m_whiteToMove(copy.m_whi
     }
 }
 
-bool CG_board::move(int f_source, int r_source, int f_dest, int r_dest)
+bool CG_board::move(int f_source, int r_source, int f_dest, int r_dest, int translation)
 {
     bool move_made = false;
 
@@ -189,6 +190,11 @@ bool CG_board::move(int f_source, int r_source, int f_dest, int r_dest)
                 //This figures out which rank to use.  If the king is moving right,
                 //the rank should be the rook on the right, and vice versa.
                 int rook_rank = 7 == (r_dest + 1) ? 7 : 0;
+
+                if ( translation == 7 )
+                {
+                    rook_rank = 0 == (r_dest - 1) ? 0 : 7;
+                }
 
                 //This determines what side to put the rook on after castling.
                 //If the King castled right, the Rook should be on the King's left,
