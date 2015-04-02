@@ -193,7 +193,7 @@ Item
 
             onClicked:
             {
-//                User.
+                User.updateCountryFlag(cb_country.currentIndex - 1)
 
                 root.countryFlag = cb_country.currentIndex - 1
                 root.settingsChanged()

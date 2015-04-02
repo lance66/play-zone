@@ -82,6 +82,8 @@ ApplicationWindow
         onSettingsChanged:
         {
             game.playerFlagFrame = settings.countryFlag
+            ServerConnection.setPlayerInfo(User.getUsername(), User.getCurrentELO(),game.playerFlagFrame)
+
             settings.visible = false
             lobby.visible = true
         }

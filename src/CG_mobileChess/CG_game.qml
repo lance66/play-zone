@@ -128,7 +128,12 @@ Item
         ledActive: cg_board.whiteBlackMove == 1 ? true : false
 
         // TODO : Change to opponent.getFlag()
-        flagFrame: 21
+        flagFrame:
+        {
+            if(root.visible)
+                ServerConnection.getOpponentFlag()
+        }
+            //21
 
         clockRunning:
         {
@@ -148,6 +153,12 @@ Item
         id: cg_player
         width: Game.getBannerWidth()
         height: Game.getBannerHeight()
+
+        flagFrame:
+        {
+                if(root.visible)
+                    User.getCountryFlag()
+        }
 
         playerInfo: root.visible == true ? (User.getUsername() + "\n" + User.getCurrentELO()) : ""
         ledActive: cg_board.whiteBlackMove == 0 ? true : false

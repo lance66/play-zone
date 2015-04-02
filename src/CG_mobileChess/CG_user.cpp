@@ -81,7 +81,7 @@ bool CG_user::addUser(QString username, QString password, QString email)
     return added_user;
 }
 
-bool CG_user::updateCountryFlag(QString str_username, int country_flag)
+bool CG_user::updateCountryFlag(int country_flag)
 {
     bool result = false;
 

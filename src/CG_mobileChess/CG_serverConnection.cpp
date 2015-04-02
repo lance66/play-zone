@@ -18,10 +18,6 @@ void CG_serverConnection::handleConnections()
 {
     connect(m_socket, &QTcpSocket::readyRead, this, &CG_serverConnection::onDataReady);
     connect(m_socket, &QTcpSocket::disconnected, this, &CG_serverConnection::onDisconnect);
-
-    //If you are the black pieces, change the pawn to go in opposite direction
-//    connect(this, &CG_serverConnection::iAmBlack, &CG_pawn, &CG_pawn::ToggleDirection);
-    //QObject::connect(this, &CG_serverConnection::iAmBlack, &CG_pawn, &CG_pawn::ToggleDirection);
 }
 
 void CG_serverConnection::sendPlayerInfo(QString username, int ELO, int countryFlag)

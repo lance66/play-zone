@@ -33,7 +33,7 @@ class CG_user : public QObject
         bool addUser(QString username, QString password, QString email);
         bool getUser(QString username);
         bool logIn(QString username, QString password);
-        bool updateCountryFlag(QString str_username, int country_flag);
+        bool updateCountryFlag(int country_flag);
 
 
         QString getUsername() { return str_username; }
