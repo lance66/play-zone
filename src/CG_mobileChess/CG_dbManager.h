@@ -40,6 +40,8 @@ class CG_dbManager : public QObject
         bool userExists(QString str_username);
         bool correctUserInfo(QString str_username, QString str_password);
         bool addUser(QString str_username, QString str_password, QString str_email);
+        bool updateCountryFlag(QString str_username, int country_flag);
+        int getCountryFlag(QString str_username);
         void encryptPassword(QString & password);
 
         QString getCurrentELO(QString str_username);

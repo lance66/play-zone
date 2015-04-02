@@ -149,6 +149,47 @@ QString CG_dbManager::getCurrentELO(QString str_username)
     return result;
 }
 
+bool CG_dbManager::updateCountryFlag(QString str_username, int country_flag)
+{
+    bool updateCountry = false;
+
+    if(db_login.open())
+    {
+        QSqlQuery qry( db_login );
+
+        qry.prepare( "UPDATE CG_user SET userCountry = ? WHERE Username = ?" );
+        qry.addBindValue(country_flag);
+        qry.addBindValue(str_username);
+
+        if(qry.exec())
+            updateCountry = true;
+
+        db_login.close();
+    }
+
+    return updateCountry;
+}
+
+int CG_dbManager::getCountryFlag(QString str_username)
+{
+    int result;
+
+    if(db_login.open())
+    {
+        QSqlQuery qry( db_login );
+        qry.prepare( "SELECT userCountry FROM CG_user WHERE Username= ? COLLATE NOCASE" );
+        qry.addBindValue(str_username);
+
+        if(qry.exec())
+            for (int count = 0; qry.next(); count++)
+                result = qry.value(0).toInt();
+
+        db_login.close();
+    }
+
+    return result;
+}
+
 /**************************************************************
 *	  Purpose:  To encrypt a password using the SHA256 hashing
 *               function.
