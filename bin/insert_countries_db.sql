@@ -1,5 +1,3 @@
---USE TestDB;
-
 
 INSERT INTO CG_countries(country)
 VALUES ('');
