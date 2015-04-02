@@ -82,8 +82,6 @@ function getY(current_index)
 function refreshBoard(repeaterPieces, translate)
 {
     for (var currentPiece = 0; currentPiece < repeaterPieces.count; ++currentPiece)
-        //repeaterPieces.itemAt(getSquareIndex(Math.abs(translate - getRow(currentPiece)), Math.abs(translate - getColumn(currentPiece)))).frame = setPiece(BoardLogic.getSquare(getRow(currentPiece), getColumn(currentPiece)));
-
         repeaterPieces.itemAt(currentPiece).frame = setPiece(BoardLogic.getSquare(getRow(currentPiece), getColumn(currentPiece)))
 }
 
@@ -91,8 +89,6 @@ function refreshBoardWithTranslation(repeaterPieces, translate)
 {
     for (var currentPiece = 0; currentPiece < repeaterPieces.count; ++currentPiece)
         repeaterPieces.itemAt(getSquareIndex(Math.abs(translate - getRow(currentPiece)), Math.abs(translate - getColumn(currentPiece)))).frame = setPiece(BoardLogic.getSquare(getRow(currentPiece), getColumn(currentPiece)));
-
-        //repeaterPieces.itemAt(currentPiece).frame = setPiece(BoardLogic.getSquare(getRow(currentPiece), getColumn(currentPiece)))
 }
 
 /**************************************************************

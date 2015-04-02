@@ -27,6 +27,18 @@ Item
 
     Connections
     {
+        target: cg_board
+        onClientMoved:
+        {
+            cg_player.clockRunning = !cg_player.clockRunning
+            cg_player.ledActive = !cg_player.ledActive
+            cg_opponent.clockRunning = !cg_opponent.clockRunning
+            cg_opponent.ledActive = !cg_opponent.ledActive
+        }
+    }
+
+    Connections
+    {
         target: ServerConnection
         onIAmBlack:
         {
@@ -55,17 +67,17 @@ Item
 
         onNetworkPlayerMoved:
         {
+            cg_player.clockRunning = !cg_player.clockRunning
+            cg_player.ledActive = !cg_player.ledActive
+            cg_opponent.clockRunning = !cg_opponent.clockRunning
+            cg_opponent.ledActive = !cg_opponent.ledActive
+
             //Toggle clocks
+            //If zero equals false, you are the white pieces
             if(ServerConnection.getColor() === false)
             {
-                cg_player.clockRunning = false
-                cg_player.ledActive = false
-                cg_opponent.clockRunning = true
-                cg_opponent.ledActive = true
-
                 //If you are the white pieces, then...
                 translation = 0
-                //translation = 7
 
                 // Make move
                 BoardLogic.move(Math.abs(translation - fromFile), Math.abs(translation - fromRank), Math.abs(translation - toFile), Math.abs(translation - toRank));
@@ -76,44 +88,27 @@ Item
 
                 // Update board
                 Board.refreshBoard(cg_board.pieces, translation)
+
+                // Update notation
             }
 
             else
             {
-                cg_player.clockRunning = true
-                cg_player.ledActive = true
-                cg_opponent.clockRunning = false
-                cg_opponent.ledActive = false
-
                 //If you are the black pieces, then...
                 translation = 7
 
                 // Make move
                 BoardLogic.move(Math.abs(translation - fromFile), Math.abs(translation - fromRank), Math.abs(translation - toFile), Math.abs(translation - toRank));
-                //BoardLogic.move(fromFile, fromRank, toFile, toRank);
 
                 // Toggle color
                 cg_board.whiteBlackMove = !cg_board.whiteBlackMove;
 
-
                 // Update board
                 Board.refreshBoard(cg_board.pieces, translation)
 
+                // Update notation
+
             }
-
-            // Make move
-//            BoardLogic.move(Math.abs(translation - fromFile), Math.abs(translation - fromRank), Math.abs(translation - toFile), Math.abs(translation - toRank));
-//            //BoardLogic.move(fromFile, fromRank, toFile, toRank);
-
-//            // Toggle color
-//            cg_board.whiteBlackMove = !cg_board.whiteBlackMove;
-
-
-//            // Update board
-//            Board.refreshBoard(cg_board.pieces, translation)
-              //Board.refreshBoardWithTranslation(cg_board.pieces, translation)
-            // Update notation
-
         }
     }
 

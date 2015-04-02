@@ -30,10 +30,16 @@ Item
     property alias startingMove: starting
     property alias endingMove: ending
     property int translation: 0
+    signal clientMoved
 
     Connections
     {
         target: ServerConnection
+
+        onMatchConnected:
+        {
+            Board.refreshBoard(repeaterPieces, translation)
+        }
         onIAmBlack:
         {
             translation = 7
@@ -168,11 +174,11 @@ Item
                         else
                         {
                             //Make move on server
+                            root.clientMoved()
 
                             // Update the board's pieces after a movement
                             ServerConnection.sendMove(Math.abs(translation - Board.getRow(starting_index)), Math.abs(translation - Board.getColumn(starting_index)), Math.abs(translation - Board.getRow(ending_index)), Math.abs(translation - Board.getColumn(ending_index)))
                             //ServerConnection.sendMove(Board.getRow(starting_index), Board.getColumn(starting_index), Board.getRow(ending_index), Board.getColumn(ending_index))
-
 
                             // TODO -- Move to game.qml
                             // Make sound on successful movement
@@ -180,7 +186,9 @@ Item
 
                             // TODO -- Move to game.qml
                             // Toggle the current player's LED if the movement was made.
+
                             whiteBlackMove = whiteBlackMove == 1 ? 0 : 1
+                            //whiteBlackMove = whiteBlackMove == 0 ? 1 : 0
 
                             // TODO -- Move to game.qml
                             // Increment ply number
