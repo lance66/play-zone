@@ -1,3 +1,6 @@
+--USE TestDB; --I created a test Database for this example.
+
+
 CREATE TABLE CG_countries
 (
 	countries 	int		IDENTITY,
@@ -26,5 +29,10 @@ CREATE TABLE CG_settings
 	CONSTRAINT	CG_settings_pk		PRIMARY KEY (settings)
 );
 
+--I added this table beause it needed in the alter table statement that you sent.
+--CREATE TABLE CG_user
+--(test int);
+
+--The alter table had an issue with the key word COLUMN and you didn't really need it... the following statement does that without the COLUMN keyword.
 ALTER TABLE CG_user
-	ADD COLUMN settings int CONSTRAINT CG_user_settings_fk REFERENCES CG_settings(settings);
+	ADD settings int CONSTRAINT CG_user_settings_fk REFERENCES CG_settings(settings);
