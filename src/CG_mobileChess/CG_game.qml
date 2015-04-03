@@ -277,15 +277,32 @@ Item
 
             //Go backward throughout the game.
 
-            if (cg_board.currentMoveNumber - 1 >= 0)
+            //If you are the white pieces
+            if(ServerConnection.getColor() === false)
             {
-                cg_board.currentMoveNumber = Board.backward(cg_board.listOfMoves, cg_board.currentMoveNumber)
-                BoardLogic.callHistoryBackward()
-                Board.refreshBoard(cg_board.pieces)
-                iPod2.play()
+                if (cg_board.currentMoveNumber - 1 >= 0)
+                {
+                    cg_board.currentMoveNumber = Board.backward(cg_board.listOfMoves, cg_board.currentMoveNumber)
+                    BoardLogic.callHistoryBackward()
+                    Board.refreshBoard(cg_board.pieces)
+                    iPod2.play()
+                }
+                else
+                    resignDialog.open()
             }
+
             else
-                resignDialog.open()
+            {
+                if (cg_board.currentMoveNumber - 1 >= 0)
+                {
+                    cg_board.currentMoveNumber = Board.backward(cg_board.listOfMoves, cg_board.currentMoveNumber)
+                    BoardLogic.callHistoryBackward()
+                    Board.refreshBoard(cg_board.pieces)
+                    iPod2.play()
+                }
+                else
+                    resignDialog.open()
+            }
 
             //Make the starting and ending selections invisible when
             //traversing the history.

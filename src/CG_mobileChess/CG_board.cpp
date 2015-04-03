@@ -108,27 +108,10 @@ void CG_board::initBlackView()
     for(int file = 0; file < 8; file++)
         m_board[6][file].getPiece()->ToggleDirection();
 
-//    for (int rank = 0; rank < 4; ++rank)
-//    {
-//        for (int file = 0; file < 8; ++file)
-//        {
-//            CG_square temp;
-//            temp.setSquare(File(7 - rank), 7 - file);
-//            //temp.setPiece(m_board[7 - rank][7 - file].getPiece());
+    CG_square tempFrom;
+    CG_square tempTo;
 
-//            m_board[7 - rank][7 - file].setSquare(File(rank), file);
-//            //m_board[7 - rank][7 - file].setPiece(m_board[rank][file].getPiece());
-
-//            m_board[rank][file].setSquare(temp.getFile(), temp.getRank());
-//            //m_board[rank][file].setPiece(temp.getPiece());
-//        }
-//    }
-
-//        for(int file= 0; file < 8; file++)
-//        {
-//            m_board[1][file].getPiece()->ToggleDirection();
-//            m_board[6][file].getPiece()->ToggleDirection();
-//        }
+    m_history.setNext(m_board, tempFrom, tempTo);
 }
 
 CG_board::CG_board(const CG_board & copy ) : m_board(), m_whiteToMove(copy.m_whiteToMove), m_history(m_board)
@@ -571,6 +554,11 @@ void CG_board::callHistoryBackward()
     {
         for (int file = 0; file < NUMBER_OF_RANKS; file++)
         {
+            qDebug() << "New rank: "  << m_history.getCurrentBoard()[rank][file].getRank();
+            qDebug() << "New file: "  << m_history.getCurrentBoard()[rank][file].getFile();
+            qDebug() << "New piece: " << m_history.getCurrentBoard()[rank][file].getPiece();
+            qDebug() << "-----------";
+
             m_board[rank][file].setRank(m_history.getCurrentBoard()[rank][file].getRank());
             m_board[rank][file].setFile(m_history.getCurrentBoard()[rank][file].getFile());
             m_board[rank][file].setPiece(m_history.getCurrentBoard()[rank][file].getPiece());
