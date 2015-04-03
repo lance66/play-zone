@@ -29,6 +29,7 @@ Item
     property alias pieces: repeaterPieces
     property alias startingMove: starting
     property alias endingMove: ending
+    property alias currentPiece: current_piece.frame
     property int translation: 0
     signal clientMoved
 
@@ -178,17 +179,13 @@ Item
 
                             // Update the board's pieces after a movement
                             ServerConnection.sendMove(Math.abs(translation - Board.getRow(starting_index)), Math.abs(translation - Board.getColumn(starting_index)), Math.abs(translation - Board.getRow(ending_index)), Math.abs(translation - Board.getColumn(ending_index)))
-                            //ServerConnection.sendMove(Board.getRow(starting_index), Board.getColumn(starting_index), Board.getRow(ending_index), Board.getColumn(ending_index))
-
                             // TODO -- Move to game.qml
                             // Make sound on successful movement
                             iPod.play()
 
                             // TODO -- Move to game.qml
                             // Toggle the current player's LED if the movement was made.
-
                             whiteBlackMove = whiteBlackMove == 1 ? 0 : 1
-                            //whiteBlackMove = whiteBlackMove == 0 ? 1 : 0
 
                             // TODO -- Move to game.qml
                             // Increment ply number
@@ -209,7 +206,11 @@ Item
 
                             // TODO -- Move to game.qml
                             // Update current move
-                            currentMove = moveNumber + Board.pieceToString(current_piece.frame) + Board.yToFile(file) + Board.xToRank(rank)
+                            // If White to Move
+                            if(whiteBlackMove == 1)
+                                currentMove = moveNumber + Board.pieceToString(current_piece.frame) + Board.yToFile(file) + Board.xToRank(rank)
+                            else
+                                currentMove = moveNumber + Board.pieceToString(current_piece.frame) + Board.yToFile(Math.abs(7 - file)) + Board.xToRank(Math.abs(7 - rank))
 
                             // TODO -- Move to game.qml
                             // Store current move in list
@@ -225,6 +226,7 @@ Item
 
                 // Set the draggable piece to invisible while not being dragged.
                 current_piece.visible = false
+
             }
         }
     }
@@ -243,6 +245,7 @@ Item
             //Get the piece from the business layer.
 
             property alias frame: piece.frame
+
             //property int currentFrame: Board.setPiece(BoardLogic.getSquare(Board.getRow(index), Board.getColumn(index)))
 
             x: Board.getX(index)

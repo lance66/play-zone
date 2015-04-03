@@ -30,6 +30,7 @@ Item
         target: cg_board
         onClientMoved:
         {
+            // TODO : Write function for following code
             cg_player.clockRunning = !cg_player.clockRunning
             cg_player.ledActive = !cg_player.ledActive
             cg_opponent.clockRunning = !cg_opponent.clockRunning
@@ -56,7 +57,6 @@ Item
 
             // Update board
             Board.refreshBoard(cg_board.pieces, translation)
-            //Board.refreshBoardWithTranslation(cg_board.pieces, translation)
         }
 
         onOpponentReceived:
@@ -64,7 +64,7 @@ Item
             //Set opponent info
             opponentName = ServerConnection.getOpponent();
             opponentELO = ServerConnection.getOpponentELO();
-            cg_opponent.flagFrame = ServerConnection.getCountryFlag();
+            cg_opponent.flagFrame = ServerConnection.getOpponentFlag();
             color = ServerConnection.getColor();
 
             //Set client country
@@ -87,7 +87,6 @@ Item
 
                 // Make move
                 BoardLogic.move(Math.abs(translation - fromFile), Math.abs(translation - fromRank), Math.abs(translation - toFile), Math.abs(translation - toRank));
-                //BoardLogic.move(fromFile, fromRank, toFile, toRank);
 
                 // Toggle color
                 cg_board.whiteBlackMove = !cg_board.whiteBlackMove;
@@ -96,6 +95,29 @@ Item
                 Board.refreshBoard(cg_board.pieces, translation)
 
                 // Update notation
+
+                // Increment ply number
+                cg_board.plyNumber++
+
+                // Check whose turn it is
+                cg_board.plyNumber % 2 != 0 ? cg_board.whiteMoveNumber++ : cg_board.blackMoveNumber++
+                cg_board.plyNumber % 2 != 0 ? cg_board.moveNumber = cg_board.whiteMoveNumber : cg_board.moveNumber = cg_board.blackMoveNumber
+
+                // Convert y to file
+                var file = toFile
+
+                // Convert x to rank
+                var rank = toRank
+
+                var currentPieceFrame1 = BoardLogic.getSquare(toFile, toRank)
+
+                // Update current move
+                // TODO : Fix file and rank.  They are flipped
+                cg_board.currentMove = cg_board.moveNumber + Board.pieceToNotation(currentPieceFrame1) + Board.yToFile(rank) + Board.xToRank(file)
+
+                // Store current move in list
+                cg_board.listOfMoves.push({move: cg_board.currentMove})
+                cg_board.currentMoveNumber++
             }
 
             else
@@ -114,6 +136,29 @@ Item
 
                 // Update notation
 
+                // Increment ply number
+                cg_board.plyNumber++
+
+                // Check whose turn it is
+                cg_board.plyNumber % 2 != 0 ? cg_board.whiteMoveNumber++ : cg_board.blackMoveNumber++
+                cg_board.plyNumber % 2 != 0 ? cg_board.moveNumber = cg_board.whiteMoveNumber : cg_board.moveNumber = cg_board.blackMoveNumber
+
+                // Convert y to file
+                var file1 = toFile
+
+                // Convert x to rank
+                var rank1 = toRank
+
+                //var currentPieceFrame = cg_board.currentPiece.frame
+                var currentPieceFrame = BoardLogic.getSquare(Math.abs(7 - toFile), Math.abs(7 - toRank))
+
+                // Update current move
+                // TODO : Fix file and rank.  They are flipped because the file and rank are flipped when passed in
+                cg_board.currentMove = cg_board.moveNumber + Board.pieceToNotation(currentPieceFrame) + Board.yToFile(rank1) + Board.xToRank(file1)
+
+                // Store current move in list
+                cg_board.listOfMoves.push({move: cg_board.currentMove})
+                cg_board.currentMoveNumber++
             }
         }
     }

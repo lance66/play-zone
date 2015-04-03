@@ -231,7 +231,40 @@ function pieceToString(frame)
     case 11:
         return ". "
     default:
-        return ""
+        return "Invalid piece"
+    }
+}
+
+function pieceToNotation(frame)
+{
+    switch(frame)
+    {
+    case "King1":
+        return "...K"
+    case "Queen1":
+        return "...Q"
+    case "Knight1":
+        return "...N"
+    case "Bishop1":
+        return "...B"
+    case "Rook1":
+        return "...R"
+    case "Pawn1":
+        return "..."
+    case "King0":
+        return ". Q"
+    case "Queen0":
+        return ". K"
+    case "Knight0":
+        return ". N"
+    case "Bishop0":
+        return ". B"
+    case "Rook0":
+        return ". R"
+    case "Pawn0":
+        return ". "
+    default:
+        return "Invalid piece"
     }
 }
 
@@ -305,5 +338,10 @@ function current(moves, current)
 function getCurrentMove()
 {
     return currentMove
+}
+
+function getCurrentFrame(repeaterPieces)
+{
+    return current_piece.frame
 }
 
