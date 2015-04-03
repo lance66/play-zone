@@ -252,9 +252,9 @@ function pieceToNotation(frame)
     case "Pawn1":
         return "..."
     case "King0":
-        return ". Q"
-    case "Queen0":
         return ". K"
+    case "Queen0":
+        return ". Q"
     case "Knight0":
         return ". N"
     case "Bishop0":
